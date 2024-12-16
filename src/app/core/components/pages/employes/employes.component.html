@@ -1,0 +1,103 @@
+{{ stateEmployes() | json }}
+<p>employes works!</p>
+<p-table #dt1
+    [value]="stateEmployes().data"
+    dataKey="id"
+    [paginator]="true"
+    [rows]="stateEmployes().rows"
+    [loading]="stateEmployes().loading"
+    [rowHover]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} histories"
+    [rowsPerPageOptions]="[15, 30, 50, 100, 200]"
+    styleClass="p-datatable-sm"
+    [lazy]="true"
+    [columns]="['id','idper','idtipo', 'idcargo', 'salario', 'fing']"
+    [totalRecords]="777"
+    responsiveLayout="scroll"
+    [sortMode]="'multiple'"
+    [customSort]="true"
+    [scrollable]="true"
+    scrollHeight="600px">
+    <!-- [paginatorPosition]="dat÷a() ? data().length > 50 ? 'both' :'bottom' :'bottom'"> -->
+    <!-- (onSort)="onSortOrder($event)" -->
+    <!-- (onLazyLoad)="getDataPaged($event)" -->
+
+    <ng-template pTemplate="caption"> </ng-template>
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 1rem"></th>
+        @for (item of columns; track item) {
+          <th style="min-width: 16rem" [pSortableColumn]="item" pReorderableColumn>
+            <div class="flex justify-content-between align-items-left">{{"labels." + item}}
+              <p-sortIcon [field]="item.field"></p-sortIcon>
+            </div>
+          </th>
+          <!-- @switch (item) {
+            @case("idtipo") {
+              <th style="min-width: 16rem" [pSortableColumn]="'idtipo'" pReorderableColumn>
+                <div class="flex justify-content-between align-items-left">{{"labels.category"}}
+                  <p-sortIcon [field]="item.field"></p-sortIcon>
+                </div>
+              </th>
+            }
+            @case("bin_tag") {
+              <th style="min-width: 16rem" pSortableColumn="{{item}}" pReorderableColumn>
+                <div class="flex justify-content-between align-items-left">{{"labels.kardex"}}
+                  <p-sortIcon [field]="item.field"></p-sortIcon>
+                </div>
+              </th>
+            }
+            @default {
+              <th style="min-width: 16rem" pSortableColumn="{{item}}" pReorderableColumn>
+                <div class="flex justify-content-between align-items-left">{{"labels." + item}}
+                  <p-sortIcon [field]="item.field"></p-sortIcon>
+                </div>
+              </th>
+            }
+          } -->
+        }
+      </tr>
+      <tr>
+        <th class="flex">
+          <p-tableHeaderCheckbox class="pt-2 pl-2 pr-2 pb-3"/>
+          <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text" > </button>
+        </th>
+        @if (columns; as cols) {
+          <!-- <th style="min-width: 12rem">
+            <shipedge-filter-input field="qty" />
+          </th> -->
+          @for (item of cols; track item) {
+            <th>{{item}}</th>
+            <!-- <th> -->
+            <!-- @switch (item) { -->
+              <!-- @case("account") { <th style="min-width: 12rem"><shipedge-filter-multiselect [valores]="accounts()" [field]="'account_id'" type="Select accounts" columna="company_name" /></th> } -->
+              <!-- @case("category") { <th style="min-width: 12rem"><shipedge-filter-multiselect [valores]="categories()" [field]="'category_id'" type="Select categories" columna="category"/></th> } -->
+              <!-- @case("bin_qty_max") { <th style="min-width: 12rem"><shipedge-filter-input field="bin_qty_max"/></th> } -->
+              <!-- @case("bin_qty_min") { <th style="min-width: 12rem"><shipedge-filter-input field="bin_qty_min"/></th> } -->
+              <!-- @default { -->
+                <!-- <th style="min-width: 12rem"> -->
+                  <!-- {{ item | json}} -->
+                <!-- </th> } -->
+            <!-- } -->
+            <!-- </th> -->
+          }@empty { <th style="min-width: 12rem">cargando</th> }
+          <!-- <th style="min-width: 12rem">
+            <shipedge-filter-input field="qty" />
+          </th> -->
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td>
+          <p-tableCheckbox class="p-2"  [value]="rowData"></p-tableCheckbox>
+          <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text" > </button>
+        </td>
+        @for (item of columns; track $index) {
+          <td>{{rowData[item]}}</td>
+        }
+      </tr>
+    </ng-template>
+</p-table>
