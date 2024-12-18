@@ -30,4 +30,26 @@ export class DarkmodeComponent {
     element?.classList.toggle('dark');
     this.isDarkMode.set(!this.isDarkMode());
   }
+
+
+
+
+
+  darkThemeSwitchTokens = {
+    width: '3.2rem',
+    height: '1.5rem',
+    Background: '#fff',
+    HoverBackground: '#eee',
+    checkedBackground: '#111',
+    checkedHoverBackground: '#000',
+    handle: {
+      size: '1.5rem',
+      background: 'transparent url("https://static-00.iconduck.com/assets.00/sun-with-face-emoji-2048x2048-jsb953ux.png") 0 0 / 1.5rem no-repeat',
+      hoverBackground: 'transparent url("https://static-00.iconduck.com/assets.00/sun-with-face-emoji-2048x2048-jsb953ux.png") 0 0 / 1.5rem no-repeat',
+      checkedBackground:
+        'transparent url("https://symbl-world.akamaized.net/i/webp/49/e48f4222f1bac554c513f44e7b0591.webp") 0 0 / 1.5rem no-repeat',
+      checkedHoverBackground:
+        'transparent url("https://symbl-world.akamaized.net/i/webp/49/e48f4222f1bac554c513f44e7b0591.webp") 0 0 / 1.5rem no-repeat',
+    },
+  };
 }
