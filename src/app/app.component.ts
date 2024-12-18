@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
@@ -11,20 +11,29 @@ import { DropdownModule } from 'primeng/dropdown';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { HeaderComponent } from './layout/header/header.component';
+
+import Aura from '@primeng/themes/aura';
+import { CardModule } from 'primeng/card';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, ButtonModule, SidebarComponent, HeaderComponent
-    ],
+    imports: [RouterOutlet, ButtonModule, SidebarComponent, CardModule, ToggleSwitchModule, FormsModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  isDarkMode = signal(false);
 
-  // constructor(private primeng: PrimeNG) {}
+  toggleDarkMode() {
+    const element = document.querySelector('html');
+    element?.classList.toggle('dark');
+    this.isDarkMode.set(!this.isDarkMode());
+  }
 
   ngOnInit() {
       this.primeng.ripple.set(true);
@@ -40,12 +49,20 @@ export class AppComponent implements OnInit {
 
 languages: any[];
   selectedLanguage: any;
-  isDarkMode: boolean = false;
+  //  : boolean = false;
   items: MenuItem[];
 
   sidebarVisible: boolean = true;
   
   constructor(private primeng: PrimeNG, private router: Router) {
+    this.primeng.theme.set({
+      preset: Aura,
+      options: {
+        darkModeSelector: '.dark',
+      },
+    });
+
+
     this.languages = [
       { name: 'English', code: 'en' },
       { name: 'Español', code: 'es' }
@@ -55,12 +72,12 @@ languages: any[];
       {
         label: 'Mi Perfil',
         icon: 'pi pi-user',
-        command: () => this.viewProfile()
+        command: () => console.log('viewProfile(')
       },
       {
         label: 'Configuración',
         icon: 'pi pi-cog',
-        command: () => this.openSettings()
+        command: () => console.log('openSettings(')
       },
       {
         separator: true
@@ -68,38 +85,10 @@ languages: any[];
       {
         label: 'Cerrar Sesión',
         icon: 'pi pi-power-off',
-        command: () => this.logout()
+        command: () => console.log('logout(')
       }
     ];
   }
-
-  toggleSidebar() {
-    // Implementar lógica para mostrar/ocultar sidebar
-  }
-
-  toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
-    // Implementar lógica para cambiar tema
-  }
-
-  onLanguageChange(event: any) {
-    // Implementar lógica para cambiar idioma
-  }
-
-  viewProfile() {
-    // Implementar lógica para ver perfil
-  }
-
-  openSettings() {
-    // Implementar lógica para abrir configuración
-  }
-
-  logout() {
-    // Implementar lógica para cerrar sesión
-  }
-
-
-
 
 
 

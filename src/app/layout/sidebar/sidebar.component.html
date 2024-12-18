@@ -1,0 +1,105 @@
+<p-menubar [model]="items()">
+    <ng-template pTemplate="start">
+        <img src="icons/logo-current.png"
+            alt="logo"
+            height="30"
+            class="mr-2"/>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <input type="text" pInputText placeholder="Search" class="mr-2"/>
+        <app-darkmode/>
+        <p-button label="Logout" icon="pi pi-fw pi-power-off"/>
+    </ng-template>
+</p-menubar>
+
+
+
+<p-sidebar
+    [visible]="visibleSidebar()"
+    [dismissible]="true"
+    [showCloseIcon]="false"
+    (onShow)="onShowSidebar($event)"
+    (onHide)="onHiddenSidebar($event)"
+    (visibleChange)="sidebarChange($event)">
+    <ng-template pTemplate="header">
+        <img src="icons/logo.png"
+            alt="logo"
+            height="130"
+            width="overflow-y-auto"
+            class="mr-2"/>
+        <!-- Header Content -->
+    </ng-template>
+    <!-- Content -->
+    <!-- <ng-template pTemplate="content">
+        <div class="sidebar-content">
+            
+            <ul class="menu-list">
+                <li>
+                    <a href="#" class="menu-item">
+                        <i class="pi pi-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="menu-item">
+                        <i class="pi pi-users"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="menu-item">
+                        <i class="pi pi-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </ng-template> -->
+    <ng-template pTemplate="content">
+        <div class="sidebar-content">
+            <ul class="menu-list">
+                @for (item of menuItems(); track $index) {
+                <li>
+                    <!-- <div class="menu-item" (click)="navigateTo(item.route)">
+                        <i class="{{item.icon}}"></i>
+                        <span>{{item.label}}</span>
+                        @if (item.subItems?.length) {
+                            <i class="pi pi-angle-down ml-auto"></i>
+                        }
+                    </div> -->
+                    <div class="menu-item" 
+                        [class.expanded]="item.expanded"
+                        (click)="toggleSubm(item)"> <!-- Ensure the function call is complete -->
+                        <i class="{{item.icon}}"></i>
+                        <span>{{item.label}}</span> <!-- Add this line if you want to display the label -->
+                    </div>
+                    
+                    @if (item.subItems?.length) {
+                    <ul class="submenu-list">
+                        @for (subItem of item.subItems; track $index) {
+                        <li class="submenu-item"
+                            (click)="navigateTo(subItem.route)">
+                            <span>{{subItem.label}}</span>
+                        </li>
+                        }
+                    </ul>
+                    }
+                </li>
+                }
+            </ul>
+        </div>
+    </ng-template>
+
+    <!-- Footer -->
+    <ng-template pTemplate="footer">
+        <div class="sidebar-footer">
+            <p>© 2024 Mi Aplicación</p>
+            <button pButton 
+                label="Cerrar Sesión" 
+                icon="pi pi-power-off"
+                class="p-button-danger">
+            </button>
+        </div>
+    </ng-template>
+</p-sidebar>

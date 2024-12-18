@@ -5,11 +5,12 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { SidebarModule } from 'primeng/sidebar';
+import { DarkmodeComponent } from './darkmode/darkmode.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SidebarModule, ButtonModule, 
+  imports: [SidebarModule, ButtonModule, DarkmodeComponent, 
     MenubarModule, FormsModule,
     InputTextModule],
   templateUrl: './sidebar.component.html',
@@ -66,4 +67,83 @@ export class SidebarComponent {
     ]);
   }
 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  menuItems = signal<any[]>([
+    { 
+      label: 'Inicio', 
+      icon: 'pi pi-home', 
+      route: '/home',
+      subItems: [] 
+    },
+    { 
+      label: 'Usuarios', 
+      icon: 'pi pi-users', 
+      route: '/users',
+      subItems: [
+        { label: 'Lista de Usuarios', route: '/users/list' },
+        { label: 'Agregar Usuario', route: '/users/add' }
+      ]
+    },
+    { 
+      label: 'Configuración', 
+      icon: 'pi pi-cog', 
+      route: '/settings',
+      subItems: [
+        { label: 'Perfil', route: '/settings/profile' },
+        { label: 'Preferencias', route: '/settings/preferences' }
+      ]
+    },
+    { 
+      label: 'Reportes', 
+      icon: 'pi pi-chart-bar', 
+      route: '/reports',
+      subItems: [
+        { label: 'Ventas', route: '/reports/sales' },
+        { label: 'Inventario', route: '/reports/inventory' }
+      ]
+    }
+  ]);
+
+  // Método para manejar la navegación
+  navigateTo(route: string) {
+    // Implementa la lógica de navegación aquí
+    console.log('Navegando a:', route);
+  }
+  // toggleSubmenu(item: any) {
+  //   item.expanded = !item.expanded;
+  // }
+  toggleSubm(item: any): void {
+    // Implement the logic to toggle the submenu for the given item
+    item.expanded = !item.expanded; // Example logic to toggle the expanded state
+  }
 }
