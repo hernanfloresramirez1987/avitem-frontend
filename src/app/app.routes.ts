@@ -12,7 +12,7 @@ export const routes: Routes = [
           { path: 'payments', loadChildren: () => import('./core/components/pages/payments/payments.module').then(m => m.PaymentsModule) },
         // ]
       // },
-      // { path: 'login', loadComponent: () => import('./core/components/auth/login/login.component') },
-      // { path: 'restorepassword', loadComponent: () => import('./core/components/auth/password-recovery/password-recovery.component') },
+      { path: 'login', loadComponent: () => import('./core/components/auth/login/login.component') },
+      { path: 'restorepassword', loadComponent: () => import('./core/components/auth/password-recovery/password-recovery.component') },
       { path: '**', loadComponent: () => import('./core/components/pages/page-not-found/page-not-found.component') },
 ];
