@@ -25,6 +25,7 @@ import { P_A_Personal } from '../../../../models/pa_personal.interface';
 
 @Component({
     selector: 'app-employes-register',
+    standalone: true,
     imports: [ReactiveFormsModule, FormsModule, RadioButtonModule, CardModule, InputTextModule, MultiSelectModule, DropdownModule, CalendarModule, SelectButtonModule, ToggleButtonModule, SidebarModule, FloatLabelModule, RouterModule, FileUploadModule],
     providers: [CargoService, TipoempleadoService, TipodocService, DatePipe],
     templateUrl: './employes-register.component.html',
