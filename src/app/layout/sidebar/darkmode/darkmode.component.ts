@@ -36,8 +36,8 @@ export class DarkmodeComponent {
 
 
   darkThemeSwitchTokens = {
-    width: '3.2rem',
-    height: '1.5rem',
+    // width: '3rem',
+    height: '2.25rem',
     Background: '#fff',
     HoverBackground: '#eee',
     checkedBackground: '#111',
