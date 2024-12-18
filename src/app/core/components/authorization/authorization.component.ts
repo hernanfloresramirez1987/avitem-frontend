@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-authorization',
+    standalone: true,
     imports: [RouterModule, MultiSelectModule, DropdownModule, ButtonModule],
     providers: [TipoempleadoService],
     templateUrl: './authorization.component.html',

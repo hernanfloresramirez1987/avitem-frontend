@@ -5,6 +5,7 @@ import { CardModule } from 'primeng/card';
 
 @Component({
     selector: 'app-password-recovery',
+    standalone: true,
     imports: [ReactiveFormsModule, RouterModule, CardModule],
     templateUrl: './password-recovery.component.html',
     styleUrl: './password-recovery.component.css'

@@ -20,7 +20,7 @@ function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 export const appConfig: ApplicationConfig = {
-  providers: [ // provideZoneChangeDetection({ eventCoalescing: true }),
+  providers: [ //provideZoneChangeDetection({ eventCoalescing: true }),
     provideExperimentalZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
     importProvidersFrom(
@@ -43,5 +43,5 @@ export const appConfig: ApplicationConfig = {
             preset: Aura
         }
     })
-]
+  ]
 };

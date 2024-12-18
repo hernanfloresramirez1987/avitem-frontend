@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-employes',
+    standalone: true,
     imports: [JsonPipe, ButtonModule, TableModule],
     templateUrl: './employes.component.html',
     styleUrl: './employes.component.css'
