@@ -1,1 +1,0 @@
-import{Nb as m,Vb as p,da as a,tb as o,ub as s}from"./chunk-I66JML2L.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=a({type:n,selectors:[["app-payments"]],standalone:!0,features:[p],decls:2,vars:0,template:function(e,r){e&1&&(o(0,"p"),m(1,"payments works!"),s())}})};export{t as default};
