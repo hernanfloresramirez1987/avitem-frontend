@@ -38,10 +38,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     provideAnimationsAsync(),
-    providePrimeNG({ 
-        theme: {
-            preset: Aura
-        }
-    })
+    // providePrimeNG({ 
+    //     theme: {
+    //         preset: Aura
+    //     }
+    // })
   ]
 };
