@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 
 import Aura from '@primeng/themes/aura';
@@ -10,7 +10,8 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
   standalone: true,
   imports: [ToggleSwitchModule, FormsModule],
   templateUrl: './darkmode.component.html',
-  styleUrl: './darkmode.component.css'
+  styleUrl: './darkmode.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DarkmodeComponent {
   isDarkMode = signal(false);
