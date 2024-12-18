@@ -1,8 +1,14 @@
 
 @if (isDarkMode()) {
-    🌚
+    <!-- 🌚 -->
 } @else {
-    🌞
+    <!-- 🌞 -->
 }
-<p-toggleSwitch [ngModel]="isDarkMode()" (ngModelChange)="toggleDarkMode()" class="p-2">
-</p-toggleSwitch>
+<!-- <p-toggleSwitch [ngModel]="isDarkMode()" (ngModelChange)="toggleDarkMode()" class="p-2">
+</p-toggleSwitch> -->
+<p-toggleSwitch
+        [ngModel]="isDarkMode()"
+        (ngModelChange)="toggleDarkMode()"
+        [dt]="darkThemeSwitchTokens"
+        styleClass="pb-2"
+      ></p-toggleSwitch>
