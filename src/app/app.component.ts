@@ -57,9 +57,9 @@ languages: any[];
   constructor(private primeng: PrimeNG, private router: Router) {
     this.primeng.theme.set({
       preset: Aura,
-      options: {
-        darkModeSelector: '.dark',
-      },
+      // options: {
+      //   darkModeSelector: '.dark',
+      // },
     });
 
 
