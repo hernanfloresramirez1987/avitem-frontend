@@ -1,9 +1,9 @@
 <p-menubar [model]="items()">
     <ng-template pTemplate="start">
-        <img src="icons/logo-current.png"
+        <!-- <img src="icons/logo-current.png"
             alt="logo"
             height="30"
-            class="mr-2"/>
+            class="mr-2"/> -->
     </ng-template>
     <ng-template pTemplate="end">
         <input type="text" pInputText placeholder="Search" class="mr-2"/>
@@ -14,92 +14,55 @@
 
 
 
-<p-sidebar
-    [visible]="visibleSidebar()"
+<!-- Sidebar -->
+<p-sidebar 
+    [modal]="true"
+    [showCloseIcon]="true"
+    [baseZIndex]="10000"
+
+    [visible]="sidebarVisible()"
     [dismissible]="true"
-    [showCloseIcon]="false"
     (onShow)="onShowSidebar($event)"
     (onHide)="onHiddenSidebar($event)"
-    (visibleChange)="sidebarChange($event)">
+    (visibleChange)="sidebarChange($event)"
+    styleClass="p-sidebar-lg">
+    
+    <!-- Header del Sidebar -->
     <ng-template pTemplate="header">
-        <img src="icons/logo.png"
-            alt="logo"
-            height="130"
-            width="overflow-y-auto"
-            class="mr-2"/>
-        <!-- Header Content -->
+            <p-avatar 
+                image="https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-man-avatar-isolated-on-white-background-png-image_4891418.png" 
+                shape="circle"
+                size="large">
+            </p-avatar>
+            <div class="flex flex-column">
+                <h3 class="m-0">John Doe</h3>
+                <span class="text-sm text-500">Administrador</span>
+            </div>
     </ng-template>
-    <!-- Content -->
-    <!-- <ng-template pTemplate="content">
-        <div class="sidebar-content">
-            
-            <ul class="menu-list">
-                <li>
-                    <a href="#" class="menu-item">
-                        <i class="pi pi-home"></i>
-                        <span>Inicio</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <i class="pi pi-users"></i>
-                        <span>Usuarios</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="menu-item">
-                        <i class="pi pi-cog"></i>
-                        <span>Configuración</span>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
-    </ng-template> -->
+    <p-divider></p-divider>
+
+    <!-- Contenido del Sidebar -->
     <ng-template pTemplate="content">
-        <div class="sidebar-content">
-            <ul class="menu-list">
-                @for (item of menuItems(); track $index) {
-                <li>
-                    <!-- <div class="menu-item" (click)="navigateTo(item.route)">
-                        <i class="{{item.icon}}"></i>
-                        <span>{{item.label}}</span>
-                        @if (item.subItems?.length) {
-                            <i class="pi pi-angle-down ml-auto"></i>
-                        }
-                    </div> -->
-                    <div class="menu-item" 
-                        [class.expanded]="item.expanded"
-                        (click)="toggleSubm(item)"> <!-- Ensure the function call is complete -->
-                        <i class="{{item.icon}}"></i>
-                        <span>{{item.label}}</span> <!-- Add this line if you want to display the label -->
-                    </div>
-                    
-                    @if (item.subItems?.length) {
-                    <ul class="submenu-list">
-                        @for (subItem of item.subItems; track $index) {
-                        <li class="submenu-item"
-                            (click)="navigateTo(subItem.route)">
-                            <span>{{subItem.label}}</span>
-                        </li>
-                        }
-                    </ul>
-                    }
-                </li>
-                }
-            </ul>
-        </div>
+        <!-- <div class="sidebar-content"> -->
+            <!-- Panel de Menú -->
+            <p-panelMenu 
+                [model]="menuItems()" 
+                [multiple]="false">
+            </p-panelMenu>
+        <!-- </div> -->
     </ng-template>
 
-    <!-- Footer -->
+    <!-- Footer del Sidebar -->
     <ng-template pTemplate="footer">
-        <div class="sidebar-footer">
-            <p>© 2024 Mi Aplicación</p>
-            <button pButton 
+        <div class="flex flex-column gap-2 px-3">
+            <p-divider></p-divider>
+            <p-button 
                 label="Cerrar Sesión" 
                 icon="pi pi-power-off"
-                class="p-button-danger">
-            </button>
+                severity="danger"
+                [text]="true"
+                (onClick)="onNavigate('/logout')">
+            </p-button>
         </div>
     </ng-template>
 </p-sidebar>

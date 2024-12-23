@@ -12,15 +12,15 @@ export class EmployesService {
   constructor(private http: HttpClient) { }
 
   getAllEmployes() {
-    return this.http.get(`${this.url}empleado`);
+    return this.http.get(`${this.url}empleados`);
   }
 
   saveEmploye(dataEmploye: any): Observable<any> {
     console.log(dataEmploye);
-    return this.http.post(`${this.url}empleado`, dataEmploye);
+    return this.http.post(`${this.url}empleados`, dataEmploye);
   }
   savePromise(dataEmploye: any): Promise<any> {
     console.log(dataEmploye);
-    return this.http.post(`${this.url}empleado`, dataEmploye).toPromise();
+    return this.http.post(`${this.url}empleados`, dataEmploye).toPromise();
   }
 }

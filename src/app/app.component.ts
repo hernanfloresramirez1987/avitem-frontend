@@ -26,7 +26,7 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   isDarkMode = signal(false);
 
   toggleDarkMode() {
@@ -35,9 +35,6 @@ export class AppComponent implements OnInit {
     this.isDarkMode.set(!this.isDarkMode());
   }
 
-  ngOnInit() {
-      this.primeng.ripple.set(true);
-  }
   title = 'avitem-frontend';
 
 //   toggleDarkMode() {
@@ -54,13 +51,13 @@ languages: any[];
 
   sidebarVisible: boolean = true;
   
-  constructor(private primeng: PrimeNG, private router: Router) {
-    this.primeng.theme.set({
-      preset: Aura,
-      // options: {
-      //   darkModeSelector: '.dark',
-      // },
-    });
+  constructor(private router: Router) {
+    // this.primeng.theme.set({
+    //   preset: Aura,
+    //   // options: {
+    //   //   darkModeSelector: '.dark',
+    //   // },
+    // });
 
 
     this.languages = [

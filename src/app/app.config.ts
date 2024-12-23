@@ -8,7 +8,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 
-import Aura from '@primeng/themes/aura';
+// import Aura from '@primeng/themes/aura';
 
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 
@@ -18,6 +18,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json')
 }
+
+import { MyPreset } from './mytheme'; // Importa tu preset
+
 
 export const appConfig: ApplicationConfig = {
   providers: [ //provideZoneChangeDetection({ eventCoalescing: true }),
@@ -38,10 +41,20 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: MyPreset,
+      }
+    })
     // providePrimeNG({ 
-    //     theme: {
-    //         preset: Aura
+    //   theme: {
+    //     preset: Aura,
+    //     options: {
+    //         prefix: 'p',
+    //         darkModeSelector: 'system',
+    //         cssLayer: false
     //     }
+    //   }
     // })
   ]
 };

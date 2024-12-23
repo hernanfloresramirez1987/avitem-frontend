@@ -14,7 +14,7 @@ import { CargoService } from '../../../../services/cargo.service';
 import { TipoempleadoService } from '../../../../services/tipoempleado.service';
 import { RolService } from '../../../../services/rol.service';
 import { TipodocService } from '../../../../services/tipodoc.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgStyle } from '@angular/common';
 import { ExtdocService } from '../../../../services/extdoc.service';
 import { EmployesService } from '../../../../services/employes.service';
 import { Router, RouterModule } from '@angular/router';
@@ -22,11 +22,12 @@ import { debounceTime } from 'rxjs';
 import { PersonaService } from '../../../../services/persona.service';
 import { FileUploadModule } from 'primeng/fileupload';
 import { P_A_Personal } from '../../../../models/pa_personal.interface';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-employes-register',
     standalone: true,
-    imports: [ReactiveFormsModule, FormsModule, RadioButtonModule, CardModule, InputTextModule, MultiSelectModule, DropdownModule, CalendarModule, SelectButtonModule, ToggleButtonModule, SidebarModule, FloatLabelModule, RouterModule, FileUploadModule],
+    imports: [ReactiveFormsModule, FormsModule, ButtonModule, RadioButtonModule, CardModule, InputTextModule, MultiSelectModule, DropdownModule, CalendarModule, SelectButtonModule, ToggleButtonModule, SidebarModule, FloatLabelModule, RouterModule, FileUploadModule, CardModule, NgStyle],
     providers: [CargoService, TipoempleadoService, TipodocService, DatePipe],
     templateUrl: './employes-register.component.html',
     styleUrl: './employes-register.component.css'
@@ -234,20 +235,20 @@ export default class EmployesRegisterComponent implements OnInit {
         }
       })
   }
-  // saveDataObservable() {
-  //   console.log(this.fg.value);
-  //   console.log(this.dataDtoEmployes);
-  //   const aux = this.employesService.saveEmploye(this.dataDtoEmployes)
-  //     .subscribe(t => {
-  //       console.log(t)
-  //       console.log(t.status)
-  //       if(t.status === '201') {
-  //         console.log("Se registro exitosamente")
-  //         this.router.navigate(['/employes']);
-  //       }
-  //     });
-  //   aux.unsubscribe();
-  // }
+  saveDataObservable() {
+    console.log(this.fg.value);
+    console.log(this.dataDtoEmployes);
+    const aux = this.employesService.saveEmploye(this.dataDtoEmployes)
+      .subscribe(t => {
+        console.log(t)
+        console.log(t.status)
+        if(t.status === '201') {
+          console.log("Se registro exitosamente")
+          this.router.navigate(['/employes']);
+        }
+      });
+    aux.unsubscribe();
+  }
 
   formatearFecha(fecha: Date | null): string {
     if (fecha) {
