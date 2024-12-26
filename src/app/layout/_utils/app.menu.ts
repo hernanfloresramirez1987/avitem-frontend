@@ -4,26 +4,52 @@ export const APP_MENU = [
   {
     label: "home", icon: "pi pi-home",
     items: [
-      { label: "dashboard", icon: "pi pi-desktop", routerLink: ["/home"] },
-      { label: "main panel", icon: "pi pi-desktop", routerLink: ["/dashboard"] }
+      { label: "dashboard", icon: "pi pi-home", routerLink: ["/home"] },
+      { label: "main_panel", icon: "pi pi-desktop", routerLink: ["/dashboard"] }
     ]
   },
   {
-    label: "users", icon: "pi pi-sign-in",
+    label: "users", icon: "pi pi-address-book",
     items: [
-      { label: "Empleados", icon: "pi pi-user", routerLink: ["/users/"] },
-      { label: "Empleados", icon: "pi pi-user", routerLink: ["/users/create"] },
+      {
+        label: "employees", icon: "pi pi-users",
+        items: [
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/"] },
+          { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/create"] },
+        ]
+      },
+      {
+        label: "suppliers", icon: "pi pi-users",
+        items: [
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/"] },
+          { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/create"] },
+        ]
+      },
+      {
+        label: "customers", icon: "pi pi-users",
+        items: [
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/"] },
+          { label: "register_customers", icon: "pi pi-user", routerLink: ["/users/create"] },
+        ]
+      },
     ]
   },
   {
     label: "inventory", icon: "pi pi-th-large",
     items: [
-      { label: "warehouse", icon: "fa-solid fa-database", routerLink: ["/inventory/warehouse"] },
+      { label: "warehouse", icon: "pi pi-database", routerLink: ["/inventory/warehouse"] },
       { label: "catalogs", icon: "pi pi-box", routerLink: ["/inventory/catalog"] },
     ]
   },
   {
-    label: "Productos", icon: "pi pi-windows",
+    label: "purchases", icon: "pi pi-windows",
+    items: [
+      { label: "listas", icon: "pi pi-ban", routerLink: ["/productos/"] },
+      { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },
+    ]
+  },
+  {
+    label: "sales", icon: "pi pi-windows",
     items: [
       { label: "listas", icon: "pi pi-ban", routerLink: ["/productos/"] },
       { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },

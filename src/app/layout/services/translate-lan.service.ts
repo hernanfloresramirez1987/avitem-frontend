@@ -1,13 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
+// export class TranslateLanService {
+
+//   static lan = environment.defaultLanguage
+
+//   changeLanguage$ = new Subject<string>();
+// }
+
+@Injectable({ providedIn: 'root' })
 export class TranslateLanService {
+    static lan: string = 'es'; // Idioma por defecto
+    changeLanguage$ = new BehaviorSubject<string>(TranslateLanService.lan);
 
-  static lan = environment.defaultLanguage
+    constructor(private translate: TranslateService) {
+        this.translate.setDefaultLang(TranslateLanService.lan);
+    }
 
-  changeLanguage$ = new Subject<string>();
+    changeLanguage(language: string): void {
+        TranslateLanService.lan = language;
+        this.translate.use(language); // Cambiar el idioma
+        this.changeLanguage$.next(language); // Notificar el cambio
+    }
 }
