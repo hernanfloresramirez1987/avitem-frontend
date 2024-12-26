@@ -1,32 +1,6 @@
 {
   "pages": {
-    "backorder": "Backorder",
-    "archived": "Archived",
-    "delivered": "Delivered",
-    "parameterization": "Parameterization",
-    "inbounds": "Inbounds",
-    "zones": "Zones",
-    "locations": "Locations",
-    "inventory": "Inventory",
-    "bins": "Bins",
-    "warehouse": "Warehouse",
-    "catalogs": "Catalogs",
-    "kardex history": "Kardex History",
-    "sku history": "Sku History",
-    "cyclecount": "Cycle Count",
-    "outbound": "Outbound",
-    "pending": "Pending",
-    "processing": "Processing",
-    "shipped": "Shipped",
-    "all orders": "All orders",
-    "fill rate": "Fill rate",
-    "assigment": "Assigment",
-    "tasks o jobs": "Tasks o Jobs",
-    "inbound": "Inbounds",
-    "receiving": "Purchase Orders",
-    "history": "Archive History",
-    "details": "Details",
-    "return": "Return"
+    "dashboard": "Dashboard"
   },
   "edit": {
     "edit": "Edit",
