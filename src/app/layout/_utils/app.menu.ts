@@ -35,23 +35,23 @@ export const APP_MENU = [
     ]
   },
   {
-    label: "inventory", icon: "pi pi-th-large",
+    label: "inventory", icon: "pi pi-warehouse",
     items: [
       { label: "warehouse", icon: "pi pi-database", routerLink: ["/inventory/warehouse"] },
       { label: "catalogs", icon: "pi pi-box", routerLink: ["/inventory/catalog"] },
     ]
   },
   {
-    label: "purchases", icon: "pi pi-windows",
+    label: "purchases", icon: "pi pi-shopping-cart",
     items: [
-      { label: "listas", icon: "pi pi-ban", routerLink: ["/productos/"] },
+      { label: "list", icon: "pi pi-ban", routerLink: ["/productos/"] },
       { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },
     ]
   },
   {
-    label: "sales", icon: "pi pi-windows",
+    label: "sales", icon: "pi pi-tag",
     items: [
-      { label: "listas", icon: "pi pi-ban", routerLink: ["/productos/"] },
+      { label: "list", icon: "pi pi-ban", routerLink: ["/productos/"] },
       { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },
     ]
   }
