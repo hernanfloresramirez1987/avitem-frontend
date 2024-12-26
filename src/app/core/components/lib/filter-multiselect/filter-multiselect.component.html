@@ -1,0 +1,27 @@
+<p-columnFilter #filterComponent [field]="this.field" matchMode="in" [showMatchModes]="false" [showOperator]="false"
+  [showAddButton]="false" [showApplyButton]="false" [showClearButton]="false" [showMatchModes]="false"
+  [matchModeOptions]="configfilter">
+  <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+    <p-multiSelect #multiselect [ngModel]="value" [options]="this.valores" [placeholder]="this.type" optionLabel="id"
+      [maxSelectedLabels]="0" [selectedItemsLabel]="'{0} items'" [showClear]="false" [filter]="true" appendTo="body">
+      <ng-template let-option pTemplate="item">
+        <div class="p-multiselect-representative-option">
+          <div class="p-multiselect-representative-option">
+            @if(!this.withTemplate){
+              <span class="ml-2">{{ option[this.columna] }}</span>
+            }@else{
+              <ng-container *ngTemplateOutlet="listTemplate; context: { $implicit: option }"></ng-container>
+            }
+
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="p-ai-center p-mt-3 p-3">
+          <p-button label="Clear" styleClass="p-button-outlined w-6" (onClick)="filter(null); hide()"></p-button>
+          <p-button label="Apply" styleClass="w-6" (onClick)="filter(multiselect.value); hide()"></p-button>
+        </div>
+      </ng-template>
+    </p-multiSelect>
+  </ng-template>
+</p-columnFilter>

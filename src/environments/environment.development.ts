@@ -1,4 +1,5 @@
 export const environment = {
-  URL_API: "http://localhost:3000/",
+  URL_API: "https://edge01.shipedge.com/",
   defaultLanguage: 'en'
 };
+

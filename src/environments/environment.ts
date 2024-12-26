@@ -1,3 +1,4 @@
 export const environment = {
-  // URL_API: "https://uealberteinstein-backend.onrender.com/"
+  URL_API: "https://xxxxxxx.shipedge.com/",
+  defaultLanguage: 'en'
 };
