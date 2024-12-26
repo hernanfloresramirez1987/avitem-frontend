@@ -1,0 +1,10 @@
+@for (item of enformato; track item.key) {
+  <p-chip
+    [removable]="true"
+    class="custom-chip"
+    (onRemove)="remove($event, item.key)"
+  >
+    <i class="pi pi-filter"></i>
+    {{ item.show }}:{{ item.valor }}
+  </p-chip>
+}
