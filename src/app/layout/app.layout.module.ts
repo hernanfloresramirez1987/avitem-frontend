@@ -21,7 +21,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
 import { MenuModule } from 'primeng/menu';
 import { TranslateLanModule } from '../core/_modules/translate-lan.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 
 @NgModule({
@@ -53,7 +53,8 @@ import { ButtonModule } from 'primeng/button';
         RouterModule,
         TooltipModule,
         AppConfigModule,
-        TranslateLanModule
+        TranslateLanModule,
+        NgOptimizedImage
     ],
     exports: [AppLayoutComponent]
 })

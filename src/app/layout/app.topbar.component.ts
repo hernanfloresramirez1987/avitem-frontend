@@ -18,7 +18,7 @@ export class AppTopBarComponent implements OnInit{
     menu: MenuItem[] = [];
 
     @ViewChild('searchinput') searchInput!: ElementRef;
-
+    
     @ViewChild('menubutton') menuButton!: ElementRef;
 
     searchActive = false;
@@ -27,10 +27,24 @@ export class AppTopBarComponent implements OnInit{
     lan: string
     username?: string;
     role?: string;
+    
 
-    constructor(public layoutService: LayoutService) {
+    constructor(public layoutService: LayoutService,
+        private translateService: TranslateLanService) {
         this.lan = TranslateLanService.lan
+        this.lan = TranslateLanService.lan;
 
+        this.items = [
+            {
+                label: 'EN',
+                command: () => this.changeLanguage('en'),
+            },
+            {
+                label: 'ES',
+                command: () => this.changeLanguage('es'),
+            }
+        ];
+        
         this.items = [
             {
                 label: 'EN',
@@ -47,6 +61,11 @@ export class AppTopBarComponent implements OnInit{
                 }
             }
         ];
+    }
+
+    changeLanguage(lang: string) {
+        this.lan = lang;
+        this.translateService.changeLanguage(lang);
     }
 
     async ngOnInit() {
