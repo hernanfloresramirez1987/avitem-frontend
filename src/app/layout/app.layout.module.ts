@@ -22,6 +22,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MenuModule } from 'primeng/menu';
 import { TranslateLanModule } from '../core/_modules/translate-lan.module';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { CommonModule } from '@angular/common';
         StyleClassModule,
         BadgeModule,
         RadioButtonModule,
+        ButtonModule,
         InputSwitchModule,
         RippleModule,
         RouterModule,

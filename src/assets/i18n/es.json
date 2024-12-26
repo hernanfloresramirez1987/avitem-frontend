@@ -1,6 +1,9 @@
 {
   "pages": {
-    "dashboard": "Panel"
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "users": "Usuarios",
+    "users_list": "Lista de Usuarios"
   },
   "edit": {
     "edit": "Editar",

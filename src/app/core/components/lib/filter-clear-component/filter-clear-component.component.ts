@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { FiltersShip } from './filters.interface';
 import { FormsModule } from '@angular/forms';
 import { ChipModule } from 'primeng/chip';
-import { TranslateLanService } from 'src/app/core/_services/translate-lan.service';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
 
 
 @Component({

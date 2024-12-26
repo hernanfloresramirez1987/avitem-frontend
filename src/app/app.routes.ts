@@ -5,8 +5,9 @@ export const routes: Routes = [
     {
       path: '', component: AppLayoutComponent,
       children: [
-        // { path: 'location', data: { breadcrumb: 'Parameterization / Location' }, loadChildren: () => import('./core/components/pages/location/location.module').then(m => m.LocationModule) },
-        // { path: 'webreport', data: { breadcrumb: '' }, loadComponent: () => import('./core/components/pages/report/report.component'), }
+        { path: 'home', data: { breadcrumb: 'Home' }, loadComponent: () => import('./core/components/pages/home/home.component') },
+        { path: 'dashboard', data: { breadcrumb: 'Dashboard' }, loadComponent: () => import('./core/components/pages/dashboard/dashboard.component'), },
+        { path: 'users', data: { breadcrumb: 'Home' }, loadChildren: () => import('./core/components/pages/users/users-routing.module').then(m => m.UsersRoutingModule) },
       ]
     }
   ];

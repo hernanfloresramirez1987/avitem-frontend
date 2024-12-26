@@ -2,7 +2,7 @@ import { Component, ContentChild, ContentChildren, Input, QueryList, TemplateRef
 import { PrimeTemplate } from 'primeng/api';
 import { MultiSelect } from 'primeng/multiselect';
 import { Nullable } from 'primeng/ts-helpers';
-import { filterConfigMatchModes } from 'src/app/core/config/filtercolumn.config';
+import { filterConfigMatchModes } from '../../../config/filtercolumn.config';
 
 @Component({
   selector: 'shipedge-filter-multiselect',
