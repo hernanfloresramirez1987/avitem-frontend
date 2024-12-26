@@ -1,6 +1,9 @@
 {
   "pages": {
-    "dashboard": "Dashboard"
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "users": "User",
+    "users_list": "Users List"
   },
   "edit": {
     "edit": "Edit",
