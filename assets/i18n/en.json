@@ -2,8 +2,21 @@
   "pages": {
     "home": "Home",
     "dashboard": "Dashboard",
+    "main_panel": "Main Panel",
     "users": "User",
-    "users_list": "Users List"
+    "employees": "Employees",
+    "register_employees": "Register",
+    "suppliers": "Suppliers",
+    "register_suppliers": "Register",
+    "customers": "Customers",
+    "register_customers": "Register Customer",
+    "list": "List",
+    "inventory": "Inventory",
+    "warehouse": "Warehouse",
+    "catalogs": "Catalogs",
+    "purchases": "Purchases",
+    "sale": "Sales"
+
   },
   "edit": {
     "edit": "Edit",

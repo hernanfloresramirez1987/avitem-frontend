@@ -1,1 +1,0 @@
-import{Ab as a,Hb as s,ca as n,kb as r,lb as o}from"./chunk-NGYPIWCT.js";var m=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-users-create"]],standalone:!0,features:[s],decls:2,vars:0,template:function(t,p){t&1&&(r(0,"p"),a(1,"users-create works!"),o())}})}}return e})();export{m as default};

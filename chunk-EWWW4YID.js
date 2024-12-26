@@ -1,0 +1,1 @@
+import{Cb as r,Jb as a,da as n,mb as o,nb as s}from"./chunk-DAIB3G5R.js";var c=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-users"]],standalone:!0,features:[a],decls:2,vars:0,template:function(t,p){t&1&&(o(0,"p"),r(1,"users works!"),s())}})}}return e})();export{c as default};

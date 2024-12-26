@@ -1,9 +1,21 @@
 {
   "pages": {
     "home": "Inicio",
-    "dashboard": "Panel",
+    "dashboard": "Panel de Control",
+    "main_panel": "Panel Principal",
     "users": "Usuarios",
-    "users_list": "Lista de Usuarios"
+    "employees": "Empleados",
+    "register_employees": "Registrar",
+    "suppliers": "Suppliers",
+    "register_suppliers": "Registrar",
+    "customers": "Clientes",
+    "register_customers": "Registrar",
+    "list": "Lista",
+    "inventory": "Inventario",
+    "warehouse": "Almacen",
+    "catalogs": "Catalogo",
+    "purchases": "Compras",
+    "sale": "Ventas"
   },
   "edit": {
     "edit": "Editar",
