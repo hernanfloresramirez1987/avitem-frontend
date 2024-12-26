@@ -1,32 +1,6 @@
 {
   "pages": {
-    "backorder": "Pedidos en Espera",
-    "archived": "Archivados",
-    "delivered": "Entregado",
-    "parameterization": "Parametrizacion",
-    "inbounds": "Entradas",
-    "zones": "Zonas",
-    "locations": "Ubicaciones",
-    "inventory": "Inventerio",
-    "bins": "Bines",
-    "warehouse": "Almacen",
-    "catalogs": "Catalogos",
-    "kardex history": "Historia Kardex",
-    "sku history": "Historial Sku",
-    "cyclecount": "Contador de Ciclos",
-    "outbound": "Salidas",
-    "pending": "Pendientes",
-    "processing": "En proceso",
-    "shipped": "Enviados",
-    "all orders": "Total Pedidos",
-    "fill rate": "Tasas de Relleno",
-    "assigment": "Asignacion",
-    "tasks o jobs": "Tareas o Trabajos",
-    "inbound": "Entradas",
-    "receiving": "Órdenes de compra",
-    "history": "Historial de archivo",
-    "details": "Detalles",
-    "return": "Devolución"
+    "dashboard": "Panel"
   },
   "edit": {
     "edit": "Editar",
