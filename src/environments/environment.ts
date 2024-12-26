@@ -1,4 +1,4 @@
 export const environment = {
-  URL_API: "https://xxxxxxx.shipedge.com/",
+  URL_API: "https://xxxxxxx.my_domain.com/",
   defaultLanguage: 'en'
 };

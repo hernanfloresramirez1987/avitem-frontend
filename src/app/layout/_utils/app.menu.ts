@@ -2,15 +2,17 @@ import { MenuItem } from "primeng/api";
 
 export const APP_MENU = [
   {
-    label: "dashboard", icon: "pi pi-home",
+    label: "home", icon: "pi pi-home",
     items: [
-      { label: "panel principal", icon: "pi pi-desktop", routerLink: ["/dashboard"] }
+      { label: "dashboard", icon: "pi pi-desktop", routerLink: ["/home"] },
+      { label: "main panel", icon: "pi pi-desktop", routerLink: ["/dashboard"] }
     ]
   },
   {
-    label: "Personal", icon: "pi pi-sign-in",
+    label: "users", icon: "pi pi-sign-in",
     items: [
-      { label: "Empleados", icon: "pi pi-user", routerLink: ["/user/"] },
+      { label: "Empleados", icon: "pi pi-user", routerLink: ["/users/"] },
+      { label: "Empleados", icon: "pi pi-user", routerLink: ["/users/create"] },
     ]
   },
   {

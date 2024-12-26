@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from 'src/app/core/_services/translate-lan.service';
-import { filterConfigMatchModes } from 'src/app/core/config/filtercolumn.config';
+import { filterConfigMatchModes } from '../../../config/filtercolumn.config';
+import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
 
 @Component({
   selector: 'shipedge-filter-input',
