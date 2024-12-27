@@ -24,6 +24,7 @@
 
     "username": "User Name",
     "password": "Password",
+    "reppit_password": "Repet Password",
     "rol": "Role",
     
     "ci": "Document",
@@ -34,7 +35,13 @@
     "apm": "Mother's Surname",
     "sexo": "Sex",
     "fnaci": "Date of Birth",
-    "direccion": "Address"
+    "direccion": "Address",
+    "telefono": "phone",
+    "email": "email",
+
+    "type": "Type",
+    "position": "Position",
+    "salary": "Salary"
   },
 
 
