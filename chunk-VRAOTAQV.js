@@ -1,1 +1,0 @@
-import{Cb as a,Jb as s,da as n,mb as r,nb as o}from"./chunk-DAIB3G5R.js";var m=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-users-create"]],standalone:!0,features:[s],decls:2,vars:0,template:function(t,p){t&1&&(r(0,"p"),a(1,"users-create works!"),o())}})}}return e})();export{m as default};
