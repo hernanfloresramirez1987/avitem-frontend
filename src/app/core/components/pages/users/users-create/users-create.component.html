@@ -1,94 +1,96 @@
 <p-card [header]="'labels.register_employee' | translate | uppercase">
-  <div class="flex flex-column md:flex-row">
-    <div class="w-full md:w-6 flex flex-column align-items-left justify-content-top pr-2">
-        <h6>{{'user_employee.detail_user' | translate | uppercase}}</h6>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="CompName" class="w-15rem">{{'user_employee.username' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="FirstName" class="w-15rem">{{'user_employee.password' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="LastName" class="w-15rem">{{'user_employee.rol' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-    </div>
-    <div class="w-full md:w-6 flex flex-column align-items-left justify-content-top pr-2">
+  <div class="flex flex-column md:flex-row sm:flex-row">    
+    <div class="align-items-left justify-content-top pr-2">
         <h6>{{'user_employee.detail_people' | translate | uppercase}}</h6>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+        <div class="flex flex-column md:flex-row flex-row">
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
             <label for="OwnerEmail" class="w-15rem">{{'user_employee.ci' | translate }}</label>
             <input pInputText type="text" class="w-full" />
-          </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="OwnerEmail" class="w-15rem">{{'user_employee.ciExpedit' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="ServiceName" class="w-15rem">{{'user_employee.ciComplement' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4"> <!-- apply mask for this -->
-          <label for="DirectPhone" class="w-15rem">{{'user_employee.name' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="PublicPhone" class="w-15rem">{{'user_employee.app' | translate }}e</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="ComEmail" class="w-15rem">{{'user_employee.apm' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-          <label for="Web" class="w-15rem">{{'user_employee.sexo' | translate }}</label>
-          <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="Web" class="w-15rem">{{'user_employee.fnaci' | translate }}</label>
+            </div>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2">
+            <label for="OwnerEmail" class="w-15rem">{{'user_employee.ciExpedit' | translate }}</label>
             <input pInputText type="text" class="w-full" />
+            </div>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                <label for="ServiceName" class="w-15rem">{{'user_employee.ciComplement' | translate }}</label>
+                <input pInputText type="text" class="w-full" />
+            </div>
         </div>
-      <!-- </form> -->
+        <div class="flex flex-column md:flex-row flex-row">
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full md:w-full">
+            <label for="DirectPhone" class="w-15rem">{{'user_employee.name' | translate }}</label>
+            <input pInputText type="text" class="w-full" />
+            </div>
+        </div>
+        <div class="flex flex-column flex-row md:flex-row ">
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pr-1">
+            <label for="PublicPhone" class="w-15rem">{{'user_employee.app' | translate }}e</label>
+            <input pInputText type="text" class="w-full" />
+            </div>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pl-1">
+                <label for="ComEmail" class="w-15rem">{{'user_employee.apm' | translate }}</label>
+                <input pInputText type="text" class="w-full" />
+            </div>
+        </div>
+        <div class="flex flex-column md:flex-row flex-row">
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="Web" class="w-15rem">{{'user_employee.sexo' | translate }}</label>
+            <input pInputText type="text" class="w-full" />
+            </div>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2">
+                <label for="Web" class="w-15rem">{{'user_employee.fnaci' | translate }}</label>
+                <input pInputText type="text" class="w-full" />
+            </div>
+        <!-- </div>
+        <div class="flex flex-column md:flex-row flex-row"> -->
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                <label for="Web" class="w-15rem">{{'user_employee.telefono' | translate }}</label>
+                <input pInputText type="text" class="w-full" />
+            </div>
+        </div>
+        <div class="flex flex-column flex-row md:flex-row">
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
+                <label for="Web" class="w-15rem">{{'user_employee.email' | translate }}</label>
+                <input pInputText type="text" class="w-full" />
+            </div>
+        </div>
     </div>
 
-    <!-- Warehouse Location -->
+    
     <div class="w-full md:w-6 flex flex-column align-items-left justify-content-top pl-2">
-    <h5>{{'user.user_profile.warehouse_location' | translate | uppercase}}</h5>
-        <!-- <form action=""> -->
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="WherehouseName" class="w-15rem">{{'user.user_profile.name' | translate }}</label>
-                <input pInputText id="WherehouseName" type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="Type" class="w-15rem">{{'user.user_profile.type' | translate }}</label>
-                <input pInputText id="Type" type="text" class="w-full"/>
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="Country" class="w-15rem">{{'user.user_profile.country' | translate }}Country</label>
-                <input pInputText id="Country" type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="AddressOne" class="w-15rem">{{'user.user_profile.address' | translate }} 1</label>
-                <input pInputText id="AddressOne" type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="AddressTwo" class="w-15rem">{{'user.user_profile.address' | translate }} 2</label>
-                <input pInputText id="AddressTwo" type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="PostalCode" class="w-15rem">{{'user.user_profile.web' | translate }}</label>
-                <input pInputText id="PostalCode" type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="City" class="w-15rem">{{'user.user_profile.city' | translate }}</label>
-                <input pInputText id="City" type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="Region" class="w-15rem">{{'user.user_profile.state' | translate }}</label>
-                <input pInputText id="Region" type="text" class="w-full" />
-            </div>
-        <!-- </form> -->
+        <h6>{{'user_employee.detail_user' | translate | uppercase}}</h6>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="CompName" class="w-15rem">{{'user_employee.username' | translate }}</label>
+            <input pInputText type="text" class="w-full" />
+        </div>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="FirstName" class="w-15rem">{{'user_employee.password' | translate }}</label>
+            <input pInputText type="password" class="w-full" />
+        </div>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="FirstName" class="w-15rem">{{'user_employee.reppit_password' | translate }}</label>
+            <input pInputText type="password" class="w-full" />
+        </div>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="LastName" class="w-15rem">{{'user_employee.rol' | translate }}</label>
+            <input pInputText type="text" class="w-full" />
+        </div>
+    </div>
+    
+    <div class="flex flex-column align-items-left justify-content-top px-2">
+        <h6>{{'user_employee.detail_employee' | translate | uppercase}}</h6>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="WherehouseName" class="w-15rem">{{'user_employee.type' | translate }}</label>
+            <input pInputText id="WherehouseName" type="text" class="w-full" />
+        </div>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="Type" class="w-15rem">{{'user_employee.cargo' | translate }}</label>
+            <input pInputText id="Type" type="text" class="w-full"/>
+        </div>
+        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+            <label for="Country" class="w-15rem">{{'user_employee.salary' | translate }}Country</label>
+            <input pInputText id="Country" type="text" class="w-full" />
+        </div>
     </div>
   </div>
   <ng-template pTemplate="footer">

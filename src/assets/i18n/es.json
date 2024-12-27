@@ -24,6 +24,7 @@
 
     "username": "Nombre de Usuario",
     "password": "Contrasena",
+    "reppit_password": "Repetir Contrasena",
     "rol": "Rol",
     
     "ci": "Documento",
@@ -34,7 +35,13 @@
     "apm": "Apellido Materno",
     "sexo": "Sexo",
     "fnaci": "Fecha de Nacimiento",
-    "direccion": "Direccion"
+    "direccion": "Direccion",
+    "telefono": "Telefono/Celular",
+    "email": "Correo Electronico",
+
+    "type": "Tipo",
+    "position": "Cargo",
+    "salary": "Salario"
   },
 
 
