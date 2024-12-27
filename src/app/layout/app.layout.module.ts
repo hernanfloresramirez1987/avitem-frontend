@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
 import { BadgeModule } from 'primeng/badge';
@@ -37,7 +37,7 @@ import { ButtonModule } from 'primeng/button';
     imports: [
         CommonModule,
         FormsModule,
-        HttpClientModule,
+        // HttpClientModule,
         InputTextModule,
         InputSwitchModule,
         MenuModule,
