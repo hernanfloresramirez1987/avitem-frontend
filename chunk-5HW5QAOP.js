@@ -1,0 +1,1 @@
+import{Ib as r,Qb as s,ea as o,sb as a,tb as n}from"./chunk-SI5SZALX.js";var m=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=o({type:e,selectors:[["app-dashboard"]],standalone:!0,features:[s],decls:2,vars:0,template:function(t,d){t&1&&(a(0,"p"),r(1,"dashboard works!"),n())}})}}return e})();export{m as default};
