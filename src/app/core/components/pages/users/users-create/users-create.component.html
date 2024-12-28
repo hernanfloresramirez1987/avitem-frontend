@@ -1,102 +1,144 @@
+<form [formGroup]="registroForm">
 <p-card [header]="'labels.register_employee' | translate | uppercase">
-  <div class="flex flex-column md:flex-row sm:flex-row">    
-    <div class="align-items-left justify-content-top pr-2">
-        <h6>{{'user_employee.detail_people' | translate | uppercase}}</h6>
-        <div class="flex flex-column md:flex-row flex-row">
+    <div class="flex flex-column md:flex-row sm:flex-row">
+        <div class="align-items-left justify-content-top pr-2">
+            <h6>{{'user_employee.detail_people' | translate | uppercase}}</h6>
+            <div class="flex flex-column md:flex-row flex-row">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                    <label for="ci" class="w-20rem">{{'user_employee.ci' | translate }}</label>
+                    <input pInputText [formControlName]="'ci'" type="text" class="w-full" />
+                    @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
+                        <span>Error en el CI.</span>
+                    }
+                </div>
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 pb-4">
+                    <label for="ServiceName" class="w-15rem">{{'user_employee.ciComplement' | translate }}</label>
+                    <p-inputGroup>
+                        <input type="text" pInputText placeholder="complemento" [disabled]="checkComplementCI"/>
+                        <button type="button" pButton icon="pi pi-check" class="p-button-primary" (click)="checkComplementCI = !checkComplementCI"></button>
+                    </p-inputGroup>
+                </div>
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
+                    <label for="expedition" class="w-15rem">{{'user_employee.ciExpedit' | translate }}</label>
+                    <p-dropdown [formControlName]="'ciExpedit'" [options]="expedidoOptions" optionLabel="name" placeholder="Select a Extension" [style]="{width: '100%'}"/>
+                    @if (registroForm.get('ciExpedit')?.invalid && registroForm.get('ciExpedit')?.touched) {
+                        <span>Error en el {{'user_employee.ciExpedit' | translate }}.</span>
+                    }
+                </div>
+            </div>
+            <div class="flex flex-column md:flex-row flex-row">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full md:w-full">
+                    <label for="DirectPhone" class="w-15rem">{{'user_employee.name' | translate }}</label>
+                    <input pInputText [formControlName]="'nombre'" type="text" class="w-full" />
+                    @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+                        <span>Error en el {{'user_employee.name' | translate }}.</span>
+                    }
+                </div>
+            </div>
+            <div class="flex flex-column flex-row md:flex-row ">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pr-1">
+                    <label for="PublicPhone" class="w-15rem">{{'user_employee.app' | translate }}e</label>
+                    <input pInputText [formControlName]="'app'" type="text" class="w-full" />
+                    @if (registroForm.get('app')?.invalid && registroForm.get('app')?.touched) {
+                        <span>Error en el {{'user_employee.app' | translate }}.</span>
+                    }
+                </div>
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pl-1">
+                    <label for="apm" class="w-15rem">{{'user_employee.apm' | translate }}</label>
+                    <input pInputText [formControlName]="'apm'" type="text" class="w-full" />
+                    @if (registroForm.get('apm')?.invalid && registroForm.get('apm')?.touched) {
+                        <span>Error en el {{'user_employee.apm' | translate }}.</span>
+                    }
+                </div>
+            </div>
+            <div class="flex flex-column flex-row md:flex-row">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
+                    <label for="Web" class="w-15rem">{{'user_employee.direccion' | translate }}</label>
+                    <input pInputText type="direccion" [formControlName]="'direccion'" class="w-full" />
+                    @if (registroForm.get('direccion')?.invalid && registroForm.get('direccion')?.touched) {
+                        <span>Error en el {{'user_employee.direccion' | translate }}.</span>
+                    }
+                </div>
+            </div>
+            <div class="flex flex-column md:flex-row flex-row">
+                <div class="flex justify-content-center" >
+                    @for (item of sexo; track $index) {
+                        <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" />
+                        <label [for]="item.key" class="ml-2">{{ item.name }}</label>
+                    }
+                </div>
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 w-full">
+                    <label for="Web" class="w-15rem">{{'user_employee.fnaci' | translate }}</label>
+                    <p-calendar [formControlName]="'fNaci'" class="w-full" />
+                    @if (registroForm.get('fNaci')?.invalid && registroForm.get('fNaci')?.touched) {
+                        <span>Error en el {{'user_employee.fnaci' | translate }}.</span>
+                    }
+                </div>
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                    <label for="Web" class="w-15rem">{{'user_employee.telefono' | translate }}</label>
+                    <input pInputText type="text" [formControlName]="'telefono'" class="w-full" />
+                </div>
+            </div>
+            <div class="flex flex-column flex-row md:flex-row">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
+                    <label for="Web" class="w-15rem">{{'user_employee.email' | translate }}</label>
+                    <input pInputText type="email" [formControlName]="'email'" class="w-full" />
+                    @if (registroForm.get('email')?.invalid && registroForm.get('email')?.touched) {
+                        <span>Error en el {{'user_employee.email' | translate }}.</span>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full md:w-6 flex flex-column align-items-left justify-content-top pl-2">
+            <h6>{{'user_employee.detail_user' | translate | uppercase}}</h6>
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="OwnerEmail" class="w-15rem">{{'user_employee.ci' | translate }}</label>
-            <input pInputText type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2">
-            <label for="OwnerEmail" class="w-15rem">{{'user_employee.ciExpedit' | translate }}</label>
-            <input pInputText type="text" class="w-full" />
+                <label for="username" class="w-15rem">{{'user_employee.username' | translate }}</label>
+                <input pInputText type="text" [formControlName]="'username'" class="w-full" />
+                @if (registroForm.get('username')?.invalid && registroForm.get('username')?.touched) {
+                    <span>Error en el {{'user_employee.username' | translate }}.</span>
+                }
             </div>
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="ServiceName" class="w-15rem">{{'user_employee.ciComplement' | translate }}</label>
-                <input pInputText type="text" class="w-full" />
+                <label for="password" class="w-15rem">{{'user_employee.password' | translate }}</label>
+                <input pInputText type="password" [formControlName]="'password'" class="w-full" />
+                @if (registroForm.get('password')?.invalid && registroForm.get('password')?.touched) {
+                    <span>Error en el {{'user_employee.password' | translate }}.</span>
+                }
             </div>
-        </div>
-        <div class="flex flex-column md:flex-row flex-row">
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full md:w-full">
-            <label for="DirectPhone" class="w-15rem">{{'user_employee.name' | translate }}</label>
-            <input pInputText type="text" class="w-full" />
-            </div>
-        </div>
-        <div class="flex flex-column flex-row md:flex-row ">
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pr-1">
-            <label for="PublicPhone" class="w-15rem">{{'user_employee.app' | translate }}e</label>
-            <input pInputText type="text" class="w-full" />
-            </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pl-1">
-                <label for="ComEmail" class="w-15rem">{{'user_employee.apm' | translate }}</label>
-                <input pInputText type="text" class="w-full" />
-            </div>
-        </div>
-        <div class="flex flex-column md:flex-row flex-row">
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="Web" class="w-15rem">{{'user_employee.sexo' | translate }}</label>
-            <input pInputText type="text" class="w-full" />
+                <label for="repit password" class="w-15rem">{{'user_employee.reppit_password' | translate }}</label>
+                <input pInputText type="password" [formControlName]="'reppit_password'" class="w-full" />
             </div>
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2">
-                <label for="Web" class="w-15rem">{{'user_employee.fnaci' | translate }}</label>
-                <input pInputText type="text" class="w-full" />
-            </div>
-        <!-- </div>
-        <div class="flex flex-column md:flex-row flex-row"> -->
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                <label for="Web" class="w-15rem">{{'user_employee.telefono' | translate }}</label>
-                <input pInputText type="text" class="w-full" />
+                <label for="LastName" class="w-15rem">{{'user_employee.rol' | translate }}</label>
+                <p-dropdown [formControlName]="'rol'" [options]="rol" optionLabel="name" class="w-full" placeholder="Select a Extension" />
             </div>
         </div>
-        <div class="flex flex-column flex-row md:flex-row">
-            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
-                <label for="Web" class="w-15rem">{{'user_employee.email' | translate }}</label>
-                <input pInputText type="text" class="w-full" />
+        
+        <div class="flex flex-column align-items-left justify-content-top px-2">
+            <h6>{{'user_employee.detail_employee' | translate | uppercase}}</h6>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                <label for="type" class="w-15rem">{{'user_employee.type' | translate }}</label>
+                <p-dropdown [formControlName]="'idTipo'" [options]="tipo" optionLabel="name" placeholder="Select a Extension" />
+            </div>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                <label for="Type" class="w-15rem">{{'user_employee.position' | translate }}</label>
+                <p-dropdown [formControlName]="'idCargo'" [options]="cargo" optionLabel="name" placeholder="Select a Extension" />
+            </div>
+            <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                <label for="salary" class="w-15rem">{{'user_employee.salary' | translate }}Country</label>
+                <input pInputText [formControlName]="'salario'" type="text" class="w-full" />
             </div>
         </div>
-    </div>
 
-    
-    <div class="w-full md:w-6 flex flex-column align-items-left justify-content-top pl-2">
-        <h6>{{'user_employee.detail_user' | translate | uppercase}}</h6>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="CompName" class="w-15rem">{{'user_employee.username' | translate }}</label>
-            <input pInputText type="text" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="FirstName" class="w-15rem">{{'user_employee.password' | translate }}</label>
-            <input pInputText type="password" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="FirstName" class="w-15rem">{{'user_employee.reppit_password' | translate }}</label>
-            <input pInputText type="password" class="w-full" />
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="LastName" class="w-15rem">{{'user_employee.rol' | translate }}</label>
-            <input pInputText type="text" class="w-full" />
-        </div>
     </div>
     
-    <div class="flex flex-column align-items-left justify-content-top px-2">
-        <h6>{{'user_employee.detail_employee' | translate | uppercase}}</h6>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="WherehouseName" class="w-15rem">{{'user_employee.type' | translate }}</label>
-            <input pInputText id="WherehouseName" type="text" class="w-full" />
+    <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+            <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
+            <p-button label="Save" class="w-full" styleClass="w-full" (click)="saveEmployee()" [disabled]="!registroForm.valid" />
         </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="Type" class="w-15rem">{{'user_employee.cargo' | translate }}</label>
-            <input pInputText id="Type" type="text" class="w-full"/>
-        </div>
-        <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-            <label for="Country" class="w-15rem">{{'user_employee.salary' | translate }}Country</label>
-            <input pInputText id="Country" type="text" class="w-full" />
-        </div>
-    </div>
-  </div>
-  <ng-template pTemplate="footer">
-    <div class="flex gap-3 mt-1">
-        <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-        <p-button label="Save" class="w-full" styleClass="w-full" />
-    </div>
-  </ng-template>
+    </ng-template>
 </p-card>
+</form>
