@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { EmployeesService } from '../../../_services/employees.service';
 import { StateEmployeeResponseModel } from '../../../_models/users/employees/employeeResponse.interface';
@@ -14,6 +14,7 @@ import { LibModule } from '../../lib/lib.module';
 import { RouterLink } from '@angular/router';
 import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
+import { Column } from '../../../_models/common/columns.interface';
 
 
 @Component({
@@ -34,31 +35,32 @@ export default class UsersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
+  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'unit_value'];
+  columns: string[] = this.allowedColumns;
+  // columnsSelect: Column[] = this.columns
+  //   .map(columnName => ({
+  //     field: columnName,
+  //     header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  //   }));
+  columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+    })));
+
   constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
         .pipe(map(t => {
           console.log("console.log('', t):   ", t);
-          console.log("console.log('', t):   ", t.persona);
-          return { data: [{
-            id:         t.id,
-            idtipo:     t.idtipo,
-            idcargo:    t.idcargo,
-            salario:    t.salario,
-            fing:       t.fing,
-            ci:         t.persona.ci,
-            ciExpedit:  t.persona.ciExpedit,
-            nombre:     t.persona.nombre,
-            app:        t.persona.app,
-            apm:        t.persona.apm
-          }], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
+          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
         }))
         .subscribe({
           next: t => {
             console.log({...this.employeedto()});
-            console.log(t.data);
-            this.stateValues.set({ data: (t && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: t.loaded, loading: t.loading, error: null });
+            console.log(t);
+            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null });
           },
           error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: err })
         })

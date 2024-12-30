@@ -8,20 +8,21 @@
         <!-- <p-button [icon]="'pi pi-filter'" (click)="showDialog()" [text]="true"> </p-button> -->
         <!-- @if (stateValues().data !== null && stateValues().data.length > 0) { <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button> }
         @else { <p-button class="p-button-outlined" icon="pi pi-ellipsis-v" [text]=true [disabled]="true"> </p-button> } -->
-        ;;;;{{this.stateValues | json}}
+        ;;;;{{stateValues().data | json}}
       </div>
     </div>
     <p-table #dt1
           [value]="stateValues().data"
           dataKey="id"
           [paginator]="true"
-          [rows]="stateValues().rows"
           [loading]="stateValues().loading"
+          [rows]="stateValues().data.length"
           [rowHover]="true"
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
           [rowsPerPageOptions]="tablecon"
-          styleClass="p-datatable-sm text-xl"
+          styleClass="p-datatable-sm"
           [lazy]="true"
+          [columns]="columnsSelectSignal()"
           [reorderableColumns]="true"
           (onLazyLoad)="getDataPaged($event)"
           [totalRecords]="stateValues().total_records"
@@ -31,8 +32,8 @@
           [scrollable]="true"
           scrollHeight="60vh"
           [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
+          <!-- [rows]="stateValues().rows" -->
           <!-- (onColReorder)="onColumnReorder($event)" -->
-          <!-- [columns]="columnsSelectSignal()" -->
   
       <ng-template pTemplate="header" let-columns>
         <tr>
@@ -42,33 +43,33 @@
           </th>
           @for (item of columns; track item) {
             @switch (item.field) {
-              @case("account") { 
-                <th [pSortableColumn]="'account'" pReorderableColumn>
-                  <div class="flex justify-content-between align-items-left">{{"labels.account" | translate | uppercase}}<p-sortIcon [field]="'account'"></p-sortIcon>
+              @case("id") { 
+                <th [pSortableColumn]="'id'" pReorderableColumn>
+                  <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}<p-sortIcon [field]="'id'"></p-sortIcon>
                   </div>
                 </th>
               }
-              @case("category") { 
+              @case("ci") { 
                 <th [pSortableColumn]="item.field" pReorderableColumn>
-                  <div class="flex justify-content-between align-items-left">{{"labels.category" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
+                  <div class="flex justify-content-between align-items-left">{{"labels.ci" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
                   </div>
                 </th>
               }
-              @case("location") {
+              @case("nombre") {
                 <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                  <div class="flex justify-content-between align-items-left">{{"labels.location" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
+                  <div class="flex justify-content-between align-items-left">{{"labels.nombre" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
                   </div>
                 </th>
               }
-              @case("lpn") {
+              @case("app") {
                 <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                  <div class="flex justify-content-between align-items-left">{{"labels.lpn" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
+                  <div class="flex justify-content-between align-items-left">{{"labels.app" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
                   </div>
                 </th>
               }
-              @case("kardex") {
+              @case("apm") {
                 <th pSortableColumn="{{item.field}}" pReorderableColumn>
-                  <div class="flex justify-content-between align-items-left">{{"labels.kardex" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
+                  <div class="flex justify-content-between align-items-left">{{"labels.apm" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
                   </div>
                 </th>
               }
@@ -111,13 +112,13 @@
           @for (item of columns; track item) {
             <td>
             @switch (item.field) {
-              @case("account") { {{ rowData['account'] }} }
-              @case("category") { {{ rowData['category'] }} }
-              @case('location') { <a routerLink="historylocation/{{ rowData['kardex_id']}}/{{rowData['location_id']}}"><u>{{ rowData[item.field] }}</u></a> }
-              @case('kardex') { <a routerLink="historykardex/{{ rowData['kardex'] }}"><u>{{ rowData[item.field] }}</u></a> }
-              @case('image') { <img src="{{rowData[item.field]}}" alt=" " height="43" width="43" loading="lazy"> }
-              @case('sku') { <a routerLink="historysku/{{ rowData['kardex_id'] }}/{{rowData['product_id']}}"><u>{{ rowData[item.field] }}</u></a> }
-              @case('expir') {
+              @case("id") { {{ rowData['id'] }} }
+              @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} }
+              @case('nombre') { {{ rowData[item.field] }} }
+              @case('app') { {{ rowData[item.field] }} }
+              @case('apm') { {{ rowData[item.field] }} }
+              @case('sexo') { <a routerLink="historysku/{{ rowData['kardex_id'] }}/{{rowData['product_id']}}"><u>{{ rowData[item.field] }}</u></a> }
+              @case('fnaci') { {{ rowData[item.field] }}
                 <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->
               }
               @default { {{ rowData[item.field] }} }
