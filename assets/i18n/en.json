@@ -46,29 +46,14 @@
 
 
 
-
-  "edit": {
-    "edit": "Edit",
-    "zone": "Edit Zone",
-    "location": "Edit Location",
-    "category": "Edit Category",
-    "volume": "Edit Volume",
-    "lpn": "Edit Lpn"
-  },
-  "add": {
-    "add": "Add",
-    "zone": "Add Zone",
-    "location": "Add Location",
-    "bins": "Add Bins"
-  },
   "labels": {
     "register_employee": "Register Employee",
-    "account": "Account",
-    "account_name": "Account",
-    "accounts": "Accounts",
-    "action": "Action",
-    "active_locations": "Active locations",
-    "activity": "Activity",
+    "id": "Id",
+    "ci": "C.I.",
+    "nombre": "Name",
+    "app": "Father's Surname",
+    "apm": "Mother's Surname",
+    "sexo": "Sex",
     "all_orders": "All Orders",
     "any": "Any",
     "area": "Area"

@@ -1,1 +1,0 @@
-import{Lb as i,Tb as m,ea as o,tb as n,ub as a}from"./chunk-ILSE7TFP.js";var c=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=o({type:e,selectors:[["app-home"]],standalone:!0,features:[m],decls:2,vars:0,template:function(t,p){t&1&&(n(0,"p"),i(1,"home works!"),a())}})}}return e})();export{c as default};

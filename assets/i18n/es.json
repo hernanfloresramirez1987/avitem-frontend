@@ -47,27 +47,15 @@
 
 
   
-  "edit": {
-    "edit": "Editar",
-    "zone": "Editar Zona",
-    "location": "Editar Ubicación",
-    "category": "Editar Categoria",
-    "volume": "Editar Volumen",
-    "lpn": "Editar Lpn"
-  },
-  "add": {
-    "add": "Crear",
-    "zone": "Crear Zona",
-    "location": "Crear Ubicación",
-    "bins": "Crear Bines"
-  },
   "labels": {
-    "register_employee": "Registro de Empleados",
-    "account": "Cuenta",
-    "account_name": "Cuenta",
-    "accounts": "Cuentas",
-    "action": "Accion",
-    "active_locations": "Ubicaciones activas",
+    "register_employee": "Register Employee",
+    "id": "Id",
+    "ci": "C.I.",
+    "nombre": "Nombre",
+    "app": "Apellido Paterno",
+    "apm": "Apellido Materno",
+    "sexo": "Sexo",
+    "idtipo": "Tipo",
     "activity": "Actividad",
     "all_orders": "Todas las ordenes",
     "any": "Todos",
