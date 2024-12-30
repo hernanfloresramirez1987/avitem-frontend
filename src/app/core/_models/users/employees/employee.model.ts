@@ -1,4 +1,12 @@
 export interface EmployeeItem {
-    account_id:       number;
-    account:          string;
+    id:         number;
+    idtipo:     number;
+    idcargo:    number;
+    salario:    number;
+    fing:       string;
+    ci:         number;
+    ciExpedit:  number;
+    nombre:     string;
+    app:        string;
+    apm:        string;
 }

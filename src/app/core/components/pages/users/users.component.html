@@ -1,13 +1,14 @@
 <div class="card">
     <div class="flex justify-content-between">
       <div>
-        <h5 class="text-4xl">{{'pages.warehouse' | translate | uppercase}}</h5>
+        <h5 class="text-4xl">{{'pages.employees' | translate | uppercase}}</h5>
       </div>
       <div>
         <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"> </button>
         <!-- <p-button [icon]="'pi pi-filter'" (click)="showDialog()" [text]="true"> </p-button> -->
         <!-- @if (stateValues().data !== null && stateValues().data.length > 0) { <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button> }
         @else { <p-button class="p-button-outlined" icon="pi pi-ellipsis-v" [text]=true [disabled]="true"> </p-button> } -->
+        ;;;;{{this.stateValues | json}}
       </div>
     </div>
     <p-table #dt1
@@ -17,7 +18,7 @@
           [rows]="stateValues().rows"
           [loading]="stateValues().loading"
           [rowHover]="true"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} warehouse"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
           [rowsPerPageOptions]="tablecon"
           styleClass="p-datatable-sm text-xl"
           [lazy]="true"

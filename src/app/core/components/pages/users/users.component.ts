@@ -6,19 +6,20 @@ import { MatchModel } from '../../../_models/common/matchmodel.interface';
 import { EmployeeDTO } from '../../../_models/dto/users/employee.interface.dto';
 import { EmployeeBaseFilter } from '../../../_models/dto/users/employeesearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
+import { JsonPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { tableconfig } from '../../../config/table.config';
 import { FilterApplyService } from '../../../_services/common/filter.service';
 import { LibModule } from '../../lib/lib.module';
 import { RouterLink } from '@angular/router';
 import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
+import { map } from 'rxjs';
 
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink],
+  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, JsonPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -37,13 +38,29 @@ export default class UsersComponent {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
+        .pipe(map(t => {
+          console.log("console.log('', t):   ", t);
+          console.log("console.log('', t):   ", t.persona);
+          return { data: [{
+            id:         t.id,
+            idtipo:     t.idtipo,
+            idcargo:    t.idcargo,
+            salario:    t.salario,
+            fing:       t.fing,
+            ci:         t.persona.ci,
+            ciExpedit:  t.persona.ciExpedit,
+            nombre:     t.persona.nombre,
+            app:        t.persona.app,
+            apm:        t.persona.apm
+          }], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
+        }))
         .subscribe({
           next: t => {
             console.log({...this.employeedto()});
-            console.log(t);
-            this.stateValues.set({ data: (t && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null });
+            console.log(t.data);
+            this.stateValues.set({ data: (t && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: t.loaded, loading: t.loading, error: null });
           },
-          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null })
+          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: err })
         })
     })
   }
