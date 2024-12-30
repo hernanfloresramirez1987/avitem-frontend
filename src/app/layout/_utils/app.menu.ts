@@ -14,14 +14,14 @@ export const APP_MENU = [
       {
         label: "employees", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/"] },
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/employees"] },
           { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/create"] },
         ]
       },
       {
         label: "suppliers", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/"] },
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/employee/create"] },
           { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/create"] },
         ]
       },

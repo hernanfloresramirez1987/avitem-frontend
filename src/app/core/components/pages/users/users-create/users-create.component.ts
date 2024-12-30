@@ -16,6 +16,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { debounceTime } from 'rxjs';
 import { EmployeeRegister } from '../../../../_models/dto/users/employeeRegister.interface';
 import { EmployeesService } from '../../../../_services/employees.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-create',
@@ -35,7 +36,7 @@ export default class UsersCreateComponent implements OnInit {
 
   employeRegister!: EmployeeRegister
 
-  constructor(private employeeServ: EmployeesService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder){
+  constructor(private employeeServ: EmployeesService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.expedidoOptions = [
@@ -119,7 +120,11 @@ export default class UsersCreateComponent implements OnInit {
   saveEmployee() {
     console.log(this.asignarValores());
     this.employeeServ.postEmployee(this.asignarValores()).
-      subscribe(t => console.log(t));
+      subscribe(t => {
+        if(t.CodigoEstado === "201") {
+          this.router.navigate(['users/employees']);
+        }
+      });
   }
 
 
@@ -151,8 +156,5 @@ export default class UsersCreateComponent implements OnInit {
       e_fing: formValues.fechaIngreso,
       e_salario: formValues.salario,
     };
-
-    // Aquí puedes verificar el contenido de employeRegister
-    console.log(this.employeRegister);
   }
 }
