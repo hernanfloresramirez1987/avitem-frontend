@@ -1,7 +1,7 @@
-import { BaseSortQuery } from "../../common/basesort.interface";
-import { MatchModel } from "../../common/matchmodel.interface";
+import { BaseSortQuery } from "../../../common/basesort.interface";
+import { MatchModel } from "../../../common/matchmodel.interface";
 
-export interface supplierBaseFilter { // extends BaseModelQuery {
+export interface ProveedorBaseFilter { // extends BaseModelQuery {
     [key: string]: string | number | BaseSortQuery[] | MatchModel;
     account_id:    MatchModel;
     bin:           MatchModel;

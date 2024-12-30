@@ -1,26 +1,26 @@
 import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
-import { EmployeesService } from '../../../_services/employees.service';
-import { StateEmployeeResponseModel } from '../../../_models/users/employees/employeeResponse.interface';
-import { MatchModel } from '../../../_models/common/matchmodel.interface';
-import { EmployeeDTO } from '../../../_models/dto/users/employee.interface.dto';
-import { EmployeeBaseFilter } from '../../../_models/dto/users/employeesearch.interface.dto';
+import { EmployeesService } from '../../../../_services/employees.service';
+import { StateEmployeeResponseModel } from '../../../../_models/users/employees/employeeResponse.interface';
+import { MatchModel } from '../../../../_models/common/matchmodel.interface';
+import { EmployeeDTO } from '../../../../_models/dto/users/employees/employee.interface.dto';
+import { EmployeeBaseFilter } from '../../../../_models/dto/users/employees/employeeSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { JsonPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { tableconfig } from '../../../config/table.config';
-import { FilterApplyService } from '../../../_services/common/filter.service';
-import { LibModule } from '../../lib/lib.module';
+import { tableconfig } from '../../../../config/table.config';
+import { FilterApplyService } from '../../../../_services/common/filter.service';
+import { LibModule } from '../../../lib/lib.module';
 import { RouterLink } from '@angular/router';
-import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
+import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
-import { Column } from '../../../_models/common/columns.interface';
+import { Column } from '../../../../_models/common/columns.interface';
 
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, JsonPipe],
+  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -35,7 +35,7 @@ export default class UsersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'unit_value'];
+  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   // columnsSelect: Column[] = this.columns
   //   .map(columnName => ({
