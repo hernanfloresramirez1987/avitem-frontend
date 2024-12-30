@@ -14,6 +14,8 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
 import { debounceTime } from 'rxjs';
+import { EmployeeRegister } from '../../../../_models/dto/users/employeeRegister.interface';
+import { EmployeesService } from '../../../../_services/employees.service';
 
 @Component({
   selector: 'app-users-create',
@@ -31,7 +33,9 @@ export default class UsersCreateComponent implements OnInit {
   rol: { name: string; code: string }[];
   checkComplementCI: boolean = true;
 
-  constructor(private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder){
+  employeRegister!: EmployeeRegister
+
+  constructor(private employeeServ: EmployeesService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.expedidoOptions = [
@@ -111,7 +115,44 @@ export default class UsersCreateComponent implements OnInit {
   }
 
 
+  
   saveEmployee() {
+    console.log(this.asignarValores());
+    this.employeeServ.postEmployee(this.asignarValores()).
+      subscribe(t => console.log(t));
+  }
 
+
+  asignarValores(): EmployeeRegister {
+    const formValues = this.registroForm.value;
+
+    return this.employeRegister = {
+      // Datos de usuario
+      u_username: formValues.username,
+      u_password: formValues.password,  // Aquí puedes manejar el hashing si es necesario antes de enviarlo
+      u_rol: formValues.rol.code,
+
+      // Datos de persona
+      p_ci: formValues.ci,
+      p_ciExpedit: formValues.ciExpedit.code,
+      p_ciComplement: formValues.ciComplement,
+      p_nombre: formValues.nombre,
+      p_app: formValues.app,
+      p_apm: formValues.apm,
+      p_sexo: formValues.sexo.key,
+      p_fnaci: formValues.fNaci,
+      p_direccion: formValues.direccion,
+      p_telefono: formValues.telefono,
+      p_email: formValues.email,
+
+      // Datos de empleado
+      e_idtipo: formValues.idTipo.code,
+      e_idcargo: formValues.idCargo.code,
+      e_fing: formValues.fechaIngreso,
+      e_salario: formValues.salario,
+    };
+
+    // Aquí puedes verificar el contenido de employeRegister
+    console.log(this.employeRegister);
   }
 }

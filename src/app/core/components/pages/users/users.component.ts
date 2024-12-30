@@ -1,6 +1,6 @@
 import { Component, effect, ElementRef, signal, ViewChild } from '@angular/core';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
-import { EmployesService } from '../../../_services/employes.service';
+import { EmployeesService } from '../../../_services/employees.service';
 import { StateEmployeeResponseModel } from '../../../_models/users/employees/employeeResponse.interface';
 import { MatchModel } from '../../../_models/common/matchmodel.interface';
 import { EmployeeDTO } from '../../../_models/dto/users/employee.interface.dto';
@@ -33,24 +33,25 @@ export default class UsersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  constructor(private employeeServ: EmployesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService) {
+  constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-      effect(() => {
-        this.employeeServ.postEmployee(this.employeedto())
-          .subscribe({
-            next: t => {
-              console.log({...this.employeedto()});
-              console.log(t);
-              this.stateValues.set({ data: (t.inventory.data !== null) ? [...t.inventory.data] : [], page: t.inventory.page, rows: t.inventory.rows, total_records: t.inventory.total_records, loaded: true, loading: false, error: null});
-            },
-            error: (err) => this.stateValues.set({ data: [], page: 1, rows: 0, total_records: 0, loaded: false, loading: true, error: err})});
-      })
+    effect(() => {
+      this.employeeServ.postEmployees(this.employeedto())
+        .subscribe({
+          next: t => {
+            console.log({...this.employeedto()});
+            console.log(t);
+            this.stateValues.set({ data: (t && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null });
+          },
+          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null })
+        })
+    })
   }
 
   getEmployees () {
-    this.employeeServ.getEmployees().subscribe(t => {
-      console.log(t);
-    })
+    // this.employeeServ.getEmployee().subscribe(t => {
+    //   console.log(t);
+    // })
   }
 
   clear = (table: Table) => {
