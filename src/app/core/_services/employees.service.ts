@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { EmployeeDTO } from '../_models/dto/users/employee.interface.dto';
+import { EmployeeDTO } from '../_models/dto/users/employees/employee.interface.dto';
 import { EmployeeResp } from '../_models/users/employees/employeeResponse.interface';
-import { EmployeeRegister } from '../_models/dto/users/employeeRegister.interface';
+import { EmployeeRegister } from '../_models/dto/users/employees/employeeRegister.interface';
 import { EmployeeSaveResponse } from '../_models/users/employees/employeeSaveResponse';
 
 @Injectable({

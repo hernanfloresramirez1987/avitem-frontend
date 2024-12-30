@@ -4,9 +4,9 @@ import { ButtonModule } from 'primeng/button';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { TranslateLanModule } from '../../../../_modules/translate-lan.module';
+import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
+import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { JsonPipe, UpperCasePipe } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
@@ -14,8 +14,8 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
 import { debounceTime } from 'rxjs';
-import { EmployeeRegister } from '../../../../_models/dto/users/employeeRegister.interface';
-import { EmployeesService } from '../../../../_services/employees.service';
+import { EmployeeRegister } from '../../../../../_models/dto/users/employees/employeeRegister.interface';
+import { EmployeesService } from '../../../../../_services/employees.service';
 import { Router } from '@angular/router';
 
 @Component({

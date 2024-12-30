@@ -8,7 +8,7 @@
         <!-- <p-button [icon]="'pi pi-filter'" (click)="showDialog()" [text]="true"> </p-button> -->
         <!-- @if (stateValues().data !== null && stateValues().data.length > 0) { <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button> }
         @else { <p-button class="p-button-outlined" icon="pi pi-ellipsis-v" [text]=true [disabled]="true"> </p-button> } -->
-        ;;;;{{stateValues().data | json}}
+        <!-- ;;;;{{stateValues().data | json}} -->
       </div>
     </div>
     <p-table #dt1
@@ -68,13 +68,21 @@
                 </th>
               }
               @case("apm") {
-                <th pSortableColumn="{{item.field}}" pReorderableColumn>
+                <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
                   <div class="flex justify-content-between align-items-left">{{"labels.apm" | translate | uppercase}}<p-sortIcon [field]="item.field"/>
                   </div>
                 </th>
               }
-              @case("image") {
-                <th pReorderableColumn>{{"labels.image" | translate | uppercase}}
+              @case("telefono") {
+                <th style="min-width: 15rem" pReorderableColumn>{{"labels.telefono" | translate | uppercase}}
+                </th>
+              }
+              @case("email") {
+                <th style="min-width: 15rem" pReorderableColumn>{{"labels.email" | translate | uppercase}}
+                </th>
+              }
+              @case("telefono") {
+                <th style="min-width: 15rem" pReorderableColumn>{{"labels.telefono" | translate | uppercase}}
                 </th>
               }
               @default { 
@@ -117,7 +125,7 @@
               @case('nombre') { {{ rowData[item.field] }} }
               @case('app') { {{ rowData[item.field] }} }
               @case('apm') { {{ rowData[item.field] }} }
-              @case('sexo') { <a routerLink="historysku/{{ rowData['kardex_id'] }}/{{rowData['product_id']}}"><u>{{ rowData[item.field] }}</u></a> }
+              @case('sexo') { {{ rowData[item.field] }} }
               @case('fnaci') { {{ rowData[item.field] }}
                 <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->
               }

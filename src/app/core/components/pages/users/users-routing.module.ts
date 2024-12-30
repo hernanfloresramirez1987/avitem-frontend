@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'employees', data: { breadcrumb: '' }, loadComponent: () => import('./users.component') },
-  { path: 'employee/create', data: { breadcrumb: 'Registrar' }, loadComponent: () => import('./users-create/users-create.component') },
+  { path: 'employees', data: { breadcrumb: '' }, loadComponent: () => import('./empleados/users.component') },
+  { path: 'employee/create', data: { breadcrumb: 'Registrar' }, loadComponent: () => import('./empleados/users-create/users-create.component') },
 
 ];
 
