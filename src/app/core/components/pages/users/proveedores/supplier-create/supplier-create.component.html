@@ -110,28 +110,14 @@
                     <label for="telefonoEmpresa" class="w-15rem">{{'users.telefonoEmpresa' | translate }}</label>
                     <input pInputText type="tel" [formControlName]="'telefonoEmpresa'" class="w-full" />
                 </div>
-                <!-- <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                    <label for="LastName" class="w-15rem">{{'users.rol' | translate }}</label>
-                    <p-dropdown [formControlName]="'rol'" [options]="rol" optionLabel="name" class="w-full" placeholder="Select a Extension" />
-                </div> -->
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                    <label for="empresa" class="w-15rem">{{'users.direccionEmpresa' | translate }}</label>
+                    <input pInputText type="text" [formControlName]="'direccionEmpresa'" class="w-full" />
+                    @if (registroForm.get('pr_direccionEmpresa')?.invalid && registroForm.get('pr_direccionEmpresa')?.touched) {
+                        <span>Error en el {{'users.pr_direccionEmpresa' | translate }}.</span>
+                    }
+                </div>
             </div>
-            
-            <!-- <div class="flex flex-column align-items-left justify-content-top px-2"> -->
-                <!-- <h6>{{'users.detail_employee' | translate | uppercase}}</h6> -->
-                <!-- <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                    <label for="type" class="w-15rem">{{'users.type' | translate }}</label>
-                    <p-dropdown [formControlName]="'idTipo'" [options]="tipo" optionLabel="name" placeholder="Select a Extension" />
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                    <label for="Type" class="w-15rem">{{'users.position' | translate }}</label>
-                    <p-dropdown [formControlName]="'idCargo'" [options]="cargo" optionLabel="name" placeholder="Select a Extension" />
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
-                    <label for="salary" class="w-15rem">{{'users.salary' | translate }}Country</label>
-                    <input pInputText [formControlName]="'salario'" type="text" class="w-full" />
-                </div> -->
-            <!-- </div> -->
-    
         </div>
         
         <ng-template pTemplate="footer">

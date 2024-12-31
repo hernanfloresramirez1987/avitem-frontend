@@ -37,11 +37,6 @@ export default class UsersComponent {
 
   private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
-  // columnsSelect: Column[] = this.columns
-  //   .map(columnName => ({
-  //     field: columnName,
-  //     header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
-  //   }));
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
       field: columnName,

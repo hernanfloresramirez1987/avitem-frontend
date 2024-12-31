@@ -26,6 +26,7 @@
     "enterprise": "Enterprise",
     "nit": "Nit",
     "telefonoEmpresa": "Phone Enterprise",
+    "direccionEmpresa": "Addres Enterprise",
 
     "username": "User Name",
     "password": "Password",
