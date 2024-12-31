@@ -35,12 +35,10 @@ export default class UsersCreateComponent implements OnInit {
   rol!: { name: string; code: string }[];
   checkComplementCI: boolean = true;
 
-  employeRegister!: EmployeeRegister
+  employeRegister!: EmployeeRegister;
 
   constructor(private employeeServ: EmployeesService, private usersServ: UsersService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    
-    
     this.usersServ.getExpedidoOptions().subscribe(t => this.expedidoOptions = t);
     this.usersServ.getSexo().subscribe(t => this.sexo = t);
     this.usersServ.getTipo().subscribe(t => this.tipo = t);

@@ -17,10 +17,15 @@
     "purchases": "Compras",
     "sales": "Ventas"
   },
-  "user_employee": {
+  "users": {
     "detail_user": "Detalles de Usuario",
     "detail_people": "Detalles de Persona",
     "detail_employee": "Detalles de Empleado",
+    "detail_supplier": "Detalles de Proveedor",
+    "detail_client": "Detalles de Cliente",
+    "enterprise": "Empresa",
+    "nit": "Nit",
+    "telefonoEmpresa": "Telefono de Empresa",
 
     "username": "Nombre de Usuario",
     "password": "Contrasena",
@@ -48,7 +53,8 @@
 
   
   "labels": {
-    "register_employee": "Register Employee",
+    "register_employee": "Registrar Empleado",
+    "register_supplier": "Registrar Proveedor",
     "id": "Id",
     "ci": "C.I.",
     "nombre": "Nombre",
