@@ -15,7 +15,6 @@ export class EmployeesService {
 
   constructor(private http: HttpClient) { }
 
-  // postEmployees = (employeeDto: EmployeeDTO): Observable<EmployeeResp> => this.http.post<EmployeeResp>(`${this.#url}empleados/list`, employeeDto);
   postEmployees = (employeeDto: EmployeeDTO): Observable<EmployeeResp> => this.http.post<EmployeeResp>(`${this.#url}empleados/list`, employeeDto);
 
   postEmployee = (employeeReg: EmployeeRegister): Observable<EmployeeSaveResponse> => this.http.post<EmployeeSaveResponse>(`${this.#url}empleados/register`, employeeReg);

@@ -17,6 +17,7 @@ import { debounceTime } from 'rxjs';
 import { EmployeeRegister } from '../../../../../_models/dto/users/employees/employeeRegister.interface';
 import { EmployeesService } from '../../../../../_services/employees.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../../../../../_services/common/user.service';
 
 @Component({
   selector: 'app-users-create',
@@ -27,50 +28,23 @@ import { Router } from '@angular/router';
 })
 export default class UsersCreateComponent implements OnInit {
   registroForm: FormGroup;
-  expedidoOptions: { name: string; code: string }[];
-  sexo: { name: string, key: string }[];
-  cargo: { name: string; code: number }[];
-  tipo: { name: string; code: number }[];
-  rol: { name: string; code: string }[];
+  expedidoOptions!: { name: string; code: string }[];
+  sexo!: { name: string, key: string }[];
+  cargo!: { name: string; code: number }[];
+  tipo!: { name: string; code: number }[];
+  rol!: { name: string; code: string }[];
   checkComplementCI: boolean = true;
 
   employeRegister!: EmployeeRegister
 
-  constructor(private employeeServ: EmployeesService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
+  constructor(private employeeServ: EmployeesService, private usersServ: UsersService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
-    this.expedidoOptions = [
-      { name: 'La Paz', code: 'LP' },
-      { name: 'Santa Cruz', code: 'SC' },
-      { name: 'Cochabamba', code: 'CB' },
-      { name: 'Oruro', code: 'OR' },
-      { name: 'Potosí', code: 'PO' },
-      { name: 'Chuquisaca', code: 'CH' },
-      { name: 'Tarija', code: 'TA' },
-      { name: 'Beni', code: 'BE' },
-      { name: 'Pando', code: 'PA' },
-    ];
-    this.cargo = [
-      { name: 'Gerente', code: 1 },
-      { name: 'Administrador', code: 2 },
-      { name: 'Vendedor', code: 3 },
-      { name: 'Contador', code: 4 },
-    ];
-    this.sexo = [
-      { name: 'Varon', key: 'V' },
-      { name: 'Mujer', key: 'M' }
-    ];
-    this.tipo = [
-      { name: 'Interno', code: 1 },
-      { name: 'Externo', code: 2 },
-      { name: 'Temporal', code: 3 },
-      { name: 'Permanente', code: 4 },
-    ];
-    this.rol = [
-      { name: 'Administrador', code: 'admin' },
-      { name: 'Usuario', code: 'user' },
-      { name: 'Invitado', code: 'guest' }
-    ];
+    
+    this.usersServ.getExpedidoOptions().subscribe(t => this.expedidoOptions = t);
+    this.usersServ.getSexo().subscribe(t => this.sexo = t);
+    this.usersServ.getTipo().subscribe(t => this.tipo = t);
+    this.usersServ.getRol().subscribe(t => this.rol = t);
     
     this.registroForm = this.fb.group({ // Datos de persona
       ci: ['', [Validators.required, Validators.pattern(/^[0-9]{6,10}$/)]],
