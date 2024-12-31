@@ -2,8 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'employees', data: { breadcrumb: '' }, loadComponent: () => import('./empleados/users.component') },
-  { path: 'employee/create', data: { breadcrumb: 'Registrar' }, loadComponent: () => import('./empleados/users-create/users-create.component') },
+  { path: 'empleados', data: { breadcrumb: 'Empleados' }, loadComponent: () => import('./empleados/users.component') },
+  { path: 'empleados/create', data: { breadcrumb: 'Empleados / Registrar' }, loadComponent: () => import('./empleados/users-create/users-create.component') },
+
+  { path: 'proveedores', data: { breadcrumb: 'Proveedores' }, loadComponent: () => import('./proveedores/suppliers.component') },
+  { path: 'proveedores/create', data: { breadcrumb: 'Proveedores / Registrar' }, loadComponent: () => import('./proveedores/supplier-create/supplier-create.component') },
+
+  { path: 'clientes', data: { breadcrumb: 'Clientes' }, loadComponent: () => import('./clientes/clientes.component') },
+  { path: 'clientes/create', data: { breadcrumb: 'Clientes / Registrar' }, loadComponent: () => import('./proveedores/supplier-create/supplier-create.component') },
 
 ];
 

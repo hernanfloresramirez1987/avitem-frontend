@@ -16,7 +16,7 @@ import { ProveedorBaseFilter } from '../../../../_models/dto/users/proveedors/pr
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })
-export class SuppliersComponent {
+export default class SuppliersComponent {
   @ViewChild('dt1') table!: Table;
   @ViewChild('filter') filter!: ElementRef;
 

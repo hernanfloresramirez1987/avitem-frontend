@@ -14,22 +14,22 @@ export const APP_MENU = [
       {
         label: "employees", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/employees"] },
-          { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/employee/create"] },
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/empleados"] },
+          { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/empleados/create"] },
         ]
       },
       {
         label: "suppliers", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/suppliers"] },
-          { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/suppliers/create"] },
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/proveedores"] },
+          { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/proveedores/create"] },
         ]
       },
       {
         label: "customers", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/customers"] },
-          { label: "register_customers", icon: "pi pi-user", routerLink: ["/users/customers/create"] },
+          { label: "list", icon: "pi pi-user", routerLink: ["/users/clientes"] },
+          { label: "register_customers", icon: "pi pi-user", routerLink: ["/users/clientes/create"] },
         ]
       },
     ]
