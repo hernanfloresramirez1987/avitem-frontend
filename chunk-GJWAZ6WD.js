@@ -1,0 +1,1 @@
+import{Kb as a,Sb as s,ea as n,tb as o,ub as i}from"./chunk-2SHBWNGG.js";var c=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-clientes"]],standalone:!0,features:[s],decls:2,vars:0,template:function(t,l){t&1&&(o(0,"p"),a(1,"clientes works!"),i())}})}}return e})();export{c as default};
