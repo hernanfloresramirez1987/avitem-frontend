@@ -1,1 +1,0 @@
-import{Kb as a,Sb as p,ea as n,tb as r,ub as o}from"./chunk-2SHBWNGG.js";var c=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-supplier-create"]],standalone:!0,features:[p],decls:2,vars:0,template:function(t,s){t&1&&(r(0,"p"),a(1,"supplier-create works!"),o())}})}}return e})();export{c as default};

@@ -21,6 +21,11 @@
     "detail_user": "Detail User",
     "detail_people": "Detail People",
     "detail_employee": "Detail Employee",
+    "detail_supplier": "Detail Supplier",
+    "detail_client": "Detail Client",
+    "enterprise": "Enterprise",
+    "nit": "Nit",
+    "telefonoEmpresa": "Phone Enterprise",
 
     "username": "User Name",
     "password": "Password",
@@ -48,6 +53,7 @@
 
   "labels": {
     "register_employee": "Register Employee",
+    "register_supplier": "Register Supplier",
     "id": "Id",
     "ci": "C.I.",
     "nombre": "Name",
