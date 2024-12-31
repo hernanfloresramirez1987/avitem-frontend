@@ -56,8 +56,8 @@ export default class SupplierCreateComponent {
       // Datos de proveedor
       empresa: ['', Validators.required],
       nit: [''], // Validators.required, Validators.pattern(/^[0-9]{6,10}$/)],
-      telefonoEmpresa: [],
-
+      telefonoEmpresa: ['', Validators.required],
+      direccionEmpresa: ['', Validators.required]
       });
   }
 
@@ -76,7 +76,7 @@ export default class SupplierCreateComponent {
     this.proveedorServ.postEmployee(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
-          this.router.navigate(['users/employees']);
+          this.router.navigate(['users/proveedores']);
         }
       });
   }

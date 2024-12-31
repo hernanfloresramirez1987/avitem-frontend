@@ -26,6 +26,7 @@
     "enterprise": "Empresa",
     "nit": "Nit",
     "telefonoEmpresa": "Telefono de Empresa",
+    "direccionEmpresa": "Direccion de Empresa",
 
     "username": "Nombre de Usuario",
     "password": "Contrasena",

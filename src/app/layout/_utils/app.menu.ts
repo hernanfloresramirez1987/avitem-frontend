@@ -37,21 +37,21 @@ export const APP_MENU = [
   {
     label: "inventory", icon: "pi pi-warehouse",
     items: [
-      { label: "warehouse", icon: "pi pi-database", routerLink: ["/inventory/warehouse"] },
-      { label: "catalogs", icon: "pi pi-box", routerLink: ["/inventory/catalog"] },
+      { label: "warehouse", icon: "pi pi-database", routerLink: ["/inventory/"] },
+      { label: "catalogs", icon: "pi pi-box", routerLink: ["/inventory/products"] },
     ]
   },
   {
     label: "purchases", icon: "pi pi-shopping-cart",
     items: [
-      { label: "list", icon: "pi pi-ban", routerLink: ["/productos/"] },
-      { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },
+      { label: "list", icon: "pi pi-ban", routerLink: ["/inventory/products"] },
+      { label: "crear", icon: "pi pi-ban", routerLink: ["/inventory/products/create"] },
     ]
   },
   {
     label: "sales", icon: "pi pi-tag",
     items: [
-      { label: "list", icon: "pi pi-ban", routerLink: ["/productos/"] },
+      { label: "list", icon: "pi pi-ban", routerLink: ["/products/"] },
       { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },
     ]
   }

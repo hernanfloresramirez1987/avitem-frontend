@@ -2,16 +2,20 @@ import { BaseSortQuery } from "../../../common/basesort.interface";
 import { MatchModel } from "../../../common/matchmodel.interface";
 
 export interface ProveedorBaseFilter { // extends BaseModelQuery {
-    [key: string]: string | number | BaseSortQuery[] | MatchModel;
-    account_id:    MatchModel;
-    bin:           MatchModel;
-    kardex:       MatchModel;
-    category_id:   MatchModel;
-    is_serialized: MatchModel;
-    location:      MatchModel;
-    lot:           MatchModel;
-    lpn:           MatchModel;
-    qty:           MatchModel;
-    sku:           MatchModel;
-    volume:        MatchModel;
-  }
+  [key: string]: string | number | BaseSortQuery[] | MatchModel;
+  id:           MatchModel;
+  ciExpedit:    MatchModel;
+  ciComplement: MatchModel;
+  nombre:       MatchModel;
+  app:          MatchModel;
+  apm:          MatchModel;
+  sexo:         MatchModel;
+  fnaci:        MatchModel;
+  direccion:    MatchModel;
+  telefono:     MatchModel;
+  email:        MatchModel;
+  state:        MatchModel
+
+  empresa:    MatchModel;
+  nit:        MatchModel;
+}
