@@ -1,1 +1,0 @@
-import{Kb as a,Sb as i,ea as o,tb as n,ub as r}from"./chunk-2SHBWNGG.js";var s=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=o({type:e,selectors:[["app-product-create"]],standalone:!0,features:[i],decls:2,vars:0,template:function(t,p){t&1&&(n(0,"p"),a(1,"product-create works!"),r())}})}}return e})();export{s as default};

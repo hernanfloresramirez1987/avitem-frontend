@@ -49,13 +49,21 @@
     "position": "Cargo",
     "salary": "Salario"
   },
-
-
+  "inventory": {
+    "nombre": "Nombre",
+    "description": "Descripcion",
+    "cantidadStock": "Cantidad Stock",
+    "fechaIngreso": "Fecha Ingreso",
+    "unidadMedida": "Unidad de Medida",
+    "codigoProducto": "Codigo de Producto",
+    "id_categoria": "Categoria"
+  },
 
   
   "labels": {
     "register_employee": "Registrar Empleado",
     "register_supplier": "Registrar Proveedor",
+    "register_product": "Registrar Producto",
     "id": "Id",
     "ci": "C.I.",
     "nombre": "Nombre",
