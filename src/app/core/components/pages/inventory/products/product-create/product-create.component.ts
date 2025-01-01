@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
+import { CategoriasService } from '../../../../../_services/categorias.service';
 
 @Component({
   selector: 'app-product-create',
@@ -21,8 +22,9 @@ import { TranslateLanModule } from '../../../../../_modules/translate-lan.module
 })
 export default class ProductCreateComponent {
   registroForm: FormGroup;
+  categorias!: { nombre: string; id: number }[];
 
-  constructor(private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
+  constructor(private categoriasServ: CategoriasService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     // const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
 
@@ -35,9 +37,12 @@ export default class ProductCreateComponent {
       codigoProducto: ['', Validators.required],
       id_categoria: ['', Validators.required]
     })
+
+    this.categoriasServ.getAll().subscribe(t => {
+      console.log('console.log(t): \n', t)
+    });
   }
 
   saveProcto() {
-    
   }
 }
