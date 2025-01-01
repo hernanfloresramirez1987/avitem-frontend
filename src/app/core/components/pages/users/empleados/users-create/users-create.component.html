@@ -4,7 +4,7 @@
         <div class="align-items-left justify-content-top pr-2">
             <h6>{{'users.detail_people' | translate | uppercase}}</h6>
             <div class="flex flex-column md:flex-row flex-row">
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                     <label for="ci" class="w-20rem">{{'users.ci' | translate }}</label>
                     <input pInputText [formControlName]="'ci'" type="text" class="w-full" />
                     @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
@@ -18,9 +18,9 @@
                         <button type="button" pButton icon="pi pi-check" class="p-button-primary" (click)="checkComplementCI = !checkComplementCI"></button>
                     </p-inputGroup>
                 </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full w-full">
                     <label for="expedition" class="w-15rem">{{'users.ciExpedit' | translate }}</label>
-                    <p-dropdown [formControlName]="'ciExpedit'" [options]="expedidoOptions" optionLabel="name" placeholder="Select a Extension" [style]="{width: '100%'}"/>
+                    <p-dropdown [formControlName]="'ciExpedit'" [options]="expedidoOptions" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" [style]="{width: '100%'}"/>
                     @if (registroForm.get('ciExpedit')?.invalid && registroForm.get('ciExpedit')?.touched) {
                         <span>Error en el {{'users.ciExpedit' | translate }}.</span>
                     }
@@ -61,22 +61,22 @@
                 </div>
             </div>
             <div class="flex flex-column md:flex-row flex-row">
-                <div class="flex justify-content-center" >
+                <div class="flex justify-content-left w-full" >
                     @for (item of sexo; track $index) {
-                        <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" />
-                        <label [for]="item.key" class="ml-2">{{ item.name }}</label>
+                        <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" class="w-full lg:w-full" styleClass="w-full"/>
+                        <label [for]="item.key" class="ml-2 justify-content-center">{{ item.name }}</label>
                     }
                 </div>
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 w-full">
                     <label for="Web" class="w-15rem">{{'users.fnaci' | translate }}</label>
-                    <p-calendar [formControlName]="'fNaci'" class="w-full" />
+                    <p-calendar [formControlName]="'fNaci'" class="w-full lg:w-full" styleClass="w-full" />
                     @if (registroForm.get('fNaci')?.invalid && registroForm.get('fNaci')?.touched) {
                         <span>Error en el {{'users.fnaci' | translate }}.</span>
                     }
                 </div>
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
                     <label for="Web" class="w-15rem">{{'users.telefono' | translate }}</label>
-                    <input pInputText type="tel" [formControlName]="'telefono'" class="w-full" />
+                    <input pInputText type="tel" [formControlName]="'telefono'" class="w-full lg:w-full" styleClass="w-full" />
                 </div>
             </div>
             <div class="flex flex-column flex-row md:flex-row">
@@ -112,7 +112,7 @@
             </div>
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
                 <label for="LastName" class="w-15rem">{{'users.rol' | translate }}</label>
-                <p-dropdown [formControlName]="'rol'" [options]="rol" optionLabel="name" class="w-full" placeholder="Select a Extension" />
+                <p-dropdown [formControlName]="'rol'" [options]="rol" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" />
             </div>
         </div>
         
@@ -120,11 +120,11 @@
             <h6>{{'users.detail_employee' | translate | uppercase}}</h6>
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
                 <label for="type" class="w-15rem">{{'users.type' | translate }}</label>
-                <p-dropdown [formControlName]="'idTipo'" [options]="tipo" optionLabel="name" placeholder="Select a Extension" />
+                <p-dropdown [formControlName]="'idTipo'" [options]="tipo" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" />
             </div>
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
                 <label for="Type" class="w-15rem">{{'users.position' | translate }}</label>
-                <p-dropdown [formControlName]="'idCargo'" [options]="cargo" optionLabel="name" placeholder="Select a Extension" />
+                <p-dropdown [formControlName]="'idCargo'" [options]="cargo" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" />
             </div>
             <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
                 <label for="salary" class="w-15rem">{{'users.salary' | translate }}Country</label>

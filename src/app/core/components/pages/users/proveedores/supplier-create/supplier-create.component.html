@@ -4,14 +4,14 @@
             <div class="align-items-left justify-content-top pr-2">
                 <h6>{{'users.detail_supplier' | translate | uppercase}}</h6>
                 <div class="flex flex-column md:flex-row flex-row">
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full lg:w-full">
                         <label for="ci" class="w-20rem">{{'users.ci' | translate }}</label>
                         <input pInputText [formControlName]="'ci'" type="text" class="w-full" />
                         @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
                             <span>Error en el CI.</span>
                         }
                     </div>
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 pb-4">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 pb-4 w-full lg:w-full">
                         <label for="ServiceName" class="w-15rem">{{'users.ciComplement' | translate }}</label>
                         <p-inputGroup>
                             <input type="text" pInputText placeholder="complemento" [disabled]="checkComplementCI   "/>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
                         <label for="expedition" class="w-15rem">{{'users.ciExpedit' | translate }}</label>
-                        <p-dropdown [formControlName]="'ciExpedit'" [options]="expedidoOptions" optionLabel="name" placeholder="Select a Extension" [style]="{width: '100%'}"/>
+                        <p-dropdown [formControlName]="'ciExpedit'" [options]="expedidoOptions" optionLabel="name" placeholder="Select a Extension" class="w-full lg:w-full" styleClass="w-full"/>
                         @if (registroForm.get('ciExpedit')?.invalid && registroForm.get('ciExpedit')?.touched) {
                             <span>Error en el {{'users.ciExpedit' | translate }}.</span>
                         }
@@ -36,14 +36,14 @@
                     </div>
                 </div>
                 <div class="flex flex-column flex-row md:flex-row ">
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pr-1">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pr-1 w-full lg:w-full">
                         <label for="PublicPhone" class="w-15rem">{{'users.app' | translate }}e</label>
                         <input pInputText [formControlName]="'app'" type="text" class="w-full" />
                         @if (registroForm.get('app')?.invalid && registroForm.get('app')?.touched) {
                             <span>Error en el {{'users.app' | translate }}.</span>
                         }
                     </div>
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pl-1">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 pl-1 w-full lg:w-full">
                         <label for="apm" class="w-15rem">{{'users.apm' | translate }}</label>
                         <input pInputText [formControlName]="'apm'" type="text" class="w-full" />
                         @if (registroForm.get('apm')?.invalid && registroForm.get('apm')?.touched) {
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="flex flex-column flex-row md:flex-row">
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full lg:w-full">
                         <label for="Web" class="w-15rem">{{'users.direccion' | translate }}</label>
                         <input pInputText type="direccion" [formControlName]="'direccion'" class="w-full" />
                         @if (registroForm.get('direccion')?.invalid && registroForm.get('direccion')?.touched) {
@@ -61,22 +61,22 @@
                     </div>
                 </div>
                 <div class="flex flex-column md:flex-row flex-row">
-                    <div class="flex justify-content-center" >
+                    <div class="flex justify-content-left w-full" >
                         @for (item of sexo; track $index) {
-                            <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" />
+                            <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" class="w-full lg:w-full" styleClass="w-full"/>
                             <label [for]="item.key" class="ml-2">{{ item.name }}</label>
                         }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 w-full">
                         <label for="Web" class="w-15rem">{{'users.fnaci' | translate }}</label>
-                        <p-calendar [formControlName]="'fNaci'" class="w-full" />
+                        <p-calendar [formControlName]="'fNaci'" class="w-full" styleClass="w-full" />
                         @if (registroForm.get('fNaci')?.invalid && registroForm.get('fNaci')?.touched) {
                             <span>Error en el {{'users.fnaci' | translate }}.</span>
                         }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4">
                         <label for="Web" class="w-15rem">{{'users.telefono' | translate }}</label>
-                        <input pInputText type="tel" [formControlName]="'telefono'" class="w-full" />
+                        <input pInputText type="tel" [formControlName]="'telefono'" class="w-full" styleClass="w-full" />
                     </div>
                 </div>
                 <div class="flex flex-column flex-row md:flex-row">
