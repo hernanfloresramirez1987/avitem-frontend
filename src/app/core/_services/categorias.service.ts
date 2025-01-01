@@ -15,6 +15,7 @@ export class CategoriasService {
   readonly #url= environment.URL_API;
 
   constructor(private http: HttpClient) { }
+  
   getAll = (): Observable<{ id: number, nombre: string, descripcion: string }[]> => this.http.get<{ id: number, nombre: string, descripcion: string }[]>(`${this.#url}categorias`);
   
 }

@@ -17,6 +17,5 @@ export class ProveedoresService {
 
   postEmployees = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.http.post<ProveedorResp>(`${this.#url}proveedores/list`, proveedorDto);
 
-  postEmployee = (employeeReg: ProveedorRegister): Observable<ProveedorSaveResponse> => this.http.post<ProveedorSaveResponse>(`${this.#url}proveedores/register`, employeeReg);
-  
+  postEmployee = (employeeReg: ProveedorRegister): Observable<ProveedorSaveResponse> => this.http.post<ProveedorSaveResponse>(`${this.#url}proveedores/register`, employeeReg);  
 }
