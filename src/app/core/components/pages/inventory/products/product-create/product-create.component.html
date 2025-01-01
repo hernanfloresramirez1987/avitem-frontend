@@ -42,7 +42,7 @@
                 </div>
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                     <label for="LastName" class="w-15rem">{{'inventory.id_categoria' | translate }}</label>
-                    <p-dropdown [formControlName]="'id_categoria'" [options]="[]" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select una Categoria" />
+                    <p-dropdown [formControlName]="'id_categoria'" [options]="categorias" optionLabel="nombre" class="w-full lg:w-full" styleClass="w-full" placeholder="Select una Categoria" />
                     @if (registroForm.get('id_categoria')?.invalid && registroForm.get('id_categoria')?.touched) {
                         <span>Error en el {{'inventory.id_categoria' | translate }}.</span>
                     }

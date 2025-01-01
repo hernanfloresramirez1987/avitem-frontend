@@ -22,7 +22,7 @@ import { CategoriasService } from '../../../../../_services/categorias.service';
 })
 export default class ProductCreateComponent {
   registroForm: FormGroup;
-  categorias!: { nombre: string; id: number }[];
+  categorias!: { id: number, nombre: string, descripcion: string }[];
 
   constructor(private categoriasServ: CategoriasService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
@@ -39,7 +39,7 @@ export default class ProductCreateComponent {
     })
 
     this.categoriasServ.getAll().subscribe(t => {
-      console.log('console.log(t): \n', t)
+      this.categorias = t;
     });
   }
 
