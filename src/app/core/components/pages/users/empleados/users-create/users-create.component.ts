@@ -42,6 +42,7 @@ export default class UsersCreateComponent implements OnInit {
     this.usersServ.getExpedidoOptions().subscribe(t => this.expedidoOptions = t);
     this.usersServ.getSexo().subscribe(t => this.sexo = t);
     this.usersServ.getTipo().subscribe(t => this.tipo = t);
+    this.usersServ.getCargo().subscribe(t => this.cargo = t);
     this.usersServ.getRol().subscribe(t => this.rol = t);
     
     this.registroForm = this.fb.group({ // Datos de persona
