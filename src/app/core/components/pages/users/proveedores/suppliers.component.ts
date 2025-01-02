@@ -10,7 +10,7 @@ import { ProveedorDTO } from '../../../../_models/dto/users/proveedors/proveedor
 import { ProveedorBaseFilter } from '../../../../_models/dto/users/proveedors/proveedoresSearch.interface.dto';
 import { tableconfig } from '../../../../config/table.config';
 import { Column } from '../../../../_models/common/columns.interface';
-import { ProveedoresService } from '../../../../_services/proveedores.service';
+import { ProveedoresService } from '../../../../_services/proveedors.service';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
@@ -33,7 +33,7 @@ export default class SuppliersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
+  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'salario', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({

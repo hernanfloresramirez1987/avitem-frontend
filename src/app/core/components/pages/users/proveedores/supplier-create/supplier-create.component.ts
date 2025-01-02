@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProveedoresService } from '../../../../../_services/proveedores.service';
+import { ProveedoresService } from '../../../../../_services/proveedors.service';
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
