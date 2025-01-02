@@ -33,7 +33,7 @@ export default class SuppliersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'salario', 'direccion', 'telefono', 'email'];
+  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'nit', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -44,7 +44,7 @@ export default class SuppliersComponent {
     constructor(private employeeServ: ProveedoresService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
-        this.employeeServ.postEmployees(this.employeedto())
+        this.employeeServ.postProveedores(this.employeedto())
           .pipe(map(t => {
             console.log("console.log('', t):   ", t);
             return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};

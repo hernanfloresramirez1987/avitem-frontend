@@ -15,7 +15,7 @@ export class ProductosService {
 
   constructor(private http: HttpClient) { }
 
-  postEmployees = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.http.post<ProveedorResp>(`${this.#url}proveedores/list`, proveedorDto);
+  postEmployees = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.http.post<ProveedorResp>(`${this.#url}productos/list`, proveedorDto);
 
-  postEmployee = (employeeReg: ProveedorRegister): Observable<ProveedorSaveResponse> => this.http.post<ProveedorSaveResponse>(`${this.#url}proveedores/register`, employeeReg);  
+  postEmployee = (employeeReg: ProveedorRegister): Observable<ProveedorSaveResponse> => this.http.post<ProveedorSaveResponse>(`${this.#url}productos/register`, employeeReg);  
 }

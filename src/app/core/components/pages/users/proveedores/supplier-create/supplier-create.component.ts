@@ -73,7 +73,7 @@ export default class SupplierCreateComponent {
 
   saveProveedor() {
     console.log(this.asignarValores());
-    this.proveedorServ.postEmployee(this.asignarValores()).
+    this.proveedorServ.postProveedor(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
           this.router.navigate(['users/proveedores']);
