@@ -1,12 +1,11 @@
 export interface ProductItem {
-    id:         number;
-    idtipo:     number;
-    idcargo:    number;
-    salario:    number;
-    fing:       string;
-    ci:         number;
-    ciExpedit:  number;
-    nombre:     string;
-    app:        string;
-    apm:        string;
+    id:             number;
+    nombre:         string;
+    descripcion:    string;
+    fechaIngreso:   string;
+    unidadMedida:   string;
+    codigoProducto: string;
+    state:          number;
+    id_proveedor:   number;
+    id_categoria:   number;
 }

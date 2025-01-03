@@ -3,49 +3,42 @@
         <div class="align-items-left justify-content-top pr-2">
             <!-- <h6>{{'users.detail_people' | translate | uppercase}}</h6> -->
             <div class="flex flex-column md:flex-row flex-row">
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-8 md:w-6">
                     <label for="nombre" class="w-20rem">{{'inventory.nombre' | translate }}</label>
-                    <input pInputText [formControlName]="'nombre'" type="text" class="w-full" />
-                    @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
-                        <span>Error en el Nombre.</span>
-                    }
+                    <input pInputText [formControlName]="'nombre'" type="text" class="w-full" /> @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+                    <span>Error en el Nombre.</span> }
                 </div>
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                     <label for="description" class="w-20rem">{{'inventory.description' | translate }}</label>
-                    <input pInputText [formControlName]="'descripcion'" type="text" class="w-full" />
-                    @if (registroForm.get('description')?.invalid && registroForm.get('description')?.touched) {
-                        <span>Error en el Nombre.</span>
-                    }
+                    <input pInputText [formControlName]="'descripcion'" type="text" class="w-full" /> @if (registroForm.get('description')?.invalid && registroForm.get('description')?.touched) {
+                    <span>Error en el Nombre.</span> }
                 </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4  md:w-full">
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4  lg:w-4 md:w-5">
                     <label for="fechaIngreso" class="w-15rem">{{'inventory.fechaIngreso' | translate }}</label>
-                    <input pInputText [formControlName]="'fechaIngreso'" type="text" class="w-full" />
-                    @if (registroForm.get('fechaIngreso')?.invalid && registroForm.get('fechaIngreso')?.touched) {
-                        <span>Error en el {{'inventory.fechaIngreso' | translate }}.</span>
-                    }
+                    <p-calendar [formControlName]="'fechaIngreso'" class="w-full lg:w-full" styleClass="w-full" /> @if (registroForm.get('fechaIngreso')?.invalid && registroForm.get('fechaIngreso')?.touched) {
+                    <span>Error en el {{'inventory.fechaIngreso' | translate }}.</span> }
                 </div>
             </div>
             <div class="flex flex-column flex-row md:flex-row ">
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                     <label for="unidadMedida" class="w-15rem">{{'inventory.unidadMedida' | translate }}</label>
-                    <input pInputText [formControlName]="'unidadMedida'" type="text" class="w-full" />
-                    @if (registroForm.get('unidadMedida')?.invalid && registroForm.get('unidadMedida')?.touched) {
-                        <span>Error en el {{'inventory.unidadMedida' | translate }}.</span>
-                    }
+                    <input pInputText [formControlName]="'unidadMedida'" type="text" class="w-full" /> @if (registroForm.get('unidadMedida')?.invalid && registroForm.get('unidadMedida')?.touched) {
+                    <span>Error en el {{'inventory.unidadMedida' | translate }}.</span> }
                 </div>
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                     <label for="codigoProducto" class="w-15rem">{{'inventory.codigoProducto' | translate }}</label>
-                    <input pInputText [formControlName]="'codigoProducto'" type="text" class="w-full" />
-                    @if (registroForm.get('codigoProducto')?.invalid && registroForm.get('codigoProducto')?.touched) {
-                        <span>Error en el {{'inventory.codigoProducto' | translate }}.</span>
-                    }
+                    <input pInputText [formControlName]="'codigoProducto'" type="text" class="w-full" /> @if (registroForm.get('codigoProducto')?.invalid && registroForm.get('codigoProducto')?.touched) {
+                    <span>Error en el {{'inventory.codigoProducto' | translate }}.</span> }
+                </div>
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                    <label for="proveedor" class="w-15rem">{{'inventory.id_proveedor' | translate }}</label>
+                    <p-dropdown [options]="proveedores" [formControlName]="'id_proveedor'" optionLabel="empresa" [editable]="true" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un Proveedor" /> @if (registroForm.get('id_proveedor')?.invalid && registroForm.get('id_proveedor')?.touched) {
+                    <span>Error en el {{'inventory.id_proveedor' | translate }}.</span> }
                 </div>
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                     <label for="LastName" class="w-15rem">{{'inventory.id_categoria' | translate }}</label>
-                    <p-dropdown [formControlName]="'id_categoria'" [options]="categorias" optionLabel="nombre" class="w-full lg:w-full" styleClass="w-full" placeholder="Select una Categoria" />
-                    @if (registroForm.get('id_categoria')?.invalid && registroForm.get('id_categoria')?.touched) {
-                        <span>Error en el {{'inventory.id_categoria' | translate }}.</span>
-                    }
+                    <p-dropdown [formControlName]="'id_categoria'" [options]="categorias" optionLabel="nombre" class="w-full lg:w-full" styleClass="w-full" placeholder="Select una Categoria" /> @if (registroForm.get('id_categoria')?.invalid && registroForm.get('id_categoria')?.touched) {
+                    <span>Error en el {{'inventory.id_categoria' | translate }}.</span> }
                 </div>
             </div>
         </div>
