@@ -6,6 +6,7 @@ import { ProveedorDTO } from '../_models/dto/users/proveedors/proveedor.interfac
 import { ProveedorResp } from '../_models/users/proveedores/proveedoresResponse.interface';
 import { ProveedorRegister } from '../_models/dto/users/proveedors/proveedorRegister.interface';
 import { ProveedorSaveResponse } from '../_models/users/proveedores/proveedoresSaveResponse';
+import { ProveedorItem } from '../_models/users/proveedores/proveedores.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,6 @@ export class ProveedoresService {
   postProveedores = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.http.post<ProveedorResp>(`${this.#url}proveedores/list`, proveedorDto);
 
   postProveedor = (employeeReg: ProveedorRegister): Observable<ProveedorSaveResponse> => this.http.post<ProveedorSaveResponse>(`${this.#url}proveedores/register`, employeeReg);  
+
+  postProveedoresSearch = (employeeReg: ProveedorDTO): Observable<ProveedorItem[]> => this.http.post<ProveedorItem[]>(`${this.#url}proveedores/list`, employeeReg);  
 }
