@@ -68,7 +68,7 @@ export default class ProductCreateComponent {
     this.productosServ.postProduct(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
-          this.router.navigate(['users/products']);
+          this.router.navigate(['inventory/products']);
         }
       });
   }
@@ -77,15 +77,14 @@ export default class ProductCreateComponent {
     const formValues = this.registroForm.value;
 
     return this.productoRegister = {
-      // Datos de persona
       p_nombre: formValues.nombre,
       p_descripcion: formValues.descripcion,
-      p_cantidadStock: formValues.cantidadStock,
+      p_cantidadStock: 0,
       p_fechaIngreso: formValues.fechaIngreso,
       p_unidadMedida: formValues.unidadMedida,
       p_codigoProducto: formValues.codigoProducto,
-      p_idProveedor: formValues.id_proveedor.id,
-      p_idCategoria: formValues.id_categoria.id,
+      p_idProveedor: Number(formValues.id_proveedor.id),
+      p_idCategoria: Number(formValues.id_categoria.id),
       p_state: 1,
     };
   }
