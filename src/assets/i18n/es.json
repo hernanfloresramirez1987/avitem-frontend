@@ -15,7 +15,10 @@
         "warehouse": "Almacen",
         "catalogs": "Catalogo",
         "purchases": "Compras",
-        "sales": "Ventas"
+        "sales": "Ventas",
+        "crear": "Crear",
+        "products": "Productos",
+        "create_product": "Crear Producto"
     },
     "users": {
         "detail_user": "Detalles de Usuario",
