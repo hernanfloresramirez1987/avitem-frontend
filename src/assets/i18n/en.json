@@ -15,7 +15,10 @@
         "warehouse": "Warehouse",
         "catalogs": "Catalogs",
         "purchases": "Purchases",
-        "sales": "Sales"
+        "sales": "Sales",
+        "crear": "Create",
+        "products": "Products",
+        "create_product": "Create Product"
     },
     "user_employee": {
         "detail_user": "Detail User",

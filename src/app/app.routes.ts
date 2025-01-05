@@ -9,6 +9,7 @@ export const routes: Routes = [
         { path: 'dashboard', data: { breadcrumb: 'Dashboard' }, loadComponent: () => import('./core/components/pages/dashboard/dashboard.component'), },
         { path: 'users', data: { breadcrumb: 'Users' }, loadChildren: () => import('./core/components/pages/users/users-routing.module').then(m => m.UsersRoutingModule) },
         { path: 'inventory', data: { breadcrumb: 'Inventory' }, loadChildren: () => import('./core/components/pages/inventory/inventory-routing.module').then(m => m.InventoryRoutingModule) },
+        { path: 'transactions', data: { breadcrumb: 'Transcciones' }, loadChildren: () => import('./core/components/pages/transactions/purchases-routing.module').then( m => m.PurchasesRoutingModule) }
       ]
     }
   ];

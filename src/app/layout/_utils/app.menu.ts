@@ -14,22 +14,22 @@ export const APP_MENU = [
       {
         label: "employees", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/empleados"] },
+          { label: "list", icon: "pi pi-list", routerLink: ["/users/empleados"] },
           { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/empleados/create"] },
         ]
       },
       {
         label: "suppliers", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/proveedores"] },
+          { label: "list", icon: "pi pi-list", routerLink: ["/users/proveedores"] },
           { label: "register_employees", icon: "pi pi-user-plus", routerLink: ["/users/proveedores/create"] },
         ]
       },
       {
         label: "customers", icon: "pi pi-users",
         items: [
-          { label: "list", icon: "pi pi-user", routerLink: ["/users/clientes"] },
-          { label: "register_customers", icon: "pi pi-user", routerLink: ["/users/clientes/create"] },
+          { label: "list", icon: "pi pi-list", routerLink: ["/users/clientes"] },
+          { label: "register_customers", icon: "pi pi-user-plus", routerLink: ["/users/clientes/create"] },
         ]
       },
     ]
@@ -37,22 +37,27 @@ export const APP_MENU = [
   {
     label: "inventory", icon: "pi pi-warehouse",
     items: [
-      { label: "warehouse", icon: "pi pi-database", routerLink: ["/inventory/"] },
-      { label: "catalogs", icon: "pi pi-box", routerLink: ["/inventory/products"] },
+      { label: "warehouse", icon: "pi pi-database"},
+      { label: "catalogs", icon: "pi pi-box", 
+        items: [
+          { label: "products", icon: "pi pi-shop", routerLink: ["/inventory/products"] },
+          { label: "create_product", icon: "pi pi-plus-circle", routerLink: ["/inventory/products/create"] },
+        ]
+      }
     ]
   },
   {
     label: "purchases", icon: "pi pi-shopping-cart",
     items: [
-      { label: "list", icon: "pi pi-ban", routerLink: ["/inventory/products"] },
-      { label: "crear", icon: "pi pi-ban", routerLink: ["/inventory/products/create"] },
+      { label: "list", icon: "pi pi-list", routerLink: ["/transactions/compras"] },
+      { label: "crear", icon: "pi pi-cart-plus", routerLink: ["/transactions/compras/create"] },
     ]
   },
   {
     label: "sales", icon: "pi pi-tag",
     items: [
-      { label: "list", icon: "pi pi-ban", routerLink: ["/products/"] },
-      { label: "crear", icon: "pi pi-ban", routerLink: ["/productos/backorder"] },
+      { label: "list", icon: "pi pi-list", routerLink: ["/products/"] },
+      { label: "crear", icon: "pi pi-plus", routerLink: ["/productos/backorder"] },
     ]
   }
 ]
