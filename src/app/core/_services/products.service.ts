@@ -17,7 +17,9 @@ export class ProductosService {
 
   constructor(private http: HttpClient) { }
 
-  postProducts = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.post<ProductResp>(`${this.#url}productos/list`, proveedorDto);
+  postProducts = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.post<ProductResp>(`${this.#url}productos`, proveedorDto);
+  
+  postProductscProveedor = (idProvider: number): Observable<ProductResp> => this.http.get<ProductResp>(`${this.#url}productos/list/${idProvider}`);
 
   postProduct = (employeeReg: ProductoRegister): Observable<ProductSaveResponse> => this.http.post<ProductSaveResponse>(`${this.#url}productos/register`, employeeReg);  
 }

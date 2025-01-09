@@ -1,1 +1,70 @@
-<p>purchase-create works!</p>
+<form [formGroup]="purchaseForm">
+    <p-card [header]="'labels.register_purchases' | translate | uppercase">
+        <div class="flex flex-column md:flex-row sm:flex-row">
+            <div class="align-items-left justify-content-top pr-2">
+                <div class="flex flex-column md:flex-row flex-row">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 lg:w-full">
+                        <label for="fechaCompra" class="w-25rem">{{'purcharses.fechaCompra' | translate }}</label>
+                        <p-calendar [formControlName]="'fechaCompra'" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
+                        <small style="color: red;">Error en el Fecha de Compra.</small> }
+                    </div>
+
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 lg:w-full">
+                        <label for="total" class="w-25rem">{{'purcharses.total' | translate }}</label>
+                        <input pInputText [formControlName]="'total'" type="text" class="w-full" /> @if (purchaseForm.get('total')?.invalid && purchaseForm.get('total')?.touched) {
+                        <small style="color: red;">Error en el Precio Total.</small> }
+                    </div>
+
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                        <label for="id_proveedor" class="w-25rem">{{'purcharses.id_proveedor' | translate }}</label>
+                        <p-dropdown [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
+                        <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
+                    </div>
+                    <div class="justify-content-center py-2 align-items-center pb-4">
+                        <label class="py-4">{{'purcharses.add' | translate }}</label>
+                        <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" class="p-button-secondary" (click)="addDetail()" />
+                    </div>
+                </div>
+                <hr>
+                <div formArrayName="detalle">
+                    <h4>Detalles</h4>
+                    @for (item of detalle.controls; track $index) {
+                    <div class="flex flex-column md:flex-row flex-row">
+                        <div [formGroupName]="$index" class="detalle-item">
+                            <div class="flex flex-column md:flex-row flex-row">
+                                <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                                    <label for="cantidad" class="w-25rem">{{'purcharses.cantidad' | translate }}</label>
+                                    <input pInputText [id]="'cantidad-' + $index" [formControlName]="'cantidad'" type="number" class="w-full" /> @if (purchaseForm.get('cantidad')?.invalid && purchaseForm.get('cantidad')?.touched) {
+                                    <small style="color: red;">Error en el Fecha de Compra.</small> }
+                                </div>
+
+                                <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                                    <label for="precio unitario" class="w-25rem">{{'purcharses.precioUnitario' | translate }}</label>
+                                    <input pInputText [id]="'precioUnitario-' + $index" [formControlName]="'precioUnitario'" type="number" class="w-full" /> @if (purchaseForm.get('precioUnitario')?.invalid && purchaseForm.get('precioUnitario')?.touched)
+                                    {
+                                    <small style="color: red;">Error en el Precio Total.</small> }
+                                </div>
+
+                                <div class="flex flex-wrap justify-content-left align-items-center gap-2 lg:w-full px-2">{{productos | json}}
+                                    <label for="id_producto" class="w-25rem">{{'purcharses.id_producto' | translate }}</label>
+                                    <p-dropdown [id]="'id_producto-' + $index" [options]="productos" [formControlName]="'id_producto'" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
+                                    <small style="color: red;">Error en el Producto seleccionado.</small> }
+                                </div>
+                                <div class="justify-content-center py-2 align-items-center">
+                                    <label class="py-4">{{'purcharses.add' | translate }}</label><br>
+                                    <p-button [title]="'label.add_detall' | translate" icon="pi pi-trash" severity="danger" (click)="removeDetail($index)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <div class="button-group">
+                    <p-button [label]="'label.cancel' | translate" class="btn btn-secondary" (click)="submitPurchase()" />
+                    <p-button [label]="'label.register' | translate" class="btn btn-primary" [disabled]="purchaseForm.invalid" />
+                </div>
+            </div>
+        </div>
+    </p-card>
+</form>

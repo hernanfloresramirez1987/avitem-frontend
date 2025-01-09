@@ -68,6 +68,7 @@
         "register_employee": "Register Employee",
         "register_supplier": "Register Supplier",
         "register_product": "Register Product",
+        "register_purchases": "Register Purchases",
         "id": "Id",
         "ci": "C.I.",
         "nombre": "Name",
@@ -85,5 +86,20 @@
         "all_orders": "All Orders",
         "any": "Any",
         "area": "Area"
+    },
+    "compras": {
+        "fechaCompra": "Purchase Date",
+        "total": "Total",
+        "id_proveedor": "Proveedor"
+
+    },
+
+    "purcharses": {
+        "fechaCompra": "Purcharse Date",
+        "total": "Total",
+        "id_proveedor": "Proveedor",
+        "add": "Agregar",
+        "cantidad": "Cantidad",
+        "precioUnitario": "Precio Unitario"
     }
 }
