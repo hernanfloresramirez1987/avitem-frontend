@@ -68,6 +68,7 @@
         "register_employee": "Registrar Empleado",
         "register_supplier": "Registrar Proveedor",
         "register_product": "Registrar Producto",
+        "register_purchases": "Registrar Compras",
         "id": "Id",
         "ci": "C.I.",
         "nombre": "Nombre",
@@ -85,5 +86,16 @@
         "all_orders": "Todas las ordenes",
         "any": "Todos",
         "area": "Area"
+    },
+
+    "purcharses": {
+        "fechaCompra": "Fecha de Compra",
+        "total": "Total",
+        "id_proveedor": "Proveedor",
+        "add": "Agregar",
+        "cantidad": "Cantidad",
+        "precioUnitario": "Precio Unitario"
     }
+
+
 }

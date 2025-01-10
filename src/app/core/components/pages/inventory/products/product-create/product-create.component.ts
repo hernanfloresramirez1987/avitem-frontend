@@ -22,6 +22,7 @@ import { ProductoRegister } from '../../../../../_models/dto/inventory/products/
   selector: 'app-product-create',
   standalone: true,
   imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, TranslateLanModule, UpperCasePipe, JsonPipe],
+  providers: [DatePipe],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'
 })
@@ -33,15 +34,15 @@ export default class ProductCreateComponent {
 
   productoRegister!: ProductoRegister;
 
-  constructor(private categoriasServ: CategoriasService, private proveedoresServ: ProveedoresService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
+  constructor(private categoriasServ: CategoriasService, private proveedoresServ: ProveedoresService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    // const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+    const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
 
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: [''],
       // cantidadStock: ['', Validators.required],
-      fechaIngreso: [new Date(), Validators.required],
+      fechaIngreso: [currentDate, Validators.required],
       unidadMedida: ['', Validators.required],
       codigoProducto: ['', Validators.required],
       id_proveedor: ['', Validators.required],
