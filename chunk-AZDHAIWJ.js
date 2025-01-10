@@ -1,0 +1,1 @@
+import{Mb as a,Ub as s,ea as o,tb as n,ub as r}from"./chunk-PQPLRZS3.js";var d=(()=>{class t{static{this.\u0275fac=function(e){return new(e||t)}}static{this.\u0275cmp=o({type:t,selectors:[["app-products"]],standalone:!0,features:[s],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),a(1,"products works!"),r())}})}}return t})();export{d as default};
