@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
+import { PurcharseDetail, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { Router } from '@angular/router';
@@ -30,16 +30,16 @@ import { ProductItem } from '../../../../../_models/inventory/products/product.m
 export default class PurchaseCreateComponent implements OnInit {
   purchaseForm!: FormGroup;
 
-  employeRegister!: PurcharseRegister;
+  comprasRegister!: PurcharseRegister;
   proveedores!: ProveedorItem[];
   productos!: ProductItem[];
 
   constructor(private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-    this.purchaseForm = this.fb.group({ // Datos de persona
-      fechaCompra: [{ value: currentDate, disabled: true }],
-      total: [{value: 0, disabled: true}, [Validators.required, Validators.pattern(/^[0-9]{6,10}$/)]],
+    this.purchaseForm = this.fb.group({
+      fechaCompra: [currentDate, { disabled: true }],
+      total: [0, { disabled: true}],
       id_proveedor: ['', [Validators.required]],
       detalle: this.fb.array([]),
     });
@@ -55,7 +55,7 @@ export default class PurchaseCreateComponent implements OnInit {
   }
 
   ngOnInit(): void { console.log(9999);
-    this.purchaseForm.valueChanges.pipe(debounceTime(5000)).subscribe(t => this.calculateTotal(t));
+    this.purchaseForm.valueChanges/*.pipe(debounceTime(5000))*/.subscribe(t => this.calculateTotal(t));
   }
 
   // Calcular el total dinámicamente
@@ -88,34 +88,49 @@ export default class PurchaseCreateComponent implements OnInit {
     this.detalle.removeAt(index);
   }
 
-  changeProvider() {
-    console.log('console.log(this.purchaseForm.value.id_proveedor);\n', this.purchaseForm.value.id_proveedor.id);
+  changeProvider() { // console.log('console.log(this.purchaseForm.value.id_proveedor);\n', this.purchaseForm.value.id_proveedor.id);
     this.productosServ.postProductscProveedor(this.purchaseForm.value.id_proveedor.id).subscribe(t => {
-      console.log(t)
-      this.productos = t.data;
+      this.productos = t;
     });
   }
 
   submitPurchase(): void {
-    console.log('console.log(this.purchaseForm.valid);\n ', this.purchaseForm.value);
     if (this.purchaseForm.valid) {
-      const purchaseData = this.purchaseForm.value;
-      purchaseData.detalle = JSON.stringify(purchaseData.detalle); // Convert detail array to JSON string
+      const purchaseData = this.asignarValores();
       
-
-      console.log('console.log(purchaseData); :   ', purchaseData);
+      purchaseData.detalle = JSON.stringify(purchaseData.detalle);
       
       this.comprasServ.postProduct(purchaseData).subscribe({
         next: (t) => {
-          console.log('Compra registrada con éxito:', t);
-          this.router.navigate(['/transactions/compras']);
+          if(t.CodigoEstado === "201") {
+            this.router.navigate(['/transactions/compras']);
+          }
         }, error: (e) => {
           console.error('Error al registrar la compra:', e);
         }
-      }
-      );
+      });
     } else {
       console.error('Formulario inválido');
     }
+  }
+
+  asignarValores(): PurcharseRegister {
+    const formValues = this.purchaseForm.value;
+
+    this.comprasRegister = {
+      fechaCompra: formValues.fechaCompra,
+      total: formValues.total,
+      id_proveedor: formValues.id_proveedor.id,
+      detalle: formValues.detalle.map((t: any) => {
+        return {
+          cantidad: t.cantidad, // Asegúrate de que 't' sea un elemento de PurcharseDetail
+          precioUnitario: t.precioUnitario, // Accede a 'precioUnitario' de 't'
+          id_producto: t.id_producto.id // Asegúrate de que 'id_producto' esté definido
+        };
+      })
+    };
+    console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
+    return this.comprasRegister;
+
   }
 }

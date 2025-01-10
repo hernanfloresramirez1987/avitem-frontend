@@ -8,6 +8,7 @@ import { ProductoDTO } from '../_models/dto/inventory/products/producto.interfac
 import { ProductResp } from '../_models/inventory/products/productResponse.interface';
 import { ProductoRegister } from '../_models/dto/inventory/products/productoRegister.interface';
 import { ProductSaveResponse } from '../_models/inventory/products/productSaveResponse';
+import { ProductItem } from '../_models/inventory/products/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ProductosService {
 
   postProducts = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.post<ProductResp>(`${this.#url}productos`, proveedorDto);
   
-  postProductscProveedor = (idProvider: number): Observable<ProductResp> => this.http.get<ProductResp>(`${this.#url}productos/list/${idProvider}`);
+  postProductscProveedor = (idProvider: number): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}productos/list/${idProvider}`);
 
   postProduct = (employeeReg: ProductoRegister): Observable<ProductSaveResponse> => this.http.post<ProductSaveResponse>(`${this.#url}productos/register`, employeeReg);  
 }

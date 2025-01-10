@@ -2,7 +2,7 @@ export interface PurcharseRegister {
   fechaCompra: string;
   total: number;
   id_proveedor: number;
-  detalle: PurcharseDetail[];
+  detalle: PurcharseDetail[] | string;
 }
 
 export interface PurcharseDetail {

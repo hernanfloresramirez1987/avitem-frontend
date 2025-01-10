@@ -1,4 +1,4 @@
-export interface ProductItem {
+export interface ComprasItem {
     id:             number;
     nombre:         string;
     descripcion:    string;
