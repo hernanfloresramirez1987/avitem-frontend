@@ -91,10 +91,11 @@
     "purcharses": {
         "fechaCompra": "Fecha de Compra",
         "total": "Total",
-        "id_proveedor": "Proveedor",
+        "proveedor": "Proveedor",
         "add": "Agregar",
         "cantidad": "Cantidad",
-        "precioUnitario": "Precio Unitario"
+        "precioUnitario": "Precio Unitario",
+        "producto": "Producto"
     }
 
 

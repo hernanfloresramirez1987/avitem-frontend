@@ -9,6 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CommonModule } from '@angular/common';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -29,6 +30,8 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'es',
       })
     ),
+    MessageService,
+    ConfirmationService,
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(),

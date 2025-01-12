@@ -1,47 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PurcharseDetail, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CardModule } from 'primeng/card';
 import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
+import { ButtonGroupModule } from 'primeng/buttongroup';
+import { CalendarModule } from 'primeng/calendar';
+import { PurcharseDetail, PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
+import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { ProveedorItem } from '../../../../../_models/users/proveedores/proveedores.model';
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
-import { CalendarModule } from 'primeng/calendar';
 import { debounceTime } from 'rxjs';
 import { ComprasService } from '../../../../../_services/compras.service';
 import { ProductosService } from '../../../../../_services/products.service';
 import { ProductItem } from '../../../../../_models/inventory/products/product.model';
+import { TableModule } from 'primeng/table';
+import { ToastService } from '../../../../../_services/common/toast.service';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, JsonPipe, CalendarModule],
+  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, JsonPipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'
 })
 
-export default class PurchaseCreateComponent implements OnInit {
+export default class PurchaseCreateComponent {
   purchaseForm!: FormGroup;
 
   comprasRegister!: PurcharseRegister;
   proveedores!: ProveedorItem[];
   productos!: ProductItem[];
 
-  constructor(private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe) {
+  // detail: PurcharseDetail[] = [];
+  detailView: PurcharseDetailWithNameProduct[] = [];
+  
+  stateInputs = signal<boolean>(true);
+  currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+  total = 0;
+
+  constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+    
     this.purchaseForm = this.fb.group({
-      fechaCompra: [currentDate, { disabled: true }],
-      total: [0, { disabled: true}],
+      fechaCompra: [{ value: this.currentDate, disabled: this.stateInputs() }],
+      total: [{ value: this.total, disabled: this.stateInputs() }],
       id_proveedor: ['', [Validators.required]],
-      detalle: this.fb.array([]),
+      // detalle: this.fb.array([]),
+      cantidad: ['', {disabled: this.stateInputs()}],
+      precioUnitario: [''],
+      precioVenta: [''],
+      id_producto: [''],
     });
 
     this.proveedoresServ.postProveedoresSearch(null).subscribe({
@@ -52,63 +69,44 @@ export default class PurchaseCreateComponent implements OnInit {
       },
       error: (err) => console.error('Error al obtener proveedores:', err)
     });
-  }
-
-  ngOnInit(): void { console.log(9999);
-    this.purchaseForm.valueChanges/*.pipe(debounceTime(5000))*/.subscribe(t => this.calculateTotal(t));
-  }
-
-  // Calcular el total dinámicamente
-  private calculateTotal(t: any): void {
-    let total = 0;
-    for (let i = 0; i < t.detalle.length; i++) {
-      total += t.detalle[i].cantidad * t.detalle[i].precioUnitario;
-    }
-    console.log(total);
-
-    // Actualizar el campo `total` en el formulario
-    this.purchaseForm.patchValue({ total: total }, { emitEvent: false });
-  }
-
-  get detalle(): FormArray {
-    return this.purchaseForm.get('detalle') as FormArray;
-  }
+  } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
 
   addDetail(): void {
-    const detailGroup = this.fb.group({
-      cantidad: ['', [Validators.required, Validators.min(1)]],
-      precioUnitario: ['', [Validators.required, Validators.min(0.01)]],
-      id_producto: [null, Validators.required],
+    this.detailView.push({
+      cantidad: Number(this.purchaseForm.value.cantidad),
+      precioUnitario: Number(this.purchaseForm.value.precioUnitario),
+      precioVenta: Number(this.purchaseForm.value.precioVenta),
+      id_producto: Number(this.purchaseForm.value.id_producto.id), // Use get to access the control
+      name_product: this.purchaseForm.value.id_producto.nombre // Ensure to include 'name_product'
     });
-
-    this.detalle.push(detailGroup);
+    console.log(this.detailView)
+    this.total = this.detailView.reduce((acc, t) => {
+      const cantidad = Number(t.cantidad) || 0; // Convierte a número, o 0 si no es válido
+      const precioUnitario = Number(t.precioUnitario) || 0; // Convierte a número, o 0 si no es válido
+      console.log('Cantidad:', cantidad, 'Precio Unitario:', precioUnitario);
+      return acc + (cantidad * precioUnitario);
+    }, 0);
+    this.purchaseForm.patchValue({ total: this.total }, { emitEvent: true });
+    this.purchaseForm.patchValue({ id_producto: '', cantidad: '', precioUnitario: '' }, { emitEvent: false });
   }
 
-  removeDetail(index: number): void {
-    this.detalle.removeAt(index);
+  removeDetail(index: any): void {
+    // this.detalle.removeAt(index);
   }
 
-  changeProvider() { // console.log('console.log(this.purchaseForm.value.id_proveedor);\n', this.purchaseForm.value.id_proveedor.id);
+  changeProvider() {
     this.productosServ.postProductscProveedor(this.purchaseForm.value.id_proveedor.id).subscribe(t => {
       this.productos = t;
+      this.stateInputs.set(false);
     });
   }
 
   submitPurchase(): void {
     if (this.purchaseForm.valid) {
       const purchaseData = this.asignarValores();
-      
+      console.log(purchaseData);
       purchaseData.detalle = JSON.stringify(purchaseData.detalle);
-      
-      this.comprasServ.postProduct(purchaseData).subscribe({
-        next: (t) => {
-          if(t.CodigoEstado === "201") {
-            this.router.navigate(['/transactions/compras']);
-          }
-        }, error: (e) => {
-          console.error('Error al registrar la compra:', e);
-        }
-      });
+      this.confirm(purchaseData);
     } else {
       console.error('Formulario inválido');
     }
@@ -116,21 +114,65 @@ export default class PurchaseCreateComponent implements OnInit {
 
   asignarValores(): PurcharseRegister {
     const formValues = this.purchaseForm.value;
+    console.log(this.total);
 
     this.comprasRegister = {
-      fechaCompra: formValues.fechaCompra,
-      total: formValues.total,
+      fechaCompra: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
+      total: this.total,
       id_proveedor: formValues.id_proveedor.id,
-      detalle: formValues.detalle.map((t: any) => {
+      detalle: this.detailView.map((t: any) => {
+        console.log(t);
         return {
           cantidad: t.cantidad, // Asegúrate de que 't' sea un elemento de PurcharseDetail
           precioUnitario: t.precioUnitario, // Accede a 'precioUnitario' de 't'
-          id_producto: t.id_producto.id // Asegúrate de que 'id_producto' esté definido
+          precioVenta: t.precioVenta,
+          id_producto: t.id_producto // Asegúrate de que 'id_producto' esté definido
         };
-      })
+      }),
+      fechaReabastecimiento: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
+      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-dd-MM'))
     };
     console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
     return this.comprasRegister;
 
+  }
+  
+  getLastDateOfYear(year: number): Date {
+    return new Date(year, 11, 31); // Diciembre (mes 11), día 31
+  }
+
+  notifySuccess() {
+    this.toastServ.showSuccess('Operation Successful', 'The action was completed successfully.');
+    console.log(777);
+  }
+
+  notifyError() {
+    this.toastServ.showError('Operation Failed', 'An error occurred while processing the action.');
+  }
+
+  confirm(purchaseData: PurcharseRegister) {
+    console.log(9999)
+    this.confirmationServ.confirm({
+      message: 'Are you sure you want to perform this action?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        console.log('Action confirmed!');
+        this.comprasServ.postProduct(purchaseData).subscribe({
+          next: (t) => {
+            if(t.CodigoEstado === "201") {
+              console.log(123456789);
+              this.notifySuccess();
+              this.router.navigate(['/transactions/compras']);
+            }
+          }, error: (e) => {
+            console.error('Error al registrar la compra:', e);
+          }
+        });
+      },
+      reject: () => {
+        console.log('Action rejected!');
+      },
+    });
   }
 }
