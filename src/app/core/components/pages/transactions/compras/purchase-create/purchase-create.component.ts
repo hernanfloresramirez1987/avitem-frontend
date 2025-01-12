@@ -79,11 +79,9 @@ export default class PurchaseCreateComponent {
       id_producto: Number(this.purchaseForm.value.id_producto.id), // Use get to access the control
       name_product: this.purchaseForm.value.id_producto.nombre // Ensure to include 'name_product'
     });
-    console.log(this.detailView)
     this.total = this.detailView.reduce((acc, t) => {
       const cantidad = Number(t.cantidad) || 0; // Convierte a número, o 0 si no es válido
-      const precioUnitario = Number(t.precioUnitario) || 0; // Convierte a número, o 0 si no es válido
-      console.log('Cantidad:', cantidad, 'Precio Unitario:', precioUnitario);
+      const precioUnitario = Number(t.precioUnitario) || 0;
       return acc + (cantidad * precioUnitario);
     }, 0);
     this.purchaseForm.patchValue({ total: this.total }, { emitEvent: true });
@@ -114,7 +112,7 @@ export default class PurchaseCreateComponent {
 
   asignarValores(): PurcharseRegister {
     const formValues = this.purchaseForm.value;
-    console.log(this.total);
+    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.comprasRegister = {
       fechaCompra: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
@@ -129,8 +127,8 @@ export default class PurchaseCreateComponent {
           id_producto: t.id_producto // Asegúrate de que 'id_producto' esté definido
         };
       }),
-      fechaReabastecimiento: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
-      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-dd-MM'))
+      fechaReabastecimiento: String(this.datePipe.transform(this.currentDate, 'yyyy-MM-dd')),
+      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd'))
     };
     console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
     return this.comprasRegister;
@@ -143,7 +141,6 @@ export default class PurchaseCreateComponent {
 
   notifySuccess() {
     this.toastServ.showSuccess('Operation Successful', 'The action was completed successfully.');
-    console.log(777);
   }
 
   notifyError() {
@@ -151,7 +148,6 @@ export default class PurchaseCreateComponent {
   }
 
   confirm(purchaseData: PurcharseRegister) {
-    console.log(9999)
     this.confirmationServ.confirm({
       message: 'Are you sure you want to perform this action?',
       header: 'Confirmation',
@@ -161,7 +157,6 @@ export default class PurchaseCreateComponent {
         this.comprasServ.postProduct(purchaseData).subscribe({
           next: (t) => {
             if(t.CodigoEstado === "201") {
-              console.log(123456789);
               this.notifySuccess();
               this.router.navigate(['/transactions/compras']);
             }
