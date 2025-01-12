@@ -1,17 +1,24 @@
 export interface PurcharseRegister {
-  fechaCompra: string;
-  total: number;
-  id_proveedor: number;
-  detalle: PurcharseDetail[] | string;
+  fechaCompra:            string;
+  total:                  number;
+  id_proveedor:           number;
+  detalle:                PurcharseDetail[] | string;
+  fechaReabastecimiento:  string;
+  fechaVencimiento:       string;
 }
 
 export interface PurcharseDetail {
-  cantidad: number;
+  cantidad:       number;
   precioUnitario: number;
-  id_producto: number;
+  precioVenta:    number;
+  id_producto:    number;
+}
+
+export interface PurcharseDetailWithNameProduct extends PurcharseDetail {
+  name_product:   string;
 }
 
 export interface RegistroComprasResult {
-    p_resultado: string;
-    p_status: number;
+    p_resultado:  string;
+    p_status:     number;
 }
