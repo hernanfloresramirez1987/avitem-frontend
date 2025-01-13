@@ -10,7 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { CalendarModule } from 'primeng/calendar';
-import { PurcharseDetail, PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
+import { PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { ProveedorItem } from '../../../../../_models/users/proveedores/proveedores.model';
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
@@ -51,22 +51,20 @@ export default class PurchaseCreateComponent {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.purchaseForm = this.fb.group({
-      fechaCompra: [{ value: this.currentDate, disabled: this.stateInputs() }],
-      total: [{ value: this.total, disabled: this.stateInputs() }],
+      fechaCompra: [this.currentDate],
+      total: [this.total],
       id_proveedor: ['', [Validators.required]],
       // detalle: this.fb.array([]),
-      cantidad: ['', {disabled: this.stateInputs()}],
+      cantidad: [''],
       precioUnitario: [''],
       precioVenta: [''],
       id_producto: [''],
     });
 
+    console.log(this.currentDate);
+
     this.proveedoresServ.postProveedoresSearch(null).subscribe({
-      next: (response) => {
-        console.log(response); // Revisa cómo viene la respuesta
-        this.proveedores = response;
-        console.log(this.proveedores);
-      },
+      next: (response) => this.proveedores = response,
       error: (err) => console.error('Error al obtener proveedores:', err)
     });
   } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
@@ -95,6 +93,7 @@ export default class PurchaseCreateComponent {
   changeProvider() {
     this.productosServ.postProductscProveedor(this.purchaseForm.value.id_proveedor.id).subscribe(t => {
       this.productos = t;
+      console.log(t)
       this.stateInputs.set(false);
     });
   }
@@ -115,7 +114,7 @@ export default class PurchaseCreateComponent {
     console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.comprasRegister = {
-      fechaCompra: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
+      fechaCompra: String(this.datePipe.transform(new Date(), 'yyyy-dd-MM')),
       total: this.total,
       id_proveedor: formValues.id_proveedor.id,
       detalle: this.detailView.map((t: any) => {
@@ -127,7 +126,7 @@ export default class PurchaseCreateComponent {
           id_producto: t.id_producto // Asegúrate de que 'id_producto' esté definido
         };
       }),
-      fechaReabastecimiento: String(this.datePipe.transform(this.currentDate, 'yyyy-MM-dd')),
+      fechaReabastecimiento: String(this.currentDate),
       fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd'))
     };
     console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
@@ -158,6 +157,7 @@ export default class PurchaseCreateComponent {
           next: (t) => {
             if(t.CodigoEstado === "201") {
               this.notifySuccess();
+              console.log('hola');
               this.router.navigate(['/transactions/compras']);
             }
           }, error: (e) => {
