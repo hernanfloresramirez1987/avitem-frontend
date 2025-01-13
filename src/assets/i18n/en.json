@@ -101,6 +101,8 @@
         "add": "Add",
         "cantidad": "Quantity",
         "precioUnitario": "Unit Price",
+        "precioCompra": "Purchase Price",
+        "precioVenta": "Sale Price",
         "producto": "Product"
     }
 }

@@ -10,7 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { CalendarModule } from 'primeng/calendar';
-import { PurcharseDetail, PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
+import { PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { ProveedorItem } from '../../../../../_models/users/proveedores/proveedores.model';
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
@@ -51,22 +51,20 @@ export default class PurchaseCreateComponent {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.purchaseForm = this.fb.group({
-      fechaCompra: [{ value: this.currentDate, disabled: this.stateInputs() }],
-      total: [{ value: this.total, disabled: this.stateInputs() }],
+      fechaCompra: [this.currentDate],
+      total: [this.total],
       id_proveedor: ['', [Validators.required]],
       // detalle: this.fb.array([]),
-      cantidad: ['', {disabled: this.stateInputs()}],
+      cantidad: [''],
       precioUnitario: [''],
       precioVenta: [''],
       id_producto: [''],
     });
 
+    console.log(this.currentDate);
+
     this.proveedoresServ.postProveedoresSearch(null).subscribe({
-      next: (response) => {
-        console.log(response); // Revisa cómo viene la respuesta
-        this.proveedores = response;
-        console.log(this.proveedores);
-      },
+      next: (response) => this.proveedores = response,
       error: (err) => console.error('Error al obtener proveedores:', err)
     });
   } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
@@ -79,11 +77,9 @@ export default class PurchaseCreateComponent {
       id_producto: Number(this.purchaseForm.value.id_producto.id), // Use get to access the control
       name_product: this.purchaseForm.value.id_producto.nombre // Ensure to include 'name_product'
     });
-    console.log(this.detailView)
     this.total = this.detailView.reduce((acc, t) => {
       const cantidad = Number(t.cantidad) || 0; // Convierte a número, o 0 si no es válido
-      const precioUnitario = Number(t.precioUnitario) || 0; // Convierte a número, o 0 si no es válido
-      console.log('Cantidad:', cantidad, 'Precio Unitario:', precioUnitario);
+      const precioUnitario = Number(t.precioUnitario) || 0;
       return acc + (cantidad * precioUnitario);
     }, 0);
     this.purchaseForm.patchValue({ total: this.total }, { emitEvent: true });
@@ -97,6 +93,7 @@ export default class PurchaseCreateComponent {
   changeProvider() {
     this.productosServ.postProductscProveedor(this.purchaseForm.value.id_proveedor.id).subscribe(t => {
       this.productos = t;
+      console.log(t)
       this.stateInputs.set(false);
     });
   }
@@ -114,10 +111,10 @@ export default class PurchaseCreateComponent {
 
   asignarValores(): PurcharseRegister {
     const formValues = this.purchaseForm.value;
-    console.log(this.total);
+    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.comprasRegister = {
-      fechaCompra: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
+      fechaCompra: String(this.datePipe.transform(new Date(), 'yyyy-dd-MM')),
       total: this.total,
       id_proveedor: formValues.id_proveedor.id,
       detalle: this.detailView.map((t: any) => {
@@ -129,8 +126,8 @@ export default class PurchaseCreateComponent {
           id_producto: t.id_producto // Asegúrate de que 'id_producto' esté definido
         };
       }),
-      fechaReabastecimiento: String(this.datePipe.transform(this.currentDate, 'yyyy-dd-MM')),
-      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-dd-MM'))
+      fechaReabastecimiento: String(this.currentDate),
+      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd'))
     };
     console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
     return this.comprasRegister;
@@ -143,7 +140,6 @@ export default class PurchaseCreateComponent {
 
   notifySuccess() {
     this.toastServ.showSuccess('Operation Successful', 'The action was completed successfully.');
-    console.log(777);
   }
 
   notifyError() {
@@ -151,7 +147,6 @@ export default class PurchaseCreateComponent {
   }
 
   confirm(purchaseData: PurcharseRegister) {
-    console.log(9999)
     this.confirmationServ.confirm({
       message: 'Are you sure you want to perform this action?',
       header: 'Confirmation',
@@ -161,8 +156,8 @@ export default class PurchaseCreateComponent {
         this.comprasServ.postProduct(purchaseData).subscribe({
           next: (t) => {
             if(t.CodigoEstado === "201") {
-              console.log(123456789);
               this.notifySuccess();
+              console.log('hola');
               this.router.navigate(['/transactions/compras']);
             }
           }, error: (e) => {
