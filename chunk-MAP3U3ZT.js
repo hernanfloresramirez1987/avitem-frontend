@@ -1,1 +1,0 @@
-import{m as o}from"./chunk-NM3HJ4DI.js";import"./chunk-JAFPLUWG.js";import{W as i,fa as e}from"./chunk-PQPLRZS3.js";var s=[],a=(()=>{class t{static{this.\u0275fac=function(r){return new(r||t)}}static{this.\u0275mod=e({type:t})}static{this.\u0275inj=i({imports:[o.forChild(s),o]})}}return t})();export{a as VentasRoutingModule};

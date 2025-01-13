@@ -95,6 +95,8 @@
         "add": "Agregar",
         "cantidad": "Cantidad",
         "precioUnitario": "Precio Unitario",
+        "precioCompra": "Precio de Compra",
+        "precioVenta": "Precio de Venta",
         "producto": "Producto"
     }
 
