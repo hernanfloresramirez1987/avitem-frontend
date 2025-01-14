@@ -114,7 +114,7 @@ export default class PurchaseCreateComponent {
     console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.comprasRegister = {
-      fechaCompra: String(this.datePipe.transform(new Date(), 'yyyy-dd-MM')),
+      fechaCompra: String(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
       total: this.total,
       id_proveedor: formValues.id_proveedor.id,
       detalle: this.detailView.map((t: any) => {
@@ -126,8 +126,8 @@ export default class PurchaseCreateComponent {
           id_producto: t.id_producto // Asegúrate de que 'id_producto' esté definido
         };
       }),
-      fechaReabastecimiento: String(this.currentDate),
-      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd'))
+      fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')),
+      
     };
     console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
     return this.comprasRegister;
@@ -152,13 +152,15 @@ export default class PurchaseCreateComponent {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        console.log('Action confirmed!');
         this.comprasServ.postProduct(purchaseData).subscribe({
           next: (t) => {
+            console.log('Action confirmed!');
             if(t.CodigoEstado === "201") {
               this.notifySuccess();
               console.log('hola');
               this.router.navigate(['/transactions/compras']);
+            } else {
+              console.log(t);
             }
           }, error: (e) => {
             console.error('Error al registrar la compra:', e);

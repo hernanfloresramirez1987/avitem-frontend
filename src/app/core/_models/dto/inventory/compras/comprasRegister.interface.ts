@@ -3,7 +3,6 @@ export interface PurcharseRegister {
   total:                  number;
   id_proveedor:           number;
   detalle:                PurcharseDetail[] | string;
-  fechaReabastecimiento:  string;
   fechaVencimiento:       string;
 }
 
