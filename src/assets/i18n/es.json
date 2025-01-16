@@ -87,9 +87,13 @@
         "any": "Todos",
         "area": "Area",
         "description": "Descripcion",
-        "cantidadStock": "Cantidad Stock",
-        "fechaIngreso": "Fecha Ingreo",
-        "unidadMedida": "Unidad Medida"
+        "cantidadStock": "Stock",
+        "fechaIngreso": "Fecha Registro",
+        "unidadMedida": "Unidad Medida",
+        "codigoProducto": "Codigo",
+        "state": "Estado",
+        "categoria": "Categoria",
+        "empresa": "Empresa"
     },
 
     "purcharses": {

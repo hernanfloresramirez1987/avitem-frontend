@@ -56,7 +56,7 @@
         "nombre": "Name",
         "description": "Description",
         "cantidadStock": "Quantity Stock",
-        "fechaIngreso": "Entry Date",
+        "fechaIngreso": "Registered",
         "unidadMedida": "Unit of Measure",
         "codigoProducto": "Product code",
         "id_categoria": "Category",
@@ -87,9 +87,13 @@
         "any": "Any",
         "area": "Area",
         "description": "Description",
-        "cantidadStock": "Stock Quantity",
+        "cantidadStock": "Stock",
         "fechaIngreso": "Date of entry",
-        "unidadMedida": "Unit of measurement"
+        "unidadMedida": "Unit of measurement",
+        "codigoProducto": "Code",
+        "state": "State",
+        "categoria": "Category",
+        "empresa": "Enterprise"
     },
     "compras": {
         "fechaCompra": "Purchase Date",
