@@ -27,6 +27,7 @@ export class UsersService {
     { name: 'Tarija', code: 'TA' },
     { name: 'Beni', code: 'BE' },
     { name: 'Pando', code: 'PA' },
+    { name: 'China', code: 'china'},
   ])};
 
 

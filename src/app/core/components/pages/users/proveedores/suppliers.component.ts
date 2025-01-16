@@ -14,11 +14,12 @@ import { ProveedoresService } from '../../../../_services/proveedors.service';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-suppliers',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule],
+  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })

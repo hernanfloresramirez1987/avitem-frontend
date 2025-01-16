@@ -95,7 +95,7 @@ export default class UsersCreateComponent implements OnInit {
     this.employeeServ.postEmployee(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
-          this.router.navigate(['users/employees']);
+          this.router.navigate(['users/empleados']);
         }
       });
   }

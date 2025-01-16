@@ -70,6 +70,13 @@ export default class PurchaseCreateComponent {
   } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
 
   addDetail(): void {
+    const selectedProductId = Number(this.purchaseForm.value.id_producto.id);
+    const productExists = this.detailView.some(detail => detail.id_producto === selectedProductId);
+    if (productExists) { // Si el producto ya existe, muestra un mensaje de advertencia o notificación
+      alert('Este producto ya ha sido agregado. Por favor selecciona otro.');
+      return; // Sal del método para evitar agregar duplicados
+    }
+
     this.detailView.push({
       cantidad: Number(this.purchaseForm.value.cantidad),
       precioUnitario: Number(this.purchaseForm.value.precioUnitario),
@@ -92,7 +99,10 @@ export default class PurchaseCreateComponent {
 
   changeProvider() {
     this.productosServ.postProductscProveedor(this.purchaseForm.value.id_proveedor.id).subscribe(t => {
-      this.productos = t;
+      this.productos = t.map(producto => ({
+        ...producto,
+        display: `${producto.nombre} (${producto.unidadMedida})`
+      }));;
       console.log(t)
       this.stateInputs.set(false);
     });

@@ -85,7 +85,11 @@
         "activity": "activities   ",
         "all_orders": "All Orders",
         "any": "Any",
-        "area": "Area"
+        "area": "Area",
+        "description": "Description",
+        "cantidadStock": "Stock Quantity",
+        "fechaIngreso": "Date of entry",
+        "unidadMedida": "Unit of measurement"
     },
     "compras": {
         "fechaCompra": "Purchase Date",
@@ -96,7 +100,7 @@
 
     "purcharses": {
         "fechaCompra": "Purcharse Date",
-        "total": "Total",
+        "precio_total": "Total Price",
         "proveedor": "Supplier",
         "add": "Add",
         "cantidad": "Quantity",
