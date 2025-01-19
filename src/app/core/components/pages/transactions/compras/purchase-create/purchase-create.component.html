@@ -8,15 +8,14 @@
                 <!-- Contenedor externo alinear al 100% -->
                 <div class="flex flex-column md:flex-row gap-2 w-full">
                     <!-- Flexbox adaptado a todo el ancho -->
-
                     <!-- Fecha de compra -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 lg:w-full">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'purcharses.fechaCompra' | translate }}</label>
                         <p-calendar [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <!-- total -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 px-2 lg:w-full">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'purcharses.precio_total' | translate }}</label>
                         <input pInputText [formControlName]="'total'" type="text" class="w-full" /> @if (purchaseForm.get('total')?.invalid && purchaseForm.get('total')?.touched) {
                         <small style="color: red;">Error en el Precio Total.</small> }
@@ -27,26 +26,26 @@
                         <p-dropdown [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
                         <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
                     </div>
-                </div>
-                <hr>
-                <div class="flex flex-column md:flex-row flex-row">
                     <!-- id_producto -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 lg:w-full px-2">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'purcharses.producto' | translate }}</label>
                         <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
                         <!-- <p-dropdown [formControlName]="'id_producto'" [options]="productos" [optionLabel]="'nombre'" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) { -->
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
+                </div>
+                <hr>
+                <div class="flex flex-column md:flex-row flex-row">
                     <!-- cantidad -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
                         <label class="w-25rem">{{'purcharses.cantidad' | translate }}</label>
-                        <input pInputText [formControlName]="'cantidad'" type="number" class="w-full" /> @if (purchaseForm.get('cantidad')?.invalid && purchaseForm.get('cantidad')?.touched) {
+                        <input pInputText [formControlName]="'cantidad'" type="number" class="w-full" (change)="changeTotalCompra()" /> @if (purchaseForm.get('cantidad')?.invalid && purchaseForm.get('cantidad')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <!-- precio compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
                         <label class="w-25rem">{{'purcharses.precioCompra' | translate }}</label>
-                        <input pInputText [formControlName]="'precioUnitario'" type="number" class="w-full" /> @if (purchaseForm.get('precioUnitario')?.invalid && purchaseForm.get('precioUnitario')?.touched) {
+                        <input pInputText [formControlName]="'precioUnitario'" type="number" class="w-full" (change)="changeTotalCompra()" /> @if (purchaseForm.get('precioUnitario')?.invalid && purchaseForm.get('precioUnitario')?.touched) {
                         <small style="color: red;">Error en el Precio de Compra.</small> }
                     </div>
                     <!-- precio venta -->
@@ -55,13 +54,20 @@
                         <input pInputText [formControlName]="'precioVenta'" type="number" class="w-full" /> @if (purchaseForm.get('precioVenta')?.invalid && purchaseForm.get('precioVenta')?.touched) {
                         <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
+                    <!-- precio Total Compra -->
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                        <label class="w-25rem">{{'purcharses.totalCompra' | translate }}</label>
+                        <input pInputText value="{{totalCompra}}" type="number" class="w-full" disabled/> @if (purchaseForm.get('totaCompra')?.invalid && purchaseForm.get('totaCompra')?.touched) {
+                        <small style="color: red;">Error en el Precio de Venta.</small> }
+                    </div>
+
                     <div class="justify-content-center align-items-center">
                         <label class="">{{'purcharses.options' | translate }}</label>
                         <div class="flex justify-content-between">
                             <p-buttonGroup>
                                 <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" severity="primary" (click)="addDetail()" />
                                 <!-- <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" /> -->
-                                <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="removeDetail($event)" />
+                                <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="updateData()" />
                             </p-buttonGroup>
                         </div>
                     </div>
@@ -70,30 +76,30 @@
                 <!-- <div formArrayName="detalle"> -->
                 <h4>Detalles</h4>
                 <!-- @for (item of detail; track $index) { -->
-                <p-table [value]="detailView" [tableStyle]="{ 'width': '100%' }" styleClass="p-datatable-sm">
+                <p-table [value]="detailView" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm'">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th style="width: 5%;">No</th>
+                            <th style="width: 6%; text-align: right;">No</th>
                             <th style="width: 40%;">Producto</th>
-                            <th style="width: 15%;">Cantidad</th>
-                            <th style="width: 15%;">Precio Unitario</th>
-                            <th style="width: 15%;">Precio Venta</th>
-                            <th style="width: 15%;">Precio Total</th>
-                            <th style="width: 10%;">Option</th>
+                            <th style="width: 12%; text-align: right;">Cantidad</th>
+                            <th style="width: 12%; text-align: right;">Precio Unitario</th>
+                            <th style="width: 12%; text-align: right;">Precio Venta</th>
+                            <th style="width: 12%; text-align: right;">Precio Total</th>
+                            <th style="width: 6%;">Option</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-customer let-i="rowIndex">
                         <tr>
-                            <td>{{i + 1}}</td>
-                            <td>{{ customer.name_product }}</td>
-                            <td>{{ customer.cantidad }}</td>
-                            <td>{{ customer.precioUnitario }}</td>
-                            <td>{{ customer.precioVenta}}</td>
-                            <td>{{ customer.cantidad * customer.precioVenta}}</td>
-                            <td>
+                            <td style="text-align: right;">{{i + 1}}</td>
+                            <td [style.backgroundColor]=" getColorBackground(customer.color)" [style.color]="getColor(customer.color)">{{ customer.name_product }}</td>
+                            <td style="text-align: right;">{{ customer.cantidad }}</td>
+                            <td style="text-align: right;">{{ customer.precioUnitario }}</td>
+                            <td style="text-align: right;">{{ customer.precioVenta}}</td>
+                            <td style="text-align: right;">{{ customer.cantidad * customer.precioUnitario}}</td>
+                            <td class="flex flex-wrap justify-content-left">
                                 <p-buttonGroup>
-                                    <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" />
-                                    <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="removeDetail($event)" />
+                                    <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" (click)="updateDetail(customer)" />
+                                    <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="deleteDetail(customer)" />
                                 </p-buttonGroup>
                             </td>
                         </tr>

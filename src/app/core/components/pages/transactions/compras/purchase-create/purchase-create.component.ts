@@ -46,6 +46,7 @@ export default class PurchaseCreateComponent {
   stateInputs = signal<boolean>(true);
   currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
   total = 0;
+  totalCompra = 0;
 
   constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
@@ -53,8 +54,7 @@ export default class PurchaseCreateComponent {
     this.purchaseForm = this.fb.group({
       fechaCompra: [this.currentDate],
       total: [this.total],
-      id_proveedor: ['', [Validators.required]],
-      // detalle: this.fb.array([]),
+      id_proveedor: ['', [Validators.required]], // detalle: this.fb.array([]),
       cantidad: [''],
       precioUnitario: [''],
       precioVenta: [''],
@@ -70,8 +70,12 @@ export default class PurchaseCreateComponent {
   } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
 
   addDetail(): void {
+    if(!this.purchaseForm.value.id_producto) {
+      alert('Debe de seleccionar producto para agregarlo. Por favor seleccione uno.');
+      return;
+    }
     const selectedProductId = Number(this.purchaseForm.value.id_producto.id);
-    const productExists = this.detailView.some(detail => detail.id_producto === selectedProductId);
+    const productExists = this.detailView.some(detail => detail.id_producto === selectedProductId || this.purchaseForm.value.id_producto == '');
     if (productExists) { // Si el producto ya existe, muestra un mensaje de advertencia o notificación
       alert('Este producto ya ha sido agregado. Por favor selecciona otro.');
       return; // Sal del método para evitar agregar duplicados
@@ -82,30 +86,44 @@ export default class PurchaseCreateComponent {
       precioUnitario: Number(this.purchaseForm.value.precioUnitario),
       precioVenta: Number(this.purchaseForm.value.precioVenta),
       id_producto: Number(this.purchaseForm.value.id_producto.id), // Use get to access the control
-      name_product: this.purchaseForm.value.id_producto.nombre // Ensure to include 'name_product'
+      name_product: this.purchaseForm.value.id_producto.nombre, // Ensure to include 'name_product'
+      color: this.purchaseForm.value.id_producto.color
     });
+    this.funcTotal();
+    this.cleanForms();
+  }
+
+  funcTotal() {
     this.total = this.detailView.reduce((acc, t) => {
       const cantidad = Number(t.cantidad) || 0; // Convierte a número, o 0 si no es válido
       const precioUnitario = Number(t.precioUnitario) || 0;
       return acc + (cantidad * precioUnitario);
     }, 0);
-    this.purchaseForm.patchValue({ total: this.total }, { emitEvent: true });
-    this.purchaseForm.patchValue({ id_producto: '', cantidad: '', precioUnitario: '' }, { emitEvent: false });
+  }
+  
+  cleanForms() {
+    this.purchaseForm.patchValue({ total: this.total, id_producto: '', cantidad: '', precioUnitario: '', precioVenta: '' }, { emitEvent: false });
+    this.totalCompra = 0;
   }
 
-  removeDetail(index: any): void {
-    // this.detalle.removeAt(index);
+  updateDetail(item: PurcharseDetailWithNameProduct) {
+    this.purchaseForm.patchValue({ id_producto: '', cantidad: '', precioUnitario: '' }, { emitEvent: true });
   }
 
   changeProvider() {
     this.productosServ.postProductscProveedor(this.purchaseForm.value.id_proveedor.id).subscribe(t => {
       this.productos = t.map(producto => ({
         ...producto,
-        display: `${producto.nombre} (${producto.unidadMedida})`
+        display: `${producto.nombre} (${producto.color})  , ${producto.color} - ${producto.unidadMedida}`
       }));;
       console.log(t)
       this.stateInputs.set(false);
     });
+  }
+
+  changeTotalCompra() {
+    console.log('this.totalCompra: '); //, this.totalCompra);
+    this.totalCompra = this.purchaseForm.value.cantidad * this.purchaseForm.value.precioUnitario;
   }
 
   submitPurchase(): void {
@@ -141,7 +159,6 @@ export default class PurchaseCreateComponent {
     };
     console.log('console.log(this.comprasRegister);\n ', this.comprasRegister);
     return this.comprasRegister;
-
   }
   
   getLastDateOfYear(year: number): Date {
@@ -162,7 +179,7 @@ export default class PurchaseCreateComponent {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.comprasServ.postProduct(purchaseData).subscribe({
+        this.comprasServ.postCompras(purchaseData).subscribe({
           next: (t) => {
             console.log('Action confirmed!');
             if(t.CodigoEstado === "201") {
@@ -181,5 +198,45 @@ export default class PurchaseCreateComponent {
         console.log('Action rejected!');
       },
     });
+  }
+
+  getColorBackground(code: string): string {
+    switch (code) {
+      case 'Natural':
+        return '#cccccc'; // Beige (Natural)
+      case 'Champan':
+        return '#FBE7C6'; // Color Champán
+      case 'Negro':
+        return '#000000'; // Negro
+      case 'Madera':
+        return '#8B4513'; // Color Madera (Marrón)
+      default:
+        return '#FFFFFF'; // Color blanco predeterminado
+    }
+  }
+
+  getColor(code: string): string {
+    switch (code) {
+      case 'Natural':
+        return '#000000'; // Beige (Natural)
+      case 'Champan':
+        return '#000000'; // Color Champán
+      case 'Negro':
+        return '#FFFFFF'; // Negro
+      case 'Madera':
+        return '#FFFFFF'; // Color Madera (Marrón)
+      default:
+        return '#FFFFFF'; // Color blanco predeterminado
+    }
+  }
+
+  deleteDetail(item: PurcharseDetailWithNameProduct): void {
+    this.detailView = this.detailView.filter(detail => detail !== item);
+    this.funcTotal();
+    this.cleanForms();
+  }
+
+  updateData() {
+    console.log('updateData() { } ');
   }
 }

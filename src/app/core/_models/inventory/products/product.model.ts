@@ -3,6 +3,7 @@ export interface ProductItem {
     nombre:         string;
     descripcion:    string;
     fechaIngreso:   string;
+    color:          string;
     unidadMedida:   string;
     codigoProducto: string;
     state:          number;

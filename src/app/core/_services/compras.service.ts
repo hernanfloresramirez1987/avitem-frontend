@@ -5,6 +5,7 @@ import { PurcharseRegister } from '../_models/dto/inventory/compras/comprasRegis
 import { ComprasSaveResponse } from '../_models/inventory/compras/comprasSaveResponse';
 import { Observable } from 'rxjs';
 import { ComprasDTO } from '../_models/dto/inventory/compras/compras.interface.dto';
+import { ComprasResp } from '../_models/inventory/compras/comprasResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,11 @@ export class ComprasService {
 
   constructor(private http: HttpClient) { }
 
-  postProduct = (compraReg: PurcharseRegister): Observable<ComprasSaveResponse> => this.http.post<ComprasSaveResponse>(`${this.#url}compras/register`, compraReg);
+  postCompras = (compraReg: PurcharseRegister): Observable<ComprasSaveResponse> => this.http.post<ComprasSaveResponse>(`${this.#url}compras/register`, compraReg);
   
-  postProductSearch = (comprasDto: ComprasDTO): Observable<ComprasSaveResponse> => this.http.post<ComprasSaveResponse>(`${this.#url}compras/register`, comprasDto);
+  postComprasSearch = (comprasDto: ComprasDTO): Observable<ComprasSaveResponse> => this.http.post<ComprasSaveResponse>(`${this.#url}compras/register`, comprasDto);
+
+  getCompras = (comprasDto: ComprasDTO): Observable<ComprasResp> => this.http.get<ComprasResp>(`${this.#url}compras`)
+
+
 }

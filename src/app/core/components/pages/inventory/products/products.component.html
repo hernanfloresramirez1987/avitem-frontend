@@ -4,13 +4,8 @@
             <h5 class="text-4xl">{{'pages.products' | translate | uppercase}}</h5>
         </div>
         <div>
-            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)">
-            </button>
-            <button pButton class="p-button-outlined mr-1" icon="pi pi-plus" [routerLink]="['/inventory/products/create']"> </button>
-            <!-- <p-button [icon]="'pi pi-filter'" (click)="showDialog()" [text]="true"> </p-button> -->
-            <!-- @if (stateValues().data !== null && stateValues().data.length > 0) { <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button> }
-        @else { <p-button class="p-button-outlined" icon="pi pi-ellipsis-v" [text]=true [disabled]="true"> </p-button> } -->
-            <!-- ;;;;{{stateValues().data | json}} -->
+            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <button pButton class="p-button-outlined mr-1" icon="pi pi-plus" [routerLink]="['/inventory/products/create']"></button>
         </div>
     </div>
     <p-table #dt1 [value]="stateValues().data" dataKey="id" [paginator]="true" [loading]="stateValues().loading" [rows]="stateValues().data.length" [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees" [rowsPerPageOptions]="tablecon"
@@ -88,12 +83,7 @@
             <tr>
                 @for (item of columns; track item) {
                 <th style="min-width: 11rem">
-                    @switch (item.field) {
-                    <!-- @case("account") { <shipedge-filter-multiselect [valores]="accounts()" [field]="'account_id'" type="Select accounts" columna="company_name" [withTemplate]="false"/> } -->
-                    <!-- @case("category") { <shipedge-filter-multiselect [valores]="categories()" [field]="'category_id'" type="Select categories" columna="category"/> } -->
-                    @case("bin_qty_max") {
-                    <shipedge-filter-input field="bin_qty_max" /> } @case("bin_qty_min") {
-                    <shipedge-filter-input field="bin_qty_min" /> } @case("image") {} @default {
+                    @switch (item.field) { @default {
                     <shipedge-filter-input [field]="item.field" type="text" /> } }
                 </th>
                 } @empty {
@@ -106,6 +96,7 @@
                 <td class="flex py-4">
                     <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox>
                     <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text" (click)="toggleItemMenu($event, rowData)"> </button> -->
+                    <p-button (click)="goBuilderMaker()" />
                 </td>
                 @for (item of columns; track item) {
                 <td>

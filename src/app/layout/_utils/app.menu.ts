@@ -56,8 +56,8 @@ export const APP_MENU = [
   {
     label: "sales", icon: "pi pi-tag",
     items: [
-      { label: "list", icon: "pi pi-list", routerLink: ["/products/"] },
-      { label: "crear", icon: "pi pi-plus", routerLink: ["/productos/backorder"] },
+      { label: "list", icon: "pi pi-list", routerLink: ["/transactions/ventas/"] },
+      { label: "crear", icon: "pi pi-plus", routerLink: ["/transactions/ventas/create"] },
     ]
   }
 ]

@@ -60,7 +60,8 @@
         "unidadMedida": "Unidad de Medida",
         "codigoProducto": "Codigo de Producto",
         "id_categoria": "Categoria",
-        "id_proveedor": "Proveedor"
+        "id_proveedor": "Proveedor",
+        "color": "Color"
     },
 
 
@@ -93,7 +94,11 @@
         "codigoProducto": "Codigo",
         "state": "Estado",
         "categoria": "Categoria",
-        "empresa": "Empresa"
+        "empresa": "Empresa",
+        "fechaCompra": "Fecha de Compra",
+        "total": "Precio Total",
+        "color": "Color",
+        "totalCompra": "Total Compra"
     },
 
     "purcharses": {
@@ -105,7 +110,8 @@
         "precioUnitario": "Precio Unitario",
         "precioCompra": "Precio de Compra",
         "precioVenta": "Precio de Venta",
-        "producto": "Producto"
+        "producto": "Producto",
+        "totalCompra": "Total Compra"
     }
 
 
