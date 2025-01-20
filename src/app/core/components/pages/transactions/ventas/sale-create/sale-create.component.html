@@ -20,15 +20,15 @@
                 </div>
                 <!-- cliente -->
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                    <label class="w-25rem">{{'sales.id_client' | translate }}</label>
-                    <p-dropdown [formControlName]="'id_client'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
-                    <small style="color: red;">Error en el Producto seleccionado.</small> }
+                    <label class="w-25rem">{{'sales.id_cliente' | translate }}</label>
+                    <p-dropdown [formControlName]="'id_cliente'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
+                    <small style="color: red;">Error en el Cliente Seleccionado.</small> }
                 </div>
                 <!-- empleado -->
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                     <label class="w-25rem">{{'sales.id_empleado' | translate }}</label>
-                    <p-dropdown [formControlName]="'id_client'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
-                    <small style="color: red;">Error en el Producto seleccionado.</small> }
+                    <p-dropdown [formControlName]="'id_empleado'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
+                    <small style="color: red;">Error en el Empleado Seleccionado.</small> }
                 </div>
                 <!-- id_producto -->
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
