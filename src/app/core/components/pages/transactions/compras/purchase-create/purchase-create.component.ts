@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CardModule } from 'primeng/card';
 import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
@@ -60,8 +60,6 @@ export default class PurchaseCreateComponent {
       precioVenta: [''],
       id_producto: [''],
     });
-
-    console.log(this.currentDate);
 
     this.proveedoresServ.postProveedoresSearch(null).subscribe({
       next: (response) => this.proveedores = response,
@@ -173,26 +171,57 @@ export default class PurchaseCreateComponent {
     this.toastServ.showError('Operation Failed', 'An error occurred while processing the action.');
   }
 
+  // confirm(purchaseData: PurcharseRegister) {
+  //   this.confirmationServ.confirm({
+  //     message: 'Are you sure you want to perform this action?',
+  //     header: 'Confirmation',
+  //     icon: 'pi pi-exclamation-triangle',
+  //     accept: () => {
+  //       this.comprasServ.postCompras(purchaseData).subscribe({
+  //         next: (t) => {
+  //           console.log('Action confirmed!');
+  //           if(t.CodigoEstado === "201") {
+  //             this.notifySuccess();
+  //             console.log('hola');
+  //             this.router.navigate(['/transactions/compras']);
+  //           } else {
+  //             console.log(t);
+  //           }
+  //         }, error: (e) => {
+  //           console.error('Error al registrar la compra:', e);
+  //         }
+  //       });
+  //     },
+  //     reject: () => {
+  //       console.log('Action rejected!');
+  //     },
+  //   });
+  // }
+
   confirm(purchaseData: PurcharseRegister) {
     this.confirmationServ.confirm({
       message: 'Are you sure you want to perform this action?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
+        // Introducir un retraso de 3 segundos antes de procesar la confirmación
         this.comprasServ.postCompras(purchaseData).subscribe({
           next: (t) => {
             console.log('Action confirmed!');
-            if(t.CodigoEstado === "201") {
+            if (t.CodigoEstado === "201") {
               this.notifySuccess();
-              console.log('hola');
-              this.router.navigate(['/transactions/compras']);
-            } else {
-              console.log(t);
-            }
-          }, error: (e) => {
-            console.error('Error al registrar la compra:', e);
-          }
-        });
+                setTimeout(() => {
+                  console.log('Compra registrada correctamente');
+                  this.router.navigate(['/transactions/compras']);
+                }, 3000); // 3000 ms (3 segundos)
+              } else {
+                console.log(t);
+              }
+            },
+            error: (e) => {
+              console.error('Error al registrar la compra:', e);
+            },
+          });
       },
       reject: () => {
         console.log('Action rejected!');

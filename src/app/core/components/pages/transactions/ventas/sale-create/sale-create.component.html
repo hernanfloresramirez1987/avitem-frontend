@@ -1,1 +1,43 @@
-<p>sale-create works!</p>
+<p-toast/>
+<p-confirmDialog />
+<form [formGroup]="salesForm">
+    <p-card [header]="'labels.register_sales' | translate | uppercase">
+        <div class="flex flex-column md:flex-row sm:flex-row w-full">
+            <!-- Asegurarse de que el contenedor principal ocupe todo el ancho -->
+            <div class="flex flex-column md:flex-row gap-2 w-full">
+                <!-- Flexbox adaptado a todo el ancho -->
+                <!-- Fecha de Venta -->
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
+                    <label class="w-25rem">{{'sales.fechaVenta' | translate }}</label>
+                    <p-calendar [formControlName]="'fechaVenta'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (salesForm.get('fechaVenta')?.invalid && salesForm.get('fechaVenta')?.touched) {
+                    <small style="color: red;">Error en el Fecha de Venta.</small> }
+                </div>
+                <!-- precio total de venta -->
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                    <label class="w-25rem">{{'sales.precio_total' | translate }}</label>
+                    <input pInputText [formControlName]="'total'" type="text" class="w-full" /> @if (salesForm.get('total')?.invalid && salesForm.get('total')?.touched) {
+                    <small style="color: red;">Error en el Precio Total.</small> }
+                </div>
+                <!-- cliente -->
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                    <label class="w-25rem">{{'sales.id_client' | translate }}</label>
+                    <p-dropdown [formControlName]="'id_client'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
+                    <small style="color: red;">Error en el Producto seleccionado.</small> }
+                </div>
+                <!-- empleado -->
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                    <label class="w-25rem">{{'sales.id_empleado' | translate }}</label>
+                    <p-dropdown [formControlName]="'id_client'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
+                    <small style="color: red;">Error en el Producto seleccionado.</small> }
+                </div>
+                <!-- id_producto -->
+                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
+                    <label class="w-25rem">{{'sales.producto' | translate }}</label>
+                    <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
+                    <small style="color: red;">Error en el Producto seleccionado.</small> }
+                </div>
+            </div>
+            <hr>
+        </div>
+    </p-card>
+</form>

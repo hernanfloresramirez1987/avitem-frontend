@@ -7,10 +7,10 @@ export interface SalesRegister {
 }
 
 export interface SalesDetail {
-  cantidad:       number;
-  precioUnitario: number;
-  precioVenta:    number;
-  id_producto:    number;
+  cantidad:           number;
+  precioUnitarioVent: number;
+  precioVenta:        number;
+  id_producto:        number;
 }
 
 export interface SalesDetailWithNameProduct extends SalesDetail {

@@ -70,6 +70,7 @@
         "register_supplier": "Registrar Proveedor",
         "register_product": "Registrar Producto",
         "register_purchases": "Registrar Compras",
+        "register_sales": "Registrar Ventas",
         "id": "Id",
         "ci": "C.I.",
         "nombre": "Nombre",
@@ -112,7 +113,11 @@
         "precioVenta": "Precio de Venta",
         "producto": "Producto",
         "totalCompra": "Total Compra"
+    },
+    "sales": {
+        "fechaVenta": "Fecha Venta",
+        "precio_total": "Precio Total",
+        "id_empleado": "Empleado",
+        "id_client": "Cliente"
     }
-
-
 }
