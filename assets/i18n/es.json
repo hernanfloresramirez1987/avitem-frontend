@@ -118,6 +118,6 @@
         "fechaVenta": "Fecha Venta",
         "precio_total": "Precio Total",
         "id_empleado": "Empleado",
-        "id_client": "Cliente"
+        "id_cliente": "Cliente"
     }
 }
