@@ -14,10 +14,10 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th rowspan="2">
+                <!-- <th rowspan="2">
                     <p-tableHeaderCheckbox class="pb-0 px-2" />
-                    <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button> -->
-                </th>
+                    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button>
+                </th> -->
                 @for (item of columns; track item) { @switch (item.field) { @case("id") {
                 <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
                     <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}
@@ -93,17 +93,16 @@
 
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
             <tr>
-                <td class="flex py-4">
-                    <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox>
-                    <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text" (click)="toggleItemMenu($event, rowData)"> </button> -->
-                    <p-button (click)="goBuilderMaker()" />
-                </td>
+                <!-- <td class="flex py-4"> <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> </td> -->
                 @for (item of columns; track item) {
-                <td>
-                    @switch (item.field) { @case("id") { {{ rowData['id'] }} } @case('nombre') { {{ rowData[item.field] }} } @case("descripcion") { {{ rowData['descripcion'] }} } @case('app') { {{ rowData[item.field] }} } @case('apm') { {{ rowData[item.field] }} } @case('codigoProducto')
-                    { {{ rowData[item.field] }} } @case('state') { {{ rowData[item.field] }} } @default { {{ rowData[item.field] }} } }
-                </td>
-                }
+                <!--  -->
+                @switch (item.field) { @case("id") {
+                <td>{{ rowData['id'] }}</td> } @case('nombre') {
+                <td [style.backgroundColor]=" getColorBackground(rowData['color'])" [style.color]="getColor(rowData['color'])">{{ rowData[item.field] }} </td> } @case("descripcion") {
+                <td>{{ rowData[item.field] }}</td> } @case('codigoProducto') {
+                <td>{{ rowData[item.field] }}</td> } @case('state') {
+                <td>{{ rowData[item.field] }}</td> } @default {
+                <td>{{ rowData[item.field] }}</td> } } }
             </tr>
         </ng-template>
     </p-table>

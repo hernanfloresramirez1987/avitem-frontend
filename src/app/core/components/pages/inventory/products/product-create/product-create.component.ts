@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,7 +23,7 @@ import { TagModule } from 'primeng/tag';
 @Component({
   selector: 'app-product-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'
@@ -109,5 +109,19 @@ export default class ProductCreateComponent {
       p_idColor: Number(formValues.id_categoria.id),
       p_state: 1,
     };
+  }
+
+  cleanAll() {
+    this.registroForm.patchValue({ total: '',
+        nombre: '',
+        descripcion: '',
+        fechaIngreso: new Date(),
+        unidadMedida: '',
+        codigoProducto: '',
+        id_color: '',
+        id_proveedor: '',
+        id_categoria: '',
+      }, 
+      { emitEvent: false });
   }
 }

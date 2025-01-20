@@ -7,7 +7,7 @@ import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { ProductoDTO } from '../../../../_models/dto/inventory/products/producto.interface.dto';
 import { ProductoBaseFilter } from '../../../../_models/dto/inventory/products/productosSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
+import { JsonPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
@@ -20,7 +20,7 @@ import { ExternapiService } from '../../../../_services/externapi.service';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink],
+  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, JsonPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -88,8 +88,36 @@ export default class ProductsComponent {
     }
     // this.initData(this.namefilter());
     this.stateIni = true;
+  } // goBuilderMaker = () => this.externapiServ.postComponentsRedirecctions(null).subscribe(t => t)
+
+
+  getColorBackground(code: string): string {
+    switch (code) {
+      case 'Natural':
+        return '#cccccc'; // Beige (Natural)
+      case 'Champan':
+        return '#FBE7C6'; // Color Champán
+      case 'Negro':
+        return '#000000'; // Negro
+      case 'Madera':
+        return '#8B4513'; // Color Madera (Marrón)
+      default:
+        return '#FFFFFF'; // Color blanco predeterminado
+    }
   }
 
-
-  goBuilderMaker = () => this.externapiServ.postComponentsRedirecctions(null).subscribe(t => t)
+  getColor(code: string): string {
+    switch (code) {
+      case 'Natural':
+        return '#000000'; // Beige (Natural)
+      case 'Champan':
+        return '#000000'; // Color Champán
+      case 'Negro':
+        return '#FFFFFF'; // Negro
+      case 'Madera':
+        return '#FFFFFF'; // Color Madera (Marrón)
+      default:
+        return '#FFFFFF'; // Color blanco predeterminado
+    }
+  }
 }

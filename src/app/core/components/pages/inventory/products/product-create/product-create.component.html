@@ -50,8 +50,8 @@
 
         <ng-template pTemplate="footer">
             <div class="flex gap-3 mt-1">
-                <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" />
-                <p-button label="Limpiar" severity="secondary" class="w-full" styleClass="w-full" />
+                <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/inventory/products']" />
+                <p-button label="Limpiar" severity="secondary" class="w-full" styleClass="w-full" (click)="cleanAll()" />
                 <p-button label="Save" class="w-full" styleClass="w-full" (click)="saveProcto()" [disabled]="!registroForm.valid" />
             </div>
         </ng-template>
