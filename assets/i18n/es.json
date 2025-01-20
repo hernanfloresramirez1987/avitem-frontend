@@ -60,7 +60,8 @@
         "unidadMedida": "Unidad de Medida",
         "codigoProducto": "Codigo de Producto",
         "id_categoria": "Categoria",
-        "id_proveedor": "Proveedor"
+        "id_proveedor": "Proveedor",
+        "color": "Color"
     },
 
 
@@ -85,19 +86,32 @@
         "activity": "Actividad",
         "all_orders": "Todas las ordenes",
         "any": "Todos",
-        "area": "Area"
+        "area": "Area",
+        "description": "Descripcion",
+        "cantidadStock": "Stock",
+        "fechaIngreso": "Fecha Registro",
+        "unidadMedida": "Unidad Medida",
+        "codigoProducto": "Codigo",
+        "state": "Estado",
+        "categoria": "Categoria",
+        "empresa": "Empresa",
+        "fechaCompra": "Fecha de Compra",
+        "total": "Precio Total",
+        "color": "Color",
+        "totalCompra": "Total Compra"
     },
 
     "purcharses": {
         "fechaCompra": "Fecha de Compra",
-        "total": "Total",
+        "precio_total": "Precio Total",
         "proveedor": "Proveedor",
         "add": "Agregar",
         "cantidad": "Cantidad",
         "precioUnitario": "Precio Unitario",
         "precioCompra": "Precio de Compra",
         "precioVenta": "Precio de Venta",
-        "producto": "Producto"
+        "producto": "Producto",
+        "totalCompra": "Total Compra"
     }
 
 
