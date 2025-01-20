@@ -14,9 +14,7 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th rowspan="2">
-                    <p-tableHeaderCheckbox class="pb-0 px-2" />
-                </th>
+                <th rowspan="2"></th>
                 @for (item of columns; track item) { @switch (item.field) { @case("id") {
                 <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
                     <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}
@@ -64,10 +62,7 @@
             <tr>
                 <td class="flex py-4">
                     <p-button type="button" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" [pRowToggler]="rowData" class="p-button-text p-button-rounded" [text]="true"></p-button>
-                    <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox>
-                    <p-button type="button" pRipple [pRowToggler]="rowData" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
-                    <!-- <button pButton class="p-button-text" type="button" icon="pi pi-ellipsis-v" (click)="toggleMenuComplet_Processing($event, rowData)"> </button> -->
-
+                    <!-- <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> -->
                 </td>
                 @for (item of columns; track item) {
                 <td>

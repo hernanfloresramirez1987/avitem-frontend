@@ -52,7 +52,7 @@ export class ProductosService {
 
   postProducts = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.post<ProductResp>(`${this.#url}productos`, proveedorDto);
   
-  postProductsGet = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.get<ProductResp>(`${this.#url}productos`);
+  postProductsGet = (): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}productos`);
   
   postProductscProveedor = (idProvider: number): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}productos/list/${idProvider}`);
 
