@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
-import { Router } from '@angular/router';
-import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
@@ -17,11 +17,13 @@ import { ProveedorItem } from '../../../../../_models/users/proveedores/proveedo
 import { ProveedorDTO } from '../../../../../_models/dto/users/proveedors/proveedor.interface.dto';
 import { ProductosService } from '../../../../../_services/products.service';
 import { ProductoRegister } from '../../../../../_models/dto/inventory/products/productoRegister.interface';
+import { ColoresService } from '../../../../../_services/colores.service';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-product-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, TranslateLanModule, UpperCasePipe, JsonPipe],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'
@@ -29,38 +31,56 @@ import { ProductoRegister } from '../../../../../_models/dto/inventory/products/
 export default class ProductCreateComponent {
   registroForm: FormGroup;
   categorias!: { id: number, nombre: string, descripcion: string }[];
+  colores!: { id: number, code: string, color: string }[];
+  unidades!: string[];
   proveedores!: ProveedorItem[];
   proveedorDto!: ProveedorDTO;
 
   productoRegister!: ProductoRegister;
 
-  constructor(private categoriasServ: CategoriasService, private proveedoresServ: ProveedoresService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe){
+  constructor(private categoriasServ: CategoriasService, private coloresServi: ColoresService, private proveedoresServ: ProveedoresService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
 
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: [''],
-      // cantidadStock: ['', Validators.required],
       fechaIngreso: [currentDate, Validators.required],
       unidadMedida: ['', Validators.required],
       codigoProducto: ['', Validators.required],
+      id_color: ['', Validators.required],
       id_proveedor: ['', Validators.required],
       id_categoria: ['', Validators.required]
     });
+    this.productosServ.getUnidsMedida().subscribe(t => this.unidades = t);
 
     this.proveedoresServ.postProveedoresSearch(this.proveedorDto).subscribe({
-      next: (response) => {
-        console.log(response); // Revisa cómo viene la respuesta
-        this.proveedores = response;
-        console.log(this.proveedores);
-      },
-      error: (err) => console.error('Error al obtener proveedores:', err)
-    });
+      next: (t) => this.proveedores = t,
+      error: (err) => console.error('Error al obtener proveedores:', err) });
 
-    this.categoriasServ.getAll().subscribe(t => {
-      this.categorias = t;
-    });
+    this.categoriasServ.getAllCategolias().subscribe({
+      next: (t) => this.categorias = t,
+      error: (err) => console.error('Error al obtener categorias:', err) });
+
+    this.coloresServi.getAllColores().subscribe({
+      next: (t) => {this.colores = t; console.log(this.colores)},
+      error: (err) => console.error('Error al obtener proveedores:', err) });
+      console.log(this.colores);
+  }
+
+  getColorBackground(code: string): string {
+    switch (code) {
+      case 'Nat':
+        return 'gray'; // Beige (Natural)
+      case 'Cha':
+        return '#FBE7C6'; // Color Champán
+      case 'Neg':
+        return '#000000'; // Negro
+      case 'Mad':
+        return '#8B4513'; // Color Madera (Marrón)
+      default:
+        return '#FFFFFF'; // Color blanco predeterminado
+    }
   }
 
   saveProcto() {
@@ -82,11 +102,26 @@ export default class ProductCreateComponent {
       p_descripcion: formValues.descripcion,
       p_cantidadStock: 0,
       p_fechaIngreso: formValues.fechaIngreso,
-      p_unidadMedida: formValues.unidadMedida,
+      p_unidadMedida: formValues.unidadMedida.medida,
       p_codigoProducto: formValues.codigoProducto,
       p_idProveedor: Number(formValues.id_proveedor.id),
-      p_idCategoria: Number(formValues.id_categoria.id),
+      p_idCategoria: Number(formValues.id_color.id),
+      p_idColor: Number(formValues.id_categoria.id),
       p_state: 1,
     };
+  }
+
+  cleanAll() {
+    this.registroForm.patchValue({ total: '',
+        nombre: '',
+        descripcion: '',
+        fechaIngreso: new Date(),
+        unidadMedida: '',
+        codigoProducto: '',
+        id_color: '',
+        id_proveedor: '',
+        id_categoria: '',
+      }, 
+      { emitEvent: false });
   }
 }

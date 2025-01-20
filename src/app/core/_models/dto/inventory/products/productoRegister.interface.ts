@@ -7,6 +7,7 @@ export interface ProductoRegister {
   p_codigoProducto: string;
   p_idProveedor:    number;
   p_idCategoria:    number;
+  p_idColor:        number;
   p_state:          number;
 }
 

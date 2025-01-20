@@ -1,1 +1,109 @@
-<p>products works!</p>
+<div class="card">
+    <div class="flex justify-content-between">
+        <div>
+            <h5 class="text-4xl">{{'pages.products' | translate | uppercase}}</h5>
+        </div>
+        <div>
+            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <button pButton class="p-button-outlined mr-1" icon="pi pi-plus" [routerLink]="['/inventory/products/create']"></button>
+        </div>
+    </div>
+    <p-table #dt1 [value]="stateValues().data" dataKey="id" [paginator]="true" [loading]="stateValues().loading" [rows]="stateValues().data.length" [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees" [rowsPerPageOptions]="tablecon"
+        styleClass="p-datatable-sm" [lazy]="true" [columns]="columnsSelectSignal()" [reorderableColumns]="true" (onLazyLoad)="getDataPaged($event)" [totalRecords]="stateValues().total_records" responsiveLayout="scroll" [sortMode]="'multiple'" [customSort]="true"
+        [scrollable]="true" scrollHeight="60vh" [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <!-- <th rowspan="2">
+                    <p-tableHeaderCheckbox class="pb-0 px-2" />
+                    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button>
+                </th> -->
+                @for (item of columns; track item) { @switch (item.field) { @case("id") {
+                <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}
+                        <p-sortIcon [field]="'id'"></p-sortIcon>
+                    </div>
+                </th>
+                } @case("nombre") {
+                <th style="min-width: 20rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.nombre" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("descripcion") {
+                <th style="min-width: 25rem" [pSortableColumn]="item.field" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.description" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("cantidadStock") {
+                <th style="min-width: 10rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.cantidadStock" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("fechaIngreso") {
+                <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.fechaIngreso" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("unidadMedida") {
+                <th style="min-width: 15rem" pReorderableColumn>{{"labels.unidadMedida" | translate | uppercase}}
+                </th>
+                } @case("codigoProducto") {
+                <th style="min-width: 2rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.codigoProducto" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("state") {
+                <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.state" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("empresa") {
+                <th style="min-width: 20rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels.empresa" | translate | uppercase}}
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } @case("categoria") {
+                <th style="min-width: 15rem" pReorderableColumn>{{"labels.categoria" | translate | uppercase}}
+                </th>
+                } @default {
+                <th pSortableColumn="{{item.field}}" pReorderableColumn>
+                    <div class="flex justify-content-between align-items-left">{{"labels." + item.field | translate | uppercase}} ii
+                        <p-sortIcon [field]="item.field" />
+                    </div>
+                </th>
+                } } }
+            </tr>
+            <tr>
+                @for (item of columns; track item) {
+                <th style="min-width: 11rem">
+                    @switch (item.field) { @default {
+                    <shipedge-filter-input [field]="item.field" type="text" /> } }
+                </th>
+                } @empty {
+                <th style="min-width: 12rem">cargando</th> }
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+            <tr>
+                <!-- <td class="flex py-4"> <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> </td> -->
+                @for (item of columns; track item) {
+                <!--  -->
+                @switch (item.field) { @case("id") {
+                <td>{{ rowData['id'] }}</td> } @case('nombre') {
+                <td [style.backgroundColor]=" getColorBackground(rowData['color'])" [style.color]="getColor(rowData['color'])">{{ rowData[item.field] }} </td> } @case("descripcion") {
+                <td>{{ rowData[item.field] }}</td> } @case('codigoProducto') {
+                <td>{{ rowData[item.field] }}</td> } @case('state') {
+                <td>{{ rowData[item.field] }}</td> } @default {
+                <td>{{ rowData[item.field] }}</td> } } }
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

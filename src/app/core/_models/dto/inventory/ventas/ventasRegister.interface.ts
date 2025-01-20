@@ -1,24 +1,23 @@
-export interface PurcharseRegister {
+export interface SalesRegister {
   fechaCompra:            string;
   total:                  number;
   id_proveedor:           number;
-  detalle:                PurcharseDetail[] | string;
+  detalle:                SalesDetail[] | string;
   fechaVencimiento:       string;
 }
 
-export interface PurcharseDetail {
+export interface SalesDetail {
   cantidad:       number;
   precioUnitario: number;
   precioVenta:    number;
   id_producto:    number;
-  color?:          string;
 }
 
-export interface PurcharseDetailWithNameProduct extends PurcharseDetail {
+export interface SalesDetailWithNameProduct extends SalesDetail {
   name_product:   string;
 }
 
-export interface RegistroComprasResult {
+export interface RegistroVentasResult {
     p_resultado:  string;
     p_status:     number;
 }

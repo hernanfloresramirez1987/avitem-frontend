@@ -1,12 +1,12 @@
 import { ComprasItem } from "./compras.model";
 
-export interface StateComprasResponseModel extends ProductResp {
+export interface StateComprasResponseModel extends ComprasResp {
     loaded: boolean;
     loading: boolean;
     error: string | null;
   }
 
-  export interface ProductResp {
+  export interface ComprasResp {
     data:          Array<ComprasItem>;
     page:          number;
     rows:          number;
