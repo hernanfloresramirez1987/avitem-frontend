@@ -113,8 +113,7 @@ export default class PurchaseCreateComponent {
       this.productos = t.map(producto => ({
         ...producto,
         display: `${producto.nombre} (${producto.color})  , ${producto.color} - ${producto.unidadMedida}`
-      }));;
-      console.log(t)
+      }));
       this.stateInputs.set(false);
     });
   }

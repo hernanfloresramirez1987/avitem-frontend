@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TableModule } from 'primeng/table';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -24,7 +23,6 @@ import { TranslateLanModule } from '../../_modules/translate-lan.module';
     FilterInputComponent
   ],
   imports: [
-    CommonModule,
     TableModule,
     MultiSelectModule,
     ButtonModule,

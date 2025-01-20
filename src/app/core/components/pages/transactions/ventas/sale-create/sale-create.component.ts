@@ -21,6 +21,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProductosService } from '../../../../../_services/products.service';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { Router } from '@angular/router';
+import { EmployeesService } from '../../../../../_services/employees.service';
+import { map, pipe } from 'rxjs';
+import { EmployeeResp } from '../../../../../_models/users/employees/employeeResponse.interface';
+import { EmployeeItem } from '../../../../../_models/users/employees/employee.model';
 
 @Component({
   selector: 'app-sale-create',
@@ -34,7 +38,8 @@ export default class SaleCreateComponent {
   salesForm!: FormGroup;
 
   ventasRegister!: SalesRegister;
-  proveedores!: ProveedorItem[];
+  clientes!: any[];
+  empleados!: EmployeeItem[];
   productos!: ProductItem[];
 
   detailView: SalesDetailWithNameProduct[] = [];
@@ -44,7 +49,7 @@ export default class SaleCreateComponent {
   total = 0;
   totalVenta = 0;
 
-  constructor(private confirmationServ: ConfirmationService, private ventasServ: VentasService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
+  constructor(private confirmationServ: ConfirmationService, private employeesServ: EmployeesService, private ventasServ: VentasService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
 
     this.salesForm = this.fb.group({
@@ -55,8 +60,24 @@ export default class SaleCreateComponent {
       id_empleado: ['', [Validators.required]],
       cantidad: [''],
       precioUnitario: [''],
+      precioUnitarioVenta: [''],
       id_producto: [''],
     });
+
+    this.productosServ.postProductsGet().subscribe(t => {
+      this.productos = t.map(r => ({
+        ...r,
+        display: `${r.nombre} (${r.color}) - ${r.unidadMedida}`
+      }));
+      this.stateInputs.set(false);
+    });
+    this.employeesServ.postEmployees(null).subscribe(t => {
+      this.empleados = t.data.map(r => ({
+          ...r,
+          display: `${r.nombre} ${r.app} ${r.apm}, ${r.idcargo}`
+        }));
+        this.stateInputs.set(false);
+      });
   }
 
   asignarValores(): SalesRegister {
@@ -132,6 +153,14 @@ export default class SaleCreateComponent {
     this.detailView = this.detailView.filter(detail => detail !== item);
     this.funcTotal();
     this.cleanForms();
+  }
+
+  changeTotalVenta() {
+
+  }
+
+  addDetail() {
+
   }
 
   updateData() {

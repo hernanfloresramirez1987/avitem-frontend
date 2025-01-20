@@ -48,7 +48,8 @@ export default class ProductsComponent {
     ) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
-        this.productsServ.postProductsGet(this.productsdto())
+        // this.productsServ.postProductsGet(this.productsdto())
+        this.productsServ.postProductsGet()
           .pipe(map(t => {
             console.log("console.log('', t):   ", t);
             return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
