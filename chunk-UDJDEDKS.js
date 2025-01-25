@@ -1,0 +1,1 @@
+import{Mb as i,Ub as r,ea as n,tb as o,ub as a}from"./chunk-PQPLRZS3.js";var p=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-clientes-create"]],standalone:!0,features:[r],decls:2,vars:0,template:function(t,c){t&1&&(o(0,"p"),i(1,"clientes-create works!"),a())}})}}return e})();export{p as default};
