@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CardModule } from 'primeng/card';
@@ -23,11 +23,16 @@ import { ToastService } from '../../../../../_services/common/toast.service';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { AlmacenesService } from '../../../../../_services/almacenes.service';
+import { AlmacenItem } from '../../../../../_models/inventory/almacenes/almacenes.model';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, JsonPipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule],
+  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, JsonPipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'
@@ -39,6 +44,7 @@ export default class PurchaseCreateComponent {
   comprasRegister!: PurcharseRegister;
   proveedores!: ProveedorItem[];
   productos!: ProductItem[];
+  almacenes!: AlmacenItem[];
 
   // detail: PurcharseDetail[] = [];
   detailView: PurcharseDetailWithNameProduct[] = [];
@@ -48,23 +54,29 @@ export default class PurchaseCreateComponent {
   total = 0;
   totalCompra = 0;
 
-  constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
+  constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private almacenesServ: AlmacenesService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.purchaseForm = this.fb.group({
       fechaCompra: [this.currentDate],
-      total: [this.total],
+      // total: [this.total],
       id_proveedor: ['', [Validators.required]], // detalle: this.fb.array([]),
       cantidad: [''],
       precioUnitario: [''],
       precioVenta: [''],
       id_producto: [''],
+      id_almacen: [''],
     });
 
     this.proveedoresServ.postProveedoresSearch(null).subscribe({
       next: (response) => this.proveedores = response,
       error: (err) => console.error('Error al obtener proveedores:', err)
     });
+
+    this.almacenesServ.getAllAlmacenes().subscribe({
+      next: (t) => this.almacenes = t,
+      error: (e: Error) => console.log(e.message)
+    })
   } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
 
   addDetail(): void {
@@ -170,32 +182,6 @@ export default class PurchaseCreateComponent {
     this.toastServ.showError('Operation Failed', 'An error occurred while processing the action.');
   }
 
-  // confirm(purchaseData: PurcharseRegister) {
-  //   this.confirmationServ.confirm({
-  //     message: 'Are you sure you want to perform this action?',
-  //     header: 'Confirmation',
-  //     icon: 'pi pi-exclamation-triangle',
-  //     accept: () => {
-  //       this.comprasServ.postCompras(purchaseData).subscribe({
-  //         next: (t) => {
-  //           console.log('Action confirmed!');
-  //           if(t.CodigoEstado === "201") {
-  //             this.notifySuccess();
-  //             console.log('hola');
-  //             this.router.navigate(['/transactions/compras']);
-  //           } else {
-  //             console.log(t);
-  //           }
-  //         }, error: (e) => {
-  //           console.error('Error al registrar la compra:', e);
-  //         }
-  //       });
-  //     },
-  //     reject: () => {
-  //       console.log('Action rejected!');
-  //     },
-  //   });
-  // }
 
   confirm(purchaseData: PurcharseRegister) {
     this.confirmationServ.confirm({
@@ -204,7 +190,7 @@ export default class PurchaseCreateComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         // Introducir un retraso de 3 segundos antes de procesar la confirmación
-        this.comprasServ.postCompras(purchaseData).subscribe({
+        this.comprasServ.postSaveCompras(purchaseData).subscribe({
           next: (t) => {
             console.log('Action confirmed!');
             if (t.CodigoEstado === "201") {
@@ -266,5 +252,9 @@ export default class PurchaseCreateComponent {
 
   updateData() {
     console.log('updateData() { } ');
+  }
+
+  cleanAll() {
+    
   }
 }

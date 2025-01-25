@@ -1,16 +1,10 @@
-<p-columnFilter [showClearButton]="false" [showOperator]="false" [showButtons]="false" [type]="this.typereal"
-    [matchMode]="configfilter[0].value" 
-    [showMenu]="configfilter.length > 1" 
-    [showClearButton]="configfilter.length == 1"
-    [hideOnClear]="configfilter.length == 1"
-
-    [field]="field"
-    [showMatchModes]="false"
-
-    [matchModeOptions]="configfilter">
-    <ng-template pTemplate="filter" *ngIf="this.typereal=='date'" let-filter="filterCallback">
-        <p-calendar #calendar [showTime]="false" [showSeconds]="false" dateFormat="yy-mm-dd" dataType="yy-mm-dd"
-            (onSelect)="filter(formatDate(calendar.value));formatDate(calendar.value);"></p-calendar>
+<p-columnFilter [showClearButton]="false" [showOperator]="false" [showButtons]="false" [type]="this.typereal" [matchMode]="configfilter[0].value" [showMenu]="configfilter.length > 1" [showClearButton]="configfilter.length == 1" [hideOnClear]="configfilter.length == 1"
+    [field]="field" [showMatchModes]="false" [matchModeOptions]="configfilter">
+    @if (typereal === 'date') {
+    <ng-template pTemplate="filter" let-filter="filterCallback">
+        <p-calendar #calendar [showTime]="false" [showSeconds]="false" dateFormat="yy-mm-dd" dataType="yy-mm-dd" (onSelect)="filter(formatDate(calendar.value)); formatDate(calendar.value);">
+        </p-calendar>
     </ng-template>
+    }
 
-</p-columnFilter> 
+</p-columnFilter>

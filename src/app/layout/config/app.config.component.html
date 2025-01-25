@@ -3,7 +3,8 @@
 </button>
 
 <p-sidebar [(visible)]="visible" position="right" [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'" styleClass="layout-config-sidebar w-18rem">
-    <ng-container *ngIf="!minimal">
+    @if (!minimal) {
+    <ng-container>
         <h5>Menu Type</h5>
         <div class="flex flex-wrap row-gap-3">
             <div class="flex align-items-center gap-2 w-6">
@@ -23,9 +24,10 @@
                 <label for="mode3">Slim +</label>
             </div>
         </div>
-      
-        <hr class="surface-border"/>
+
+        <hr class="surface-border" />
     </ng-container>
+    }
 
     <h5>Color Scheme</h5>
     <div class="flex">
@@ -39,7 +41,8 @@
         </div>
     </div>
 
-    <ng-container *ngIf="!minimal">
+    @if (!minimal) {
+    <ng-container>
         <h5>Layout Theme</h5>
         <div class="field-radiobutton">
             <p-radioButton name="menuTheme" value="colorScheme" [(ngModel)]="menuTheme" inputId="menutheme-colorscheme"></p-radioButton>
@@ -50,13 +53,15 @@
             <label for="menutheme-primarycolor">Primary Color (Light Only)</label>
         </div>
     </ng-container>
+    }
 
     <h5>Themes</h5>
     <div class="flex flex-wrap gap-3">
         <div *ngFor="let theme of componentThemes">
-            <a style="cursor: pointer" (click)="changeTheme(theme.name)" class="inline-flex justify-content-center align-items-center w-2rem h-2rem border-round" 
-                [ngStyle]="{'background-color': colorScheme === 'light' ? theme.lightColor : theme.darkColor, 'color': colorScheme === 'light' ? '#ffffff' : '#000000'}">
-                <i class="pi pi-check" *ngIf="currentTheme === theme.name"></i>
+            <a style="cursor: pointer" (click)="changeTheme(theme.name)" class="inline-flex justify-content-center align-items-center w-2rem h-2rem border-round" [ngStyle]="{'background-color': colorScheme === 'light' ? theme.lightColor : theme.darkColor, 'color': colorScheme === 'light' ? '#ffffff' : '#000000'}">
+                @if (currentTheme === theme.name) {
+                <i class="pi pi-check"></i>
+                }
             </a>
         </div>
     </div>
@@ -67,7 +72,7 @@
         <div class="flex gap-3 align-items-center">
             <i class="pi pi-circle-fill text-300" *ngFor="let s of scales" [ngClass]="{'text-primary-500': s === scale}"></i>
         </div>
-        <button icon="pi pi-plus"  type="button" pButton (click)="incrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem ml-2" [disabled]="scale === scales[scales.length - 1]"></button>
+        <button icon="pi pi-plus" type="button" pButton (click)="incrementScale()" class="p-button-text p-button-rounded w-2rem h-2rem ml-2" [disabled]="scale === scales[scales.length - 1]"></button>
     </div>
 
     <h5>Input Style</h5>

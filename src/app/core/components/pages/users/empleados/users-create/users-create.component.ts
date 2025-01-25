@@ -16,13 +16,13 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { debounceTime } from 'rxjs';
 import { EmployeeRegister } from '../../../../../_models/dto/users/employees/employeeRegister.interface';
 import { EmployeesService } from '../../../../../_services/employees.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../../../_services/common/user.service';
 
 @Component({
   selector: 'app-users-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
   templateUrl: './users-create.component.html',
   styleUrl: './users-create.component.scss'
 })
@@ -92,7 +92,7 @@ export default class UsersCreateComponent implements OnInit {
   
   saveEmployee() {
     console.log(this.asignarValores());
-    this.employeeServ.postEmployee(this.asignarValores()).
+    this.employeeServ.postSaveEmployee(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
           this.router.navigate(['users/empleados']);
@@ -129,5 +129,9 @@ export default class UsersCreateComponent implements OnInit {
       e_fing: formValues.fechaIngreso,
       e_salario: formValues.salario,
     };
+  }
+
+  cleanAll() {
+
   }
 }

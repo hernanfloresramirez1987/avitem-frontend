@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ATemplateMakerService {
-  readonly #url= environment.URL_API;
-
-  constructor(private http: HttpClient) { }
+  readonly #url= `http://127.0.0.1:8080/api/templates/`;
+  private readonly http: HttpClient = inject(HttpClient);
 
   data = {
     "account_id": 9,
@@ -28,13 +27,14 @@ export class ATemplateMakerService {
     "in_transit": 0,
     "back_order": 0
   };
+
   redirectToBackend() {
     const stringifiedData = Object.entries(this.data).reduce((acc, [key, value]) => ({
       ...acc,
       [key]: String(value)
     }), {});
     const queryString = new URLSearchParams(stringifiedData).toString();
-    window.location.href = `${this.#url}/templates/getcomponents/?${queryString}`;
+    window.location.href = `${this.#url}getcomponents/extern?${queryString}`;
   }
 
 
@@ -43,12 +43,16 @@ export class ATemplateMakerService {
       ...acc,
       [key]: String(value)
     }), {});
-    const queryString = new URLSearchParams(stringifiedData).toString();
-    this.http.post(`${this.#url}/templates/getcomponents/?${queryString}`, this.data).subscribe(
+    console.log(stringifiedData, '\n');
+   
+    const queryString = new URLSearchParams(stringifiedData).toString(); 
+    console.log(queryString, '\n');
+    
+    this.http.post(`${this.#url}getcomponents/extern/`, this.data).subscribe(
       (response) => {
         console.log('Datos enviados con éxito:', response);
         // Redirige después del procesamiento
-        window.location.href = `${this.#url}/templates/getcomponents/`;
+        window.location.href = `${this.#url}getcomponents/`;
       },
       (error) => {
         console.error('Error al enviar datos:', error);

@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriasService {
+export class AlmacenesService {
   readonly #url= environment.URL_API;
   private readonly http: HttpClient = inject(HttpClient);
   
-  getAllCategolias = (): Observable<{ id: number, nombre: string, descripcion: string }[]> => this.http.get<{ id: number, nombre: string, descripcion: string }[]>(`${this.#url}categorias`);
+  getAllAlmacenes = (): Observable<any[]> => this.http.get<any[]>(`${this.#url}almacenes`);
   
 }
