@@ -15,11 +15,12 @@ import { FilterApplyService } from '../../../../_services/common/filter.service'
 import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-suppliers',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })

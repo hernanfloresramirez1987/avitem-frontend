@@ -1,9 +1,9 @@
-<div class="card">
+<p-card [header]="'pages.purchases' | translate | uppercase">
     <div class="flex justify-content-between">
         <div>
-            <h5 class="text-4xl">{{'pages.purchases' | translate | uppercase}}</h5>
+            <!-- <h5 class="text-4xl">{{'pages.purchases' | translate | uppercase}}</h5> -->
         </div>
-        <div>
+        <div class="x-0 y-4">
             <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
             <button pButton class="p-button-outlined mr-1" icon="pi pi-plus" [routerLink]="['/transactions/compras/create']"> </button>
         </div>
@@ -80,7 +80,7 @@
             </tr>
         </ng-template>
     </p-table>
-</div>
+</p-card>
 
 
 

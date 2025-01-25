@@ -15,12 +15,13 @@ import { RouterLink } from '@angular/router';
 import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
 import { Column } from '../../../../_models/common/columns.interface';
+import { CardModule } from 'primeng/card';
 
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })

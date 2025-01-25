@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable, of } from 'rxjs';
 import { ProveedorRegister } from '../_models/dto/users/proveedors/proveedorRegister.interface';
@@ -15,8 +15,7 @@ import { ProductItem } from '../_models/inventory/products/product.model';
 })
 export class ProductosService {
   readonly #url= environment.URL_API;
-
-  constructor(private http: HttpClient) { }
+  private readonly http: HttpClient = inject(HttpClient);
 
   getUnidsMedida = (): Observable<any[]> => {
     return of([
@@ -56,5 +55,5 @@ export class ProductosService {
   
   postProductscProveedor = (idProvider: number): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}productos/list/${idProvider}`);
 
-  postProduct = (employeeReg: ProductoRegister): Observable<ProductSaveResponse> => this.http.post<ProductSaveResponse>(`${this.#url}productos/register`, employeeReg);  
+  postSaveProduct = (employeeReg: ProductoRegister): Observable<ProductSaveResponse> => this.http.post<ProductSaveResponse>(`${this.#url}productos/register`, employeeReg);  
 }

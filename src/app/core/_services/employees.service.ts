@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { EmployeeDTO } from '../_models/dto/users/employees/employee.interface.dto';
@@ -13,13 +13,12 @@ import { EmployeeItem } from '../_models/users/employees/employee.model';
 })
 export class EmployeesService {
   readonly #url= environment.URL_API;
-
-  constructor(private http: HttpClient) { }
+  private readonly http: HttpClient = inject(HttpClient);
 
   postEmployees = (employeeDto: EmployeeDTO | any): Observable<EmployeeResp> => this.http.post<EmployeeResp>(`${this.#url}empleados/list`, employeeDto);
   
   getEmployees = (): Observable<EmployeeItem[]> => this.http.post<EmployeeItem[]>(`${this.#url}empleados/list`, {});
 
-  postEmployee = (employeeReg: EmployeeRegister): Observable<EmployeeSaveResponse> => this.http.post<EmployeeSaveResponse>(`${this.#url}empleados/register`, employeeReg);
+  postSaveEmployee = (employeeReg: EmployeeRegister): Observable<EmployeeSaveResponse> => this.http.post<EmployeeSaveResponse>(`${this.#url}empleados/register`, employeeReg);
   
 }

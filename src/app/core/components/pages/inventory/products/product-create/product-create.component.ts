@@ -86,7 +86,7 @@ export default class ProductCreateComponent {
   saveProcto() {
     //productosServ
     console.log(this.asignarValores());
-    this.productosServ.postProduct(this.asignarValores()).
+    this.productosServ.postSaveProduct(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
           this.router.navigate(['inventory/products']);

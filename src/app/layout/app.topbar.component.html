@@ -16,9 +16,11 @@
             </a>
             <!-- <i class="pi pi-times" (click)="removeTab($event, item, i)"></i> -->
         </li>
-        <li *ngIf="!tabs || tabs.length === 0" class="topbar-menu-empty">
+        @if (!tabs || tabs.length === 0) {
+        <li class="topbar-menu-empty">
             Use (Apartado para agregar botones`) to open a tab
         </li>
+        }
     </ul>
 
     <div class="topbar-search" [ngClass]="{'topbar-search-active': searchActive}">

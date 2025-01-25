@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'proveedores/create', data: { breadcrumb: 'Proveedores / Registrar' }, loadComponent: () => import('./proveedores/supplier-create/supplier-create.component') },
 
   { path: 'clientes', data: { breadcrumb: 'Clientes' }, loadComponent: () => import('./clientes/clientes.component') },
-  { path: 'clientes/create', data: { breadcrumb: 'Clientes / Registrar' }, loadComponent: () => import('./proveedores/supplier-create/supplier-create.component') },
+  { path: 'clientes/create', data: { breadcrumb: 'Clientes / Registrar' }, loadComponent: () => import('./clientes/clientes-create/clientes-create.component') },
 
 ];
 

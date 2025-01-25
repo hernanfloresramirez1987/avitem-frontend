@@ -4,7 +4,7 @@ import { ProveedoresService } from '../../../../../_services/proveedors.service'
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { ProveedorRegister } from '../../../../../_models/dto/users/proveedors/proveedorRegister.interface';
 import { CardModule } from 'primeng/card';
@@ -22,7 +22,7 @@ import { UpperCasePipe } from '@angular/common';
 @Component({
   selector: 'app-supplier-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
   templateUrl: './supplier-create.component.html',
   styleUrl: './supplier-create.component.scss'
 })
@@ -73,7 +73,7 @@ export default class SupplierCreateComponent {
 
   saveProveedor() {
     console.log(this.asignarValores());
-    this.proveedorServ.postProveedor(this.asignarValores()).
+    this.proveedorServ.postSaveProveedor(this.asignarValores()).
       subscribe(t => {
         if(t.CodigoEstado === "201") {
           this.router.navigate(['users/proveedores']);
@@ -107,4 +107,7 @@ export default class SupplierCreateComponent {
     };
   }
 
+  cleanAll() {
+
+  }
 }

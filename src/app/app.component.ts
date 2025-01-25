@@ -19,5 +19,7 @@ export class AppComponent {
   }
 
 
-  btn = () => this.aTemplateMakerService.redirectToBackend();
+  btnGet = () => this.aTemplateMakerService.redirectToBackend();
+
+  btnPost = () => this.aTemplateMakerService.sendDataToBackend();
 }

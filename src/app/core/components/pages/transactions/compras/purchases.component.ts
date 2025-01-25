@@ -20,12 +20,13 @@ import { MessageService } from 'primeng/api';
 import { RatingModule } from 'primeng/rating';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
+import { CardModule } from 'primeng/card';
 
 
 @Component({
   selector: 'app-purchases',
   standalone: true,
-  imports: [TableModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, CurrencyPipe],
+  imports: [TableModule, CardModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, CurrencyPipe],
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.scss'
 })
