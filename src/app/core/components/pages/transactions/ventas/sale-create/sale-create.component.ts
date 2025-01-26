@@ -20,7 +20,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProductosService } from '../../../../../_services/products.service';
 import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EmployeesService } from '../../../../../_services/employees.service';
 import { map, pipe } from 'rxjs';
 import { EmployeeResp } from '../../../../../_models/users/employees/employeeResponse.interface';
@@ -29,7 +29,7 @@ import { EmployeeItem } from '../../../../../_models/users/employees/employee.mo
 @Component({
   selector: 'app-sale-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule],
+  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './sale-create.component.html',
   styleUrl: './sale-create.component.scss'
@@ -54,7 +54,7 @@ export default class SaleCreateComponent {
 
     this.salesForm = this.fb.group({
       fechaVenta: [this.currentDate],
-      total: [this.total],
+      // total: [this.total],
       tokenSIN: [''],
       id_cliente: ['', [Validators.required]],
       id_empleado: ['', [Validators.required]],
@@ -72,6 +72,7 @@ export default class SaleCreateComponent {
       this.stateInputs.set(false);
     });
     this.employeesServ.postEmployees(null).subscribe(t => {
+      console.log(t);
       this.empleados = t.data.map(r => ({
           ...r,
           display: `${r.nombre} ${r.app} ${r.apm}, ${r.idcargo}`
@@ -179,4 +180,8 @@ export default class SaleCreateComponent {
     this.salesForm.patchValue({ total: this.total, id_producto: '', cantidad: '', precioUnitario: '', precioVenta: '' }, { emitEvent: false });
     this.totalVenta = 0;
   }
+
+  cleanAll() {}
+
+  submitSales() {}
 }

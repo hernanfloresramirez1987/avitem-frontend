@@ -109,6 +109,7 @@
     },
 
     "purcharses": {
+        "almacen": "Storage",
         "fechaCompra": "Purcharse Date",
         "precio_total": "Total Price",
         "proveedor": "Supplier",

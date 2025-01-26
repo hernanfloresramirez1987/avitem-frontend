@@ -16,11 +16,12 @@ import { TranslateLanService } from '../../../../../layout/services/translate-la
 import { map } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { ExternapiService } from '../../../../_services/externapi.service';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, JsonPipe],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, JsonPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
