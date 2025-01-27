@@ -17,7 +17,7 @@
                     <!-- precio total de compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'purcharses.precio_total' | translate }}</label>
-                        <input pInputText type="text" class="w-full" [value]="total" disabled/>
+                        <input pInputText type="text" class="w-full" [value]="total" [disabled]="true" />
                     </div>
                     <!-- proveedor -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
@@ -34,14 +34,18 @@
                     <!-- almacen -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'purcharses.almacen' | translate }}</label>
-                        <p-inputGroup>
-                            <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
+                        <!-- <p-inputGroup>
+                            <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" class="p-inputtext-sm w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
                             <small style="color: red;">Error en el Almacen Seleccionado.</small> } &nbsp;
-                            <p-inputGroupAddon>
-                                <p-checkbox [binary]="true" class="pInputText" /></p-inputGroupAddon>
-                            <!-- <p-inputGroupAddon>
-                            </p-inputGroupAddon> -->
+                            <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" severity="primary" />
+                        </p-inputGroup> -->
+                        <p-inputGroup>
+                            <!-- <input type="text" pInputText placeholder="Vote" /> -->
+                            <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" class="p-inputtext-sm w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" />
+                            <button type="button" pButton icon="pi pi-plus" class="p-button-primary" title="Agregar almacen"></button>
                         </p-inputGroup>
+                        @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
+                        <small style="color: red;">Error en el Almacen Seleccionado.</small> }
                     </div>
                 </div>
                 <!-- <hr> -->

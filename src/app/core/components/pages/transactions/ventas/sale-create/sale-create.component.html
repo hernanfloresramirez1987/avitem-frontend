@@ -17,18 +17,18 @@
                     <!-- precio total de venta -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'sales.precio_total' | translate }}</label>
-                        <input pInputText type="text" class="w-full" [disabled]="true" />
+                        <input pInputText type="text" [value]="total" class="w-full" [disabled]="true" />
                     </div>
                     <!-- id_cliente -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'sales.id_cliente' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_cliente'" [options]="clientes" optionLabel="nombre" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Cliente" [style]="{width: '100%'}" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
+                        <p-dropdown [formControlName]="'id_cliente'" [options]="clientes" optionLabel="displayCliente" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Cliente" [style]="{width: '100%'}" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
                         <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
                     </div>
                     <!-- id_empleado -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'sales.id_empleado' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_empleado'" [options]="empleados" optionLabel="display" placeholder="Seleccionar Empleado" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
+                        <p-dropdown [formControlName]="'id_empleado'" [options]="empleados" optionLabel="displayEmpleado" placeholder="Seleccionar Empleado" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <!-- id_producto -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'sales.id_producto' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="display" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
+                        <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
                         <small style="color: red;">Error en el Producto Seleccionado.</small> }
                     </div>
                     <!-- cantidad -->
@@ -48,15 +48,9 @@
                     </div>
                     <!-- precio compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.precioCompra' | translate }}</label>
+                        <label class="w-25rem">{{'sales.precioVenta' | translate }}</label>
                         <input pInputText [formControlName]="'precioUnitario'" type="number" class="w-full" (change)="changeTotalVenta()" /> @if (salesForm.get('precioUnitario')?.invalid && salesForm.get('precioUnitario')?.touched) {
                         <small style="color: red;">Error en el Precio de Compra.</small> }
-                    </div>
-                    <!-- precio venta -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.precioUnitarioVenta' | translate }}</label>
-                        <input pInputText [formControlName]="'precioUnitarioVenta'" type="number" class="w-full" /> @if (salesForm.get('precioUnitarioVenta')?.invalid && salesForm.get('precioUnitarioVenta')?.touched) {
-                        <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
                     <!-- precio Total Compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
@@ -87,7 +81,7 @@
                             <th style="width: 40%;">Producto</th>
                             <th style="width: 12%; text-align: right;">Cantidad</th>
                             <th style="width: 12%; text-align: right;">Precio Unitario</th>
-                            <th style="width: 12%; text-align: right;">Precio Venta</th>
+                            <!-- <th style="width: 12%; text-align: right;">Precio Venta</th> -->
                             <th style="width: 12%; text-align: right;">Precio Total</th>
                             <th style="width: 6%;">Option</th>
                         </tr>
@@ -98,7 +92,7 @@
                             <td [style.backgroundColor]=" getColorBackground(customer.color)" [style.color]="getColor(customer.color)">{{ customer.name_product }}</td>
                             <td style="text-align: right;">{{ customer.cantidad }}</td>
                             <td style="text-align: right;">{{ customer.precioUnitario }}</td>
-                            <td style="text-align: right;">{{ customer.precioVenta}}</td>
+                            <!-- <td style="text-align: right;">{{ customer.precioVenta}}</td> -->
                             <td style="text-align: right;">{{ customer.cantidad * customer.precioUnitario}}</td>
                             <td class="flex flex-wrap justify-content-left">
                                 <p-buttonGroup>
@@ -109,14 +103,6 @@
                         </tr>
                     </ng-template>
                 </p-table>
-                <!-- </div> -->
-
-                <!-- <ng-template pTemplate="footer"> -->
-                <!-- <div class="flex gap-3 mt-1"> -->
-                <!-- <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" /> -->
-                <!-- <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitPurchase()" [disabled]="salesForm.invalid && detailView.length > 0" /> -->
-                <!-- </div> -->
-                <!-- </ng-template> -->
             </div>
             <!-- <hr> -->
         </div>

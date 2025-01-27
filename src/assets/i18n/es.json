@@ -20,7 +20,7 @@
         "products": "Productos",
         "create_product": "Crear Producto"
     },
-    "users": {
+    "user_employee": {
         "detail_user": "Detalles de Usuario",
         "detail_people": "Detalles de Persona",
         "detail_employee": "Detalles de Empleado",
@@ -119,6 +119,10 @@
         "fechaVenta": "Fecha Venta",
         "precio_total": "Precio Total",
         "id_empleado": "Empleado",
-        "id_cliente": "Cliente"
+        "id_cliente": "Cliente",
+        "id_producto": "Producto",
+        "cantidad": "Cantidad",
+        "precioVenta": "Precio Venta",
+        "totalVenta": "Total Ventas"
     }
 }
