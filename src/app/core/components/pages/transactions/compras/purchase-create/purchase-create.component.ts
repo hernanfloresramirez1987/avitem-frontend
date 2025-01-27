@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -96,6 +96,7 @@ export default class PurchaseCreateComponent {
       precioUnitario: Number(this.purchaseForm.value.precioUnitario),
       precioVenta: Number(this.purchaseForm.value.precioVenta),
       id_producto: Number(this.purchaseForm.value.id_producto.id), // Use get to access the control
+      id_almacen: Number(this.purchaseForm.value.id_almacen.id),
       name_product: this.purchaseForm.value.id_producto.nombre, // Ensure to include 'name_product'
       color: this.purchaseForm.value.id_producto.color
     });
@@ -160,7 +161,8 @@ export default class PurchaseCreateComponent {
           cantidad: t.cantidad, // Asegúrate de que 't' sea un elemento de PurcharseDetail
           precioUnitario: t.precioUnitario, // Accede a 'precioUnitario' de 't'
           precioVenta: t.precioVenta,
-          id_producto: t.id_producto // Asegúrate de que 'id_producto' esté definido
+          id_producto: t.id_producto, // Asegúrate de que 'id_producto' esté definido
+          id_almacen: t.id_almacen
         };
       }),
       fechaVencimiento: String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')),

@@ -11,6 +11,7 @@ export interface PurcharseDetail {
   precioUnitario: number;
   precioVenta:    number;
   id_producto:    number;
+  id_almacen:     number;
   color?:          string;
 }
 

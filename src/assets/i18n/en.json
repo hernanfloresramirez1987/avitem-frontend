@@ -125,6 +125,10 @@
         "fechaVenta": "Sale Date",
         "precio_total": "Total Price",
         "id_empleado": "Employee",
-        "id_cliente": "Client"
+        "id_cliente": "Client",
+        "id_producto": "Product",
+        "cantidad": "Quantity",
+        "precioVenta": "Sales Price",
+        "totalVenta": "Sales Total"
     }
 }

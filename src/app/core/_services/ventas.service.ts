@@ -13,6 +13,6 @@ export class VentasService {
   private readonly http: HttpClient = inject(HttpClient);
 
 
-  postSaveVenta = (ventaReg: SalesRegister): Observable<VentaSaveResponse> => this.http.post<VentaSaveResponse>(`${this.#url}proveedores/register`, ventaReg);
+  postSaveVenta = (ventaReg: SalesRegister): Observable<VentaSaveResponse> => this.http.post<VentaSaveResponse>(`${this.#url}ventas/register`, ventaReg);
   
 }

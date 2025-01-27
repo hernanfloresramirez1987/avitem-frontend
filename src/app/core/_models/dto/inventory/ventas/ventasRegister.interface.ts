@@ -1,21 +1,22 @@
 export interface SalesRegister {
   fechaVenta:             string;
   total:                  number;
-  token_SIN:              string;
+  token_SIM:              string;
   id_cliente:             number;
   id_empleado:            number;
-  confactura:             boolean;
+  confactura:             number;
   detalle:                SalesDetail[] | string;
 }
 
 export interface SalesDetail {
   cantidad:           number;
-  precioUnitarioVent: number;
-  precioUnitVenta:    number;
+  precioUnitario:     number;
+  // precioUnitVenta:    number;
   id_producto:        number;
 }
 
 export interface SalesDetailWithNameProduct extends SalesDetail {
+  color:              string;
   name_product:   string;
 }
 
