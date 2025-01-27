@@ -103,6 +103,7 @@
     },
 
     "purcharses": {
+        "almacen": "Almacen",
         "fechaCompra": "Fecha de Compra",
         "precio_total": "Precio Total",
         "proveedor": "Proveedor",

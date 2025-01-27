@@ -29,23 +29,16 @@
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'purcharses.producto' | translate }}</label>
                         <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
-                        <!-- <p-dropdown [formControlName]="'id_producto'" [options]="productos" [optionLabel]="'nombre'" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) { -->
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
-
-
-
                     <!-- almacen -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'purcharses.almacen' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
-                        <small style="color: red;">Error en el Almacen Seleccionado.</small> }
-
                         <p-inputGroup>
-                            <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" />
-                            <!-- <input type="text" pInputText placeholder="Username" /> -->
-                            &nbsp;
-                            <p-checkbox [binary]="true" />
+                            <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
+                            <small style="color: red;">Error en el Almacen Seleccionado.</small> } &nbsp;
+                            <p-inputGroupAddon>
+                                <p-checkbox [binary]="true" class="pInputText" /></p-inputGroupAddon>
                             <!-- <p-inputGroupAddon>
                             </p-inputGroupAddon> -->
                         </p-inputGroup>
