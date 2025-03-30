@@ -85,6 +85,9 @@ export default class SupplierCreateComponent {
   asignarValores(): ProveedorRegister {
     const formValues = this.registroForm.value;
 
+    const dateFNaci = new Date(formValues.fNaci);
+    const formattedDateFNaci = dateFNaci.toISOString().split("T")[0];
+
     return this.proveedorRegister = {
       // Datos de persona
       p_ci: formValues.ci,
@@ -94,7 +97,7 @@ export default class SupplierCreateComponent {
       p_app: formValues.app,
       p_apm: formValues.apm,
       p_sexo: formValues.sexo.key,
-      p_fnaci: formValues.fNaci,
+      p_fnaci: formattedDateFNaci,
       p_direccion: formValues.direccion,
       p_telefono: formValues.telefono,
       p_email: formValues.email,
