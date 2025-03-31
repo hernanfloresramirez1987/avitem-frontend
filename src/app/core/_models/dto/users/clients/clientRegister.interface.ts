@@ -1,7 +1,7 @@
 export interface ClientRegister {
-    u_username: string;
-    u_password: string;
-    u_rol: 'admin' | 'user' | 'guest';
+    // u_username: string;
+    // u_password: string;
+    // u_rol: 'admin' | 'user' | 'guest';
 
     p_ci: string;
     p_ciExpedit: string;
@@ -15,10 +15,7 @@ export interface ClientRegister {
     p_telefono: string;
     p_email: string;
 
-    e_idtipo: number;
-    e_idcargo: number;
-    e_fing: string;
-    e_salario: number;
+    cli_nit: number;
 }
 
 export interface RegistroPersonaClienteResult {
