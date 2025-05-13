@@ -38,7 +38,7 @@
                 </th>
                 } @case("nombre") {
                 <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.nombre" | translate | uppercase}}
+                    <div class="flex justify-content-between align-items-left">{{"labels.name" | translate | uppercase}}
                         <p-sortIcon [field]="item.field" />
                     </div>
                 </th>
@@ -59,7 +59,7 @@
                 </th>
                 } @case("sexo") {
                 <th style="min-width: 2rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.sexo" | translate | uppercase}}
+                    <div class="flex justify-content-between align-items-left">{{"labels.sex" | translate | uppercase}}
                         <p-sortIcon [field]="item.field" />
                     </div>
                 </th>
@@ -110,8 +110,15 @@
                 </td>
                 @for (item of columns; track item) {
                 <td>
-                    @switch (item.field) { @case("id") { {{ rowData['id'] }} } @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} } @case('nombre') { {{ rowData[item.field] }} } @case('app') { {{ rowData[item.field] }} } @case('apm') { {{ rowData[item.field] }}
-                    } @case('sexo') { {{ rowData[item.field] }} } @case('fnaci') { {{ rowData[item.field] }}
+                    @switch (item.field) { 
+                        @case("id") { {{ rowData['id'] }} } 
+                        @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} } 
+                        @case('nombre') { {{ rowData[item.field] }} } 
+                        @case('app') { {{ rowData[item.field] }} } 
+                        @case('apm') { {{ rowData[item.field] }} } 
+                        @case('sexo') { <i class="pi pi-{{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-mars' }}"></i> {{ rowData[item.field] }} <i class="pi pi-check"></i> {{ (rowData[item.field] === 'V') ? 'pi-varon' : 'pi-mujer' }} } 
+                        @case('fnaci') { {{ rowData[item.field] }}
+                        
                     <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->
                     } @default { {{ rowData[item.field] }} } }
                 </td>

@@ -12,15 +12,16 @@ import { tableconfig } from '../../../../config/table.config';
 import { Column } from '../../../../_models/common/columns.interface';
 import { ProveedoresService } from '../../../../_services/proveedors.service';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
-import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 
 @Component({
   selector: 'app-suppliers',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })

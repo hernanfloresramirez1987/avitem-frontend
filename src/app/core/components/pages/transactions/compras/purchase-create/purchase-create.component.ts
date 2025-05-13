@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CardModule } from 'primeng/card';
-import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { DropdownModule } from 'primeng/dropdown';
@@ -11,10 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { CalendarModule } from 'primeng/calendar';
 import { PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
-import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
-import { ProveedorItem } from '../../../../../_models/users/proveedores/proveedores.model';
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
-import { debounceTime } from 'rxjs';
 import { ComprasService } from '../../../../../_services/compras.service';
 import { ProductosService } from '../../../../../_services/products.service';
 import { ProductItem } from '../../../../../_models/inventory/products/product.model';
@@ -28,11 +25,13 @@ import { AlmacenItem } from '../../../../../_models/inventory/almacenes/almacene
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { ProveedorItem } from '@/core/_models/users/proveedores/proveedores.model';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, JsonPipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink],
+  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'
@@ -50,13 +49,13 @@ export default class PurchaseCreateComponent {
   detailView: PurcharseDetailWithNameProduct[] = [];
   
   stateInputs = signal<boolean>(true);
-  currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
+  currentDate!: string;
   total = 0;
   totalCompra = 0;
 
   constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private almacenesServ: AlmacenesService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    
+    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
     this.purchaseForm = this.fb.group({
       fechaCompra: [this.currentDate],
       // total: [this.total],

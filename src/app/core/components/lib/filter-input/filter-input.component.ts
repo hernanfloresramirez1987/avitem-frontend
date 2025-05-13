@@ -1,9 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { filterConfigMatchModes } from '../../../config/filtercolumn.config';
-import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
+  standalone: true,
+  imports: [TableModule, InputTextModule, FormsModule, CalendarModule],
   selector: 'shipedge-filter-input',
   templateUrl: './filter-input.component.html',
   styleUrls: ['./filter-input.component.scss']

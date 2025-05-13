@@ -9,7 +9,6 @@ import { Column } from '../../../../_models/common/columns.interface';
 import { ComprasService } from '../../../../_services/compras.service';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -21,12 +20,13 @@ import { RatingModule } from 'primeng/rating';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
-
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 
 @Component({
   selector: 'app-purchases',
   standalone: true,
-  imports: [TableModule, CardModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, CurrencyPipe],
+  imports: [TableModule, CardModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.scss'
 })

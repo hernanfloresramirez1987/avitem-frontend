@@ -6,7 +6,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { JsonPipe, UpperCasePipe } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
@@ -18,6 +17,7 @@ import { EmployeeRegister } from '../../../../../_models/dto/users/employees/emp
 import { EmployeesService } from '../../../../../_services/employees.service';
 import { Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../../../../_services/common/user.service';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
 
 @Component({
   selector: 'app-users-create',

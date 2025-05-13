@@ -1,10 +1,15 @@
 import { Component, ContentChild, ContentChildren, Input, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { PrimeTemplate } from 'primeng/api';
-import { MultiSelect } from 'primeng/multiselect';
+import { MultiSelect, MultiSelectModule } from 'primeng/multiselect';
 import { Nullable } from 'primeng/ts-helpers';
 import { filterConfigMatchModes } from '../../../config/filtercolumn.config';
+import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
+  standalone: true,
+  imports: [TableModule, MultiSelectModule, FormsModule, ButtonModule],
   selector: 'shipedge-filter-multiselect',
   templateUrl: './filter-multiselect.component.html',
   styleUrls: ['./filter-multiselect.component.scss']

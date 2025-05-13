@@ -3,7 +3,7 @@ import { FiltersShip } from './filters.interface';
 import { FormsModule } from '@angular/forms';
 import { ChipModule } from 'primeng/chip';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../layout/services/translate-lan.service';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
 
 
 @Component({

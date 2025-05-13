@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { TranslateLanService } from "../../layout/services/translate-lan.service";
+import { TranslateLanService } from "@/layout/service/translate-lan.service";
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import { TranslateLanService } from "../../layout/services/translate-lan.service
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => {
-          return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+          return new TranslateHttpLoader(http, './i18n/', '.json');
         },
         deps: [HttpClient],
       },

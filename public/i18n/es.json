@@ -1,0 +1,21 @@
+{
+    "labels": {
+        "id": "ID",
+        "ci": "CI",
+        "name": "Nombre",
+        "app": "Primer Apellido",
+        "apm": "Segundo Apellido",
+        "sex": "Sexo",
+        "fnaci": "Fecha de Nacimiento",
+        "phone": "Teléfono",
+        "email": "Correo Electrónico",
+        "address": "Dirección",
+        "city": "Ciudad",
+        "state": "Estado",
+        "zip": "Código Postal",
+        "salary": "Salario",
+        "status": "Estado",
+        "action": "Acción",
+        "idcargo": "Cargo"
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/@ngx-translate/http-loader/fesm5/ngx-translate-http-loader.js"],
+  "sourcesContent": ["var TranslateHttpLoader = /** @class */function () {\n  function TranslateHttpLoader(http, prefix, suffix) {\n    if (prefix === void 0) {\n      prefix = \"/assets/i18n/\";\n    }\n    if (suffix === void 0) {\n      suffix = \".json\";\n    }\n    this.http = http;\n    this.prefix = prefix;\n    this.suffix = suffix;\n  }\n  /**\n   * Gets the translations from the server\n   */\n  TranslateHttpLoader.prototype.getTranslation = function (lang) {\n    return this.http.get(\"\" + this.prefix + lang + this.suffix);\n  };\n  return TranslateHttpLoader;\n}();\n\n/**\n * Generated bundle index. Do not edit.\n */\n\nexport { TranslateHttpLoader };\n"],
+  "mappings": ";;;AAAA,IAAI;AAAA;AAAA,EAAmC,WAAY;AACjD,aAASA,qBAAoB,MAAM,QAAQ,QAAQ;AACjD,UAAI,WAAW,QAAQ;AACrB,iBAAS;AAAA,MACX;AACA,UAAI,WAAW,QAAQ;AACrB,iBAAS;AAAA,MACX;AACA,WAAK,OAAO;AACZ,WAAK,SAAS;AACd,WAAK,SAAS;AAAA,IAChB;AAIA,IAAAA,qBAAoB,UAAU,iBAAiB,SAAU,MAAM;AAC7D,aAAO,KAAK,KAAK,IAAI,KAAK,KAAK,SAAS,OAAO,KAAK,MAAM;AAAA,IAC5D;AACA,WAAOA;AAAA,EACT,EAAE;AAAA;",
+  "names": ["TranslateHttpLoader"]
+}

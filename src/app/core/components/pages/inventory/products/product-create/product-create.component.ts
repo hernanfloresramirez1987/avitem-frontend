@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { Router, RouterLink } from '@angular/router';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { CardModule } from 'primeng/card';
@@ -19,6 +18,7 @@ import { ProductosService } from '../../../../../_services/products.service';
 import { ProductoRegister } from '../../../../../_models/dto/inventory/products/productoRegister.interface';
 import { ColoresService } from '../../../../../_services/colores.service';
 import { TagModule } from 'primeng/tag';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
 
 @Component({
   selector: 'app-product-create',
@@ -37,15 +37,15 @@ export default class ProductCreateComponent {
   proveedorDto!: ProveedorDTO;
 
   productoRegister!: ProductoRegister;
+  currentDate!: string;
 
   constructor(private categoriasServ: CategoriasService, private coloresServi: ColoresService, private proveedoresServ: ProveedoresService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    const currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy');
-
+    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
     this.registroForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: [''],
-      fechaIngreso: [currentDate, Validators.required],
+      fechaIngreso: [this.currentDate, Validators.required],
       unidadMedida: ['', Validators.required],
       codigoProducto: ['', Validators.required],
       id_color: ['', Validators.required],

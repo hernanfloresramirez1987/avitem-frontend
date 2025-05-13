@@ -10,21 +10,18 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
-import { UpperCasePipe } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClientRegister } from '../../../../../_models/dto/users/clients/clientRegister.interface';
-import { EmployeesService } from '../../../../../_services/employees.service';
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { debounceTime } from 'rxjs';
-import { ProveedoresService } from '../../../../../_services/proveedors.service';
 import { ClientsService } from '../../../../../_services/clients.service';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
 
 @Component({
   selector: 'app-clientes-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule],
   templateUrl: './clientes-create.component.html',
   styleUrl: './clientes-create.component.scss'
 })

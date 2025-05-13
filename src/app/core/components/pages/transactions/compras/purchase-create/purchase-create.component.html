@@ -112,7 +112,7 @@
                             <td style="text-align: right;">{{ customer.cantidad * customer.precioUnitario}}</td>
                             <td class="flex flex-wrap justify-content-left">
                                 <p-buttonGroup>
-                                    <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" (click)="updateDetail(customer)" />
+                                    <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warn" (click)="updateDetail(customer)" /> 
                                     <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="deleteDetail(customer)" />
                                 </p-buttonGroup>
                             </td>

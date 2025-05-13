@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateService } from '@ngx-translate/core';
-import { TranslateLanService } from '../../../../../../layout/services/translate-lan.service';
 import { Router, RouterLink } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { ProveedorRegister } from '../../../../../_models/dto/users/proveedors/proveedorRegister.interface';
@@ -18,6 +17,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
 import { UpperCasePipe } from '@angular/common';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
 
 @Component({
   selector: 'app-supplier-create',

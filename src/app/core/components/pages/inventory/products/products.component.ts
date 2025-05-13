@@ -7,21 +7,22 @@ import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { ProductoDTO } from '../../../../_models/dto/inventory/products/producto.interface.dto';
 import { ProductoBaseFilter } from '../../../../_models/dto/inventory/products/productosSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { JsonPipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { ProductosService } from '../../../../_services/products.service';
-import { TranslateLanService } from '../../../../../layout/services/translate-lan.service';
 import { map } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { ExternapiService } from '../../../../_services/externapi.service';
 import { CardModule } from 'primeng/card';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, JsonPipe],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
