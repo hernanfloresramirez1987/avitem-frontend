@@ -1,26 +1,28 @@
 import {
   AutoFocus
-} from "./chunk-UREPXEK7.js";
+} from "./chunk-OV4C3PGC.js";
 import "./chunk-5G7WYC4N.js";
 import {
   StarFillIcon,
   StarIcon
-} from "./chunk-UQAGQFIB.js";
+} from "./chunk-3HXLCS2K.js";
 import {
   BaseComponent
-} from "./chunk-2TWA6GWE.js";
+} from "./chunk-QPHMWXUQ.js";
 import {
   BaseStyle
-} from "./chunk-P6N22X4J.js";
+} from "./chunk-I2QDHLJT.js";
+import "./chunk-TZIJKBMI.js";
 import {
   PrimeTemplate,
   SharedModule
-} from "./chunk-4C2B2QPZ.js";
+} from "./chunk-QV2JXGJT.js";
 import {
   focus,
   getFirstFocusableElement,
   uuid
 } from "./chunk-J7KLPNBF.js";
+import "./chunk-YAPJLE7E.js";
 import {
   NG_VALUE_ACCESSOR
 } from "./chunk-I5W4KY7L.js";
@@ -83,8 +85,6 @@ import {
 import "./chunk-WPM5VTLQ.js";
 import "./chunk-PEBH6BBU.js";
 import "./chunk-4S3KYZTJ.js";
-import "./chunk-TZIJKBMI.js";
-import "./chunk-YAPJLE7E.js";
 import "./chunk-GOMI4DH3.js";
 
 // node_modules/primeng/fesm2022/primeng-rating.mjs

@@ -18,11 +18,12 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { DatePickerModule } from 'primeng/datepicker';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-users-create',
   standalone: true,
-  imports: [CardModule, DatePickerModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe],
+  imports: [CardModule, DatePickerModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, PasswordModule],
   templateUrl: './users-create.component.html',
   styleUrl: './users-create.component.scss'
 })
