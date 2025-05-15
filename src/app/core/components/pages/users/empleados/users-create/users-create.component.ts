@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
 import { TranslateService } from '@ngx-translate/core';
-import { JsonPipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
-import { CalendarModule } from 'primeng/calendar';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
 import { debounceTime } from 'rxjs';
 import { EmployeeRegister } from '../../../../../_models/dto/users/employees/employeeRegister.interface';
 import { EmployeesService } from '../../../../../_services/employees.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { DatePickerModule } from 'primeng/datepicker';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-users-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
+  imports: [CardModule, DatePickerModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, PasswordModule],
   templateUrl: './users-create.component.html',
   styleUrl: './users-create.component.scss'
 })
