@@ -1,0 +1,21 @@
+{
+    "labels": {
+        "id": "ID",
+        "ci": "CI",
+        "name": "Name",
+        "app": "Last First Name",
+        "apm": "Last Second Name",
+        "sex": "Sex",
+        "fnaci": "Date of Birth",
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address",
+        "city": "City",
+        "state": "State",
+        "zip": "Zip",
+        "salary": "Salary",
+        "status": "Status",
+        "action": "Action",
+        "idcargo": "Rol"
+    }
+}
