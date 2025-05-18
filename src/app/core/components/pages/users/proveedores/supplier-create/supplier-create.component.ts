@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
 import { UsersService } from '../../../../../_services/common/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,7 +9,7 @@ import { ProveedorRegister } from '../../../../../_models/dto/users/proveedors/p
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -18,11 +18,12 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
 import { UpperCasePipe } from '@angular/common';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-supplier-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
+  imports: [CardModule, ReactiveFormsModule, DatePickerModule, FormsModule, InputTextModule, RadioButtonModule, SelectModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
   templateUrl: './supplier-create.component.html',
   styleUrl: './supplier-create.component.scss'
 })
@@ -49,7 +50,7 @@ export default class SupplierCreateComponent {
       app: ['', Validators.required],
       apm: ['', ],
       sexo: ['', Validators.required],
-      fNaci: ['', Validators.required],
+      fnaci: [null, Validators.required],
       direccion: ['', Validators.required],
       telefono: ['', []],
       email: ['', [Validators.required, Validators.email]],
@@ -63,7 +64,7 @@ export default class SupplierCreateComponent {
 
   ngOnInit(): void {
     this.registroForm.valueChanges.pipe(debounceTime(5000)).subscribe(t => {
-      // console.log('Formulario : \n', t);
+      console.log('Formulario : \n', t);
       console.log('Errores:', t.errors);
       for (const control in this.registroForm.controls) {
         console.log(`${control}:`, this.registroForm.get(control)?.errors);
@@ -81,11 +82,10 @@ export default class SupplierCreateComponent {
       });
   }
 
-
   asignarValores(): ProveedorRegister {
     const formValues = this.registroForm.value;
 
-    const dateFNaci = new Date(formValues.fNaci);
+    const dateFNaci = new Date(formValues.fnaci);
     const formattedDateFNaci = dateFNaci.toISOString().split("T")[0];
 
     return this.proveedorRegister = {

@@ -17,6 +17,7 @@ import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 import { IconFieldModule } from 'primeng/iconfield';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -44,7 +45,7 @@ export default class UsersComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-  constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService) {
+  constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
@@ -94,4 +95,6 @@ export default class UsersComponent {
     // this.initData(this.namefilter());
     this.stateIni = true;
   }
+
+  add = () => this.router.navigate(['/users/empleados/create']);
 }

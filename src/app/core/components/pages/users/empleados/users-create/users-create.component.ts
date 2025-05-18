@@ -6,8 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TranslateLanModule } from '../../../../../_modules/translate-lan.module';
 import { TranslateService } from '@ngx-translate/core';
+import { SelectModule } from 'primeng/select';
 import { UpperCasePipe } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -23,7 +23,7 @@ import { PasswordModule } from 'primeng/password';
 @Component({
   selector: 'app-users-create',
   standalone: true,
-  imports: [CardModule, DatePickerModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, PasswordModule],
+  imports: [CardModule, DatePickerModule, ReactiveFormsModule, InputTextModule, RadioButtonModule, SelectModule, ButtonModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, PasswordModule],
   templateUrl: './users-create.component.html',
   styleUrl: './users-create.component.scss'
 })
