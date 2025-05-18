@@ -1,1 +1,0 @@
-import{Gb as p,Na as o,kb as s,lb as i}from"./chunk-4LBSLQEY.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=o({type:n,selectors:[["app-clientes"]],decls:2,vars:0,template:function(e,a){e&1&&(s(0,"p"),p(1,"clientes works!"),i())},encapsulation:2})};export{t as default};

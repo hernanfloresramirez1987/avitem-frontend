@@ -1,12 +1,27 @@
 {
+    "pages": {
+        "employees": "Employees",
+        "clients": "Clients",
+        "suppliers": "Suppliers",
+        "users": "Users"
+    },
     "labels": {
+        "detail_people": "Detail People",
+        "detail_user": "Detail User",
+        "detail_supplier": "Detail Supplier",
+        "detail_employee": "Detail Employee",
+        "detail_client": "Detail Client",
         "id": "ID",
         "ci": "CI",
+        "ciComplement": "CI Complement",
+        "ciExpedit": "CI Expedit",
         "name": "Name",
         "app": "Last First Name",
         "apm": "Last Second Name",
+        "direccion": "Address",
         "sex": "Sex",
         "fnaci": "Date of Birth",
+        "telefono": "Phone",
         "phone": "Phone",
         "email": "Email",
         "address": "Address",
@@ -16,6 +31,12 @@
         "salary": "Salary",
         "status": "Status",
         "action": "Action",
-        "idcargo": "Rol"
+        "idcargo": "Rol",
+        "username": "Username",
+        "password": "Password",
+        "repit_password": "Repeat Password",
+        "rol": "Rol",
+        "type": "Type",
+        "position": "Position"
     }
 }

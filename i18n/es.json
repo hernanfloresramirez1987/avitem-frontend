@@ -1,12 +1,27 @@
 {
+    "pages": {
+        "employees": "Empleados",
+        "clients": "Clientes",
+        "suppliers": "Proveedores",
+        "users": "Usuarios"
+    },
     "labels": {
+        "detail_people": "Detalle Persona",
+        "detail_user": "Detalle Usuario",
+        "detail_supplier": "Detalle Proveedor",
+        "detail_employee": "Detalle Empleado",
+        "detail_client": "Detalle Cliente",
         "id": "ID",
         "ci": "CI",
+        "ciComplement": "Complemento CI",
+        "ciExpedit": "Expedición CI",
         "name": "Nombre",
         "app": "Primer Apellido",
         "apm": "Segundo Apellido",
+        "direccion": "Dirección",
         "sex": "Sexo",
         "fnaci": "Fecha de Nacimiento",
+        "telefono": "Teléfono",
         "phone": "Teléfono",
         "email": "Correo Electrónico",
         "address": "Dirección",
@@ -16,6 +31,13 @@
         "salary": "Salario",
         "status": "Estado",
         "action": "Acción",
-        "idcargo": "Cargo"
+        "idcargo": "Cargo",
+        "username": "Nombre de Usuario",
+        "password": "Contraseña",
+        "repit_password": "Repetir Contraseña",
+        "rol": "Rol",
+        "type": "Tipo",
+        "position": "Cargo"
+        
     }
 }

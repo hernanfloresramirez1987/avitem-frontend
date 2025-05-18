@@ -1,0 +1,1 @@
+import{Gb as p,Na as s,kb as o,lb as a}from"./chunk-G5U4GKZJ.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=s({type:n,selectors:[["app-sales"]],decls:2,vars:0,template:function(e,l){e&1&&(o(0,"p"),p(1,"sales works!"),a())},encapsulation:2})};export{t as default};
