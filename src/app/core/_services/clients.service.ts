@@ -14,6 +14,6 @@ export class ClientsService {
 
   getAllClients = (): Observable<any[]> => this.http.get<any[]>(`${this.#url}clientes`);
 
-  postSaveCliente = (employeeReg: ClientRegister): Observable<ClienteSaveResponse> => this.http.post<ClienteSaveResponse>(`${this.#url}clientes/register`, employeeReg);  
+  postSaveCliente = (employeeReg: ClientRegister): Observable<ClienteSaveResponse> => this.http.post<ClienteSaveResponse>(`${this.#url}register`, employeeReg);  
 
 }

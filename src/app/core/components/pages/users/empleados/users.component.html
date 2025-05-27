@@ -60,7 +60,7 @@
                 </th>
                 } @case("sexo") {
                 <th style="min-width: 2rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.sex" | translate | uppercase}}
+                    <div class="flex justify-content-between align-items-left">{{"labels.sexo" | translate | uppercase}}
                         <p-sortIcon [field]="item.field" />
                     </div>
                 </th>
@@ -81,7 +81,7 @@
                 </th>
                 } @default {
                 <th pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels." + item.field | translate | uppercase}} ii
+                    <div class="flex justify-content-between align-items-left">{{"labels." + item.field | translate | uppercase}}
                         <p-sortIcon [field]="item.field" />
                     </div>
                 </th>
@@ -116,8 +116,8 @@
                         @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} } 
                         @case('nombre') { {{ rowData[item.field] }} } 
                         @case('app') { {{ rowData[item.field] }} } 
-                        @case('apm') { {{ rowData[item.field] }} } 
-                        @case('sexo') { <i class="pi pi-{{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-mars' }}"></i> {{ rowData[item.field] }} <i class="pi pi-check"></i> {{ (rowData[item.field] === 'V') ? 'pi-varon' : 'pi-mujer' }} } 
+                        @case('apm') { {{ rowData[item.field] }} }
+                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-mars' }}"></i>====== {{ rowData[item.field] }} <i class="pi pi-check"></i> {{ (rowData[item.field] === 'V') ? 'pi-varon' : 'pi-mujer' }} } 
                         @case('fnaci') { {{ rowData[item.field] }}
                         
                     <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->
