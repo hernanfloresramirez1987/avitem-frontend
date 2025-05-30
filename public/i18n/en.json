@@ -13,8 +13,9 @@
         "detail_client": "Detail Client",
         "id": "ID",
         "ci": "CI",
-        "ciComplement": "CI Complement",
+        "nit": "NIT",
         "ciExpedit": "CI Expedit",
+        "ciComplement": "CI Complement",
         "name": "Name",
         "nombre": "Name",
         "app": "Last First Name",
@@ -38,6 +39,8 @@
         "repit_password": "Repeat Password",
         "rol": "Rol",
         "type": "Type",
-        "position": "Position"
+        "position": "Position",
+        "developed_by": "Developed by",
+        "ing": "Ing."
     }
 }

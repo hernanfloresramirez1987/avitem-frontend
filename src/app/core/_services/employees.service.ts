@@ -12,13 +12,14 @@ import { EmployeeItem } from '../_models/users/employees/employee.model';
   providedIn: 'root'
 })
 export class EmployeesService {
-  readonly #url= environment.URL_API;
+  readonly #url= `${ environment.URL_API }empleados/`;
+  
   private readonly http: HttpClient = inject(HttpClient);
 
-  postEmployees = (employeeDto: EmployeeDTO | any): Observable<EmployeeResp> => this.http.post<EmployeeResp>(`${this.#url}empleados/list`, employeeDto);
+  postEmployees = (employeeDto: EmployeeDTO | any): Observable<EmployeeResp> => this.http.post<EmployeeResp>(`${this.#url}list`, employeeDto);
   
-  getEmployees = (): Observable<EmployeeItem[]> => this.http.post<EmployeeItem[]>(`${this.#url}empleados/list`, {});
+  getEmployees = (): Observable<EmployeeItem[]> => this.http.post<EmployeeItem[]>(`${this.#url}list`, {});
 
-  postSaveEmployee = (employeeReg: EmployeeRegister): Observable<EmployeeSaveResponse> => this.http.post<EmployeeSaveResponse>(`${this.#url}empleados/register`, employeeReg);
+  postSaveEmployee = (employeeReg: EmployeeRegister): Observable<EmployeeSaveResponse> => this.http.post<EmployeeSaveResponse>(`${this.#url}register`, employeeReg);
   
 }
