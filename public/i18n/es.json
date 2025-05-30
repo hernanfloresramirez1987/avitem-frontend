@@ -13,13 +13,15 @@
         "detail_client": "Detalle Cliente",
         "id": "ID",
         "ci": "CI",
-        "ciComplement": "Complemento CI",
+        "nit": "NIT",
         "ciExpedit": "Expedición CI",
+        "ciComplement": "Complemento CI",
         "name": "Nombre",
+        "nombre": "Nombre",
         "app": "Primer Apellido",
         "apm": "Segundo Apellido",
         "direccion": "Dirección",
-        "sex": "Sexo",
+        "sexo": "Sexo",
         "fnaci": "Fecha de Nacimiento",
         "telefono": "Teléfono",
         "phone": "Teléfono",
@@ -37,7 +39,8 @@
         "repit_password": "Repetir Contraseña",
         "rol": "Rol",
         "type": "Tipo",
-        "position": "Cargo"
-        
+        "position": "Cargo",
+        "developed_by": "Desarrollado por",
+        "ing": "Ing."
     }
 }

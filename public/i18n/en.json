@@ -13,13 +13,15 @@
         "detail_client": "Detail Client",
         "id": "ID",
         "ci": "CI",
-        "ciComplement": "CI Complement",
+        "nit": "NIT",
         "ciExpedit": "CI Expedit",
+        "ciComplement": "CI Complement",
         "name": "Name",
+        "nombre": "Name",
         "app": "Last First Name",
         "apm": "Last Second Name",
         "direccion": "Address",
-        "sex": "Sex",
+        "sexo": "Sex",
         "fnaci": "Date of Birth",
         "telefono": "Phone",
         "phone": "Phone",
@@ -37,6 +39,8 @@
         "repit_password": "Repeat Password",
         "rol": "Rol",
         "type": "Type",
-        "position": "Position"
+        "position": "Position",
+        "developed_by": "Developed by",
+        "ing": "Ing."
     }
 }

@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 import { AppLayout } from '@/layout/components/app.layout';
+import { AppComponent } from './app.component';
 
 export const appRoutes: Routes = [
     {
         path: '',
         component: AppLayout,
         children: [
+            { path: ':token', component: AppComponent },
             { path: 'home', data: { breadcrumb: 'Home' }, loadComponent: () => import('./app/core/components/pages/home/home.component') },
             { path: 'dashboard', data: { breadcrumb: 'Dashboard' }, loadComponent: () => import('./app/core/components/pages/dashboard/dashboard.component'), },
             { path: 'users', data: { breadcrumb: 'Users' }, loadChildren: () => import('./app/core/components/pages/users/users-routing.module').then(m => m.UsersRoutingModule) },

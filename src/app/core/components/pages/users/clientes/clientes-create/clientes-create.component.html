@@ -24,7 +24,7 @@
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="expedition" class="w-15rem">{{'labels.ciExpedit' | translate }}</label>
-                        <p-select [formControlName]="'ciExpedit'" [options]="[]" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" [style]="{width: '100%'}" /> @if (registroForm.get('ciExpedit')?.invalid && registroForm.get('ciExpedit')?.touched) {
+                        <p-select [formControlName]="'ciExpedit'" [options]="expedidoOptions" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" [style]="{width: '100%'}" /> @if (registroForm.get('ciExpedit')?.invalid && registroForm.get('ciExpedit')?.touched) {
                         <small style="color: red;">Error en el {{'labels.ciExpedit' | translate }}.</small> }
                     </div>
                 </div>
