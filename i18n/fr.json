@@ -1,7 +1,16 @@
 {
+    "pages": {
+        "employees": "Employés",
+        "clients": "Clients",
+        "suppliers": "Fournisseurs",
+        "users": "Utilisateurs"
+    },
     "labels": {
         "id": "ID",
         "ci": "CI",
+        "nit": "NIT",
+        "ciExpedit": "CI Expedit",
+        "ciComplement": "CI Complement",
         "name": "Nom",
         "app": "Nom de famille",
         "apm": "Nom de famille",
@@ -16,6 +25,14 @@
         "salary": "Salaire",
         "status": "Etat",
         "action": "Action",
-        "idcargo": "Rôle"
+        "idcargo": "Rôle",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "repit_password": "Répéter le mot de passe",
+        "rol": "Rôle",
+        "type": "Type",
+        "position": "Position",
+        "developed_by": "Développé par",
+        "ing": "Ing."
     }
 }
