@@ -62,7 +62,7 @@ import { FormsModule } from '@angular/forms';
 
                 <div class="topbar-profile">
                     <button class="topbar-profile-button" type="button" pStyleClass="@next" enterFromClass="hidden" enterActiveClass="animate-scalein" leaveToClass="hidden" leaveActiveClass="animate-fadeout" [hideOnOutsideClick]="true">
-                        <img alt="avatar" src="/layout/images/avatar.png" />
+                        <img alt="avatar" src="layout/images/avatar.png" />
                         <span class="profile-details">
                             <span class="profile-name">Gene Russell</span>
                             <span class="profile-job">Developer</span>
@@ -136,7 +136,7 @@ export class AppTopbar {
     }
 
     get logo(): string {
-        const path = '/layout/images/logo-';
+        const path = 'layout/images/logo-';
         const logo = this.layoutService.isDarkTheme() || this.layoutService.layoutConfig().layoutTheme === 'primaryColor'? 'light.png' : 'dark.png';
         return path + logo;
     }

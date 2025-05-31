@@ -1,4 +1,4 @@
-<p-card [header]="'pages.employees' | translate | uppercase">
+<p-card [header]="'pages.clients' | translate | uppercase">
     <div class="flex justify-content-between">
         <div>
         </div>
@@ -35,10 +35,10 @@
                 <th rowspan="2">
                     <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button>
                 </th>
-                <th *ngFor="let col of columns" [pSortableColumn]="col">
+                <!-- <th *ngFor="let col of columns" [pSortableColumn]="col">
                     {{ col | translate }}
                     <p-sortIcon [field]="col"></p-sortIcon>
-                </th>
+                </th> -->
             </tr>
         </ng-template>
 
