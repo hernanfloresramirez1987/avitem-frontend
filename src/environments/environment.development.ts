@@ -1,6 +1,5 @@
 export const environment = {
-  // URL_API: "https://app-939f6dc1-2e0f-41df-a4ae-5dc332e98965.cleverapps.io/api/v1/",
-  URL_API: "http://localhost:3000/api/v1/",
+  URL_API: "https://app_a3d1e97c-1324-4925-805e-0ce8c6ab4632.cleverapps.io/api/v1/",
   defaultLanguage: 'en'
 };
 
