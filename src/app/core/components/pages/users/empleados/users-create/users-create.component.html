@@ -124,7 +124,7 @@
             <div class="flex gap-3 mt-1">
                 <p-button [label]="'labels.cancel' | translate" severity="danger" class="w-full" styleClass="w-full" (click)="cancel()" />
                 <p-button [label]="'labels.clean' | translate" severity="secondary" class="w-full" styleClass="w-full" (click)="cleanAll()" />
-                <p-button [label]="'labels.save' | translate" class="w-full" styleClass="w-full" (click)="saveEmployee()" [disabled]="!registroForm.valid" />
+                <p-button [label]="'labels.save' | translate" class="w-full" styleClass="w-full" (click)="save()" [disabled]="!registroForm.valid" />
             </div>
         </ng-template>
     </p-card>

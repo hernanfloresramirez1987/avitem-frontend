@@ -6,7 +6,9 @@
         "users": "Usuarios",
         "register_employee": "Registrar Empleado",
         "register_supplier": "Registrar Proveedor",
-        "register_client": "Registrar Cliente"
+        "register_client": "Registrar Cliente",
+        "products": "Productos",
+        "register_product": "Registrar Producto"
     },
     "labels": {
         "detail_people": "Detalle Persona",
@@ -60,6 +62,16 @@
         "register_client": "Registrar Cliente",
         "enterprise": "Empresa",
         "telefonoEmpresa": "Teléfono de la Empresa",
-        "direccionEmpresa": "Dirección de la Empresa"
+        "direccionEmpresa": "Dirección de la Empresa",
+        "codigoProducto": "Código de Producto",
+        "description": "Descripción",
+        "fechaIngreso": "Fecha de Ingreso",
+        "unidadMedida": "Unidad de Medida",
+        "color": "Color",
+        "id_color": "Color",
+        "id_proveedor": "Proveedor",
+        "id_categoria": "Categoría",
+        "register_product": "Registrar Producto",
+        "admin_products": "Administrar Productos"
     }
 }

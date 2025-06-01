@@ -24,7 +24,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 @Component({
   selector: 'app-clientes-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, SelectModule, DatePickerModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
+  imports: [CardModule, ReactiveFormsModule, SelectModule, DatePickerModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe],
   templateUrl: './clientes-create.component.html',
   styleUrl: './clientes-create.component.scss'
 })
@@ -70,15 +70,17 @@ export default class ClientesCreateComponent implements OnInit {
     });
   }
 
-  // saveCliente() {
-  //   console.log(this.asignarValores());
-  //   this.clientServ.postSaveCliente(this.asignarValores()).
-  //     subscribe(t => {
-  //       if(t.CodigoEstado === "201") {
-  //         this.router.navigate(['users/proveedores']);
-  //       }
-  //     });
-  // }
+  save = () =>this.saveCliente();
+
+  saveCliente() {
+    console.log(this.asignarValores());
+    this.clientServ.postSaveCliente(this.asignarValores()).
+      subscribe(t => { console.log(t);
+        if(t.CodigoEstado === "201") {
+          this.router.navigate(['users/clientes']);
+        }
+      });
+  }
 
   asignarValores(): ClientRegister {
     const formValues = this.registroForm.value;
@@ -106,24 +108,16 @@ export default class ClientesCreateComponent implements OnInit {
   }
 
   cleanAll() {
-    this.registroForm.reset();
+    const confirClean = confirm('¿Estás seguro de querer limpiar el formulario?');
+    if(confirClean) {
+      this.registroForm.reset();
+    }
   }
 
   cancel() {
-    this.router.navigate(['users/clientes']);
-  }
-
-  save() {
-    this.saveCliente();
-  } 
-
-  saveCliente() {
-    console.log(this.asignarValores());
-    this.clientServ.postSaveCliente(this.asignarValores()).
-      subscribe(t => { console.log(t);
-        if(t.CodigoEstado === "201") {
-          this.router.navigate(['users/clientes']);
-        }
-      });
+    const confir = confirm('¿Estás seguro de querer cancelar el registro y salir del formulario?');
+    if(confir) {
+      this.router.navigate(['users/clientes']);
+    }
   }
 }

@@ -1,4 +1,4 @@
-<p-card [header]="'pages.products' | translate | uppercase">
+<p-card [header]="'pages.products' | translate | uppercase" [subheader]="'labels.admin_products' | translate">
     <div class="flex justify-content-between">
         <div>
             <button pButton class="p-button-outlined mr-1" icon="pi pi-file-pdf" [routerLink]="['/inventory/products/create']" title="Proforma"></button>
@@ -15,10 +15,10 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <!-- <th rowspan="2">
+                <th rowspan="2">
+                    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-2"> </button>
                     <p-tableHeaderCheckbox class="pb-0 px-2" />
-                    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button>
-                </th> -->
+                </th>
                 @for (item of columns; track item) { @switch (item.field) { @case("id") {
                 <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
                     <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}
@@ -94,16 +94,22 @@
 
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
             <tr>
-                <!-- <td class="flex py-4"> <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> </td> -->
+                <td class="flex py-4"> 
+                    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5"> </button>
+                    <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox>
+                </td>
                 @for (item of columns; track item) {
-                <!--  -->
-                @switch (item.field) { @case("id") {
-                <td>{{ rowData['id'] }}</td> } @case('nombre') {
-                <td [style.backgroundColor]=" getColorBackground(rowData['color'])" [style.color]="getColor(rowData['color'])">{{ rowData[item.field] }} </td> } @case("descripcion") {
-                <td>{{ rowData[item.field] }}</td> } @case('codigoProducto') {
-                <td>{{ rowData[item.field] }}</td> } @case('state') {
-                <td>{{ rowData[item.field] }}</td> } @default {
-                <td>{{ rowData[item.field] }}</td> } } }
+                    @switch (item.field) { 
+                        @case("id") { <td>{{ rowData[item.field] }}</td> } 
+                        @case('nombre') { <td [style.backgroundColor]=" getColorBackground(rowData['code'])" [style.color]="getColor(rowData['code'])">...llll{{ item | json }}// </td> }
+                        @case("descripcion") { <td>{{ rowData[item.field] }}</td> } 
+                        @case('codigoProducto') { <td>{{ rowData[item.field] }}</td> } 
+                        @case('state') { <td>{{ rowData[item.field] }}</td> } 
+                        @case('empresa') { <td>{{ rowData[item.field] }}</td> } 
+                        @case('categoria') { <td>{{ rowData[item.field] }}</td> } 
+                        @default { <td>{{ rowData[item.field] }}</td> } 
+                    }
+                }
             </tr>
         </ng-template>
     </p-table>

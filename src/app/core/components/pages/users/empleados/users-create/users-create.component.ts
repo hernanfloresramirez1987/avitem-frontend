@@ -89,7 +89,7 @@ export default class UsersCreateComponent implements OnInit {
     });
   }
 
-
+  save = () =>this.saveEmployee();
   
   saveEmployee() {
     console.log(this.asignarValores());
