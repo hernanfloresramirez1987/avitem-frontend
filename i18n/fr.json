@@ -33,6 +33,13 @@
         "type": "Type",
         "position": "Position",
         "developed_by": "Développé par",
-        "ing": "Ing."
+        "ing": "Ing.",
+        "register_clients": "Enregistrer les clients",
+        "admin_employees": "Administrar Empleados",
+        "admin_suppliers": "Administrar Proveedores",
+        "admin_clients": "Administrar Clientes",
+        "admin_users": "Administrar Usuarios",
+        "add": "Ajouter",
+        "clear": "Effacer"
     }
 }
