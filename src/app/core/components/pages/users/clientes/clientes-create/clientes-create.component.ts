@@ -120,7 +120,7 @@ export default class ClientesCreateComponent implements OnInit {
   saveCliente() {
     console.log(this.asignarValores());
     this.clientServ.postSaveCliente(this.asignarValores()).
-      subscribe(t => {
+      subscribe(t => { console.log(t);
         if(t.CodigoEstado === "201") {
           this.router.navigate(['users/clientes']);
         }

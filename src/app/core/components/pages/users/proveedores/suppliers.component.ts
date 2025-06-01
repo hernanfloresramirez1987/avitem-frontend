@@ -13,16 +13,18 @@ import { Column } from '../../../../_models/common/columns.interface';
 import { ProveedoresService } from '../../../../_services/proveedors.service';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { map } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 import { PersonasService } from '@/core/_services/personas.service';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputGroupModule } from 'primeng/inputgroup';
 
 @Component({
   selector: 'app-suppliers',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent, NgStyle],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, IconFieldModule, FilterInputComponent, NgStyle, InputGroupModule],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })
@@ -45,7 +47,7 @@ export default class SuppliersComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-    constructor(private employeeServ: ProveedoresService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private personasService: PersonasService) {
+    constructor(private employeeServ: ProveedoresService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private personasService: PersonasService, private router: Router) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         this.employeeServ.postProveedores(this.employeedto())
@@ -91,4 +93,6 @@ export default class SuppliersComponent {
   }
 
   getSexo = (sex: string): string => this.personasService.getSexo(sex);
+
+  add = () => this.router.navigate(['/users/proveedores/create']);
 }

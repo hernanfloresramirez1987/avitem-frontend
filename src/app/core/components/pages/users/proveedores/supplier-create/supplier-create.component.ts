@@ -23,7 +23,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 @Component({
   selector: 'app-supplier-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, DatePickerModule, FormsModule, InputTextModule, RadioButtonModule, SelectModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, RouterLink],
+  imports: [CardModule, ReactiveFormsModule, DatePickerModule, FormsModule, InputTextModule, RadioButtonModule, SelectModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe],
   templateUrl: './supplier-create.component.html',
   styleUrl: './supplier-create.component.scss'
 })
@@ -111,6 +111,16 @@ export default class SupplierCreateComponent {
   }
 
   cleanAll() {
+    const confirClean = confirm('¿Estás seguro de querer limpiar el formulario?');
+    if(confirClean) {
+      this.registroForm.reset();
+    }
+  }
 
+  cancel() {
+    const confir = confirm('¿Estás seguro de querer cancelar el registro y salir del formulario?');
+    if(confir) {
+      this.router.navigate(['users/proveedores']);
+    }
   }
 }

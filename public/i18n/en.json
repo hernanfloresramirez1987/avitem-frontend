@@ -3,7 +3,10 @@
         "employees": "Employees",
         "clients": "Clients",
         "suppliers": "Suppliers",
-        "users": "Users"
+        "users": "Users",
+        "register_employee": "Register Employee",
+        "register_supplier": "Register Supplier",
+        "register_client": "Register Client"
     },
     "labels": {
         "detail_people": "Detail People",
@@ -48,6 +51,15 @@
         "admin_clients": "Admin Clients",
         "admin_users": "Admin Users",
         "add": "Add",
-        "clear": "Clear"
+        "clear": "Clear",
+        "cancel": "Cancel",
+        "save": "Save",
+        "clean": "Clean",
+        "register_employee": "Register Employee",
+        "register_supplier": "Register Supplier",
+        "register_client": "Register Client",
+        "enterprise": "Enterprise",
+        "telefonoEmpresa": "Enterprise Phone",
+        "direccionEmpresa": "Enterprise Address"
     }
 }

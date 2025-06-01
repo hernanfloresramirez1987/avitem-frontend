@@ -1,13 +1,4 @@
 <p-card [header]="'pages.clients' | translate | uppercase" [subheader]="'labels.admin_clients' | translate">
-    <div class="flex justify-content-between">
-        <div>
-        </div>
-        <div>
-            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"> </button>
-            <button pButton label="Add" class="p-button-outlined mr-1" icon="pi pi-plus" (click)="add()"> </button> 
-        </div>
-    </div>
-
     <p-table #dt1
         [value]="stateValues().data"
         dataKey="id"
@@ -29,6 +20,18 @@
         [scrollable]="true"
         scrollHeight="60vh"
         [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
+
+        <ng-template #caption>
+            <div class="flex justify-content-end">
+                <p-iconfield iconPosition="left">
+                    <p-inputgroup>
+                        <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
+                        <p-button icon="pi pi-user-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />&nbsp;
+                        <p-button pRipple icon="pi pi-ellipsis-v" severity="secondary" [outlined]="true"/>
+                    </p-inputgroup>
+                </p-iconfield>
+            </div>
+        </ng-template>
 
         <ng-template pTemplate="header" let-columns>
             <tr>
