@@ -26,7 +26,7 @@
                 <p-iconfield iconPosition="left">
                     <p-inputgroup>
                         <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
-                        <p-button icon="pi pi-user-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />&nbsp;
+                        <p-button icon="pi pi-user-plus" severity="primary" [outlined]="true" (click)="add()" />
                         <p-button pRipple icon="pi pi-ellipsis-v" severity="secondary" [outlined]="true"/>
                     </p-inputgroup>
                 </p-iconfield>
@@ -37,7 +37,6 @@
             <tr>
                 <th rowspan="2">
                     <p-tableHeaderCheckbox class="pb-0 px-2" />
-                    <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button> -->
                 </th>
                 @for (item of columns; track item) { 
                     @switch (item.field) { 
@@ -115,8 +114,8 @@
         <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
             <tr>
                 <td class="flex py-4">
+                    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text"> </button>
                     <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox>
-                    <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text" (click)="toggleItemMenu($event, rowData)"> </button> -->
                 </td>
                 @for (item of columns; track item) {
                     <td>
@@ -126,7 +125,7 @@
                         @case('nombre') { {{ rowData[item.field] }} } 
                         @case('app') { {{ rowData[item.field] }} } 
                         @case('apm') { {{ rowData[item.field] }} }
-                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-venus' }}" [ngStyle]="{ color: rowData[item.field] === 'V' ? 'blue' : 'red', 'font-weight': 'bold', 'font-size': '1.25rem', 'align-items': 'center', 'justify-content': 'center' }"></i> {{ getSexo(rowData[item.field]) }} } 
+                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-venus' }}" [ngStyle]="{ color: rowData[item.field] === 'V' ? 'slate-500' : 'red-500', 'font-weight': 'bold', 'font-size': '1.25rem', 'align-items': 'center', 'justify-content': 'center' }"></i> {{ getSexo(rowData[item.field]) }} } 
                         @case('fnaci') { {{ rowData[item.field] }}
                         
                     <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->

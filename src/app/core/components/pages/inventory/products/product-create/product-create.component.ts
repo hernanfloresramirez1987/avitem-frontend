@@ -19,11 +19,12 @@ import { ProductoRegister } from '../../../../../_models/dto/inventory/products/
 import { ColoresService } from '../../../../../_services/colores.service';
 import { TagModule } from 'primeng/tag';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-product-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule, RouterLink],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, DatePickerModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'
@@ -65,7 +66,7 @@ export default class ProductCreateComponent {
     this.coloresServi.getAllColores().subscribe({
       next: (t) => {this.colores = t; console.log(this.colores)},
       error: (err) => console.error('Error al obtener proveedores:', err) });
-      console.log(this.colores);
+      // console.log(this.colores);
   }
 
   getColorBackground(code: string): string {
@@ -97,11 +98,14 @@ export default class ProductCreateComponent {
   asignarValores(): ProductoRegister {
     const formValues = this.registroForm.value;
 
+    const dateIngreso = new Date(formValues.fechaIngreso);
+    const formattedDateIngreso = dateIngreso.toISOString().split("T")[0];
+
     return this.productoRegister = {
       p_nombre: formValues.nombre,
       p_descripcion: formValues.descripcion,
       p_cantidadStock: 0,
-      p_fechaIngreso: formValues.fechaIngreso,
+      p_fechaIngreso: formattedDateIngreso,
       p_unidadMedida: formValues.unidadMedida.medida,
       p_codigoProducto: formValues.codigoProducto,
       p_idProveedor: Number(formValues.id_proveedor.id),

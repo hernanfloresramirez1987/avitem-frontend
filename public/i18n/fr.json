@@ -6,7 +6,9 @@
         "users": "Utilisateurs",
         "register_employee": "Enregistrer l'employé",
         "register_supplier": "Enregistrer le fournisseur",
-        "register_client": "Enregistrer le client"
+        "register_client": "Enregistrer le client",
+        "products": "Produits",
+        "register_product": "Enregistrer le produit"
     },
     "labels": {
         "id": "ID",
@@ -52,6 +54,16 @@
         "register_client": "Enregistrer le client",
         "enterprise": "Entreprise",
         "telefonoEmpresa": "Téléphone de l'entreprise",
-        "direccionEmpresa": "Adresse de l'entreprise"
+        "direccionEmpresa": "Adresse de l'entreprise",
+        "codigoProducto": "Code Produit",
+        "description": "Description",
+        "fechaIngreso": "Date d'entrée",
+        "unidadMedida": "Unité de mesure",
+        "color": "Couleur",
+        "id_color": "Couleur",
+        "id_proveedor": "Fournisseur",
+        "id_categoria": "Catégorie",
+        "register_product": "Enregistrer le produit",
+        "admin_products": "Administrar Produits"
     }
 }

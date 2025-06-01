@@ -41,7 +41,7 @@ export interface TabCloseEvent {
 })
 export class LayoutService {
     _config: layoutConfig = {
-        preset: 'Aura',
+        preset: 'Lara',
         primary: 'noir',
         surface: null,
         darkTheme: false,

@@ -6,7 +6,9 @@
         "users": "Users",
         "register_employee": "Register Employee",
         "register_supplier": "Register Supplier",
-        "register_client": "Register Client"
+        "register_client": "Register Client",
+        "products": "Products",
+        "register_product": "Register Product"
     },
     "labels": {
         "detail_people": "Detail People",
@@ -60,6 +62,16 @@
         "register_client": "Register Client",
         "enterprise": "Enterprise",
         "telefonoEmpresa": "Enterprise Phone",
-        "direccionEmpresa": "Enterprise Address"
+        "direccionEmpresa": "Enterprise Address",
+        "codigoProducto": "Product Code",
+        "description": "Description",
+        "fechaIngreso": "Date of Entry",
+        "unidadMedida": "Unit of Measure",
+        "color": "Color",
+        "id_color": "Color",
+        "id_proveedor": "Supplier",
+        "id_categoria": "Category",
+        "register_product": "Register Product",
+        "admin_products": "Admin Products"
     }
 }

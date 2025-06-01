@@ -7,7 +7,7 @@ import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { ProductoDTO } from '../../../../_models/dto/inventory/products/producto.interface.dto';
 import { ProductoBaseFilter } from '../../../../_models/dto/inventory/products/productosSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
+import { JsonPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
@@ -22,7 +22,7 @@ import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent, JsonPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })

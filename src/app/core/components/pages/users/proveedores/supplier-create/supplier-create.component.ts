@@ -72,6 +72,8 @@ export default class SupplierCreateComponent {
     });
   }
 
+  save = () =>this.saveProveedor();
+
   saveProveedor() {
     console.log(this.asignarValores());
     this.proveedorServ.postSaveProveedor(this.asignarValores()).
