@@ -41,6 +41,13 @@
         "type": "Tipo",
         "position": "Cargo",
         "developed_by": "Desarrollado por",
-        "ing": "Ing."
+        "ing": "Ing.",
+        "register_clients": "Registrar Clientes",
+        "admin_employees": "Administrar Empleados",
+        "admin_suppliers": "Administrar Proveedores",
+        "admin_clients": "Administrar Clientes",
+        "admin_users": "Administrar Usuarios",
+        "add": "Agregar",
+        "clear": "Limpiar"
     }
 }

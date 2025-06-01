@@ -1,10 +1,10 @@
-<p-card [header]="'pages.suppliers' | translate | uppercase">
+<p-card [header]="'pages.suppliers' | translate | uppercase" [subheader]="'labels.admin_suppliers' | translate">
     <div class="flex justify-content-between">
         <div>
             <!-- <h5 class="text-4xl">{{'pages.suppliers' | translate | uppercase}}</h5> -->
         </div>
         <div>
-            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"> </button>
+            <button pButton [label]="'labels.clear' | translate" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"> </button>
             <button pButton class="p-button-outlined mr-1" icon="pi pi-user-plus" [routerLink]="['/users/proveedores/create']"> </button>
             <!-- <p-button [icon]="'pi pi-filter'" (click)="showDialog()" [text]="true"> </p-button> -->
             <!-- @if (stateValues().data !== null && stateValues().data.length > 0) { <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button> }
