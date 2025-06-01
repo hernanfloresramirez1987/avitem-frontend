@@ -41,6 +41,13 @@
         "type": "Type",
         "position": "Position",
         "developed_by": "Developed by",
-        "ing": "Ing."
+        "ing": "Ing.",
+        "register_clients": "Register Clients",
+        "admin_employees": "Admin Employees",
+        "admin_suppliers": "Admin Suppliers",
+        "admin_clients": "Admin Clients",
+        "admin_users": "Admin Users",
+        "add": "Add",
+        "clear": "Clear"
     }
 }

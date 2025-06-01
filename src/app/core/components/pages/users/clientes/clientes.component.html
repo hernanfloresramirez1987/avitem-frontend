@@ -1,4 +1,4 @@
-<p-card [header]="'pages.clients' | translate | uppercase">
+<p-card [header]="'pages.clients' | translate | uppercase" [subheader]="'labels.admin_clients' | translate">
     <div class="flex justify-content-between">
         <div>
         </div>
@@ -32,24 +32,110 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th rowspan="2">
+                <th>
+                    <!-- <p-tableHeaderCheckbox class="pb-0 px-2" /> -->
                     <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button>
+                    <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button> -->
                 </th>
-                <!-- <th *ngFor="let col of columns" [pSortableColumn]="col">
-                    {{ col | translate }}
-                    <p-sortIcon [field]="col"></p-sortIcon>
-                </th> -->
+                @for (item of columns; track item) { 
+                    @switch (item.field) { 
+                        @case("id") {
+                            <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}<p-sortIcon [field]="'id'"></p-sortIcon></div>
+                            </th>
+                        } 
+                        @case("ci") {
+                            <th style="min-width: 12rem" [pSortableColumn]="item.field" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.ci" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        } 
+                        @case("nombre") {
+                            <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.name" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @case("app") {
+                            <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.app" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @case("apm") {
+                            <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.apm" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @case("telefono") {
+                            <th style="min-width: 15rem" pReorderableColumn>{{"labels.telefono" | translate | uppercase}}</th>
+                        } 
+                        @case("sexo") {
+                            <th style="min-width: 2rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.sexo" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @case("fnaci") {
+                            <th style="min-width: 15rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.fnaci" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @case("email") {
+                            <th style="min-width: 20rem" pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.email" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @case("telefono") {
+                            <th style="min-width: 15rem" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.telefono" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                        @default {
+                            <th pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels." + item.field | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        } 
+                    }
+                }
+            </tr>
+            <tr>
+                @for (item of columns; track item) {
+                <th style="min-width: 11rem">
+                    @switch (item.field) {
+                        @case("id") { <shipedge-filter-input field="id" /> } 
+                        @case("ci") { <shipedge-filter-input field="ci" /> }
+                        @case("nombre") { <shipedge-filter-input field="nombre" /> }
+                        @case("app") { <shipedge-filter-input field="app" /> }
+                        @case("apm") { <shipedge-filter-input field="apm" /> }
+                        @case("sexo") { <shipedge-filter-input field="sexo" /> }
+                        @case("fnaci") { <shipedge-filter-input field="fnaci" /> }
+                        @case("email") { <shipedge-filter-input field="email" /> }
+                        @case("telefono") { <shipedge-filter-input field="telefono" /> }
+                        @default { <shipedge-filter-input [field]="item.field" type="text" /> } 
+                    }
+                </th>
+                } @empty {
+                <th style="min-width: 12rem">cargando</th> }
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-row>
+        <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
             <tr>
                 <td>
                     <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button>
                 </td>
-                <!-- <td *ngFor="let col of columns">
-                    {{ row[col] }}
-                </td> -->
+                @for (item of columns; track item) {
+                    <td>
+                    @switch (item.field) { 
+                        @case("id") { {{ rowData['id'] }} } 
+                        @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} } 
+                        @case('nombre') { {{ rowData[item.field] }} } 
+                        @case('app') { {{ rowData[item.field] }} } 
+                        @case('apm') { {{ rowData[item.field] }} }
+                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-venus' }}" [ngStyle]="{ color: rowData[item.field] === 'V' ? 'blue' : 'red', 'font-weight': 'bold', 'font-size': '1.25rem', 'align-items': 'center', 'justify-content': 'center' }"></i> {{ getSexo(rowData[item.field]) }} } 
+                        @case('fnaci') { {{ rowData[item.field] }}
+                        
+                    <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->
+                    } @default { {{ rowData[item.field] }} } }
+                    </td>
+                }
             </tr>
         </ng-template>
     </p-table>

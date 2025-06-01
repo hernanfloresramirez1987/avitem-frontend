@@ -13,15 +13,18 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { UpperCasePipe } from '@angular/common';
+import { NgStyle, UpperCasePipe } from '@angular/common';
 import { Column } from '@/core/_models/common/columns.interface';
 import { FilterApplyService } from '@/core/_services/common/filter.service';
-
+import { PersonasService } from '@/core/_services/personas.service';
+import { LibModule } from '@/core/components/lib/lib.module';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { IconFieldModule } from 'primeng/iconfield';
 
 @Component({
   selector: 'app-clientes',
   standalone: true,
-  imports: [CardModule, TranslateModule, ButtonModule, UpperCasePipe, TableModule],
+  imports: [CardModule, TranslateModule, ButtonModule, UpperCasePipe, TableModule, NgStyle, LibModule, InputGroupModule, IconFieldModule],
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.scss'
 })
@@ -48,7 +51,7 @@ export default class ClientesComponent implements OnInit {
   expedidoOptions!: { name: string; code: string }[];
 
   
-  constructor(private usersServ: UsersService, private readonly clientServ: ClientsService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router) {
+  constructor(private usersServ: UsersService, private readonly clientServ: ClientsService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router, private personasService: PersonasService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.clientServ.postClients(this.employeedto())
@@ -70,9 +73,9 @@ export default class ClientesComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.clientServ.getAllClients().subscribe((clients) => {
-      this.clients = clients;
-    });
+    // this.clientServ.getAllClients().subscribe((clients) => {
+    //   this.clients = clients;
+    // });
   }
 
 
@@ -107,4 +110,6 @@ export default class ClientesComponent implements OnInit {
   }
 
   add = () => this.router.navigate(['/users/clientes/create']);
+
+  getSexo = (sex: string): string => this.personasService.getSexo(sex);
 }

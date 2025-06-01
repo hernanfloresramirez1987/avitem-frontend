@@ -6,7 +6,7 @@ import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { EmployeeDTO } from '../../../../_models/dto/users/employees/employee.interface.dto';
 import { EmployeeBaseFilter } from '../../../../_models/dto/users/employees/employeeSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
+import { NgClass, NgStyle, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { tableconfig } from '../../../../config/table.config';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
@@ -18,11 +18,13 @@ import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 import { IconFieldModule } from 'primeng/iconfield';
 import { Router, RouterLink } from '@angular/router';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { PersonasService } from '@/core/_services/personas.service';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, IconFieldModule],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, IconFieldModule, InputGroupModule, NgStyle],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -45,7 +47,7 @@ export default class UsersComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-  constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router) {
+  constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router, private personasService: PersonasService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
@@ -97,4 +99,6 @@ export default class UsersComponent {
   }
 
   add = () => this.router.navigate(['/users/empleados/create']);
+
+  getSexo = (sex: string): string => this.personasService.getSexo(sex);
 }

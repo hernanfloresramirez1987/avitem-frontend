@@ -1,4 +1,4 @@
-import { UpperCasePipe } from '@angular/common';
+import { NgStyle, UpperCasePipe } from '@angular/common';
 import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -17,11 +17,12 @@ import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
+import { PersonasService } from '@/core/_services/personas.service';
 
 @Component({
   selector: 'app-suppliers',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent, NgStyle],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })
@@ -44,7 +45,7 @@ export default class SuppliersComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-    constructor(private employeeServ: ProveedoresService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService) {
+    constructor(private employeeServ: ProveedoresService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private personasService: PersonasService) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         this.employeeServ.postProveedores(this.employeedto())
@@ -89,4 +90,5 @@ export default class SuppliersComponent {
     this.stateIni = true;
   }
 
+  getSexo = (sex: string): string => this.personasService.getSexo(sex);
 }
