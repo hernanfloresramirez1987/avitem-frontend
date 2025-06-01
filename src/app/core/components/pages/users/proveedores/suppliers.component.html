@@ -110,10 +110,15 @@
                 </td>
                 @for (item of columns; track item) {
                 <td>
-                    @switch (item.field) { @case("id") { {{ rowData['id'] }} } @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} } @case('nombre') { {{ rowData[item.field] }} } @case('app') { {{ rowData[item.field] }} } @case('apm') { {{ rowData[item.field] }}
-                    } @case('sexo') { {{ rowData[item.field] }} } @case('fnaci') { {{ rowData[item.field] }}
-                    <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->
-                    } @default { {{ rowData[item.field] }} } }
+                    @switch (item.field) { 
+                        @case("id") { {{ rowData['id'] }} } 
+                        @case("ci") { {{ rowData['ci'] }} {{ rowData['ciExpedit'] }} } 
+                        @case('nombre') { {{ rowData[item.field] }} } 
+                        @case('app') { {{ rowData[item.field] }} } 
+                        @case('apm') { {{ rowData[item.field] }} } 
+                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-venus' }}" [ngStyle]="{ color: rowData[item.field] === 'V' ? 'blue' : 'red', 'font-weight': 'bold', 'font-size': '1.25rem', 'align-items': 'center', 'justify-content': 'center' }"></i> {{ getSexo(rowData[item.field]) }} } 
+                        @default { {{ rowData[item.field] }} } 
+                    }
                 </td>
                 }
             </tr>

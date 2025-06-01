@@ -1,17 +1,4 @@
-<p-card [header]="'pages.employees' | translate | uppercase">
-    <div class="flex justify-content-between">
-        <div>
-            <!-- <h5 class="text-4xl">{{'pages.employees' | translate | uppercase}}</h5> -->
-        </div>
-        <div>
-            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"> </button>
-            <button pButton label="Add" class="p-button-outlined mr-1" icon="pi pi-plus" (click)="add()"> </button> 
-            <!-- <p-button [icon]="'pi pi-filter'" (click)="showDialog()" [text]="true"> </p-button> -->
-            <!-- @if (stateValues().data !== null && stateValues().data.length > 0) { <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button> }
-        @else { <p-button class="p-button-outlined" icon="pi pi-ellipsis-v" [text]=true [disabled]="true"> </p-button> } -->
-            <!-- ;;;;{{stateValues().data | json}} -->
-        </div>
-    </div>
+<p-card [header]="'pages.employees' | translate | uppercase" [subheader]="'pages.admin_employees' | translate">
     <p-table #dt1
         [value]="stateValues().data"
         dataKey="id"
@@ -33,9 +20,19 @@
         [scrollable]="true"
         scrollHeight="60vh"
         [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
-        <!-- [rows]="stateValues().rows" -->
-        <!-- (onColReorder)="onColumnReorder($event)" -->
-
+        
+        <ng-template #caption>
+            <div class="flex justify-content-end">
+                <p-iconfield iconPosition="left">
+                    <p-inputgroup>
+                        <p-button label="Add" icon="pi pi-plus" severity="primary" class="pr-1" routerLink="/edit/" />&nbsp;
+                        <p-button label="Clear" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
+                        <p-button pRipple icon="pi pi-ellipsis-v" severity="secondary"/>
+                    </p-inputgroup>
+                </p-iconfield>
+            </div>
+        </ng-template>
+    
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th rowspan="2">
@@ -134,7 +131,7 @@
                         @case('nombre') { {{ rowData[item.field] }} } 
                         @case('app') { {{ rowData[item.field] }} } 
                         @case('apm') { {{ rowData[item.field] }} }
-                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-mars' }}"></i>====== {{ rowData[item.field] }} <i class="pi pi-check"></i> {{ (rowData[item.field] === 'V') ? 'pi-varon' : 'pi-mujer' }} } 
+                        @case('sexo') { <i class="pi {{ (rowData[item.field] === 'V') ? 'pi-mars' : 'pi-venus' }}" [ngStyle]="{ color: rowData[item.field] === 'V' ? 'blue' : 'red', 'font-weight': 'bold', 'font-size': '1.25rem', 'align-items': 'center', 'justify-content': 'center' }"></i> {{ getSexo(rowData[item.field]) }} } 
                         @case('fnaci') { {{ rowData[item.field] }}
                         
                     <!-- @if (rowData[item.field] !== '') { <div style="white-space: pre-wrap;">{{ rowData[item.field] | dateTimeSeparate}}</div> } -->

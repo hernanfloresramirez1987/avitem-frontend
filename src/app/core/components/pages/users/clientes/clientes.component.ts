@@ -70,9 +70,9 @@ export default class ClientesComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.clientServ.getAllClients().subscribe((clients) => {
-      this.clients = clients;
-    });
+    // this.clientServ.getAllClients().subscribe((clients) => {
+    //   this.clients = clients;
+    // });
   }
 
 

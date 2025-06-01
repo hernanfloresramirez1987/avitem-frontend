@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ProveedorDTO } from '../_models/dto/users/proveedors/proveedor.interface.dto';
 import { ProveedorResp } from '../_models/users/proveedores/proveedoresResponse.interface';
 import { ProveedorRegister } from '../_models/dto/users/proveedors/proveedorRegister.interface';
@@ -18,4 +18,6 @@ export class PersonasService {
   postEmployees = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.http.post<ProveedorResp>(`${this.#url}empleados/list`, proveedorDto);
 
   getEmployeeCI = (employeeSearchCI: number): Observable<ProveedorItem> => this.http.get<ProveedorItem>(`${this.#url}personas/searchCI/${employeeSearchCI}`);  
+
+  getSexo = (sexo: string) => (sexo === 'V') ? 'Varon' : 'Mujer';
 }
