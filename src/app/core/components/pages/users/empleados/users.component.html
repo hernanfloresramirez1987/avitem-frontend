@@ -26,8 +26,8 @@
                 <p-iconfield iconPosition="left">
                     <p-inputgroup>
                         <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
-                        <p-button [label]="'labels.add' | translate" icon="pi pi-user-plus" severity="primary" class="pr-1" routerLink="/edit/" />&nbsp;
-                        <p-button pRipple icon="pi pi-ellipsis-v" severity="secondary"/>
+                        <p-button icon="pi pi-user-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />&nbsp;
+                        <p-button pRipple icon="pi pi-ellipsis-v" severity="secondary" [outlined]="true"/>
                     </p-inputgroup>
                 </p-iconfield>
             </div>

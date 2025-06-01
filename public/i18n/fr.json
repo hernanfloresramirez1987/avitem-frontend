@@ -3,7 +3,10 @@
         "employees": "Employés",
         "clients": "Clients",
         "suppliers": "Fournisseurs",
-        "users": "Utilisateurs"
+        "users": "Utilisateurs",
+        "register_employee": "Enregistrer l'employé",
+        "register_supplier": "Enregistrer le fournisseur",
+        "register_client": "Enregistrer le client"
     },
     "labels": {
         "id": "ID",
@@ -40,6 +43,15 @@
         "admin_clients": "Administrar Clientes",
         "admin_users": "Administrar Usuarios",
         "add": "Ajouter",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "clean": "Effacer",
+        "register_employee": "Enregistrer l'employé",
+        "register_supplier": "Enregistrer le fournisseur",
+        "register_client": "Enregistrer le client",
+        "enterprise": "Entreprise",
+        "telefonoEmpresa": "Téléphone de l'entreprise",
+        "direccionEmpresa": "Adresse de l'entreprise"
     }
 }

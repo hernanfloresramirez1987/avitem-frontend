@@ -138,6 +138,16 @@ export default class UsersCreateComponent implements OnInit {
   }
 
   cleanAll() {
+    const confirClean = confirm('¿Estás seguro de querer limpiar el formulario?');
+    if(confirClean) {
+      this.registroForm.reset();
+    }
+  }
 
+  cancel() {
+    const confir = confirm('¿Estás seguro de querer cancelar el registro y salir del formulario?');
+    if(confir) {
+      this.router.navigate(['users/empleados']);
+    }
   }
 }

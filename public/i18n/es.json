@@ -3,7 +3,10 @@
         "employees": "Empleados",
         "clients": "Clientes",
         "suppliers": "Proveedores",
-        "users": "Usuarios"
+        "users": "Usuarios",
+        "register_employee": "Registrar Empleado",
+        "register_supplier": "Registrar Proveedor",
+        "register_client": "Registrar Cliente"
     },
     "labels": {
         "detail_people": "Detalle Persona",
@@ -48,6 +51,15 @@
         "admin_clients": "Administrar Clientes",
         "admin_users": "Administrar Usuarios",
         "add": "Agregar",
-        "clear": "Limpiar"
+        "clear": "Limpiar",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "clean": "Limpiar",
+        "register_employee": "Registrar Empleado",
+        "register_supplier": "Registrar Proveedor",
+        "register_client": "Registrar Cliente",
+        "enterprise": "Empresa",
+        "telefonoEmpresa": "Teléfono de la Empresa",
+        "direccionEmpresa": "Dirección de la Empresa"
     }
 }
