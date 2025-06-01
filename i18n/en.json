@@ -8,7 +8,8 @@
         "register_supplier": "Register Supplier",
         "register_client": "Register Client",
         "products": "Products",
-        "register_product": "Register Product"
+        "register_product": "Register Product",
+        "purchases": "Purchases"
     },
     "labels": {
         "detail_people": "Detail People",
@@ -72,6 +73,8 @@
         "id_proveedor": "Supplier",
         "id_categoria": "Category",
         "register_product": "Register Product",
-        "admin_products": "Admin Products"
+        "admin_products": "Admin Products",
+        "purchases": "Purchases",
+        "register_purchases": "Register Purchases"
     }
 }
