@@ -1,49 +1,66 @@
 <form [formGroup]="registroForm">
     <p-card [header]="'pages.register_product' | translate | uppercase">
-        <div class="align-items-left justify-content-top pr-2">
-            <!-- <h6>{{'users.detail_people' | translate | uppercase}}</h6> -->
-            <div class="flex flex-column md:flex-row flex-row">
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-8 md:w-6">
-                    <label for="nombre" class="w-20rem">{{'labels.nombre' | translate }}</label>
-                    <input pInputText [formControlName]="'nombre'" type="text" class="w-full" /> @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
-                    <span style="color: red;">Error en el Nombre.</span> }
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                    <label for="description" class="w-20rem">{{'labels.description' | translate }}</label>
-                    <input pInputText [formControlName]="'descripcion'" type="text" class="w-full" /> @if (registroForm.get('description')?.invalid && registroForm.get('description')?.touched) {
-                    <span style="color: red;">Error en el Nombre.</span> }
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4  lg:w-4 md:w-5">
-                    <label for="fechaIngreso" class="w-15rem">{{'labels.fechaIngreso' | translate }}</label>
-                    <p-datepicker [formControlName]="'fechaIngreso'" class="w-full lg:w-full" styleClass="w-full" /> @if (registroForm.get('fechaIngreso')?.invalid && registroForm.get('fechaIngreso')?.touched) {
-                    <span style="color: red;">Error en el {{'labels.fechaIngreso' | translate }}.</span> }
+        <div class="flex md:flex-row sm:flex-row">
+            <div class="col-12 md:col-12 p-2 w-full">
+                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <div class="row-auto">
+                    <div class="flex md:flex-row flex-row w-full p-2">
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="nombre">{{'labels.nombre' | translate }}</label>
+                            <input pInputText [formControlName]="'nombre'" type="text" class="w-full" [fluid]="true" /> @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+                            <small style="color: red;">Error en el Nombre.</small> }
+                        </div>
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="nit">{{'labels.descripcion' | translate }}</label>
+                            <input pInputText [formControlName]="'descripcion'" type="text" class="w-full" [fluid]="true" /> @if (registroForm.get('descripcion')?.invalid && registroForm.get('descripcion')?.touched) {
+                            <small style="color: red;">Error en el Descripcion.</small> }
+                        </div>
+                    </div>
+                    <div class="flex md:flex-row flex-row w-full p-2">
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="fechaIngreso" class="w-15rem">{{'labels.fechaIngreso' | translate }}</label>
+                            <p-datepicker [formControlName]="'fechaIngreso'" class="w-full lg:w-full" styleClass="w-full" /> @if (registroForm.get('fechaIngreso')?.invalid && registroForm.get('fechaIngreso')?.touched) {
+                            <span style="color: red;">Error en el {{'labels.fechaIngreso' | translate }}.</span> }
+                        </div>
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="unidadMedida" class="w-15rem">{{'labels.unidadMedida' | translate }}</label>
+                            <p-select [options]="unidades" [formControlName]="'unidadMedida'" optionLabel="medida" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar una Unidad" /> @if (registroForm.get('unidadMedida')?.invalid && registroForm.get('unidadMedida')?.touched) {
+                            <span style="color: red;">Error en el {{'labels.unidadMedida' | translate }}.</span> }
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-column flex-row md:flex-row ">
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
-                    <label for="unidadMedida" class="w-15rem">{{'labels.unidadMedida' | translate }}</label>
-                    <p-dropdown [options]="unidades" [formControlName]="'unidadMedida'" optionLabel="medida" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar una Unidad" /> @if (registroForm.get('unidadMedida')?.invalid && registroForm.get('unidadMedida')?.touched) {
-                    <span style="color: red;">Error en el {{'labels.unidadMedida' | translate }}.</span> }
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                    <label for="color" class="w-15rem">{{'labels.color' | translate }}</label>
-                    <p-dropdown [options]="colores" [formControlName]="'id_color'" optionLabel="color" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Color" /> @if (registroForm.get('id_color')?.invalid && registroForm.get('id_color')?.touched) {
-                    <span style="color: red;">Error en el {{'labels.id_color' | translate }}.</span> }
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                    <label for="codigoProducto" class="w-15rem">{{'labels.codigoProducto' | translate }}</label>
-                    <input pInputText [formControlName]="'codigoProducto'" type="text" class="w-full" /> @if (registroForm.get('codigoProducto')?.invalid && registroForm.get('codigoProducto')?.touched) {
-                    <span style="color: red;">Error en el {{'labels.codigoProducto' | translate }}.</span> }
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                    <label for="proveedor" class="w-15rem">{{'labels.id_proveedor' | translate }}</label>
-                    <p-dropdown [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" [editable]="true" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un Proveedor" /> @if (registroForm.get('id_proveedor')?.invalid && registroForm.get('id_proveedor')?.touched) {
-                    <span style="color: red;">Error en el {{'labels.id_proveedor' | translate }}.</span> }
-                </div>
-                <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
-                    <label for="LastName" class="w-15rem">{{'labels.id_categoria' | translate }}</label>
-                    <p-dropdown [formControlName]="'id_categoria'" [options]="categorias" optionLabel="nombre" [editable]="true" class="w-full lg:w-full" styleClass="w-full" placeholder="Select una Categoria" /> @if (registroForm.get('id_categoria')?.invalid && registroForm.get('id_categoria')?.touched) {
-                    <span style="color: red;">Error en el {{'labels.id_categoria' | translate }}.</span> }
+            
+            
+
+
+            <div class="col-12 md:col-12 p-2 w-full">
+                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <div class="row-auto">
+                    <div class="flex md:flex-row flex-row w-full p-2">
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="color" class="w-15rem">{{'labels.color' | translate }}</label>
+                            <p-select [options]="colores" [formControlName]="'id_color'" optionLabel="color" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Color" /> @if (registroForm.get('id_color')?.invalid && registroForm.get('id_color')?.touched) {
+                            <span style="color: red;">Error en el {{'labels.id_color' | translate }}.</span> }
+                        </div>
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="codigoProducto" class="w-15rem">{{'labels.codigoProducto' | translate }}</label>
+                            <input pInputText [formControlName]="'codigoProducto'" type="text" class="w-full" /> @if (registroForm.get('codigoProducto')?.invalid && registroForm.get('codigoProducto')?.touched) {
+                            <span style="color: red;">Error en el {{'labels.codigoProducto' | translate }}.</span> }
+                        </div>
+                    </div>
+                    <div class="flex md:flex-row flex-row w-full p-2">
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="proveedor" class="w-15rem">{{'labels.id_proveedor' | translate }}</label>
+                            <p-select [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" [editable]="true" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un Proveedor" /> @if (registroForm.get('id_proveedor')?.invalid && registroForm.get('id_proveedor')?.touched) {
+                            <span style="color: red;">Error en el {{'labels.id_proveedor' | translate }}.</span> }
+                        </div>
+                        <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                            <label for="LastName" class="w-15rem">{{'labels.id_categoria' | translate }}</label>
+                            <p-select [formControlName]="'id_categoria'" [options]="categorias" optionLabel="nombre" [editable]="true" class="w-full lg:w-full" styleClass="w-full" placeholder="Select una Categoria" /> @if (registroForm.get('id_categoria')?.invalid && registroForm.get('id_categoria')?.touched) {
+                            <span style="color: red;">Error en el {{'labels.id_categoria' | translate }}.</span> }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

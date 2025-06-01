@@ -22,7 +22,7 @@ import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent, JsonPipe],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })

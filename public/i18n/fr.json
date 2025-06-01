@@ -8,7 +8,8 @@
         "register_supplier": "Enregistrer le fournisseur",
         "register_client": "Enregistrer le client",
         "products": "Produits",
-        "register_product": "Enregistrer le produit"
+        "register_product": "Enregistrer le produit",
+        "purchases": "Achats"
     },
     "labels": {
         "id": "ID",
@@ -64,6 +65,8 @@
         "id_proveedor": "Fournisseur",
         "id_categoria": "Catégorie",
         "register_product": "Enregistrer le produit",
-        "admin_products": "Administrar Produits"
+        "admin_products": "Administrar Produits",
+        "purchases": "Achats",
+        "register_purchases": "Enregistrer les achats"
     }
 }

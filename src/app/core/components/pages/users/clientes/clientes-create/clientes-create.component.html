@@ -2,7 +2,7 @@
     <p-card [header]="'labels.register_clients' | translate | uppercase" [subheader]="'labels.admin_employees' | translate">
         <div class="flex md:flex-row sm:flex-row">
 
-            <div class="col-12 md:col-7 p-2 w-full basis-[60%]">
+            <div class="col-12 md:col-7 p-2 w-full">
                 <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
                 <div class="flex md:flex-row flex-row w-full p-2">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
@@ -13,7 +13,7 @@
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="nit" class="w-20rem">{{'labels.nit' | translate }}</label>
                         <input pInputText [formControlName]="'nit'" type="text" class="w-full" [fluid]="true" /> @if (registroForm.get('nit')?.invalid && registroForm.get('nit')?.touched) {
-                        <small style="color: red;">Error en el CI.</small> }
+                        <small style="color: red;">Error en el NIT.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ServiceName" class="w-15rem">{{'labels.ciComplement' | translate }}</label>

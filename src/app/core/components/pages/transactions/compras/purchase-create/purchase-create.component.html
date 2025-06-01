@@ -11,7 +11,7 @@
                     <!-- Fecha de compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'purcharses.fechaCompra' | translate }}</label>
-                        <p-calendar [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
+                        <p-date-picker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <!-- precio total de compra -->
@@ -42,7 +42,7 @@
                         <p-inputGroup>
                             <!-- <input type="text" pInputText placeholder="Vote" /> -->
                             <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" class="p-inputtext-sm w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" />
-                            <button type="button" pButton icon="pi pi-plus" class="p-button-primary" title="Agregar almacen"></button>
+                            <button type="button" pButton icon="pi pi-plus" class="p-button-primary" title="Agregar almacen" (click)="stateDialog.set(true)"></button>
                         </p-inputGroup>
                         @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
                         <small style="color: red;">Error en el Almacen Seleccionado.</small> }
@@ -119,15 +119,6 @@
                         </tr>
                     </ng-template>
                 </p-table>
-                <!-- </div> -->
-
-                <!-- <ng-template pTemplate="footer"> -->
-                <!-- <div class="flex gap-3 mt-1">
-                    <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-                    <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitPurchase()" [disabled]="purchaseForm.invalid && detailView.length > 0" />
-                </div> -->
-
-                <!-- </ng-template> -->
             </div>
         </div>
         <ng-template pTemplate="footer">
@@ -139,3 +130,7 @@
         </ng-template>
     </p-card>
 </form>
+<p-dialog [visible]="stateDialog()" [modal]="true" [draggable]="false" [resizable]="false" [closable]="false" [dismissableMask]="true" [closeOnEscape]="true" [style]="{width: '50vw'}" [header]="'labels.register_purchases' | translate | uppercase">
+    <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" (click)="stateDialog.set(false)" />
+    <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitPurchase()" [disabled]="!purchaseForm.valid" />
+</p-dialog>

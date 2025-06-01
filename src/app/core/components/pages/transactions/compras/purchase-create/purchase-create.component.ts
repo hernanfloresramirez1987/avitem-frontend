@@ -9,7 +9,6 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { ButtonGroupModule } from 'primeng/buttongroup';
-import { CalendarModule } from 'primeng/calendar';
 import { PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
 import { ProveedoresService } from '../../../../../_services/proveedors.service';
 import { ComprasService } from '../../../../../_services/compras.service';
@@ -27,11 +26,13 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { ProveedorItem } from '@/core/_models/users/proveedores/proveedores.model';
+import { DatePickerModule } from 'primeng/datepicker';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink],
+  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'
@@ -52,6 +53,8 @@ export default class PurchaseCreateComponent {
   currentDate!: string;
   total = 0;
   totalCompra = 0;
+
+  stateDialog = signal<boolean>(false);
 
   constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private almacenesServ: AlmacenesService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
