@@ -8,7 +8,8 @@
         "register_supplier": "Registrar Proveedor",
         "register_client": "Registrar Cliente",
         "products": "Productos",
-        "register_product": "Registrar Producto"
+        "register_product": "Registrar Producto",
+        "purchases": "Compras"
     },
     "labels": {
         "detail_people": "Detalle Persona",
@@ -72,6 +73,8 @@
         "id_proveedor": "Proveedor",
         "id_categoria": "Categoría",
         "register_product": "Registrar Producto",
-        "admin_products": "Administrar Productos"
+        "admin_products": "Administrar Productos",
+        "purchases": "Compras",
+        "register_purchases": "Registrar Compras"
     }
 }

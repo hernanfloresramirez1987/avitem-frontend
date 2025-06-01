@@ -20,11 +20,12 @@ import { ColoresService } from '../../../../../_services/colores.service';
 import { TagModule } from 'primeng/tag';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-product-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, InputTextModule, DropdownModule, ButtonModule, DatePickerModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule, RouterLink],
+  imports: [CardModule, ReactiveFormsModule, InputTextModule, SelectModule, ButtonModule, DatePickerModule, CheckboxModule, TranslateLanModule, UpperCasePipe, TagModule, FormsModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.scss'

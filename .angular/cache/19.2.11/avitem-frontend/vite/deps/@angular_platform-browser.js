@@ -28,7 +28,8 @@ import {
   withI18nSupport,
   withIncrementalHydration,
   withNoHttpTransferCache
-} from "./chunk-Z6VWULIP.js";
+} from "./chunk-ITMOJBBP.js";
+import "./chunk-7GYTNKWD.js";
 import {
   DomRendererFactory2,
   EVENT_MANAGER_PLUGINS,
@@ -40,7 +41,6 @@ import {
 import {
   getDOM
 } from "./chunk-BIZUFLDE.js";
-import "./chunk-7GYTNKWD.js";
 import "./chunk-7JUAEKMP.js";
 import "./chunk-VEFWJPWY.js";
 import "./chunk-WPM5VTLQ.js";
