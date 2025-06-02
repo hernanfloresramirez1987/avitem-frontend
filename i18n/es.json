@@ -9,7 +9,9 @@
         "register_client": "Registrar Cliente",
         "products": "Productos",
         "register_product": "Registrar Producto",
-        "purchases": "Compras"
+        "purchases": "Compras",
+        "warehouse": "Almacenes",
+        "sucursal": "Sucursal"
     },
     "labels": {
         "detail_people": "Detalle Persona",
@@ -75,6 +77,24 @@
         "register_product": "Registrar Producto",
         "admin_products": "Administrar Productos",
         "purchases": "Compras",
-        "register_purchases": "Registrar Compras"
+        "register_purchases": "Registrar Compras",
+        "fechaCompra": "Fecha de Compra",
+        "total": "Total",
+        "proveedor": "Proveedor",
+        "producto": "Producto",
+        "almacen": "Almacén",
+        "cantidad": "Cantidad",
+        "precioCompra": "Precio de Compra",
+        "precioVenta": "Precio de Venta",
+        "totalCompra": "Total de Compra",
+        "admin_purchases": "Administrar Compras",
+        "precio_total": "Precio Total",
+        "empresa": "Empresa",
+        "cantidadStock": "Cantidad en Stock",
+        "descripcion": "Descripción",
+        "form_employees": "Formulario de Empleados",
+        "form_products": "Formulario de Productos",
+        "form_suppliers": "Formulario de Proveedores",
+        "form_clients": "Formulario de Clientes"
     }
 }
