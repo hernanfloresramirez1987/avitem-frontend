@@ -1,5 +1,5 @@
 <form [formGroup]="registroForm">
-    <p-card [header]="'pages.register_product' | translate | uppercase">
+    <p-card [header]="'pages.register_product' | translate | uppercase" [subheader]="'labels.form_products' | translate">
         <div class="flex md:flex-row sm:flex-row">
             <div class="col-12 md:col-12 p-2 w-full">
                 <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
@@ -35,7 +35,7 @@
 
 
             <div class="col-12 md:col-12 p-2 w-full">
-                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <h6>&nbsp;</h6>
                 <div class="row-auto">
                     <div class="flex md:flex-row flex-row w-full p-2">
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">

@@ -1,9 +1,9 @@
 <form [formGroup]="registroForm">
-    <p-card [header]="'labels.register_clients' | translate | uppercase" [subheader]="'labels.admin_employees' | translate">
+    <p-card [header]="'labels.register_clients' | translate | uppercase" [subheader]="'labels.forms_employees' | translate">
         <div class="flex md:flex-row sm:flex-row">
 
             <div class="col-12 md:col-7 p-2 w-full">
-                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <!-- <h6>{{'labels.detail_people' | translate | uppercase}}</h6> -->
                 <div class="flex md:flex-row flex-row w-full p-2">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ci" class="w-20rem">{{'labels.ci' | translate }}</label>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="flex md:flex-row flex-row">
-                    <div class="flex justify-content-left w-full p-2">
+                    <div class="flex justify-content-center w-full p-2">
                         @for (item of sexo; track $index) {
                         <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" class="w-full lg:w-full" styleClass="w-full" />
                         <label [for]="item.key" class="ml-2 justify-content-center">{{ item.name }}</label> }

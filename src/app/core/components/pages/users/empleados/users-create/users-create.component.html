@@ -1,8 +1,8 @@
 <form [formGroup]="registroForm">
-  <p-card [header]="'labels.register_employee' | translate | uppercase">
+  <p-card [header]="'labels.register_employee' | translate | uppercase" [subheader]="'labels.form_employees' | translate">
         <div class="flex md:flex-row sm:flex-row">
             <div class="col-12 md:col-4 p-2">
-                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <!-- <h6>{{'labels.detail_people' | translate | uppercase}}</h6> -->
                 <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ci" class="w-20rem">{{'labels.ci' | translate }}</label>
@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-12 md:col-4 p-2">
-                <h6>{{'labels.detail_user' | translate | uppercase}}</h6>
+                <!-- <h6>{{'labels.detail_user' | translate | uppercase}}</h6> -->
                 <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                     <label for="username" class="w-15rem">{{'labels.username' | translate }}</label>
@@ -103,7 +103,7 @@
             </div>
 
             <div class="col-12 md:col-4 p-2">
-                <h6>{{'labels.detail_employee' | translate | uppercase}}</h6>
+                <!-- <h6>{{'labels.detail_employee' | translate | uppercase}}</h6> -->
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2">
                     <label for="type" class="w-15rem">{{'labels.type' | translate }}</label>
                     <p-select [formControlName]="'idTipo'" [options]="tipo" optionLabel="name" class="w-full lg:w-full" styleClass="w-full" placeholder="Select a Extension" />
