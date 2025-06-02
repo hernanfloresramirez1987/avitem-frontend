@@ -13,7 +13,7 @@ import { LibModule } from '../../../lib/lib.module';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { ProductosService } from '../../../../_services/products.service';
 import { map } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ExternapiService } from '../../../../_services/externapi.service';
 import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
@@ -22,7 +22,7 @@ import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -46,7 +46,7 @@ export default class ProductsComponent {
     })));
 
     constructor(private productsServ: ProductosService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService,
-      private externapiServ: ExternapiService
+      private externapiServ: ExternapiService, private router: Router
     ) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
@@ -122,5 +122,9 @@ export default class ProductsComponent {
       default:
         return '#FFFFFF'; // Color blanco predeterminado
     }
+  }
+
+  add = () => {
+    this.router.navigate(['/inventory/products/create']);
   }
 }

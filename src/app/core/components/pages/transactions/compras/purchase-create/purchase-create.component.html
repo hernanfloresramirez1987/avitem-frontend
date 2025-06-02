@@ -2,125 +2,75 @@
 <p-confirmDialog />
 <form [formGroup]="purchaseForm">
     <p-card [header]="'labels.register_purchases' | translate | uppercase">
-        <div class="flex flex-column md:flex-row sm:flex-row w-full">
-            <!-- Asegurarse de que el contenedor principal ocupe todo el ancho -->
-            <div class="align-items-left justify-content-top w-full">
-                <!-- Contenedor externo alinear al 100% -->
-                <div class="flex flex-column md:flex-row gap-2 w-full">
-                    <!-- Flexbox adaptado a todo el ancho -->
-                    <!-- Fecha de compra -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
+        <div class="flex md:flex-row sm:flex-row">
+
+            <div class="col-12 md:col-7 p-2 w-full">
+                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <div class="flex md:flex-row flex-row w-full p-2">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'purcharses.fechaCompra' | translate }}</label>
-                        <p-date-picker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
+                        <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
-                    <!-- precio total de compra -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'purcharses.precio_total' | translate }}</label>
                         <input pInputText type="text" class="w-full" [value]="total" [disabled]="true" />
                     </div>
-                    <!-- proveedor -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'purcharses.proveedor' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
+                        <p-select [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
                         <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
                     </div>
-                    <!-- id_producto -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'purcharses.producto' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
+                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
-                    <!-- almacen -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'purcharses.almacen' | translate }}</label>
-                        <!-- <p-inputGroup>
-                            <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" class="p-inputtext-sm w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
-                            <small style="color: red;">Error en el Almacen Seleccionado.</small> } &nbsp;
-                            <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" severity="primary" />
-                        </p-inputGroup> -->
-                        <p-inputGroup>
-                            <!-- <input type="text" pInputText placeholder="Vote" /> -->
-                            <p-dropdown [formControlName]="'id_almacen'" [options]="almacenes" optionLabel="nombre" class="p-inputtext-sm w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un almacen" [style]="{width: '100%'}" />
-                            <button type="button" pButton icon="pi pi-plus" class="p-button-primary" title="Agregar almacen" (click)="stateDialog.set(true)"></button>
-                        </p-inputGroup>
-                        @if (purchaseForm.get('id_almacen')?.invalid && purchaseForm.get('id_almacen')?.touched) {
-                        <small style="color: red;">Error en el Almacen Seleccionado.</small> }
-                    </div>
                 </div>
-                <!-- <hr> -->
-                <div class="flex flex-column md:flex-row flex-row">
-                    <!-- cantidad -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                <div class="flex md:flex-row flex-row w-full">
+                    <div class="flex flex-wrap justify-content-left align-items-center pb-4 lg:w-full md:w-full w-full p-2">
                         <label class="w-25rem">{{'purcharses.cantidad' | translate }}</label>
                         <input pInputText [formControlName]="'cantidad'" type="number" class="w-full" (change)="changeTotalCompra()" /> @if (purchaseForm.get('cantidad')?.invalid && purchaseForm.get('cantidad')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
-                    <!-- precio compra -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                <!-- </div>
+                <div class="flex md:flex-row flex-row w-full"> -->
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label class="w-25rem">{{'purcharses.precioCompra' | translate }}</label>
                         <input pInputText [formControlName]="'precioUnitario'" type="number" class="w-full" (change)="changeTotalCompra()" /> @if (purchaseForm.get('precioUnitario')?.invalid && purchaseForm.get('precioUnitario')?.touched) {
                         <small style="color: red;">Error en el Precio de Compra.</small> }
                     </div>
-                    <!-- precio venta -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label class="w-25rem">{{'purcharses.precioVenta' | translate }}</label>
                         <input pInputText [formControlName]="'precioVenta'" type="number" class="w-full" /> @if (purchaseForm.get('precioVenta')?.invalid && purchaseForm.get('precioVenta')?.touched) {
                         <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
-                    <!-- precio Total Compra -->
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 px-2 lg:w-full">
+                <!-- </div>
+                <div class="flex md:flex-row flex-row w-full"> -->
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label class="w-25rem">{{'purcharses.totalCompra' | translate }}</label>
                         <input pInputText value="{{totalCompra}}" type="number" class="w-full" disabled/> @if (purchaseForm.get('totaCompra')?.invalid && purchaseForm.get('totaCompra')?.touched) {
                         <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
-
-                    <div class="justify-content-center align-items-center">
-                        <label class="">{{'purcharses.options' | translate }}</label>
-                        <div class="flex justify-content-between">
-                            <p-buttonGroup>
-                                <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" severity="primary" (click)="addDetail()" />
-                                <!-- <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" /> -->
-                                <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="updateData()" />
-                            </p-buttonGroup>
-                        </div>
-                    </div>
-
                 </div>
-                <!-- <div formArrayName="detalle"> -->
-                <h4>Detalles</h4>
-                <!-- @for (item of detail; track $index) { -->
-                <p-table [value]="detailView" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm'">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th style="width: 6%; text-align: right;">No</th>
-                            <th style="width: 40%;">Producto</th>
-                            <th style="width: 12%; text-align: right;">Cantidad</th>
-                            <th style="width: 12%; text-align: right;">Precio Unitario</th>
-                            <th style="width: 12%; text-align: right;">Precio Venta</th>
-                            <th style="width: 12%; text-align: right;">Precio Total</th>
-                            <th style="width: 6%;">Option</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-customer let-i="rowIndex">
-                        <tr>
-                            <td style="text-align: right;">{{i + 1}}</td>
-                            <td [style.backgroundColor]=" getColorBackground(customer.color)" [style.color]="getColor(customer.color)">{{ customer.name_product }}</td>
-                            <td style="text-align: right;">{{ customer.cantidad }}</td>
-                            <td style="text-align: right;">{{ customer.precioUnitario }}</td>
-                            <td style="text-align: right;">{{ customer.precioVenta}}</td>
-                            <td style="text-align: right;">{{ customer.cantidad * customer.precioUnitario}}</td>
-                            <td class="flex flex-wrap justify-content-left">
-                                <p-buttonGroup>
-                                    <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warn" (click)="updateDetail(customer)" /> 
-                                    <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="deleteDetail(customer)" />
-                                </p-buttonGroup>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         <ng-template pTemplate="footer">
             <div class="flex gap-3 mt-1">
                 <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/inventory/products']" />
@@ -130,7 +80,3 @@
         </ng-template>
     </p-card>
 </form>
-<p-dialog [visible]="stateDialog()" [modal]="true" [draggable]="false" [resizable]="false" [closable]="false" [dismissableMask]="true" [closeOnEscape]="true" [style]="{width: '50vw'}" [header]="'labels.register_purchases' | translate | uppercase">
-    <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" (click)="stateDialog.set(false)" />
-    <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitPurchase()" [disabled]="!purchaseForm.valid" />
-</p-dialog>

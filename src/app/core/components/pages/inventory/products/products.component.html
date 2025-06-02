@@ -1,18 +1,13 @@
 <p-card [header]="'pages.products' | translate | uppercase" [subheader]="'labels.admin_products' | translate">
-    <div class="flex justify-content-between">
-        <div>
-            <button pButton class="p-button-outlined mr-1" icon="pi pi-file-pdf" [routerLink]="['/inventory/products/create']" title="Proforma"></button>
-            <!-- <h5 class="text-4xl">{{'pages.products' | translate | uppercase}}</h5> -->
-        </div>
-        <div>
-            <button pButton label="Clear" class="p-button-outlined mr-1" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
-            <button pButton class="p-button-outlined mr-1" icon="pi pi-plus" [routerLink]="['/inventory/products/create']"></button>
-        </div>
-    </div>
     <p-table #dt1 [value]="stateValues().data" dataKey="id" [paginator]="true" [loading]="stateValues().loading" [rows]="stateValues().data.length" [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees" [rowsPerPageOptions]="tablecon"
         styleClass="p-datatable-sm" [lazy]="true" [columns]="columnsSelectSignal()" [reorderableColumns]="true" (onLazyLoad)="getDataPaged($event)" [totalRecords]="stateValues().total_records" responsiveLayout="scroll" [sortMode]="'multiple'" [customSort]="true"
         [scrollable]="true" scrollHeight="60vh" [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
-
+        <ng-template pTemplate="caption">
+            <div class="flex flex-wrap justify-content-end">
+                <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
+                <p-button icon="pi pi-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />
+            </div>
+        </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th rowspan="2">

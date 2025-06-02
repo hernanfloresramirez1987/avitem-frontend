@@ -6,7 +6,6 @@ import { CardModule } from 'primeng/card';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
-import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { PurcharseDetailWithNameProduct, PurcharseRegister } from '../../../../../_models/dto/inventory/compras/comprasRegister.interface';
@@ -28,11 +27,12 @@ import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { ProveedorItem } from '@/core/_models/users/proveedores/proveedores.model';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule],
+  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'

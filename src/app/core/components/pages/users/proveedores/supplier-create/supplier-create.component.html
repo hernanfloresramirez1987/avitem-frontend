@@ -1,9 +1,9 @@
 <form [formGroup]="registroForm">
-    <p-card [header]="'labels.register_supplier' | translate | uppercase">
+    <p-card [header]="'labels.register_supplier' | translate | uppercase" [subheader]="'labels.form_suppliers' | translate">
         <div class="flex md:flex-row sm:flex-row">
 
             <div class="col-12 md:col-7 p-2 w-full basis-[60%]">
-                <h6>{{'labels.detail_people' | translate | uppercase}}</h6>
+                <!-- <h6>{{'labels.detail_people' | translate | uppercase}}</h6> -->
                 <div class="flex md:flex-row flex-row w-full p-2">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ci" class="w-20rem">{{'labels.ci' | translate }}</label>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-12 md:col-6 lg:col-5 p-2 w-full basis-[40%]">
                 <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
-                    <h6>{{'labels.detail_supplier' | translate | uppercase}}</h6>
+                    <!-- <h6>{{'labels.detail_supplier' | translate | uppercase}}</h6> -->
                     <div class="flex md:flex-row flex-row w-full">
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full">
                             <label for="empresa" class="w-15rem">{{'labels.enterprise' | translate }}</label>

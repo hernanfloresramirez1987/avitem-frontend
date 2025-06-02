@@ -13,7 +13,7 @@ import { map } from 'rxjs';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
 import { RatingModule } from 'primeng/rating';
@@ -26,7 +26,7 @@ import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-
 @Component({
   selector: 'app-purchases',
   standalone: true,
-  imports: [TableModule, CardModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, RouterLink, FilterInputComponent],
+  imports: [TableModule, CardModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent],
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.scss'
 })
@@ -49,7 +49,7 @@ export default class PurchasesComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-  constructor(private comprasServ: ComprasService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private messageService: MessageService) {
+  constructor(private comprasServ: ComprasService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private messageService: MessageService, private router: Router) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.comprasServ.getCompras(this.comprasdto())
@@ -166,4 +166,6 @@ export default class PurchasesComponent {
     onRowCollapse(event: TableRowCollapseEvent) {
         this.messageService.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
     }
+
+    add = () => this.router.navigate(['/transactions/compras/create']);
 }

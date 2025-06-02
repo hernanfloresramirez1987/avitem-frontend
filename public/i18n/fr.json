@@ -9,7 +9,9 @@
         "register_client": "Enregistrer le client",
         "products": "Produits",
         "register_product": "Enregistrer le produit",
-        "purchases": "Achats"
+        "purchases": "Achats",
+        "warehouse": "Entrepôt",
+        "sucursal": "Sucursal"
     },
     "labels": {
         "id": "ID",
@@ -67,6 +69,23 @@
         "register_product": "Enregistrer le produit",
         "admin_products": "Administrar Produits",
         "purchases": "Achats",
-        "register_purchases": "Enregistrer les achats"
+        "register_purchases": "Enregistrer les achats",
+        "fechaCompra": "Date d'achat",
+        "total": "Total",
+        "proveedor": "Fournisseur",
+        "producto": "Produit",
+        "almacen": "Entrepôt",
+        "cantidad": "Quantité",
+        "precioCompra": "Prix d'achat",
+        "precioVenta": "Prix de vente",
+        "totalCompra": "Total d'achat",
+        "admin_purchases": "Administrar Achats",
+        "precio_total": "Prix total",
+        "empresa": "Entreprise",
+        "cantidadStock": "Quantité en stock",
+        "descripcion": "Description",
+        "form_employees": "Formulaire d'employés",
+        "form_products": "Formulaire de produits",
+        "form_suppliers": "Formulaire de fournisseurs"
     }
 }
