@@ -19,6 +19,7 @@
         "detail_supplier": "Detail Supplier",
         "detail_employee": "Detail Employee",
         "detail_client": "Detail Client",
+        "detail_product": "Detail Product",
         "id": "ID",
         "ci": "CI",
         "nit": "NIT",
@@ -96,6 +97,8 @@
         "form_products": "Form Products",
         "form_suppliers": "Form Suppliers",
         "form_clients": "Form Clients",
-        "form_users": "Form Users"
+        "form_users": "Form Users",
+        "idLote": "Lot ID",
+        "options": "Options"
     }
 }

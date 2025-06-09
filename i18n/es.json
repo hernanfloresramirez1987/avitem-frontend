@@ -19,6 +19,7 @@
         "detail_supplier": "Detalle Proveedor",
         "detail_employee": "Detalle Empleado",
         "detail_client": "Detalle Cliente",
+        "detail_product": "Detalle Producto",
         "id": "ID",
         "ci": "CI",
         "nit": "NIT",
@@ -95,6 +96,9 @@
         "form_employees": "Formulario de Empleados",
         "form_products": "Formulario de Productos",
         "form_suppliers": "Formulario de Proveedores",
-        "form_clients": "Formulario de Clientes"
+        "form_clients": "Formulario de Clientes",
+        "form_users": "Formulario de Usuarios",
+        "idLote": "ID Lote",
+        "options": "Opciones"
     }
 }
