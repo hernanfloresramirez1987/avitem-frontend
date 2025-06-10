@@ -99,6 +99,9 @@
         "form_clients": "Form Clients",
         "form_users": "Form Users",
         "idLote": "Lot ID",
-        "options": "Options"
+        "options": "Options",
+        "form_purchases": "Form Purchases",
+        "form_sales": "Form Sales",
+        "manage_warehouse": "Manage Warehouse"
     }
 }

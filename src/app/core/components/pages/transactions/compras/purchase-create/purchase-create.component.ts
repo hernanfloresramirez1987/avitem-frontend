@@ -29,11 +29,12 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
 import { SelectModule } from 'primeng/select';
 import { SucursalItem } from '@/core/_models/inventory/sucursales/sucursales.interface';
+import { CapitalizePipe } from '@/core/pipes/capital-letter.pipe';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule, RouterLink],
+  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule, RouterLink, CapitalizePipe],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'
@@ -155,9 +156,7 @@ export default class PurchaseCreateComponent {
   }
 
   asignarValores(): PurcharseRegister {
-    // const formValues = this.purchaseForm.value;
-       const formValues = this.purchaseForm.value;
-
+    const formValues = this.purchaseForm.value;
     const fechaCompra = new Date(formValues.fechaCompra);
     const formattedFechaCompra = fechaCompra.toISOString().split("T")[0];
     console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));

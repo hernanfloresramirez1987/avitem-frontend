@@ -8,7 +8,6 @@ import { ConfirmationService } from 'primeng/api';
 import { VentasService } from '../../../../../_services/ventas.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -25,11 +24,13 @@ import { ClientsService } from '../../../../../_services/clients.service';
 import { Router, RouterLink } from '@angular/router';
 import { ClienteItem } from '../../../../../_models/users/clients/clientesSearch.model';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
+import { SelectModule } from 'primeng/select';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-sale-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, DropdownModule, InputGroupModule, ButtonModule, UpperCasePipe, CalendarModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, RouterLink],
+  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, RouterLink],
   providers: [DatePipe],
   templateUrl: './sale-create.component.html',
   styleUrl: './sale-create.component.scss'
@@ -51,6 +52,7 @@ export default class SaleCreateComponent {
 
   constructor(private confirmationServ: ConfirmationService, private clientServ: ClientsService, private employeesServ: EmployeesService, private ventasServ: VentasService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
+    
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
     this.salesForm = this.fb.group({
       fechaVenta: [this.currentDate],
@@ -73,7 +75,8 @@ export default class SaleCreateComponent {
     });
     
     this.clientServ.getAllClients().subscribe({
-      next: (t) => { console.log(t); 
+      next: (t) => { 
+        console.log(t); 
         this.clientes  = t.map(r => ({
           ...r,
           displayCliente: `${r.nombre} (${r.app}) ${r.apm}`
@@ -96,11 +99,14 @@ export default class SaleCreateComponent {
       });
   }
 
-  asignarValores(): SalesRegister {
-    const formValues = this.salesForm.value; console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
+  asignarValores(): SalesRegister { 
+    const formValues = this.salesForm.value;
+    const fechaVenta = new Date(formValues.fechaVenta);
+    const formattedFechaVenta = fechaVenta.toISOString().split("T")[0];
+    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.ventasRegister = {
-      fechaVenta: String(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
+      fechaVenta: formattedFechaVenta,
       total: this.total,
       id_cliente: formValues.id_cliente.id,
       id_empleado: formValues.id_empleado.id,

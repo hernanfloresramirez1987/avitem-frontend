@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { FilterMultiselectComponent } from './filter-multiselect/filter-multiselect.component';
 import { FilterInputComponent } from './filter-input/filter-input.component';
-import { CalendarModule } from 'primeng/calendar';
 import { TranslateLanModule } from '../../_modules/translate-lan.module';
 
 
@@ -23,7 +22,6 @@ import { TranslateLanModule } from '../../_modules/translate-lan.module';
     TranslateLanModule,
     TagModule,
     TieredMenuModule,
-    CalendarModule,
     FilterMultiselectComponent,
     FilterInputComponent
   ],

@@ -16,11 +16,14 @@ import { WarehouseDTO } from '@/core/_models/dto/inventory/almacenes/warehouse.i
 import { WarehouseBaseFilter } from '@/core/_models/dto/inventory/almacenes/warehouseSearch.interface.dto';
 import { ButtonModule } from 'primeng/button';
 import { map } from 'rxjs';
+import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
+import { FilterClearComponentComponent } from '@/core/components/lib/filter-clear-component/filter-clear-component.component';
+import { LibModule } from '@/core/components/lib/lib.module';
 
 @Component({
   selector: 'app-warehouse',
   standalone: true,
-  imports: [CardModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule],
+  imports: [CardModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, LibModule],
   templateUrl: './warehouse.component.html',
   styleUrl: './warehouse.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -36,7 +39,7 @@ export default class WarehouseComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'cant_ingresos', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
+  private allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({

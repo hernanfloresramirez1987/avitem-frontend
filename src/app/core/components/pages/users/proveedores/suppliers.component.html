@@ -88,12 +88,12 @@
                 @for (item of columns; track item) {
                 <th style="min-width: 11rem">
                     @switch (item.field) {
-                    <!-- @case("account") { <shipedge-filter-multiselect [valores]="accounts()" [field]="'account_id'" type="Select accounts" columna="company_name" [withTemplate]="false"/> } -->
-                    <!-- @case("category") { <shipedge-filter-multiselect [valores]="categories()" [field]="'category_id'" type="Select categories" columna="category"/> } -->
+                    <!-- @case("account") { <appcommon-filter-multiselect [valores]="accounts()" [field]="'account_id'" type="Select accounts" columna="company_name" [withTemplate]="false"/> } -->
+                    <!-- @case("category") { <appcommon-filter-multiselect [valores]="categories()" [field]="'category_id'" type="Select categories" columna="category"/> } -->
                     @case("bin_qty_max") {
-                    <shipedge-filter-input field="bin_qty_max" /> } @case("bin_qty_min") {
-                    <shipedge-filter-input field="bin_qty_min" /> } @case("image") {} @default {
-                    <shipedge-filter-input [field]="item.field" type="text" /> } }
+                    <appcommon-filter-input field="bin_qty_max" /> } @case("bin_qty_min") {
+                    <appcommon-filter-input field="bin_qty_min" /> } @case("image") {} @default {
+                    <appcommon-filter-input [field]="item.field" type="text" /> } }
                 </th>
                 } @empty {
                 <th style="min-width: 12rem">cargando</th> }

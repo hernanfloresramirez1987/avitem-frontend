@@ -79,8 +79,11 @@
             <tr>
                 @for (item of columns; track item) {
                 <th style="min-width: 11rem">
-                    @switch (item.field) { @default {
-                    <shipedge-filter-input [field]="item.field" type="text" /> } }
+                    @switch (item.field) { 
+                        @default {
+                            <appcommon-filter-input [field]="item.field" type="text" /> 
+                        }
+                    }
                 </th>
                 } @empty {
                 <th style="min-width: 12rem">cargando</th> }

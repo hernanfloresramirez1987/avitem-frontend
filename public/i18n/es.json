@@ -99,6 +99,9 @@
         "form_clients": "Formulario de Clientes",
         "form_users": "Formulario de Usuarios",
         "idLote": "ID Lote",
-        "options": "Opciones"
+        "options": "Opciones",
+        "form_purchases": "Formulario de Compras",
+        "form_sales": "Formulario de Ventas",
+        "manage_warehouse": "Gestionar Almacenes"
     }
 }

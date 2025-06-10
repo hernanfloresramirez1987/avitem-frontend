@@ -11,7 +11,7 @@
                     <!-- Fecha de venta -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'labels.fechaVenta' | translate }}</label>
-                        <p-calendar [formControlName]="'fechaVenta'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (salesForm.get('fechaVenta')?.invalid && salesForm.get('fechaVenta')?.touched) {
+                        <p-datepicker [formControlName]="'fechaVenta'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (salesForm.get('fechaVenta')?.invalid && salesForm.get('fechaVenta')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <!-- precio total de venta -->
@@ -22,13 +22,13 @@
                     <!-- id_cliente -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'labels.id_cliente' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_cliente'" [options]="clientes" optionLabel="displayCliente" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Cliente" [style]="{width: '100%'}" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
+                        <p-select [formControlName]="'id_cliente'" [options]="clientes" optionLabel="displayCliente" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Cliente" [style]="{width: '100%'}" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
                         <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
                     </div>
                     <!-- id_empleado -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
                         <label class="w-25rem">{{'labels.id_empleado' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_empleado'" [options]="empleados" optionLabel="displayEmpleado" placeholder="Seleccionar Empleado" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
+                        <p-select [formControlName]="'id_empleado'" [options]="empleados" optionLabel="displayEmpleado" placeholder="Seleccionar Empleado" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <!-- id_producto -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
                         <label class="w-25rem">{{'labels.id_producto' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
+                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
                         <small style="color: red;">Error en el Producto Seleccionado.</small> }
                     </div>
                     <!-- cantidad -->

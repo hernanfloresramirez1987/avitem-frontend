@@ -5,7 +5,7 @@
         <div class="flex md:flex-row sm:flex-row">
 
             <div class="col-12 md:col-7 p-2 w-full">
-                <h6>{{'labels.form_purchases' | translate | uppercase}}</h6>
+                <h6>{{'labels.form_purchases' | translate | capitalize}}</h6>
                 <div class="flex md:flex-row flex-row w-full p-2">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.fechaCompra' | translate }}</label>
@@ -73,8 +73,11 @@
         </div>
 
 
-        <h4>Detalles</h4>
+        <!-- <h4>Detalles</h4> -->
         <p-table [value]="detailView" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm w-full'">
+            <ng-template pTemplate="caption">
+                <div class="from-stone-400">{{'labels.details' | translate | capitalize}}</div>
+            </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width: 6%; text-align: right;">No</th>

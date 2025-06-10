@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   standalone: true,
   imports: [TableModule, MultiSelectModule, FormsModule, ButtonModule],
-  selector: 'shipedge-filter-multiselect',
+  selector: 'appcommon-filter-multiselect',
   templateUrl: './filter-multiselect.component.html',
   styleUrls: ['./filter-multiselect.component.scss']
 })
