@@ -14,6 +14,12 @@
         "sucursal": "Sucursal"
     },
     "labels": {
+        "detail_product": "Détail du produit",
+        "detail_people": "Détail de la personne",
+        "detail_user": "Détail de l'utilisateur",
+        "detail_supplier": "Détail du fournisseur",
+        "detail_employee": "Détail de l'employé",
+        "detail_client": "Détail du client",
         "id": "ID",
         "ci": "CI",
         "nit": "NIT",
@@ -86,6 +92,13 @@
         "descripcion": "Description",
         "form_employees": "Formulaire d'employés",
         "form_products": "Formulaire de produits",
-        "form_suppliers": "Formulaire de fournisseurs"
+        "form_suppliers": "Formulaire de fournisseurs",
+        "form_clients": "Formulaire de clients",
+        "form_users": "Formulaire d'utilisateurs",
+        "idLote": "ID Lote",
+        "options": "Options",
+        "form_purchases": "Formulaire de Compras",
+        "form_sales": "Formulaire de Ventas",
+        "manage_warehouse": "Gestioner Entrepôt"
     }
 }

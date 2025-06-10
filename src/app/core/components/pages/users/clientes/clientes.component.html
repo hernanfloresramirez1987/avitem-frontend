@@ -102,16 +102,16 @@
                 @for (item of columns; track item) {
                 <th style="min-width: 11rem">
                     @switch (item.field) {
-                        @case("id") { <shipedge-filter-input field="id" /> } 
-                        @case("ci") { <shipedge-filter-input field="ci" /> }
-                        @case("nombre") { <shipedge-filter-input field="nombre" /> }
-                        @case("app") { <shipedge-filter-input field="app" /> }
-                        @case("apm") { <shipedge-filter-input field="apm" /> }
-                        @case("sexo") { <shipedge-filter-input field="sexo" /> }
-                        @case("fnaci") { <shipedge-filter-input field="fnaci" /> }
-                        @case("email") { <shipedge-filter-input field="email" /> }
-                        @case("telefono") { <shipedge-filter-input field="telefono" /> }
-                        @default { <shipedge-filter-input [field]="item.field" type="text" /> } 
+                        @case("id") { <appcommon-filter-input field="id" /> } 
+                        @case("ci") { <appcommon-filter-input field="ci" /> }
+                        @case("nombre") { <appcommon-filter-input field="nombre" /> }
+                        @case("app") { <appcommon-filter-input field="app" /> }
+                        @case("apm") { <appcommon-filter-input field="apm" /> }
+                        @case("sexo") { <appcommon-filter-input field="sexo" /> }
+                        @case("fnaci") { <appcommon-filter-input field="fnaci" /> }
+                        @case("email") { <appcommon-filter-input field="email" /> }
+                        @case("telefono") { <appcommon-filter-input field="telefono" /> }
+                        @default { <appcommon-filter-input [field]="item.field" type="text" /> } 
                     }
                 </th>
                 } @empty {

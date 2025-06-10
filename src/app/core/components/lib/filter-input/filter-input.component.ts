@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 
 @Component({
   standalone: true,
-  imports: [TableModule, InputTextModule, FormsModule, CalendarModule],
-  selector: 'shipedge-filter-input',
+  imports: [TableModule, InputTextModule, FormsModule, CalendarModule, DatePickerModule],
+  selector: 'appcommon-filter-input',
   templateUrl: './filter-input.component.html',
   styleUrls: ['./filter-input.component.scss']
 })

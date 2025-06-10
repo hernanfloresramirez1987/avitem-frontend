@@ -10,25 +10,25 @@
                     <!-- Flexbox adaptado a todo el ancho -->
                     <!-- Fecha de venta -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
-                        <label class="w-25rem">{{'sales.fechaVenta' | translate }}</label>
-                        <p-calendar [formControlName]="'fechaVenta'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (salesForm.get('fechaVenta')?.invalid && salesForm.get('fechaVenta')?.touched) {
+                        <label class="w-25rem">{{'labels.fechaVenta' | translate }}</label>
+                        <p-datepicker [formControlName]="'fechaVenta'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (salesForm.get('fechaVenta')?.invalid && salesForm.get('fechaVenta')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <!-- precio total de venta -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.precio_total' | translate }}</label>
+                        <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
                         <input pInputText type="text" [value]="total" class="w-full" [disabled]="true" />
                     </div>
                     <!-- id_cliente -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.id_cliente' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_cliente'" [options]="clientes" optionLabel="displayCliente" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Cliente" [style]="{width: '100%'}" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
+                        <label class="w-25rem">{{'labels.id_cliente' | translate }}</label>
+                        <p-select [formControlName]="'id_cliente'" [options]="clientes" optionLabel="displayCliente" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Cliente" [style]="{width: '100%'}" /> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
                         <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
                     </div>
                     <!-- id_empleado -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full">
-                        <label class="w-25rem">{{'sales.id_empleado' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_empleado'" [options]="empleados" optionLabel="displayEmpleado" placeholder="Seleccionar Empleado" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
+                        <label class="w-25rem">{{'labels.id_empleado' | translate }}</label>
+                        <p-select [formControlName]="'id_empleado'" [options]="empleados" optionLabel="displayEmpleado" placeholder="Seleccionar Empleado" class="w-full lg:w-full" styleClass="w-full" /> @if (salesForm.get('id_empleado')?.invalid && salesForm.get('id_empleado')?.touched) {
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
                 </div>
@@ -36,31 +36,31 @@
                 <div class="flex flex-column md:flex-row flex-row">
                     <!-- id_producto -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.id_producto' | translate }}</label>
-                        <p-dropdown [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
+                        <label class="w-25rem">{{'labels.id_producto' | translate }}</label>
+                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
                         <small style="color: red;">Error en el Producto Seleccionado.</small> }
                     </div>
                     <!-- cantidad -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.cantidad' | translate }}</label>
+                        <label class="w-25rem">{{'labels.cantidad' | translate }}</label>
                         <input pInputText [formControlName]="'cantidad'" type="number" class="w-full" (change)="changeTotalVenta()" /> @if (salesForm.get('cantidad')?.invalid && salesForm.get('cantidad')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <!-- precio compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.precioVenta' | translate }}</label>
+                        <label class="w-25rem">{{'labels.precioVenta' | translate }}</label>
                         <input pInputText [formControlName]="'precioUnitario'" type="number" class="w-full" (change)="changeTotalVenta()" /> @if (salesForm.get('precioUnitario')?.invalid && salesForm.get('precioUnitario')?.touched) {
                         <small style="color: red;">Error en el Precio de Compra.</small> }
                     </div>
                     <!-- precio Total Compra -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 lg:w-full px-2">
-                        <label class="w-25rem">{{'sales.totalVenta' | translate }}</label>
+                        <label class="w-25rem">{{'labels.totalVenta' | translate }}</label>
                         <input pInputText value="{{totalVenta}}" type="number" class="w-full" disabled/> @if (salesForm.get('totaCompra')?.invalid && salesForm.get('totaCompra')?.touched) {
                         <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
 
                     <div class="justify-content-center align-items-center">
-                        <label class="">{{'sales.options' | translate }}</label>
+                        <label class="">{{'labels.options' | translate }}</label>
                         <div class="flex justify-content-between">
                             <p-buttonGroup>
                                 <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" severity="primary" (click)="addDetail()" />

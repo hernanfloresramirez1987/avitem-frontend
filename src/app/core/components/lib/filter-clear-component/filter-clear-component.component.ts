@@ -7,7 +7,7 @@ import { TranslateLanService } from '@/layout/service/translate-lan.service';
 
 
 @Component({
-  selector: 'shipedge-filter-clear',
+  selector: 'appcommon-filter-clear',
   standalone: true,
   imports: [ChipModule, FormsModule],
   templateUrl: './filter-clear-component.component.html',

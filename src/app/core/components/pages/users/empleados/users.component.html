@@ -100,10 +100,10 @@
                 @for (item of columns; track item) {
                 <th style="min-width: 11rem">
                     @switch (item.field) {
-                        @case("bin_qty_max") { <shipedge-filter-input field="bin_qty_max" /> } 
-                        @case("bin_qty_min") { <shipedge-filter-input field="bin_qty_min" /> }
+                        @case("bin_qty_max") { <appcommon-filter-input field="bin_qty_max" /> } 
+                        @case("bin_qty_min") { <appcommon-filter-input field="bin_qty_min" /> }
                         @case("image") {} 
-                        @default { <shipedge-filter-input [field]="item.field" type="text" /> } 
+                        @default { <appcommon-filter-input [field]="item.field" type="text" /> } 
                     }
                 </th>
                 } @empty {

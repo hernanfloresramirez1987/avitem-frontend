@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AlmacenesService } from '../../../../../_services/almacenes.service';
-import { AlmacenItem } from '../../../../../_models/inventory/almacenes/almacenes.model';
+import { WarehouseItem } from '../../../../../_models/inventory/almacenes/warehouse.model';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -28,11 +28,13 @@ import { ProveedorItem } from '@/core/_models/users/proveedores/proveedores.mode
 import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
 import { SelectModule } from 'primeng/select';
+import { SucursalItem } from '@/core/_models/inventory/sucursales/sucursales.interface';
+import { CapitalizePipe } from '@/core/pipes/capital-letter.pipe';
 
 @Component({
   selector: 'app-purchase-create',
   standalone: true,
-  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule, RouterLink],
+  imports: [InputGroupModule, InputGroupAddonModule, CheckboxModule, RadioButtonModule, ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, InputTextModule, RouterLink, DialogModule, RouterLink, CapitalizePipe],
   providers: [DatePipe],
   templateUrl: './purchase-create.component.html',
   styleUrl: './purchase-create.component.scss'
@@ -44,7 +46,7 @@ export default class PurchaseCreateComponent {
   comprasRegister!: PurcharseRegister;
   proveedores!: ProveedorItem[];
   productos!: ProductItem[];
-  almacenes!: AlmacenItem[];
+  almacenes!: SucursalItem[];
 
   // detail: PurcharseDetail[] = [];
   detailView: PurcharseDetailWithNameProduct[] = [];
@@ -75,9 +77,13 @@ export default class PurchaseCreateComponent {
       error: (err) => console.error('Error al obtener proveedores:', err)
     });
 
-    this.almacenesServ.getAllAlmacenes().subscribe({
-      next: (t) => this.almacenes = t,
-      error: (e: Error) => console.log(e.message)
+    effect(() => {
+      this.almacenesServ.getAllAlmacenes().subscribe({
+        next: (t) => {
+          this.almacenes = t;
+        },
+        error: (e: Error) => console.log(e.message)
+      })
     })
   } // get detalle(): FormArray { //   return this.purchaseForm.get('detalle') as FormArray; // }
 
@@ -151,10 +157,12 @@ export default class PurchaseCreateComponent {
 
   asignarValores(): PurcharseRegister {
     const formValues = this.purchaseForm.value;
+    const fechaCompra = new Date(formValues.fechaCompra);
+    const formattedFechaCompra = fechaCompra.toISOString().split("T")[0];
     console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.comprasRegister = {
-      fechaCompra: String(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
+      fechaCompra: formattedFechaCompra, //String(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
       total: this.total,
       id_proveedor: formValues.id_proveedor.id,
       detalle: this.detailView.map((t: any) => {

@@ -2,8 +2,8 @@
     [field]="field" [showMatchModes]="false" [matchModeOptions]="configfilter">
     @if (typereal === 'date') {
     <ng-template pTemplate="filter" let-filter="filterCallback">
-        <p-calendar #calendar [showTime]="false" [showSeconds]="false" dateFormat="yy-mm-dd" dataType="yy-mm-dd" (onSelect)="filter(formatDate(calendar.value)); formatDate(calendar.value);">
-        </p-calendar>
+        <p-datePicker #calendar [showTime]="false" [showSeconds]="false" dateFormat="yy-mm-dd" dataType="yy-mm-dd" (onSelect)="filter(formatDate(calendar.value)); formatDate(calendar.value);">
+        </p-datePicker>
     </ng-template>
     }
 
