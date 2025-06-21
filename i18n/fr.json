@@ -99,6 +99,7 @@
         "options": "Options",
         "form_purchases": "Formulaire de Compras",
         "form_sales": "Formulaire de Ventas",
-        "manage_warehouse": "Gestioner Entrepôt"
+        "manage_warehouse": "Gestioner Entrepôt",
+        "cantidadDespachada": "Quantité expédiée"
     }
 }

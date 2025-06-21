@@ -1,1 +1,0 @@
-import{Gb as c,Na as o,kb as s,lb as a}from"./chunk-4PTIY3UM.js";var t=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=o({type:n,selectors:[["app-sucursal"]],decls:2,vars:0,template:function(e,p){e&1&&(s(0,"p"),c(1,"sucursal works!"),a())},encapsulation:2})};export{t as default};
