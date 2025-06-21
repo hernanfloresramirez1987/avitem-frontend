@@ -1,30 +1,32 @@
-import { Component, ContentChild, ContentChildren, Input, QueryList, TemplateRef, ViewChild } from '@angular/core';
-import { PrimeTemplate } from 'primeng/api';
-import { MultiSelect, MultiSelectModule } from 'primeng/multiselect';
-import { Nullable } from 'primeng/ts-helpers';
-import { filterConfigMatchModes } from '../../../config/filtercolumn.config';
-import { TableModule } from 'primeng/table';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, ContentChildren, Input, QueryList, TemplateRef, ViewChild, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PrimeTemplate } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TableModule } from 'primeng/table';
+import { Nullable } from 'primeng/ts-helpers';
+import { filterConfigMatchModes } from '../../../../core/config/filtercolumn.config';
 
 @Component({
   standalone: true,
-  imports: [TableModule, MultiSelectModule, FormsModule, ButtonModule],
+  imports: [TableModule, MultiSelectModule, FormsModule, ButtonModule, NgTemplateOutlet],
   selector: 'appcommon-filter-multiselect',
   templateUrl: './filter-multiselect.component.html',
   styleUrls: ['./filter-multiselect.component.scss']
 })
 export class FilterMultiselectComponent {
-
-  @Input() valores!: any[];
-  @Input() type!: string;
-  @Input() field!: string;
-  @Input() columna!: string;
-  @ViewChild('multiselect') filterComponent!: MultiSelect;
-  configfilter = filterConfigMatchModes.matchmodesOnlyIn;
+  @ViewChild('multiselect') filterComponent!: any;
   @ContentChildren(PrimeTemplate) templates: Nullable<QueryList<PrimeTemplate>>;
+  withTemplate = input<boolean>(false);
+  
+  valores = input.required<any[]>();
+  type = input<string>("");
+  field = input<string>();
+  columna = input<string>("");
+  withimage = input<string>("");
+  configfilter = filterConfigMatchModes.matchmodesOnlyIn;
   listTemplate!: TemplateRef<any> | null;
-  @Input() withTemplate: boolean = false;
   hide() {
     this.filterComponent.hide();
   }
@@ -38,4 +40,12 @@ export class FilterMultiselectComponent {
       }
     });
   }
+  clearFilter(filter: any) {
+    if (this.filterComponent) {
+      this.filterComponent.value = [];
+      this.filterComponent.updateModel();
+    }
+    filter(null)
+  }
+  
 }

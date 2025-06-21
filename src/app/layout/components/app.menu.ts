@@ -1,5 +1,5 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, inject, viewChild, ViewChild } from '@angular/core';
+
 import { RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AppMenuitem } from './app.menuitem';
@@ -7,20 +7,24 @@ import { AppMenuitem } from './app.menuitem';
 @Component({
     selector: '[app-menu]',
     standalone: true,
-    imports: [CommonModule, AppMenuitem, RouterModule],
+    imports: [AppMenuitem, RouterModule],
     template: `<div class="layout-menu-container" #menuContainer>
-        <ul class="layout-menu">
-            <ng-container *ngFor="let item of model; let i = index">
-                <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
-                <li *ngIf="item.separator" class="menu-separator"></li>
-            </ng-container>
-        </ul>
-    </div>`
+          <ul class="layout-menu">
+            @for (item of model; track item; let i = $index) {
+              @if (!item.separator) {
+                <li app-menuitem [item]="item" [index]="i" [root]="true"></li>
+              }
+              @if (item.separator) {
+                <li class="menu-separator"></li>
+              }
+            }
+          </ul>
+        </div>`
 })
 export class AppMenu {
     el: ElementRef = inject(ElementRef);
 
-    @ViewChild('menuContainer') menuContainer!: ElementRef;
+    menuContainer = viewChild<ElementRef>('menuContainer')
 
     model: MenuItem[] = [
         {
