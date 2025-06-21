@@ -19,26 +19,25 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export const appConfig: ApplicationConfig = {
-    providers: [
-        provideRouter(
-            appRoutes,
-            withInMemoryScrolling({
-                anchorScrolling: 'enabled',
-                scrollPositionRestoration: 'enabled'
-            }), 
-            withEnabledBlockingInitialNavigation()
-        ),
-        provideHttpClient(withFetch()),
-        provideAnimationsAsync(),
-        providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } } }),
-        provideExperimentalZonelessChangeDetection(),
-        importProvidersFrom(
-          BrowserAnimationsModule,
-          HttpClient,
-          TranslateLanModule,
-
-        ),
-        MessageService,
-        ConfirmationService,
-    ]
+  providers: [
+    provideRouter(
+      appRoutes,
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled'
+      }), 
+      withEnabledBlockingInitialNavigation()
+    ),
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+    providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } } }),
+    provideExperimentalZonelessChangeDetection(),
+    importProvidersFrom(
+      BrowserAnimationsModule,
+      HttpClient,
+      TranslateLanModule
+    ),
+    MessageService,
+    ConfirmationService,
+  ]
 };
