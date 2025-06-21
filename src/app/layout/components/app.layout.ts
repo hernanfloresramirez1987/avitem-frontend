@@ -1,5 +1,5 @@
 import { Component, OnDestroy, Renderer2, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { AppTopbar } from './app.topbar';
@@ -7,13 +7,13 @@ import { AppFooter } from './app.footer';
 import { LayoutService, TabCloseEvent } from '@/layout/service/layout.service';
 import { AppConfigurator } from './app.configurator';
 import { AppBreadcrumb } from './app.breadcrumb';
-import { AppMenu } from './app.menu';
+// import { AppMenu } from './app.menu';
 import {AppSidebar} from "./app.sidebar";
 
 @Component({
     selector: 'app-layout',
     standalone: true,
-    imports: [CommonModule, AppTopbar, AppSidebar, RouterModule, AppFooter, AppConfigurator, AppBreadcrumb],
+    imports: [AppTopbar, AppSidebar, RouterModule, AppFooter, AppConfigurator, AppBreadcrumb, NgClass],
     template: `
         <div class="layout-container" [ngClass]="containerClass">
             <div app-topbar></div>
@@ -67,7 +67,7 @@ export class AppLayout implements OnDestroy {
             }
 
             if ((this.layoutService.isSlim() || this.layoutService.isSlimPlus()) && !this.menuScrollListener) {
-                this.menuScrollListener = this.renderer.listen(this.appSidebar.appMenu.menuContainer.nativeElement, 'scroll', (event) => {
+                this.menuScrollListener = this.renderer.listen(this.appSidebar.appMenu.menuContainer()?.nativeElement, 'scroll', (event) => {
                     if (this.layoutService.isDesktop()) {
                         this.hideMenu();
                     }

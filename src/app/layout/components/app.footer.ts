@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
-// import { LayoutService } from '@/layout/service/layout.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     standalone: true,
-    imports: [TranslateModule],
+    imports: [TranslatePipe],
     selector: '[app-footer]',
     template: ` <div class="footer-start">
             <img src="layout/images/logo-dark.png" alt="logo" />
@@ -17,6 +16,4 @@ import { TranslateModule } from '@ngx-translate/core';
         class: 'layout-footer'
     }
 })
-export class AppFooter {
-    // layoutService = inject(LayoutService);
-}
+export class AppFooter {}

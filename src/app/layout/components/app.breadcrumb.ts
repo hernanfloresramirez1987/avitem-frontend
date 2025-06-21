@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 interface Breadcrumb {
     label: string;
@@ -12,19 +12,21 @@ interface Breadcrumb {
 @Component({
     selector: '[app-breadcrumb]',
     standalone: true,
-    imports: [CommonModule, RouterModule],
+    imports: [RouterModule, AsyncPipe],
     template: ` <ol>
-        <li>
+          <li>
             <a [routerLink]="['/']">
-                <i class="pi pi-home"></i>
+              <i class="pi pi-home"></i>
             </a>
-        </li>
-        <li class="layout-breadcrumb-chevron">/</li>
-        <ng-template ngFor let-item let-last="last" [ngForOf]="breadcrumbs$ | async">
+          </li>
+          <li class="layout-breadcrumb-chevron">/</li>
+          @for (item of breadcrumbs$ | async; track item; let last = $last) {
             <li style="cursor: pointer;">{{ item.label }}</li>
-            <li *ngIf="!last" class="layout-breadcrumb-chevron">/</li>
-        </ng-template>
-    </ol>`,
+            @if (!last) {
+              <li class="layout-breadcrumb-chevron">/</li>
+            }
+          }
+        </ol>`,
     host: {
         class: 'layout-breadcrumb'
     }

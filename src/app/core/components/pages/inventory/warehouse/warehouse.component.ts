@@ -19,11 +19,14 @@ import { map } from 'rxjs';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 import { FilterClearComponentComponent } from '@/core/components/lib/filter-clear-component/filter-clear-component.component';
 import { LibModule } from '@/core/components/lib/lib.module';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { FormsModule, NgModel } from '@angular/forms';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 
 @Component({
   selector: 'app-warehouse',
   standalone: true,
-  imports: [CardModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, LibModule],
+  imports: [CardModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, LibModule, MultiSelectModule, FormsModule],
   templateUrl: './warehouse.component.html',
   styleUrl: './warehouse.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -38,6 +41,7 @@ export default class WarehouseComponent {
   
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
+  private readonly keylocalColumn = "warehouse_cols";
 
   private allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
   columns: string[] = this.allowedColumns;
@@ -46,10 +50,15 @@ export default class WarehouseComponent {
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
 
   expandedRows = {};
 
-  constructor(private warehouseServ: WarehousesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private messageService: MessageService, private router: Router) {
+  constructor(private warehouseServ: WarehousesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private messageService: MessageService, private router: Router, private arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => { //console.log("console.log('', this.warehousesdto()):   ", this.warehousesdto());
       this.warehouseServ
@@ -79,6 +88,7 @@ export default class WarehouseComponent {
     table.clear();
   }
 
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
 
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) {
@@ -99,5 +109,20 @@ export default class WarehouseComponent {
     }
     // this.initData(this.namefilter());
     this.stateIni = true;
+  }
+
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
   }
 }

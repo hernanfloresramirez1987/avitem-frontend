@@ -1,14 +1,18 @@
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom, provideExperimentalZonelessChangeDetection } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter, withEnabledBlockingInitialNavigation, withInMemoryScrolling } from '@angular/router';
-import Aura from '@primeng/themes/aura';
-import { providePrimeNG } from 'primeng/config';
-import { appRoutes } from './app.routes';
-import { CommonModule } from '@angular/common';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { TranslateLanModule } from '@/core/_modules/translate-lan.module';
+
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
+
+import { appRoutes } from './app.routes';
+
+import Aura from '@primeng/themes/aura';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './i18n/', '.json'); // Ruta de traducciones
@@ -27,26 +31,14 @@ export const appConfig: ApplicationConfig = {
         provideHttpClient(withFetch()),
         provideAnimationsAsync(),
         providePrimeNG({ theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } } }),
-
-
-        provideExperimentalZonelessChangeDetection(),
+        provideZonelessChangeDetection(),
         importProvidersFrom(
-            CommonModule,
-            // Browser, 
-            TranslateModule.forRoot({
-              loader: {
-                deps: [HttpClient],
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-              },
-              defaultLanguage: 'es',
-            })
-          ),
-          MessageService,
-          ConfirmationService,
-        //   provideRouter(routes),
-        //   provideAnimations(),
-        //   provideHttpClient(),
-        //   provideAnimationsAsync()
+          BrowserAnimationsModule,
+          HttpClient,
+          TranslateLanModule,
+
+        ),
+        MessageService,
+        ConfirmationService,
     ]
 };
