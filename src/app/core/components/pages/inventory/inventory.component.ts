@@ -24,11 +24,11 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 
 @Component({
-  selector: 'app-warehouse',
+  selector: 'app-inventory',
   standalone: true,
   imports: [CardModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, LibModule, MultiSelectModule, FormsModule],
-  templateUrl: './warehouse.component.html',
-  styleUrl: './warehouse.component.scss',
+  templateUrl: './inventory.component.html',
+  styleUrl: './inventory.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class WarehouseComponent {
