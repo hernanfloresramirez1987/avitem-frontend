@@ -7,13 +7,13 @@ import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { ProductoDTO } from '../../../../_models/dto/inventory/products/producto.interface.dto';
 import { ProductoBaseFilter } from '../../../../_models/dto/inventory/products/productosSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { JsonPipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { ProductosService } from '../../../../_services/products.service';
 import { map } from 'rxjs';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ExternapiService } from '../../../../_services/externapi.service';
 import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
@@ -37,7 +37,7 @@ export default class ProductsComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'nombre', 'codigoProducto', 'empresa', 'descripcion', 'cantidadStock', 'fechaIngreso', 'unidadMedida',  'state', 'categoria'];
+  private readonly allowedColumns: string[] = ['id', 'nombre', 'codigoProducto', 'empresa', 'descripcion', 'cantidadStock', 'fechaIngreso', 'unidadMedida',  'state', 'categoria'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -45,9 +45,7 @@ export default class ProductsComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-    constructor(private productsServ: ProductosService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService,
-      private externapiServ: ExternapiService, private router: Router
-    ) {
+    constructor(private readonly productsServ: ProductosService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly externapiServ: ExternapiService, private readonly router: Router) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         // this.productsServ.postProductsGet(this.productsdto())
@@ -73,8 +71,7 @@ export default class ProductsComponent {
   }
     
   getDataPaged(event: TableLazyLoadEvent) {
-    if (event.filters && this.stateIni !== false) {
-      // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
+    if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.productsdto.update(() => ({
           config: {
             populate_data: false,
@@ -85,11 +82,8 @@ export default class ProductsComponent {
           filter: {
             ...this.filterservice.applyFilterNew(event.filters, this.productsdto().filter),
           }
-        }));
-        // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo);
-      // }
-    }
-    // this.initData(this.namefilter());
+        })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
+    } // this.initData(this.namefilter());
     this.stateIni = true;
   } // goBuilderMaker = () => this.externapiServ.postComponentsRedirecctions(null).subscribe(t => t)
 

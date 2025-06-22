@@ -11,7 +11,8 @@
         "register_product": "Registrar Producto",
         "purchases": "Compras",
         "warehouse": "Almacenes",
-        "sucursal": "Sucursal"
+        "sucursal": "Sucursal",
+        "inventories": "Inventarios"
     },
     "labels": {
         "detail_people": "Detalle Persona",

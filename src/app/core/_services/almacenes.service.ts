@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AlmacenesService {
-  readonly #url= environment.URL_API;
+  readonly #url= `${environment.URL_API}almacenes/`;
+
   private readonly http: HttpClient = inject(HttpClient);
   
-  getAllAlmacenes = (): Observable<any[]> => this.http.get<any[]>(`${this.#url}almacenes/list`);
+  getAllAlmacenes = (dto: any): Observable<any[]> => this.http.post<any[]>(`${this.#url}list`, dto);
   
 }

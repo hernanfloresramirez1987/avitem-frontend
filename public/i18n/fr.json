@@ -11,7 +11,8 @@
         "register_product": "Enregistrer le produit",
         "purchases": "Achats",
         "warehouse": "Entrepôt",
-        "sucursal": "Sucursal"
+        "sucursal": "Sucursal",
+        "inventories": "Invents"
     },
     "labels": {
         "detail_product": "Détail du produit",

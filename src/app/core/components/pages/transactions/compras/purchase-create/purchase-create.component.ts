@@ -58,7 +58,7 @@ export default class PurchaseCreateComponent {
 
   stateDialog = signal<boolean>(false);
 
-  constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private almacenesServ: AlmacenesService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
+  constructor(private readonly confirmationServ: ConfirmationService, private readonly comprasServ: ComprasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly proveedoresServ: ProveedoresService, private readonly almacenesServ: AlmacenesService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
     this.purchaseForm = this.fb.group({
@@ -78,7 +78,7 @@ export default class PurchaseCreateComponent {
     });
 
     effect(() => {
-      this.almacenesServ.getAllAlmacenes().subscribe({
+      this.almacenesServ.getAllAlmacenes(null).subscribe({
         next: (t) => {
           this.almacenes = t;
         },
@@ -157,9 +157,10 @@ export default class PurchaseCreateComponent {
 
   asignarValores(): PurcharseRegister {
     const formValues = this.purchaseForm.value;
+    console.log(formValues.fechaCompra)
     const fechaCompra = new Date(formValues.fechaCompra);
     const formattedFechaCompra = fechaCompra.toISOString().split("T")[0];
-    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
+    console.log(formattedFechaCompra);
 
     this.comprasRegister = {
       fechaCompra: formattedFechaCompra, //String(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),

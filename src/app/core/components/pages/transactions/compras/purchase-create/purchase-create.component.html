@@ -9,7 +9,11 @@
                 <div class="flex md:flex-row flex-row w-full p-2">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.fechaCompra' | translate }}</label>
-                        <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
+                        <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" [showIcon]="true"
+                            
+                           
+                            [touchUI]="false"
+                         type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
@@ -23,7 +27,7 @@
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.producto' | translate }}</label>
-                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
+                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" [editable]="true" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">

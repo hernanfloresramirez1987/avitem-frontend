@@ -50,7 +50,7 @@ export default class SaleCreateComponent {
   total = 0;
   totalVenta = 0;
 
-  constructor(private confirmationServ: ConfirmationService, private clientServ: ClientsService, private employeesServ: EmployeesService, private ventasServ: VentasService, private productosServ: ProductosService, private translate : TranslateService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
+  constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';

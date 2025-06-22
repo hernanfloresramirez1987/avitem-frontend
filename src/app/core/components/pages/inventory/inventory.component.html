@@ -1,9 +1,9 @@
 <!-- {{stateValues().metadata | json}}/ -->
-<p-card [header]="'pages.warehouse' | translate | uppercase">
+<p-card [header]="'pages.inventories' | translate | uppercase">
     <p-table
         #dt1
         [value]="stateValues().data"
-        dataKey="id"
+        datakey="id"
         [paginator]="true"
         [rows]="stateValues().metadata.rows"
         [loading]="stateValues().loading"

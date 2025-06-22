@@ -10,10 +10,10 @@ import { ComprasService } from '../../../../_services/compras.service';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs';
-import { CurrencyPipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
 import { RatingModule } from 'primeng/rating';
@@ -41,7 +41,7 @@ export default class PurchasesComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'fechaCompra', 'total', 'proveedor'];
+  private readonly allowedColumns: string[] = ['id', 'fechaCompra', 'total', 'proveedor'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -49,7 +49,7 @@ export default class PurchasesComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-  constructor(private comprasServ: ComprasService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private messageService: MessageService, private router: Router) {
+  constructor(private readonly comprasServ: ComprasService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly messageService: MessageService, private readonly router: Router) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.comprasServ.getCompras(this.comprasdto())
@@ -74,8 +74,7 @@ export default class PurchasesComponent {
   }
 
   getDataPaged(event: TableLazyLoadEvent) {
-    if (event.filters && this.stateIni !== false) {
-      // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
+    if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
       this.comprasdto.update(() => ({
         config: {
           populate_data: false,
@@ -86,11 +85,8 @@ export default class PurchasesComponent {
         filter: {
           ...this.filterservice.applyFilterNew(event.filters, this.comprasdto().filter),
         }
-      }));
-      // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo);
-      // }
-    }
-    // this.initData(this.namefilter());
+      })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
+    } // this.initData(this.namefilter());
     this.stateIni = true;
   }
 
