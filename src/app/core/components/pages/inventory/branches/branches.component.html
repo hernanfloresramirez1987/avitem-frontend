@@ -1,1 +1,15 @@
-<p>branches works!</p>
+<p-card [header]="'pages.branches' | translate | uppercase">
+    <p-table
+        #dt1
+        [value]="stateValues().data"
+        dataKey="id"
+        [paginator]="true"
+        [rows]="stateValues().metadata.rows"
+        [loading]="stateValues().loading"
+        [rowHover]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
+        [rowsPerPageOptions]="tablecon"
+        styleClass="p-datatable-sm p-datatable-gridlines p-0 m-0"
+        [lazy]="true">
+    </p-table>
+</p-card>

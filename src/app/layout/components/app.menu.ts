@@ -65,7 +65,7 @@ export class AppMenu {
             items: [
                 { label: "warehouse", icon: "pi pi-database",
                     items: [
-                        { label: "history", icon: "pi pi-history", routerLink: ["/inventory/warehouse"] },
+                        { label: "history", icon: "pi pi-history", routerLink: ["/inventory/inventory"] },
                         { label: "branches", icon: "pi pi-building", routerLink: ["/inventory/sucursal"] },
                     ]
                  },

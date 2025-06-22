@@ -10,6 +10,6 @@ export class AlmacenesService {
   readonly #url= environment.URL_API;
   private readonly http: HttpClient = inject(HttpClient);
   
-  getAllAlmacenes = (): Observable<any[]> => this.http.get<any[]>(`${this.#url}almacenes`);
+  getAllAlmacenes = (): Observable<any[]> => this.http.get<any[]>(`${this.#url}almacenes/list`);
   
 }

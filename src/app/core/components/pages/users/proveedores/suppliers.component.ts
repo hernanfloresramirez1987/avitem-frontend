@@ -39,7 +39,7 @@ export default class SuppliersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'nit', 'direccion', 'telefono', 'email'];
+  private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'nit', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -47,7 +47,7 @@ export default class SuppliersComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-    constructor(private employeeServ: ProveedoresService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private personasService: PersonasService, private router: Router) {
+    constructor(private readonly employeeServ: ProveedoresService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly personasService: PersonasService, private readonly router: Router) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         this.employeeServ.postProveedores(this.employeedto())
@@ -72,8 +72,7 @@ export default class SuppliersComponent {
     }
     
   getDataPaged(event: TableLazyLoadEvent) {
-    if (event.filters && this.stateIni !== false) {
-      // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
+    if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.employeedto.update(() => ({
           config: {
             populate_data: false,
@@ -84,11 +83,8 @@ export default class SuppliersComponent {
           filter: {
             ...this.filterservice.applyFilterNew(event.filters, this.employeedto().filter),
           }
-        }));
-        // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo);
-      // }
-    }
-    // this.initData(this.namefilter());
+        })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
+    } // this.initData(this.namefilter());
     this.stateIni = true;
   }
 
