@@ -28,7 +28,7 @@ import { IconFieldModule } from 'primeng/iconfield';
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.scss'
 })
-export default class ClientesComponent implements OnInit {
+export default class ClientesComponent {
   @ViewChild('dt1') table!: Table;
   @ViewChild('filter') filter!: ElementRef;
 
@@ -39,7 +39,7 @@ export default class ClientesComponent implements OnInit {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo'];
+  private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -51,11 +51,12 @@ export default class ClientesComponent implements OnInit {
   expedidoOptions!: { name: string; code: string }[];
 
   
-  constructor(private usersServ: UsersService, private readonly clientServ: ClientsService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router, private personasService: PersonasService) {
+  constructor(private readonly usersServ: UsersService, private readonly clientServ: ClientsService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    effect(() => {
+    effect(() => { 
       this.clientServ.postClients(this.employeedto())
-        .pipe(map(t => {
+      .pipe(map(t => {
+          console.log(888)
           console.log("console.log('', t):   ", t);
           return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
         }))
@@ -70,14 +71,6 @@ export default class ClientesComponent implements OnInit {
     })
     this.usersServ.getExpedidoOptions().subscribe(t => this.expedidoOptions = t);
   }
-  
-
-  ngOnInit(): void {
-    // this.clientServ.getAllClients().subscribe((clients) => {
-    //   this.clients = clients;
-    // });
-  }
-
 
   clear = (table: Table) => {
     this.employeedto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ClientBaseFilter }})
@@ -89,8 +82,7 @@ export default class ClientesComponent implements OnInit {
   }
 
   getDataPaged(event: TableLazyLoadEvent) {
-    if (event.filters && this.stateIni !== false) {
-      // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
+    if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.employeedto.update(() => ({
           config: {
             populate_data: false,
@@ -101,11 +93,8 @@ export default class ClientesComponent implements OnInit {
           filter: {
             ...this.filterservice.applyFilterNew(event.filters, this.employeedto().filter),
           }
-        }));
-        // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo);
-      // }
-    }
-    // this.initData(this.namefilter());
+        })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
+    } // this.initData(this.namefilter());
     this.stateIni = true;
   }
 

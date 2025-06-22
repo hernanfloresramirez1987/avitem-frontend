@@ -39,7 +39,7 @@ export default class UsersComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
+  private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -47,7 +47,7 @@ export default class UsersComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-  constructor(private employeeServ: EmployeesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private router: Router, private personasService: PersonasService) {
+  constructor(private readonly employeeServ: EmployeesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
@@ -66,20 +66,13 @@ export default class UsersComponent {
     })
   }
 
-  getEmployees () {
-    // this.employeeServ.getEmployee().subscribe(t => {
-    //   console.log(t);
-    // })
-  }
-
   clear = (table: Table) => {
     this.employeedto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as EmployeeBaseFilter }})
     table.clear(); 
   }
   
   getDataPaged(event: TableLazyLoadEvent) {
-    if (event.filters && this.stateIni !== false) {
-      // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
+    if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.employeedto.update(() => ({
           config: {
             populate_data: false,
@@ -90,11 +83,8 @@ export default class UsersComponent {
           filter: {
             ...this.filterservice.applyFilterNew(event.filters, this.employeedto().filter),
           }
-        }));
-        // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo);
-      // }
-    }
-    // this.initData(this.namefilter());
+        })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
+    } // this.initData(this.namefilter());
     this.stateIni = true;
   }
 

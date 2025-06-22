@@ -1,7 +1,7 @@
 <p-card [header]="'pages.employees' | translate | uppercase" [subheader]="'labels.admin_employees' | translate">
     <p-table #dt1
         [value]="stateValues().data"
-        dataKey="id"
+        datakey="id"
         [paginator]="true"
         [loading]="stateValues().loading"
         [rows]="stateValues().data.length"

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, signal, Signal, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, signal, Signal, viewChild } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { JsonPipe, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { Table, TableModule, TableLazyLoadEvent } from 'primeng/table';
 import { tableconfig } from '@/core/config/table.config';
 import { Column } from '@/core/_models/common/columns.interface';
@@ -11,16 +11,14 @@ import { FilterApplyService } from '@/core/_services/common/filter.service';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { WarehousesService } from '@/core/_services/warehouses.service';
-import { WarehouseDTO } from '@/core/_models/dto/inventory/almacenes/warehouse.interface.dto';
-import { WarehouseBaseFilter } from '@/core/_models/dto/inventory/almacenes/warehouseSearch.interface.dto';
+import { InventoriesService } from '@/core/_services/inventarios.service';
+import { InventaryDTO } from '@/core/_models/dto/inventory/almacenes/inventary.interface.dto';
+import { InventaryBaseFilter } from '@/core/_models/dto/inventory/almacenes/inventarySearch.interface.dto';
 import { ButtonModule } from 'primeng/button';
 import { map } from 'rxjs';
-import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
-import { FilterClearComponentComponent } from '@/core/components/lib/filter-clear-component/filter-clear-component.component';
 import { LibModule } from '@/core/components/lib/lib.module';
 import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 
 @Component({
@@ -32,18 +30,18 @@ import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class WarehouseComponent {
-  @ViewChild('dt1') table!: Table;
-  @ViewChild('filter') filter!: ElementRef;
+  table = viewChild<Table>('dt1');
+  filter = viewChild<Table>('filter');
 
   stateValues = signal<StateWarehouseResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
-  warehousesdto = signal<WarehouseDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as WarehouseBaseFilter }});  
+  warehousesdto = signal<InventaryDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as InventaryBaseFilter }});  
   
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  private readonly keylocalColumn = "warehouse_cols";
+  private readonly keylocalColumn = "inventory_cols";
 
-  private allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
+  private readonly allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -58,10 +56,10 @@ export default class WarehouseComponent {
 
   expandedRows = {};
 
-  constructor(private warehouseServ: WarehousesService, private filterservice: FilterApplyService, private translate : TranslateService, private translateLanService : TranslateLanService, private messageService: MessageService, private router: Router, private arrayurilservice: ArrayutilService) {
+  constructor(private readonly inventaryServ: InventoriesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly messageService: MessageService, private readonly router: Router, private readonly arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    effect(() => { //console.log("console.log('', this.warehousesdto()):   ", this.warehousesdto());
-      this.warehouseServ
+    effect(() => {
+      this.inventaryServ
         .getAllWarehouses(this.warehousesdto())
         .pipe(map(t => {
           console.log(t);
