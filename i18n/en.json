@@ -11,7 +11,8 @@
         "register_product": "Register Product",
         "purchases": "Purchases",
         "warehouse": "Warehouse",
-        "sucursal": "Branch"
+        "sucursal": "Branch",
+        "inventories": "Inventories"
     },
     "labels": {
         "detail_people": "Detail People",

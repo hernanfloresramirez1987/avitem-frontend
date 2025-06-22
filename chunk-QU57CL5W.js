@@ -1,0 +1,1 @@
+import{u as a}from"./chunk-TODYEVCJ.js";import{s as n}from"./chunk-TMRQNNBK.js";import{Q as r,W as o}from"./chunk-RCKDCOFB.js";var i=class t{#t=`${a.URL_API}almacenes/`;http=o(n);getAllAlmacenes=e=>this.http.post(`${this.#t}list`,e);static \u0275fac=function(l){return new(l||t)};static \u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})};export{i as a};
