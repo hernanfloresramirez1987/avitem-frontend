@@ -58,11 +58,9 @@ export default class PurchaseCreateComponent {
 
   stateDialog = signal<boolean>(false);
 
-  constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private almacenesServ: AlmacenesService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
+  constructor(private readonly confirmationServ: ConfirmationService, private readonly comprasServ: ComprasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly proveedoresServ: ProveedoresService, private readonly almacenesServ: AlmacenesService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
-    // const fechaCompra = new Date(this.currentDate);
-    // this.currentDate = fechaCompra.toISOString().split("T")[0];
     this.purchaseForm = this.fb.group({
       fechaCompra: [this.currentDate],
       // total: [this.total],
