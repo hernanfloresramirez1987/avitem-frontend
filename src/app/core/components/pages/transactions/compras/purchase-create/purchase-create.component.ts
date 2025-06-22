@@ -61,6 +61,8 @@ export default class PurchaseCreateComponent {
   constructor(private confirmationServ: ConfirmationService, private comprasServ: ComprasService, private productosServ: ProductosService, private translate : TranslateService, private proveedoresServ: ProveedoresService, private almacenesServ: AlmacenesService, private translateLanService: TranslateLanService, private fb: FormBuilder, private router: Router, private datePipe: DatePipe, private toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
+    // const fechaCompra = new Date(this.currentDate);
+    // this.currentDate = fechaCompra.toISOString().split("T")[0];
     this.purchaseForm = this.fb.group({
       fechaCompra: [this.currentDate],
       // total: [this.total],
@@ -78,7 +80,7 @@ export default class PurchaseCreateComponent {
     });
 
     effect(() => {
-      this.almacenesServ.getAllAlmacenes().subscribe({
+      this.almacenesServ.getAllAlmacenes(null).subscribe({
         next: (t) => {
           this.almacenes = t;
         },
@@ -157,9 +159,10 @@ export default class PurchaseCreateComponent {
 
   asignarValores(): PurcharseRegister {
     const formValues = this.purchaseForm.value;
+    console.log(formValues.fechaCompra)
     const fechaCompra = new Date(formValues.fechaCompra);
     const formattedFechaCompra = fechaCompra.toISOString().split("T")[0];
-    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
+    console.log(formattedFechaCompra);
 
     this.comprasRegister = {
       fechaCompra: formattedFechaCompra, //String(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),

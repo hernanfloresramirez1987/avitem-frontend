@@ -1,16 +1,23 @@
 import { Column } from '@/core/_models/common/columns.interface';
 import { MatchModel } from '@/core/_models/common/matchmodel.interface';
+import { AlmacenesService } from '@/core/_services/almacenes.service';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
+import { FilterApplyService } from '@/core/_services/common/filter.service';
+import { LibModule } from '@/core/components/lib/lib.module';
 import { tableconfig } from '@/core/config/table.config';
+import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { UpperCasePipe } from '@angular/common';
-import { Component, computed, Signal, signal, viewChild } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, computed, effect, Signal, signal, viewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { Table, TableModule } from 'primeng/table';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-branches',
-  imports: [CardModule, TableModule, ButtonModule, TranslatePipe, UpperCasePipe],
+  imports: [CardModule, TableModule, ButtonModule, TranslatePipe, UpperCasePipe, LibModule, MultiSelectModule, FormsModule],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
@@ -38,4 +45,69 @@ export default class BranchesComponent {
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
   }));
+
+  constructor(private readonly branches: AlmacenesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly arrayurilservice: ArrayutilService) {
+    this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
+    effect(() => {
+      this.branches
+        .getAllAlmacenes(this.branchesdto())
+        // .getAllAlmacenes(this.branchesdto())
+        // .pipe(map(t => {
+        //   console.log(t);
+        //   return { data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null}}))
+        .subscribe({
+          next: t => {
+            console.log(t);
+            console.log({...this.branchesdto()});
+            // this.stateValues.set({ data: t.data, metadata: t.metadata, loading: false, error: null});
+            console.log(this.stateValues());
+          },
+          error: (err) => {
+            this.stateValues.set({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: false, error: err });
+            console.log("console.log('', err):   ", err, this.stateValues());
+          },
+          complete: () => {
+            console.log("console.log('', this.stateValues()):   ", this.stateValues());
+          }
+        })
+    });
+  }
+
+  clear = (table: Table) => {
+    table.clear();
+  }
+
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
+
+  getDataPaged(event: TableLazyLoadEvent) {
+    if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
+      this.branchesdto.update(() => ({
+        config: {
+          populate_data: false,
+          page: ((event.first || 0) / Number(event.rows)) + 1,
+          sort_field: event.multiSortMeta ? event.multiSortMeta.filter(t => t.field) : [],
+          rows: Number(event.rows),
+        },
+        filter: {
+          ...this.filterservice.applyFilterNew(event.filters, this.branchesdto().filter),
+        }
+      })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
+    } // this.initData(this.namefilter());
+    this.stateIni = true;
+  }
+
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
+  }
 }
