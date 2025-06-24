@@ -27,6 +27,7 @@ import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 
 import { jsPDF } from "jspdf";
+import { PdfReportService } from '@/core/_services/common/pdfreport.service';
 
 @Component({
   selector: 'app-sale-create',
@@ -50,7 +51,7 @@ export default class SaleCreateComponent {
   total = 0;
   totalVenta = 0;
 
-  constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
+  constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService, private readonly pdfreport: PdfReportService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.salesForm = this.fb.group({
@@ -228,48 +229,84 @@ export default class SaleCreateComponent {
       const purchaseData = this.asignarValores();
       console.log(purchaseData);
       purchaseData.detalle = JSON.stringify(purchaseData.detalle);
-      this.confirm(purchaseData);
+      this.confirmSave(purchaseData);
     } else {
       console.error('Formulario inválido');
     }
   }
 
-  confirm(saleData: SalesRegister) {
+  confirmSaveanterior(saleData: SalesRegister) {
+    this.ventasRegister = saleData;
+  
     this.confirmationServ.confirm({
-      message: 'Are you sure you want to perform this action?',
-      header: 'Confirmation',
+      message: '¿Estás seguro de realizar esta acción?',
+      header: 'Confirmación',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        // Introducir un retraso de 3 segundos antes de procesar la confirmación
-        this.ventasServ.postSaveVenta(saleData).subscribe({
-          next: (t) => {
-            console.log('Action confirmed!');
-            if (t.CodigoEstado === "201") {
-              this.notifySuccess();
-              this.generatePdf();
-                setTimeout(() => {
-                  console.log('Venta registrada correctamente');
-                  this.router.navigate(['/transactions/ventas']);
-                }, 3000); // 3000 ms (3 segundos)
-              } else {
-                console.log(t);
-              }
-            },
-            error: (e) => {
-              console.error('Error al registrar la compra:', e);
-            },
-          });
+        // SOLO cuando el primer confirm dialog fue aceptado
+        this.openSecondConfirm();
       },
       reject: () => {
-        console.log('Action rejected!');
+        console.log('Primera acción rechazada');
+      },
+    });
+  }
+  
+  openSecondConfirm() {
+    this.confirmationServ.confirm({
+      header: '¿Está seguro de continuar con la factura?',
+      message: 'Confirme para proceder con la factura.',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        console.log('Confirmado factura:', this.ventasRegister.confactura);
+        this.generatePdf();
+        setTimeout(() => {
+          this.openSecondConfirm();
+        }, 0);
+      },
+      reject: () => {
+        console.log('Segunda acción rechazada');
       },
     });
   }
 
+  confirmDialog(message: string, header: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.confirmationServ.confirm({
+        message,
+        header,
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => resolve(true),
+        reject: () => resolve(false),
+      });
+    });
+  }
+  
+  async confirmSave(saleData: SalesRegister) {
+    this.ventasRegister = saleData;
+  
+    const firstConfirm = await this.confirmDialog('¿Estás seguro de realizar esta acción?', 'Confirmación');
+    if (firstConfirm) {
+      const secondConfirm = await this.confirmDialog('¿Está seguro de continuar con la factura?', 'Confirmación Factura');
+      if (secondConfirm) {
+        this.generatePdf();
+      } else {
+        console.log('Segunda acción rechazada');
+      }
+    } else {
+      console.log('Primera acción rechazada');
+    }
+  }
+
+
   generatePdf = () => {
     const doc = new jsPDF();
 
-    doc.text("Hello world!", 10, 10);
-    doc.save("a4.pdf");
+    const sampleData: any[] = [
+      { product: 'Producto A', quantity: 2, price: 10, total: 20 },
+      { product: 'Producto B', quantity: 1, price: 15, total: 15 },
+      { product: 'Producto C', quantity: 3, price: 7, total: 21 },
+    ];
+    this.pdfreport.generateSalesReport('Reporte de Ventas', sampleData, new Date());
   }
 }

@@ -9,10 +9,10 @@ import { environment } from '../../../../environments/environment.development';
 export class UsersService {
   readonly #url= environment.URL_API;
 
-  sexo!: { name: string, key: string }[];
-  cargo!: { name: string; code: number }[];
-  tipo!: { name: string; code: number }[];
-  rol!: { name: string; code: string }[];
+  // sexo!: { name: string, key: string }[];
+  // cargo!: { name: string; code: number }[];
+  // tipo!: { name: string; code: number }[];
+  // rol!: { name: string; code: string }[];
   
   constructor(private http: HttpClient) { }
   

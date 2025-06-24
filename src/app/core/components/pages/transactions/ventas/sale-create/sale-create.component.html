@@ -1,5 +1,6 @@
-<p-toast/>
 <p-confirmDialog />
+<p-toast/>
+<!-- <p-confirmDialog /> -->
 <form [formGroup]="salesForm">
     <p-card [header]="'pages.register_sales' | translate | uppercase">
         <div class="flex flex-column md:flex-row sm:flex-row w-full">
@@ -110,7 +111,7 @@
             <div class="flex gap-3 mt-1">
                 <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/inventory/products']" />
                 <p-button label="Limpiar" severity="secondary" class="w-full" styleClass="w-full" (click)="cleanAll()" />
-                {{salesForm.valid}}-{{detailView.length}}<p-button label="Save" class="w-full" styleClass="w-full" (click)="submitSales()" [disabled]="(!salesForm.valid || detailView.length === 0)" />
+                <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitSales()" [disabled]="(!salesForm.valid || detailView.length === 0)" />
             </div>
         </ng-template>
     </p-card>
