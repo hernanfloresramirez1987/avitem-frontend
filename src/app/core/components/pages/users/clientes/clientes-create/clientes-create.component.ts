@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
@@ -20,16 +20,35 @@ import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { UpperCasePipe } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
+import { PersonasService } from '@/core/_services/personas.service';
+import { PersonaItem } from '@/core/_models/users/persona.interface';
+import { ToastService } from '@/core/_services/common/toast.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-clientes-create',
   standalone: true,
-  imports: [CardModule, ReactiveFormsModule, SelectModule, DatePickerModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe],
+  imports: [CardModule, ReactiveFormsModule, SelectModule, DatePickerModule, InputTextModule, RadioButtonModule, DropdownModule, ButtonModule, CalendarModule, CheckboxModule, InputGroupModule, InputGroupAddonModule, TranslateLanModule, UpperCasePipe, ToastModule],
   templateUrl: './clientes-create.component.html',
   styleUrl: './clientes-create.component.scss'
 })
 export default class ClientesCreateComponent implements OnInit {
-  registroForm: FormGroup;
+  fb = inject(FormBuilder)
+  registroForm: FormGroup = this.fb.group({ // Datos de persona
+    ci: ['', [Validators.required, Validators.pattern(/^[0-9]{6,10}$/)]],
+    ciExpedit: ['', [Validators.required]],
+    ciComplement: [''],
+    nombre: ['', Validators.required],
+    app: ['', Validators.required],
+    apm: ['', ],
+    sexo: ['', Validators.required],
+    fnaci: ['', Validators.required],
+    direccion: ['', Validators.required],
+    telefono: ['', []],
+    email: ['', [Validators.required, Validators.email]],
+    // Datos del cliente
+    nit: [''],
+  });
   expedidoOptions!: { name: string; code: string }[];
   sexo!: { name: string, key: string }[];
 
@@ -37,35 +56,22 @@ export default class ClientesCreateComponent implements OnInit {
 
   clienteRegister!: ClientRegister;
 
-
-  constructor(private clientServ: ClientsService, private usersServ: UsersService, private translate : TranslateService, private translateLanService : TranslateLanService, private fb: FormBuilder, private router: Router){
+  constructor(private readonly personaServ: PersonasService, private readonly clientServ: ClientsService, private readonly usersServ: UsersService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly toastServ: ToastService){
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     this.usersServ.getExpedidoOptions().subscribe(t => this.expedidoOptions = t);
     this.usersServ.getSexo().subscribe(t => this.sexo = t);
     
-    this.registroForm = this.fb.group({ // Datos de persona
-      ci: ['', [Validators.required, Validators.pattern(/^[0-9]{6,10}$/)]],
-      ciExpedit: ['', [Validators.required]],
-      ciComplement: [''],
-      nombre: ['', Validators.required],
-      app: ['', Validators.required],
-      apm: ['', ],
-      sexo: ['', Validators.required],
-      fnaci: ['', Validators.required],
-      direccion: ['', Validators.required],
-      telefono: ['', []],
-      email: ['', [Validators.required, Validators.email]],
-      // Datos del cliente
-      nit: [''],
-    });
   }
 
   ngOnInit(): void {
     this.registroForm.valueChanges.pipe(debounceTime(5000)).subscribe(t => {
       // console.log('Formulario : \n', t);
-      console.log('Errores:', t.errors);
+      console.log('CI:', t.ci);
       for (const control in this.registroForm.controls) {
-        console.log(`${control}:`, this.registroForm.get(control)?.errors);
+        // console.log(`${control}:`, this.registroForm.get(control)?.errors);
+      }
+      if (t.ci !== '' && typeof t.ci === 'number') {
+        this.searchCI(t.ci);
       }
     });
   }
@@ -120,4 +126,47 @@ export default class ClientesCreateComponent implements OnInit {
       this.router.navigate(['users/clientes']);
     }
   }
+
+  searchCI = (ci: number) => this.personaServ.getPersonaCI(ci)
+    .subscribe((t: any) => {
+      if(t.success === true && t.data !== null) {
+        console.log('console.log(t);:    ', t);
+        this.requestData(t.data);
+        this.toastServ.showInfo(`Usuario con C.I.: ${t.data.ci} Encontrado`,`Nombre: ${t.data.nombre} ${t.data.app} ${t.data.app}\nC.I.: ${t.data.ci} ${t.data.ciExpedit}\nSexo: ${(t.data.sexo ==='V')?'Varon':'Mujer'}\nTelefono: ${t.data.telefono}\nDireccion: ${t.data.direccion}\nEmail: ${t.data.email}`)
+      }
+    })
+
+  requestData = (data: PersonaItem) => {
+    console.log(data)
+    console.log(data.nombre)
+    
+    const dateFNaci = new Date(data.fnaci);
+    const formattedDateFNaci = dateFNaci.toISOString().split("T")[0];
+    this.registroForm.patchValue({ // ci: data.ci,
+      ciExpedit: data.ciExpedit,
+      ciComplement: data.ciComplement,
+      nombre: data.nombre,
+      app: data.app,
+      apm: data.apm,
+      sexo: data.sexo,
+      fnaci: formattedDateFNaci,
+      direccion: data.direccion,
+      telefono: data.telefono,
+      email: data.email,
+      nit: ''
+    });
+  
+    console.log('Formulario actualizado:', this.registroForm.value);
+
+    this.searchCIinClient(data.ci);
+  }
+  
+  searchCIinClient = (ci: number) => this.clientServ.getClienteCI(ci)
+    .subscribe((t: any) => {
+      if(t.success === true && t.data !== null) {
+        this.registroForm.patchValue({
+          nit: t.data.nit
+        });
+      }
+    })
 }

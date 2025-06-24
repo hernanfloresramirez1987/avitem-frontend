@@ -1,13 +1,13 @@
+<p-toast/>
 <form [formGroup]="registroForm">
-    <p-card [header]="'labels.register_clients' | translate | uppercase" [subheader]="'labels.forms_employees' | translate">
+    <p-card [header]="'labels.register_clients' | translate | uppercase" [subheader]="'labels.forms_clients' | translate">
         <div class="flex md:flex-row sm:flex-row">
-
-            <div class="col-12 md:col-7 p-2 w-full">
+            <div class="col-12 md:col-7 w-full">
                 <!-- <h6>{{'labels.detail_people' | translate | uppercase}}</h6> -->
-                <div class="flex md:flex-row flex-row w-full p-2">
+                <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ci" class="w-20rem">{{'labels.ci' | translate }}</label>
-                        <input pInputText [formControlName]="'ci'" type="text" class="w-full" [fluid]="true" /> @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
+                        <input pInputText [formControlName]="'ci'" type="text" class="w-full" [fluid]="true" (change)="searchCI(registroForm.value.ci)" /> @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
                         <small style="color: red;">Error en el CI.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">

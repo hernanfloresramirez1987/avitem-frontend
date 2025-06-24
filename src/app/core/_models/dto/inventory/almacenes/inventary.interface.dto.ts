@@ -3,5 +3,5 @@ import { InventaryBaseFilter } from "./inventarySearch.interface.dto";
 
 export interface InventaryDTO {
   config: ConfigQuery,
-  filter:  InventaryBaseFilter;
+  filter: InventaryBaseFilter;
 }

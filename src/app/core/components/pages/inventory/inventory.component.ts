@@ -63,7 +63,7 @@ export default class WarehouseComponent {
         .getAllWarehouses(this.warehousesdto())
         .pipe(map(t => {
           console.log(t);
-          return { data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null}}))
+          return { data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }}}))
         .subscribe({
           next: t => {
             console.log(t);

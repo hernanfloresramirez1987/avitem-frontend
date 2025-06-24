@@ -1,6 +1,6 @@
 import { Column } from '@/core/_models/common/columns.interface';
 import { MatchModel } from '@/core/_models/common/matchmodel.interface';
-import { AlmacenesService } from '@/core/_services/almacenes.service';
+import { AlmacenesService } from '@/core/_services/sucursales';
 import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 import { FilterApplyService } from '@/core/_services/common/filter.service';
 import { LibModule } from '@/core/components/lib/lib.module';
@@ -14,6 +14,10 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
+import { map } from 'rxjs';
+import { BranchDTO } from '@/core/_models/dto/inventory/almacenes/sucursales/branch.interface.dto';
+import { StateBranchResponseModel } from '@/core/_models/inventory/sucursales/branch.Response';
+import { BranchBaseFilter } from '@/core/_models/dto/inventory/almacenes/sucursales/branchSearch.interface.dto';
 
 @Component({
   selector: 'app-branches',
@@ -25,9 +29,9 @@ export default class BranchesComponent {
   table = viewChild<Table>('dt1');
   filter = viewChild<Table>('filter');
 
-  stateValues = signal<any>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
+  stateValues = signal<StateBranchResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
-  branchesdto = signal<any>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as any }});  
+  branchesdto = signal<BranchDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as BranchBaseFilter }});  
 
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
@@ -50,17 +54,15 @@ export default class BranchesComponent {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.branches
-        .getAllAlmacenes(this.branchesdto())
-        // .getAllAlmacenes(this.branchesdto())
-        // .pipe(map(t => {
-        //   console.log(t);
-        //   return { data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null}}))
+        .getAllSucursalesFiler(this.branchesdto())
+        .pipe(map(t => {
+          console.log(t);
+          return { data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }}}))
         .subscribe({
           next: t => {
-            console.log(t);
-            console.log({...this.branchesdto()});
-            // this.stateValues.set({ data: t.data, metadata: t.metadata, loading: false, error: null});
-            console.log(this.stateValues());
+            console.log(this.branchesdto(), t);
+            this.stateValues.set({ data: t.data, metadata: t.metadata, loading: false, error: null});
+            console.log(this.stateValues()); return t;
           },
           error: (err) => {
             this.stateValues.set({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: false, error: err });
@@ -109,5 +111,9 @@ export default class BranchesComponent {
     }
     this.columnsSelectSignal = computed(() => ordered);
     localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
+  }
+
+  add = () => {
+    
   }
 }

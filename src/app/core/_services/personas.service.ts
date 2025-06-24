@@ -7,17 +7,20 @@ import { ProveedorResp } from '../_models/users/proveedores/proveedoresResponse.
 import { ProveedorRegister } from '../_models/dto/users/proveedors/proveedorRegister.interface';
 import { ProveedorSaveResponse } from '../_models/users/proveedores/proveedoresSaveResponse';
 import { ProveedorItem } from '../_models/users/proveedores/proveedores.model';
+import { PersonaItem } from '../_models/users/persona.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonasService {
   readonly #url= environment.URL_API;
-  private readonly http: HttpClient = inject(HttpClient);
+  readonly #http: HttpClient = inject(HttpClient);
 
-  postEmployees = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.http.post<ProveedorResp>(`${this.#url}empleados/list`, proveedorDto);
+  postEmployees = (proveedorDto: ProveedorDTO): Observable<ProveedorResp> => this.#http.post<ProveedorResp>(`${this.#url}empleados/list`, proveedorDto);
 
-  getEmployeeCI = (employeeSearchCI: number): Observable<ProveedorItem> => this.http.get<ProveedorItem>(`${this.#url}personas/searchCI/${employeeSearchCI}`);  
+  getEmployeeCI = (employeeSearchCI: number): Observable<ProveedorItem> => this.#http.get<ProveedorItem>(`${this.#url}personas/searchCI/${employeeSearchCI}`);
+
+  getPersonaCI = (personSearchCI: number): Observable<PersonaItem> => this.#http.get<PersonaItem>(`${this.#url}personas/searchCI/${personSearchCI}`);
 
   getSexo = (sexo: string) => (sexo === 'V') ? 'Varon' : 'Mujer';
 }

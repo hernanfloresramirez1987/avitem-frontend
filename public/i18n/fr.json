@@ -9,10 +9,13 @@
         "register_client": "Enregistrer le client",
         "products": "Produits",
         "register_product": "Enregistrer le produit",
+        "register_purchases": "Enregistrer les achats",
+        "register_sales": "Registrar Ventas",
         "purchases": "Achats",
         "warehouse": "Entrepôt",
         "sucursal": "Sucursal",
-        "inventories": "Invents"
+        "inventories": "Invents",
+        "branches": "Sucursales"
     },
     "labels": {
         "detail_product": "Détail du produit",
@@ -76,7 +79,7 @@
         "register_product": "Enregistrer le produit",
         "admin_products": "Administrar Produits",
         "purchases": "Achats",
-        "register_purchases": "Enregistrer les achats",
+        
         "fechaCompra": "Date d'achat",
         "total": "Total",
         "proveedor": "Fournisseur",
