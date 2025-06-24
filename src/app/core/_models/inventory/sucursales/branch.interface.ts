@@ -1,4 +1,4 @@
-export interface SucursalItem {
+export interface BranchItem {
     id: number;
     direccion: string;
     matriz: number;

@@ -3,5 +3,5 @@ import { ComprasBaseFilter } from "./comprasSearch.interface.dto";
 
 export interface ComprasDTO {
   config: ConfigQuery,
-  filter:  ComprasBaseFilter;
+  filter: ComprasBaseFilter;
 }

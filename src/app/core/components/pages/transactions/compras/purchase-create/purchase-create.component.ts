@@ -18,8 +18,7 @@ import { ToastService } from '../../../../../_services/common/toast.service';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import { AlmacenesService } from '../../../../../_services/almacenes.service';
-import { WarehouseItem } from '../../../../../_models/inventory/almacenes/warehouse.model';
+import { AlmacenesService } from '../../../../../_services/sucursales';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -28,8 +27,8 @@ import { ProveedorItem } from '@/core/_models/users/proveedores/proveedores.mode
 import { DatePickerModule } from 'primeng/datepicker';
 import { DialogModule } from 'primeng/dialog';
 import { SelectModule } from 'primeng/select';
-import { SucursalItem } from '@/core/_models/inventory/sucursales/sucursales.interface';
 import { CapitalizePipe } from '@/core/pipes/capital-letter.pipe';
+import { BranchItem } from '@/core/_models/inventory/sucursales/branch.interface';
 
 @Component({
   selector: 'app-purchase-create',
@@ -46,7 +45,7 @@ export default class PurchaseCreateComponent {
   comprasRegister!: PurcharseRegister;
   proveedores!: ProveedorItem[];
   productos!: ProductItem[];
-  almacenes!: SucursalItem[];
+  almacenes!: BranchItem[];
 
   // detail: PurcharseDetail[] = [];
   detailView: PurcharseDetailWithNameProduct[] = [];
@@ -78,7 +77,7 @@ export default class PurchaseCreateComponent {
     });
 
     effect(() => {
-      this.almacenesServ.getAllAlmacenes(null).subscribe({
+      this.almacenesServ.getAll().subscribe({
         next: (t) => {
           this.almacenes = t;
         },

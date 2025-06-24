@@ -6,6 +6,7 @@ import { ClientRegister } from '../_models/dto/users/clients/clientRegister.inte
 import { ClienteSaveResponse } from '../_models/users/clients/clientesSaveResponse';
 import { ClientDTO } from '../_models/dto/users/clients/client.interface.dto';
 import { ClienteResp } from '../_models/users/clients/clientesResponse.interface';
+import { PersonaItem } from '../_models/users/persona.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,7 @@ export class ClientsService {
   getAllClients = (): Observable<any[]> => this.#http.get<any[]>(`${this.#url}`);
 
   postSaveCliente = (employeeReg: ClientRegister): Observable<ClienteSaveResponse> => this.#http.post<ClienteSaveResponse>(`${this.#url}register`, employeeReg);  
+
+  getClienteCI = (cidto: number): Observable<PersonaItem> => this.#http.get<PersonaItem>(`${this.#url}searchCI/${cidto}`);  
 
 }

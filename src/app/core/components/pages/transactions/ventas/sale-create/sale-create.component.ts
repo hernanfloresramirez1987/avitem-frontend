@@ -46,16 +46,14 @@ export default class SaleCreateComponent {
   detailView: SalesDetailWithNameProduct[] = [];
   
   stateInputs = signal<boolean>(true);
-  currentDate!: string;
   total = 0;
   totalVenta = 0;
 
   constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
-    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
     this.salesForm = this.fb.group({
-      fechaVenta: [this.currentDate],
+      fechaVenta: [Validators.required],
       // total: [this.total],
       tokenSIN: [''],
       id_cliente: ['', [Validators.required]],
@@ -101,6 +99,7 @@ export default class SaleCreateComponent {
 
   asignarValores(): SalesRegister { 
     const formValues = this.salesForm.value;
+    console.log(formValues);
     const fechaVenta = new Date(formValues.fechaVenta);
     const formattedFechaVenta = fechaVenta.toISOString().split("T")[0];
     console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
