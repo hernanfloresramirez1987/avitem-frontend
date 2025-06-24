@@ -1,6 +1,6 @@
 import { Column } from '@/core/_models/common/columns.interface';
 import { MatchModel } from '@/core/_models/common/matchmodel.interface';
-import { AlmacenesService } from '@/core/_services/sucursales';
+import { AlmacenesService } from '@/core/_services/sucursales.service';
 import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 import { FilterApplyService } from '@/core/_services/common/filter.service';
 import { LibModule } from '@/core/components/lib/lib.module';

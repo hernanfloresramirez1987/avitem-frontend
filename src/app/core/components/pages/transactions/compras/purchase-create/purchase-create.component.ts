@@ -18,7 +18,7 @@ import { ToastService } from '../../../../../_services/common/toast.service';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import { AlmacenesService } from '../../../../../_services/sucursales';
+import { AlmacenesService } from '../../../../../_services/sucursales.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { CheckboxModule } from 'primeng/checkbox';

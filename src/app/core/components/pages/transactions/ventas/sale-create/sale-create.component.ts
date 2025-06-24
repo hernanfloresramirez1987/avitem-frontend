@@ -11,7 +11,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { CalendarModule } from 'primeng/calendar';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -26,6 +25,8 @@ import { ClienteItem } from '../../../../../_models/users/clients/clientesSearch
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
+
+import { jsPDF } from "jspdf";
 
 @Component({
   selector: 'app-sale-create',
@@ -245,6 +246,7 @@ export default class SaleCreateComponent {
             console.log('Action confirmed!');
             if (t.CodigoEstado === "201") {
               this.notifySuccess();
+              this.generatePdf();
                 setTimeout(() => {
                   console.log('Venta registrada correctamente');
                   this.router.navigate(['/transactions/ventas']);
@@ -262,5 +264,12 @@ export default class SaleCreateComponent {
         console.log('Action rejected!');
       },
     });
+  }
+
+  generatePdf = () => {
+    const doc = new jsPDF();
+
+    doc.text("Hello world!", 10, 10);
+    doc.save("a4.pdf");
   }
 }
