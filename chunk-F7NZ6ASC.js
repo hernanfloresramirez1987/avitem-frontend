@@ -1,0 +1,1 @@
+import{Lb as p,Ma as a,nb as n,ob as s}from"./chunk-5DVEH5ZE.js";import"./chunk-C6Q5SG76.js";var o=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["app-dashboard"]],decls:2,vars:0,template:function(e,d){e&1&&(n(0,"p"),p(1,"dashboard works!"),s())},encapsulation:2})};export{o as default};
