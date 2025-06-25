@@ -61,7 +61,7 @@ export default class UsersCreateComponent implements OnInit {
       // Datos de empleado
       idTipo: [, [Validators.required]],
       idCargo: [, [Validators.required]],
-      fechaIngreso: [new Date(), Validators.required],
+      fechaIngreso: [new Date()],
       salario: [''],
       // Datos de usuario
       username: ['', [Validators.required, Validators.minLength(3)]],

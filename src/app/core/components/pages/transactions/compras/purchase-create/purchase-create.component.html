@@ -1,12 +1,12 @@
 <p-toast/>
 <p-confirmDialog />
 <form [formGroup]="purchaseForm">
-    <p-card [header]="'pages.register_purchases' | translate | uppercase">
+    <p-card [header]="'pages.register_purchases' | translate | uppercase" [subheader]="'labels.form_purchases' | translate | capitalize">
         <div class="flex md:flex-row sm:flex-row">
 
-            <div class="col-12 md:col-7 p-2 w-full">
-                <h6>{{'labels.form_purchases' | translate | capitalize}}</h6>
-                <div class="flex md:flex-row flex-row w-full p-2">
+            <div class="col-12 md:col-7 w-full">
+                <!-- <h6>{{'labels.form_purchases' | translate | capitalize}}</h6> -->
+                <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.fechaCompra' | translate }}</label>
                         <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
@@ -58,7 +58,7 @@
                         <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
 
-                    <div class="justify-content-center align-items-center pt-2">
+                    <div class="justify-content-center align-items-center">
                         <label>{{'labels.options' | translate }}</label>
                         <div class="flex justify-content-between">
                             <p-buttonGroup class="p-2">

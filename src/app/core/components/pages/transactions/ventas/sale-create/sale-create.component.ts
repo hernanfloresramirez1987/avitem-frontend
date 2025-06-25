@@ -100,11 +100,9 @@ export default class SaleCreateComponent {
   }
 
   asignarValores(): SalesRegister { 
-    const formValues = this.salesForm.value;
-    console.log(formValues);
+    const formValues = this.salesForm.value; // console.log(formValues);
     const fechaVenta = new Date(formValues.fechaVenta);
-    const formattedFechaVenta = fechaVenta.toISOString().split("T")[0];
-    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
+    const formattedFechaVenta = fechaVenta.toISOString().split("T")[0]; // console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.ventasRegister = {
       fechaVenta: formattedFechaVenta,
@@ -235,41 +233,6 @@ export default class SaleCreateComponent {
     }
   }
 
-  confirmSaveanterior(saleData: SalesRegister) {
-    this.ventasRegister = saleData;
-  
-    this.confirmationServ.confirm({
-      message: '¿Estás seguro de realizar esta acción?',
-      header: 'Confirmación',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        // SOLO cuando el primer confirm dialog fue aceptado
-        this.openSecondConfirm();
-      },
-      reject: () => {
-        console.log('Primera acción rechazada');
-      },
-    });
-  }
-  
-  openSecondConfirm() {
-    this.confirmationServ.confirm({
-      header: '¿Está seguro de continuar con la factura?',
-      message: 'Confirme para proceder con la factura.',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        console.log('Confirmado factura:', this.ventasRegister.confactura);
-        this.generatePdf();
-        setTimeout(() => {
-          this.openSecondConfirm();
-        }, 0);
-      },
-      reject: () => {
-        console.log('Segunda acción rechazada');
-      },
-    });
-  }
-
   confirmDialog(message: string, header: string): Promise<boolean> {
     return new Promise((resolve) => {
       this.confirmationServ.confirm({
@@ -281,23 +244,28 @@ export default class SaleCreateComponent {
       });
     });
   }
-  
   async confirmSave(saleData: SalesRegister) {
     this.ventasRegister = saleData;
   
-    const firstConfirm = await this.confirmDialog('¿Estás seguro de realizar esta acción?', 'Confirmación');
+    const firstConfirm = await this.confirmDialog('¿Estás seguro de registrar esta venta?', 'Confirmación');
+    console.log(firstConfirm);
     if (firstConfirm) {
-      const secondConfirm = await this.confirmDialog('¿Está seguro de continuar con la factura?', 'Confirmación Factura');
+      const secondConfirm = await this.confirmDialog('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
+      console.log(secondConfirm);
       if (secondConfirm) {
-        this.generatePdf();
+        console.log('Generando factura:', this.ventasRegister.confactura);
+        this.ventasRegister.confactura = 1;
       } else {
-        console.log('Segunda acción rechazada');
+        console.log('El usuario no quiere factura.');
+        this.ventasRegister.confactura = 0;
       }
     } else {
-      console.log('Primera acción rechazada');
+      console.log('Primera confirmación cancelada.');
+    }
+    if (firstConfirm) {
+      this.generatePdf();
     }
   }
-
 
   generatePdf = () => {
     const doc = new jsPDF();
@@ -307,6 +275,6 @@ export default class SaleCreateComponent {
       { product: 'Producto B', quantity: 1, price: 15, total: 15 },
       { product: 'Producto C', quantity: 3, price: 7, total: 21 },
     ];
-    this.pdfreport.generateSalesReport('Reporte de Ventas', sampleData, new Date());
+    this.pdfreport.generatePdf(); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
   }
 }
