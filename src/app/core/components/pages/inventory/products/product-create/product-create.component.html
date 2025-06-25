@@ -1,10 +1,10 @@
 <form [formGroup]="registroForm">
     <p-card [header]="'pages.register_product' | translate | uppercase" [subheader]="'labels.form_products' | translate">
-        <div class="flex md:flex-row sm:flex-row">
-            <div class="col-12 md:col-12 p-2 w-full">
-                <h6>{{'labels.detail_product' | translate | uppercase}}</h6>
+        <div class="flex flex-row">
+            <div class="col-12 md:col-12 w-full">
+                <!-- <h6>{{'labels.detail_product' | translate | uppercase}}</h6> -->
                 <div class="row-auto">
-                    <div class="flex md:flex-row flex-row w-full p-2">
+                    <div class="flex md:flex-row flex-row w-full">
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                             <label for="nombre">{{'labels.nombre' | translate }}</label>
                             <input pInputText [formControlName]="'nombre'" type="text" class="w-full" [fluid]="true" /> @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
@@ -16,7 +16,7 @@
                             <small style="color: red;">Error en el Descripcion.</small> }
                         </div>
                     </div>
-                    <div class="flex md:flex-row flex-row w-full p-2">
+                    <div class="flex md:flex-row flex-row w-full">
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                             <label for="fechaIngreso" class="w-15rem">{{'labels.fechaIngreso' | translate }}</label>
                             <p-datepicker [formControlName]="'fechaIngreso'" class="w-full lg:w-full" styleClass="w-full" /> @if (registroForm.get('fechaIngreso')?.invalid && registroForm.get('fechaIngreso')?.touched) {
@@ -30,14 +30,10 @@
                     </div>
                 </div>
             </div>
-            
-            
 
-
-            <div class="col-12 md:col-12 p-2 w-full">
-                <h6>&nbsp;</h6>
+            <div class="col-12 md:col-12 w-full">
                 <div class="row-auto">
-                    <div class="flex md:flex-row flex-row w-full p-2">
+                    <div class="flex md:flex-row flex-row w-full">
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                             <label for="color" class="w-15rem">{{'labels.color' | translate }}</label>
                             <p-select [options]="colores" [formControlName]="'id_color'" optionLabel="color" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar un Color" /> @if (registroForm.get('id_color')?.invalid && registroForm.get('id_color')?.touched) {
@@ -49,7 +45,7 @@
                             <span style="color: red;">Error en el {{'labels.codigoProducto' | translate }}.</span> }
                         </div>
                     </div>
-                    <div class="flex md:flex-row flex-row w-full p-2">
+                    <div class="flex md:flex-row flex-row w-full">
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                             <label for="proveedor" class="w-15rem">{{'labels.id_proveedor' | translate }}</label>
                             <p-select [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" [editable]="true" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un Proveedor" /> @if (registroForm.get('id_proveedor')?.invalid && registroForm.get('id_proveedor')?.touched) {
@@ -67,7 +63,7 @@
 
         <ng-template pTemplate="footer">
             <div class="flex gap-3 mt-1">
-                <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/labels/products']" />
+                <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/inventory/products']" />
                 <p-button label="Limpiar" severity="secondary" class="w-full" styleClass="w-full" (click)="cleanAll()" />
                 <p-button label="Save" class="w-full" styleClass="w-full" (click)="saveProcto()" [disabled]="!registroForm.valid" />
             </div>

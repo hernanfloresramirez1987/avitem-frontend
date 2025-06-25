@@ -27,6 +27,7 @@ import { SelectModule } from 'primeng/select';
 import { DatePickerModule } from 'primeng/datepicker';
 
 import { jsPDF } from "jspdf";
+import { PdfReportService } from '@/core/_services/common/pdfreport.service';
 
 @Component({
   selector: 'app-sale-create',
@@ -50,7 +51,7 @@ export default class SaleCreateComponent {
   total = 0;
   totalVenta = 0;
 
-  constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
+  constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService, private readonly pdfreport: PdfReportService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.salesForm = this.fb.group({
@@ -99,11 +100,9 @@ export default class SaleCreateComponent {
   }
 
   asignarValores(): SalesRegister { 
-    const formValues = this.salesForm.value;
-    console.log(formValues);
+    const formValues = this.salesForm.value; // console.log(formValues);
     const fechaVenta = new Date(formValues.fechaVenta);
-    const formattedFechaVenta = fechaVenta.toISOString().split("T")[0];
-    console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
+    const formattedFechaVenta = fechaVenta.toISOString().split("T")[0]; // console.log(String(this.datePipe.transform(this.getLastDateOfYear(new Date().getFullYear()), 'yyyy-MM-dd')));
 
     this.ventasRegister = {
       fechaVenta: formattedFechaVenta,
@@ -228,48 +227,54 @@ export default class SaleCreateComponent {
       const purchaseData = this.asignarValores();
       console.log(purchaseData);
       purchaseData.detalle = JSON.stringify(purchaseData.detalle);
-      this.confirm(purchaseData);
+      this.confirmSave(purchaseData);
     } else {
       console.error('Formulario inválido');
     }
   }
 
-  confirm(saleData: SalesRegister) {
-    this.confirmationServ.confirm({
-      message: 'Are you sure you want to perform this action?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        // Introducir un retraso de 3 segundos antes de procesar la confirmación
-        this.ventasServ.postSaveVenta(saleData).subscribe({
-          next: (t) => {
-            console.log('Action confirmed!');
-            if (t.CodigoEstado === "201") {
-              this.notifySuccess();
-              this.generatePdf();
-                setTimeout(() => {
-                  console.log('Venta registrada correctamente');
-                  this.router.navigate(['/transactions/ventas']);
-                }, 3000); // 3000 ms (3 segundos)
-              } else {
-                console.log(t);
-              }
-            },
-            error: (e) => {
-              console.error('Error al registrar la compra:', e);
-            },
-          });
-      },
-      reject: () => {
-        console.log('Action rejected!');
-      },
+  confirmDialog(message: string, header: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.confirmationServ.confirm({
+        message,
+        header,
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => resolve(true),
+        reject: () => resolve(false),
+      });
     });
+  }
+  async confirmSave(saleData: SalesRegister) {
+    this.ventasRegister = saleData;
+  
+    const firstConfirm = await this.confirmDialog('¿Estás seguro de registrar esta venta?', 'Confirmación');
+    console.log(firstConfirm);
+    if (firstConfirm) {
+      const secondConfirm = await this.confirmDialog('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
+      console.log(secondConfirm);
+      if (secondConfirm) {
+        console.log('Generando factura:', this.ventasRegister.confactura);
+        this.ventasRegister.confactura = 1;
+      } else {
+        console.log('El usuario no quiere factura.');
+        this.ventasRegister.confactura = 0;
+      }
+    } else {
+      console.log('Primera confirmación cancelada.');
+    }
+    if (firstConfirm) {
+      this.generatePdf();
+    }
   }
 
   generatePdf = () => {
     const doc = new jsPDF();
 
-    doc.text("Hello world!", 10, 10);
-    doc.save("a4.pdf");
+    const sampleData: any[] = [
+      { product: 'Producto A', quantity: 2, price: 10, total: 20 },
+      { product: 'Producto B', quantity: 1, price: 15, total: 15 },
+      { product: 'Producto C', quantity: 3, price: 7, total: 21 },
+    ];
+    this.pdfreport.generatePdf(); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
   }
 }

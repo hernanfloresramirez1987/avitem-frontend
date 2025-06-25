@@ -7,7 +7,7 @@ import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { ProductoDTO } from '../../../../_models/dto/inventory/products/producto.interface.dto';
 import { ProductoBaseFilter } from '../../../../_models/dto/inventory/products/productosSearch.interface.dto';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { UpperCasePipe } from '@angular/common';
+import { CommonModule, JsonPipe, UpperCasePipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { LibModule } from '../../../lib/lib.module';
 import { FilterApplyService } from '../../../../_services/common/filter.service';
@@ -18,11 +18,12 @@ import { ExternapiService } from '../../../../_services/externapi.service';
 import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
+import { ProductItem } from '@/core/_models/inventory/products/product.model';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, CommonModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -121,4 +122,14 @@ export default class ProductsComponent {
   add = () => {
     this.router.navigate(['/inventory/products/create']);
   }
+
+  rowClass(product: any) {
+    return { '!bg-red-50 !text-red-800': product.cantidadStock <= 5 };
+  }
+
+  // rowStyle(product: any) {
+  //     if (product.cantidadStock <= 20) {
+  //         return { fontWeight: 'bold', fontStyle: 'italic' };
+  //     }
+  // }
 }

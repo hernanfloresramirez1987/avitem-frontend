@@ -3,22 +3,21 @@
     <p-card [header]="'labels.register_clients' | translate | uppercase" [subheader]="'labels.forms_clients' | translate">
         <div class="flex md:flex-row sm:flex-row">
             <div class="col-12 md:col-7 w-full">
-                <!-- <h6>{{'labels.detail_people' | translate | uppercase}}</h6> -->
                 <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ci" class="w-20rem">{{'labels.ci' | translate }}</label>
-                        <input pInputText [formControlName]="'ci'" type="text" class="w-full" [fluid]="true" (change)="searchCI(registroForm.value.ci)" /> @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
+                        <input pInputText [formControlName]="'ci'" type="text" class="w-full" [fluid]="true" (change)="searchCI(registroForm.value.ci)" placeholder="Ingrese el Documento"/> @if (registroForm.get('ci')?.invalid && registroForm.get('ci')?.touched) {
                         <small style="color: red;">Error en el CI.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="nit" class="w-20rem">{{'labels.nit' | translate }}</label>
-                        <input pInputText [formControlName]="'nit'" type="text" class="w-full" [fluid]="true" /> @if (registroForm.get('nit')?.invalid && registroForm.get('nit')?.touched) {
+                        <input pInputText [formControlName]="'nit'" type="text" class="w-full" [fluid]="true" placeholder="Ingrese el Nombre"/> @if (registroForm.get('nit')?.invalid && registroForm.get('nit')?.touched) {
                         <small style="color: red;">Error en el NIT.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label for="ServiceName" class="w-15rem">{{'labels.ciComplement' | translate }}</label>
                         <p-inputGroup>
-                            <input type="text" pInputText placeholder="complemento" [disabled]="checkComplementCI" class="w-full" [fluid]="true" />
+                            <input type="text" pInputText placeholder="complemento" [disabled]="checkComplementCI" class="w-full" [fluid]="true" placeholder="Ingrese el Complemento"/>
                             <button type="button" pButton icon="pi pi-check" class="p-button-primary" (click)="checkComplementCI = !checkComplementCI"></button>
                         </p-inputGroup>
                     </div>
@@ -31,34 +30,38 @@
                 <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center pb-4 lg:w-full md:w-full w-full p-2">
                         <label for="name" class="w-15rem">{{'labels.name' | translate }}</label>
-                        <input pInputText [formControlName]="'nombre'" type="text" class="w-full" [fluid]="true" [fluid]="true"/> @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+                        <input pInputText [formControlName]="'nombre'" type="text" class="w-full" [fluid]="true" [fluid]="true" placeholder="Ingrese el Nombre"/> @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
                         <small style="color: red;">Error en el {{'labels.name' | translate }}.</small> }
                     </div>
                 <!-- </div>
                 <div class="flex md:flex-row flex-row w-full"> -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label for="PublicPhone" class="w-15rem">{{'labels.app' | translate }}</label>
-                        <input pInputText [formControlName]="'app'" type="text" class="w-full" /> @if (registroForm.get('app')?.invalid && registroForm.get('app')?.touched) {
+                        <input pInputText [formControlName]="'app'" type="text" class="w-full" placeholder="Ingrese el Apellido Paterno"/> @if (registroForm.get('app')?.invalid && registroForm.get('app')?.touched) {
                         <small style="color: red;">Error en el {{'labels.app' | translate }}.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label for="apm" class="w-15rem">{{'labels.apm' | translate }}</label>
-                        <input pInputText [formControlName]="'apm'" type="text" class="w-full" /> @if (registroForm.get('apm')?.invalid && registroForm.get('apm')?.touched) {
+                        <input pInputText [formControlName]="'apm'" type="text" class="w-full" placeholder="Ingrese el Apellido Materno"/> @if (registroForm.get('apm')?.invalid && registroForm.get('apm')?.touched) {
                         <small style="color: red;">Error en el {{'labels.apm' | translate }}.</small> }
                     </div>
                 <!-- </div>
                 <div class="flex md:flex-row flex-row w-full"> -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label for="Web" class="w-15rem">{{'labels.direccion' | translate }}</label>
-                        <input pInputText type="direccion" [formControlName]="'direccion'" class="w-full" /> @if (registroForm.get('direccion')?.invalid && registroForm.get('direccion')?.touched) {
+                        <input pInputText type="direccion" [formControlName]="'direccion'" class="w-full" placeholder="Ingrese la Direccion"/> @if (registroForm.get('direccion')?.invalid && registroForm.get('direccion')?.touched) {
                         <small style="color: red;">Error en el {{'labels.direccion' | translate }}.</small> }
                     </div>
                 </div>
                 <div class="flex md:flex-row flex-row">
+                    <label for="sexo" class="p-2">Sexo</label>
                     <div class="flex justify-content-center w-full p-2">
                         @for (item of sexo; track $index) {
-                        <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" class="w-full lg:w-full" styleClass="w-full" />
-                        <label [for]="item.key" class="ml-2 justify-content-center">{{ item.name }}</label> }
+                            <div class="flex items-center">
+                                <p-radioButton [inputId]="item.key" [value]="item" [formControlName]="'sexo'" class="w-full lg:w-full" styleClass="w-full" />
+                                <p class="ml-2">{{ item.name }}</p>
+                            </div>
+                        }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 pb-4 w-full p-2">
                         <label for="Web" class="w-15rem">{{'labels.fnaci' | translate }}</label>
