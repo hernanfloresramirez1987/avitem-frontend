@@ -2,9 +2,9 @@ import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SalesDetailWithNameProduct, SalesRegister } from '../../../../../_models/dto/inventory/ventas/ventasRegister.interface';
 import { ProductItem } from '../../../../../_models/inventory/products/product.model';
-import { DatePipe, UpperCasePipe } from '@angular/common';
+import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 import { ToastService } from '../../../../../_services/common/toast.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { VentasService } from '../../../../../_services/ventas.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
@@ -28,11 +28,29 @@ import { DatePickerModule } from 'primeng/datepicker';
 
 import { jsPDF } from "jspdf";
 import { PdfReportService } from '@/core/_services/common/pdfreport.service';
+import { CapitalizePipe } from '@/core/pipes/capital-letter.pipe';
 
 @Component({
   selector: 'app-sale-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CardModule, TranslateModule, InputTextModule, SelectModule, InputGroupModule, ButtonModule, UpperCasePipe, DatePickerModule, ButtonGroupModule, TableModule, ToastModule, ConfirmDialogModule, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    CardModule,
+    TranslateModule,
+    InputTextModule,
+    SelectModule,
+    InputGroupModule,
+    ButtonModule,
+    UpperCasePipe,
+    DatePickerModule,
+    ButtonGroupModule,
+    TableModule,
+    ToastModule,
+    ConfirmDialogModule,
+    RouterLink,
+    CapitalizePipe,
+    JsonPipe
+  ],
   providers: [DatePipe],
   templateUrl: './sale-create.component.html',
   styleUrl: './sale-create.component.scss'
@@ -40,10 +58,15 @@ import { PdfReportService } from '@/core/_services/common/pdfreport.service';
 export default class SaleCreateComponent {
   salesForm!: FormGroup;
 
+  items: MenuItem[] | undefined;
+
   ventasRegister!: SalesRegister;
   clientes!: ClienteItem[];
   empleados!: EmployeeItem[];
   productos!: ProductItem[];
+
+  producto = signal<ProductItem>({} as ProductItem);
+  cliente = signal<ClienteItem>({} as ClienteItem);
 
   detailView: SalesDetailWithNameProduct[] = [];
   
@@ -51,7 +74,19 @@ export default class SaleCreateComponent {
   total = 0;
   totalVenta = 0;
 
-  constructor(private readonly confirmationServ: ConfirmationService, private readonly clientServ: ClientsService, private readonly employeesServ: EmployeesService, private readonly ventasServ: VentasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService, private readonly pdfreport: PdfReportService) {
+  constructor(
+    private readonly translateLanService: TranslateLanService, 
+    private readonly translate : TranslateService, 
+    private readonly toastServ: ToastService, 
+    private readonly confirmationServ: ConfirmationService, 
+    private readonly clientServ: ClientsService, 
+    private readonly employeesServ: EmployeesService, 
+    private readonly ventasServ: VentasService, 
+    private readonly productosServ: ProductosService, 
+    private readonly fb: FormBuilder, 
+    private readonly router: Router, 
+    private readonly datePipe: DatePipe, 
+    private readonly pdfreport: PdfReportService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     
     this.salesForm = this.fb.group({
@@ -79,7 +114,7 @@ export default class SaleCreateComponent {
         console.log(t); 
         this.clientes  = t.map(r => ({
           ...r,
-          displayCliente: `${r.nombre} (${r.app}) ${r.apm}`
+          displayCliente: `${r.nombre} ${r.app} ${r.apm}`
         }));
       },
       error: (e) => console.log(e)
@@ -233,7 +268,7 @@ export default class SaleCreateComponent {
     }
   }
 
-  confirmDialog(message: string, header: string): Promise<boolean> {
+  confirmDialogSave(message: string, header: string): Promise<boolean> {
     return new Promise((resolve) => {
       this.confirmationServ.confirm({
         message,
@@ -244,25 +279,52 @@ export default class SaleCreateComponent {
       });
     });
   }
+
+  confirmDialogFactura(message: string, header: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.confirmationServ.confirm({
+        message,
+        header,
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => resolve(true),
+        reject: () => resolve(false),
+      });
+    });
+  }
+
+  saveRegisterSale = (saleData: SalesRegister)  => {
+    const secondConfir: any = this.confirmDialogFactura('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
+    console.log(secondConfir);
+    this.ventasRegister.confactura = (secondConfir) ? 1 : 0;
+
+    this.ventasServ.postSaveVenta(saleData).subscribe({
+      next: (t) => console.log(t),
+      error: (e) => console.log(e),
+    })
+  }
+
   async confirmSave(saleData: SalesRegister) {
     this.ventasRegister = saleData;
   
-    const firstConfirm = await this.confirmDialog('¿Estás seguro de registrar esta venta?', 'Confirmación');
+    const firstConfirm = await this.confirmDialogSave('¿Estás seguro de registrar esta venta?', 'Confirmación');
     console.log(firstConfirm);
+    let secondConfirm: any = null;
     if (firstConfirm) {
-      const secondConfirm = await this.confirmDialog('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
-      console.log(secondConfirm);
-      if (secondConfirm) {
-        console.log('Generando factura:', this.ventasRegister.confactura);
-        this.ventasRegister.confactura = 1;
-      } else {
-        console.log('El usuario no quiere factura.');
-        this.ventasRegister.confactura = 0;
-      }
+      // secondConfirm = await this.confirmDialogFactura('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
+      this.saveRegisterSale(this.ventasRegister);
     } else {
       console.log('Primera confirmación cancelada.');
     }
-    if (firstConfirm) {
+    // console.log(secondConfirm);
+    // if (firstConfirm && secondConfirm) {
+    //   console.log('Generando factura:', this.ventasRegister.confactura);
+    //   this.ventasRegister.confactura = 1;
+    // } else {
+    //   console.log('El usuario no quiere factura.');
+    //   this.ventasRegister.confactura = 0;
+    // }
+    
+    if (firstConfirm && secondConfirm) {
       this.generatePdf();
     }
   }
@@ -277,4 +339,15 @@ export default class SaleCreateComponent {
     ];
     this.pdfreport.generatePdf(); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
   }
+
+  changeClient({ value }: any) {
+    console.log(value);
+    const aux = value;
+    this.cliente.set(aux);
+  }
+  changeProduct({ value }: any) {
+    console.log(value);
+    this.producto.set(value) as any;
+  }
+
 }

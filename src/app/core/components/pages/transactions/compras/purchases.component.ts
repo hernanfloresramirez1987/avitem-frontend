@@ -1,45 +1,84 @@
-import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
-import { Table, TableLazyLoadEvent, TableModule, TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
-import { MatchModel } from '../../../../_models/common/matchmodel.interface';
-import { StateComprasResponseModel } from '../../../../_models/inventory/compras/comprasResponse.interface';
-import { ComprasDTO } from '../../../../_models/dto/inventory/compras/compras.interface.dto';
-import { ComprasBaseFilter } from '../../../../_models/dto/inventory/compras/comprasSearch.interface.dto';
-import { tableconfig } from '../../../../config/table.config';
-import { Column } from '../../../../_models/common/columns.interface';
-import { ComprasService } from '../../../../_services/compras.service';
-import { FilterApplyService } from '../../../../_services/common/filter.service';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs';
+import { Component, computed, effect, ElementRef, Signal, signal, viewChild } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { LibModule } from '../../../lib/lib.module';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
+import { StateComprasResponseModel } from '../../../../_models/inventory/compras/comprasResponse.interface';
+import { FilterInputComponent } from '../../../../../core/components/lib/filter-input/filter-input.component';
+import { TranslateLanService } from '../../../../../layout/service/translate-lan.service';
+import { FilterApplyService } from '../../../../_services/common/filter.service';
+import { ComprasBaseFilter } from '../../../../_models/dto/inventory/compras/comprasSearch.interface.dto';
+import { ComprasService } from '../../../../_services/compras.service';
+import { tableconfig } from '../../../../config/table.config';
+import { ComprasDTO } from '../../../../_models/dto/inventory/compras/compras.interface.dto';
+import { MatchModel } from '../../../../_models/common/matchmodel.interface';
+import { LibModule } from '../../../lib/lib.module';
+import { Column } from '../../../../_models/common/columns.interface';
+import { map } from 'rxjs';
+
+import { Table, TableLazyLoadEvent, TableModule, TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
+import { MenuItem, MessageService } from 'primeng/api';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { ToastModule } from 'primeng/toast';
-import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
-import { TranslateLanService } from '@/layout/service/translate-lan.service';
-import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
+import { TagModule } from 'primeng/tag';
+import { Menu } from 'primeng/menu';
 
 @Component({
   selector: 'app-purchases',
   standalone: true,
-  imports: [TableModule, CardModule, TagModule, ToastModule, RatingModule, ButtonModule, TranslateModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent],
+  imports: [
+    TranslateModule,
+    TableModule,
+    CardModule,
+    TagModule,
+    ToastModule,
+    RatingModule,
+    ButtonModule,
+    UpperCasePipe,
+    TableModule,
+    ButtonModule,
+    LibModule,
+    FilterInputComponent,
+    TieredMenuModule],
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.scss'
 })
 export default class PurchasesComponent {
-  @ViewChild('dt1') table!: Table;
-  @ViewChild('filter') filter!: ElementRef;
+  table = viewChild<Table>('dt1');
+  menu = viewChild<Menu>('menu');
+  filter = viewChild<ElementRef>('filter');
 
-  stateValues = signal<StateComprasResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null});
+  stateValues = signal<StateComprasResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   comprasdto = signal<ComprasDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ComprasBaseFilter }});
 
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
+
+  selectedItemId: string | number | null = null;
+
+  items: MenuItem[] = [
+    {
+      label: 'View',
+      icon: 'pi pi-eye',
+      routerLink: '/transactions/compras/detail/214',
+    },
+    { label: 'Download',
+      icon: 'pi pi-download',
+      items: [
+        { label: 'Pdf',
+          icon: 'pi pi-file-pdf',
+          command: (e: any) => {
+            console.log(e);
+          }
+        }
+      ]
+    },
+  ];
 
   private readonly allowedColumns: string[] = ['id', 'fechaCompra', 'total', 'proveedor'];
   columns: string[] = this.allowedColumns;
@@ -49,21 +88,27 @@ export default class PurchasesComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
 
-  constructor(private readonly comprasServ: ComprasService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly messageService: MessageService, private readonly router: Router) {
+  constructor(
+    private readonly translateLanService : TranslateLanService, 
+    private readonly translate : TranslateService, 
+    private readonly filterservice: FilterApplyService, 
+    private readonly comprasServ: ComprasService, 
+    private readonly messageService: MessageService, 
+    private readonly router: Router) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.comprasServ.getCompras(this.comprasdto())
         .pipe(map(t => {
           console.log("console.log('', t):   ", t);
-          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
+          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null};
         }))
         .subscribe({
           next: t => {
             console.log({...this.comprasdto()});
             console.log(t);
-            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null });
+            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null });
           },
-          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: err })
+          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: err })
         })
     });
   }
@@ -89,38 +134,27 @@ export default class PurchasesComponent {
     } // this.initData(this.namefilter());
     this.stateIni = true;
   }
-
-    toggleMenuComplet_Processing($event: MouseEvent, order: any) {
-      // this.menuCompProc.toggle($event);
-      // this.currentorder = order;
-      console.log($event, order);
-    }
-
-
-
-
-
     ////////////////////
-    products: any[] = [{
-      id: '1000',
-      code: 'f230fh0g3',
-      name: 'Bamboo Watch',
-      description: 'Product Description',
-      image: 'bamboo-watch.jpg',
-      price: 65,
-      category: 'Accessories',
-      quantity: 24,
-      inventoryStatus: 'INSTOCK',
-      rating: 5,
-      orders: [
-        {
-          id: '1000-1',
-          productCode: 'f230fh0g3',
-          date: '2020-09-13',
-          amount: 65,
-          quantity: 1,
-          customer: 'David James',
-          status: 'PENDING'
+  products: any[] = [{
+    id: '1000',
+    code: 'f230fh0g3',
+    name: 'Bamboo Watch',
+    description: 'Product Description',
+    image: 'bamboo-watch.jpg',
+    price: 65,
+    category: 'Accessories',
+    quantity: 24,
+    inventoryStatus: 'INSTOCK',
+    rating: 5,
+    orders: [
+      {
+        id: '1000-1',
+        productCode: 'f230fh0g3',
+        date: '2020-09-13',
+        amount: 65,
+        quantity: 1,
+        customer: 'David James',
+        status: 'PENDING'
       }
     ]
   }];
@@ -134,16 +168,16 @@ export default class PurchasesComponent {
       this.comprasServ.getCompras(this.comprasdto())
         .pipe(map(t => {
           console.log("console.log('', t):   ", t);
-          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
+          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null};
         }))
         .subscribe({
           next: t => {
             console.log({...this.comprasdto()});
             console.log(t);
             this.products = t.data
-            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null });
+            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null });
           },
-          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: err })
+          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: err })
         })
     }
 
@@ -164,4 +198,9 @@ export default class PurchasesComponent {
     }
 
     add = () => this.router.navigate(['/transactions/compras/create']);
+
+    openMenu(event: Event, rowData: any) {
+      this.selectedItemId = rowData.id;
+      this.menu()?.toggle(event); // Abre el menú contextual
+    }
 }

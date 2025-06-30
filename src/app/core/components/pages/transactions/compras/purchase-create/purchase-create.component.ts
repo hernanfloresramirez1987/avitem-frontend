@@ -59,9 +59,9 @@ export default class PurchaseCreateComponent {
 
   constructor(private readonly confirmationServ: ConfirmationService, private readonly comprasServ: ComprasService, private readonly productosServ: ProductosService, private readonly translate : TranslateService, private readonly proveedoresServ: ProveedoresService, private readonly almacenesServ: AlmacenesService, private readonly translateLanService: TranslateLanService, private readonly fb: FormBuilder, private readonly router: Router, private readonly datePipe: DatePipe, private readonly toastServ: ToastService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
+    // this.currentDate = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || '';
     this.purchaseForm = this.fb.group({
-      fechaCompra: [this.currentDate],
+      fechaCompra: [Validators.required],
       // total: [this.total],
       id_proveedor: ['', [Validators.required]], // detalle: this.fb.array([]),
       cantidad: [''],
@@ -209,7 +209,8 @@ export default class PurchaseCreateComponent {
               this.notifySuccess();
                 setTimeout(() => {
                   console.log('Compra registrada correctamente');
-                  this.router.navigate(['/transactions/compras']);
+                  console.log(`/transactions/compras/detail/${ t.id }`);
+                  this.router.navigate([`/transactions/compras/detail/${ t.id }`]);
                 }, 3000); // 3000 ms (3 segundos)
               } else {
                 console.log(t);

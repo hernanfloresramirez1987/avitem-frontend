@@ -1,60 +1,81 @@
-<p-table [value]="stateDetailValues().data" styleClass="p-datatable-sm mt-3 mb-3 ml-3 mr-3" [columns]="columnsSelectSignal()"
-    [loading]="loading" scrollHeight="60vh"  >
-    <ng-template pTemplate="header" let-columns="columns">
-        <tr>
-            @for(column of columnsSelectSignal(); track column.header){
-            <th>
-                {{'labels.'+column.field | translate | uppercase}}
-            </th>
-            }
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr>
-        @for(column of columns; track column.field){
-          @switch (column.field) {
-            @case("image"){
-            <td>
-                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
-                    <path
-                        d="M390.769-536.462 480-581.077l89.231 44.615v-232.769H390.769v232.769ZM280-300v-40h200v40H280Zm-64.616 140q-23.057 0-39.221-16.163Q160-192.327 160-215.384v-529.232q0-23.057 16.163-39.221Q192.327-800 215.384-800h529.232q23.057 0 39.221 16.163Q800-767.673 800-744.616v529.232q0 23.057-16.163 39.221Q767.673-160 744.616-160H215.384Zm-24.615-609.231v578.462-578.462Zm24.615 578.462h529.232q9.23 0 16.923-7.692 7.692-7.693 7.692-16.923v-529.232q0-9.23-7.692-16.923-7.693-7.692-16.923-7.692H600v282.847l-120-60.001-120 60.001v-282.847H215.384q-9.23 0-16.923 7.692-7.692 7.693-7.692 16.923v529.232q0 9.23 7.692 16.923 7.693 7.692 16.923 7.692Z" />
-                </svg>
-            </td>
-            }
-            @case("type_return"){
-            <td>
-                <div>
-                    @switch (rowData[column.field]) {
-                    @case('good'){
-                    <p-tag severity="success">{{rowData[column.field] | uppercase}}</p-tag>
-                    }
-                    @case('hurt'){
-                    <p-tag severity="danger">{{rowData[column.field] | uppercase}}</p-tag>
-                    }
-                    @default {
-                    <p-tag severity="warning">{{rowData[column.field] | uppercase}}</p-tag>
-                    }
-                    }
+<p-card>
+<!-- [header]="`${ title }` | translate" [subheader]="`Detalle No.: ${id}`"> -->
+<div class="flex justify-content-between w-full">
+    <div class="text-4xl w-full"><b>{{`${ title }` | translate | uppercase}} No {{id}}</b></div>
+    <p-buttongroup>
+        <!-- <p-button label="Save" icon="pi pi-check" /> -->
+        <p-button title="Nueva Compra" icon="pi pi-plus"/>
+        <p-button title="Imprimir Compra" icon="pi pi-print" />
+        <p-button title="Imprimir Compra" icon="pi pi-arrow-down-left" (click)="redirectNew()" />
+    </p-buttongroup>
+</div>
+    <div class="flex md:flex-row sm:flex-row">
+        <div class="col-12 md:col-7 w-full">
+            <div class="flex md:flex-row flex-row w-full">
+                <div class="justify-content-left align-items-center gap-2 pb-2 lg:w-full md:w-full w-full">
+                    <b>{{'labels.proveedor' | translate }}</b>
+                    <div>{{ itemRegister().proveedor.empresa }}</div>
                 </div>
-            </td>
+                <div class="justify-content-left align-items-center gap-2 pb-2 lg:w-full md:w-full w-full">
+                    {{'labels.nit' | translate }}
+                    <div>{{ itemRegister().proveedor.nit }}</div>
+                </div>
+                <div class="justify-content-left align-items-center gap-2 pb-2 lg:w-full md:w-full w-full">
+                    <b>{{'labels.fechaCompra' | translate}}</b>
+                    <div>{{ itemRegister().fechaCompra | date: 'dd/MM/yyyy'}}</div>
+                </div>
+            </div>
+            <div class="flex md:flex-row flex-row w-full pt-2">
+                <div class="justify-content-left align-items-center gap-2 pb-2 lg:w-full md:w-full w-full">
+                    <b>{{'labels.addres' | translate }}</b>
+                    <div>{{ itemRegister().proveedor.direccionEmpresa }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <h4>Detalles</h4> -->
+    <p-table [value]="detailView()" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm w-full pt-2'">
+        <ng-template #caption>
+            <div class="from-stone-400">{{'labels.details' | translate | capitalize}}</div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th style="text-align: right;">No</th>
+                <th>Producto</th>
+                <th style="text-align: right;">Cantidad</th>
+                <th style="text-align: right;">Precio Unitario</th>
+                <th style="text-align: right;">Total Producto</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-customer let-i="rowIndex">
+            <tr>
+                <td style="text-align: right;">{{i + 1}}</td>
+                <td>{{ customer.producto.nombre }}</td>
+                <td style="text-align: right;">{{ customer.cantidad }}</td>
+                <td style="text-align: right;">{{ customer.precioUnitario }}</td>
+                <td style="text-align: right;">{{ customer.compra.total }}</td>
+            </tr>
+            @if (i+1 === detailView().length) {
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th style="text-align: right; font-weight: 800;">
+                        <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
+                    </th>
+                    <td style="text-align: right; font-weight: 700;">{{ itemRegister().total }}</td>
+                </tr>
             }
-            @default {
-            <td>
-                {{rowData[column.field]}}
-            </td>
-            }
-          }
-        }
-        </tr>
+        </ng-template>
+    </p-table>
+    <ng-template #footer>
+        <div class="flex gap-3 mt-1">
+            <!-- <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/inventory/products']" />
+            <p-button label="Limpiar" severity="secondary" class="w-full" styleClass="w-full" (click)="cleanAll()" />
+            <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitPurchase()" [disabled]="!purchaseForm.valid" /> -->
+        </div>
     </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="8">No products found.</td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="loadingbody">
-        <tr>
-            <td colspan="8">Loading products data. Please wait.</td>
-        </tr>
-    </ng-template>
-</p-table>
+
+</p-card>

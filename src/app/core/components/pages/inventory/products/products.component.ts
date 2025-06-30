@@ -38,7 +38,7 @@ export default class ProductsComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
-  private readonly allowedColumns: string[] = ['id', 'nombre', 'codigoProducto', 'empresa', 'descripcion', 'cantidadStock', 'fechaIngreso', 'unidadMedida',  'state', 'categoria'];
+  private readonly allowedColumns: string[] = ['id', 'nombre', 'codigoProducto', 'empresa', 'cantidadStock', 'fechaIngreso', 'unidadMedida',  'state', 'categoria'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({

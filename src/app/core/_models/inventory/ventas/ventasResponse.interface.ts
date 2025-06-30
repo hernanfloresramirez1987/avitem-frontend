@@ -1,12 +1,11 @@
 import { VentasItem } from "./ventas.model";
 
-export interface StateVentasResponseModel extends ComprasResp {
-    loaded: boolean;
+export interface StateVentasResponseModel extends VentasResp {
     loading: boolean;
     error: string | null;
   }
 
-  export interface ComprasResp {
+  export interface VentasResp {
     data:          Array<VentasItem>;
     page:          number;
     rows:          number;

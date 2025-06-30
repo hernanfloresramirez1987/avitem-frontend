@@ -24,6 +24,7 @@
         "detail_employee": "Detail Employee",
         "detail_client": "Detail Client",
         "detail_product": "Detail Product",
+        "detail_purchase": "Detail Purchase",
         "id": "ID",
         "ci": "CI",
         "nit": "NIT",
@@ -109,6 +110,13 @@
         "manage_warehouse": "Manage Warehouse",
         "cantidadDespachada": "Quantity Dispatched",
         "forms_clients": "Forms Clients",
-        "forms_employees": "Forms Employees"
+        "forms_employees": "Forms Employees",
+        "fechaVenta": "Date Sale",
+        "id_cliente": "Client",
+        "id_empleado": "Employee",
+        "id_producto": "Product",
+        "totalVenta": "Total Amount",
+        "detail_compra": "Detaill Purchase",
+        "addres": "Addres"
     }
 }
