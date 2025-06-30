@@ -296,7 +296,7 @@ export default class SaleCreateComponent {
     const secondConfir: any = this.confirmDialogFactura('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
     console.log(secondConfir);
     this.ventasRegister.confactura = (secondConfir) ? 1 : 0;
-
+    console.log("this.ventasRegister\n ", this.ventasRegister)
     this.ventasServ.postSaveVenta(saleData).subscribe({
       next: (t) => console.log(t),
       error: (e) => console.log(e),

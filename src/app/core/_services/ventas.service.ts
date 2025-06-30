@@ -18,7 +18,7 @@ export class VentasService {
 
   postSaveVenta = (ventaReg: SalesRegister): Observable<VentaSaveResponse> => this.http.post<VentaSaveResponse>(`${this.#url}register`, ventaReg);
 
-  // postVentasSearch = (comprasDto: VentasDTO): Observable<VentaSaveResponse> => this.http.post<VentaSaveResponse>(`${this.#url}register`, comprasDto);
+  postAllVentasSearch = (ventasdto: VentasDTO): Observable<VentasResp> => this.http.post<VentasResp>(`${this.#url}all_filter`, ventasdto);
   
   getVentas = (ventasDto: VentasDTO): Observable<VentasResp> => this.http.get<VentasResp>(`${this.#url}`)
   

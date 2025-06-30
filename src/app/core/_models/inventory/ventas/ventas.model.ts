@@ -1,6 +1,13 @@
 export interface VentasItem {
-    id:             number;
-    fechaCompra:    string;
-    total:          number;
-    proveedor:      string;
+    id:         string;
+    fechaventa: Date;
+    total:      string;
+    cliente:    Cliente;
+}
+
+export interface Cliente {
+    id:    string;
+    ci:    number;
+    nit:   number;
+    state: number;
 }

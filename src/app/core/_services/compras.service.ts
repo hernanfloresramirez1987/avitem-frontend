@@ -17,7 +17,7 @@ export class ComprasService {
 
   postSaveCompras = (compraReg: PurcharseRegister): Observable<ComprasSaveResponse> => this.http.post<ComprasSaveResponse>(`${this.#url}register`, compraReg);
   
-  // postComprasSearch = (comprasDto: ComprasDTO): Observable<ComprasSaveResponse> => this.http.post<ComprasSaveResponse>(`${this.#url}register`, comprasDto);
+  postAllComprasSearch = (comprasDto: ComprasDTO): Observable<ComprasResp> => this.http.post<ComprasResp>(`${this.#url}all_filter`, comprasDto);
 
   getCompras = (comprasDto: ComprasDTO): Observable<ComprasResp> => this.http.get<ComprasResp>(`${this.#url}`)
 

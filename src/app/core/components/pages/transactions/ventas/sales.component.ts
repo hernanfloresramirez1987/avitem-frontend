@@ -19,7 +19,7 @@ import { VentasDTO } from '@/core/_models/dto/inventory/ventas/ventas.interface.
 import { VentasBaseFilter } from '@/core/_models/dto/inventory/ventas/ventasSearch.interface.dto';
 import { Router } from '@angular/router';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
-import { UpperCasePipe } from '@angular/common';
+import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { LibModule } from '@/core/components/lib/lib.module';
 import { MenuItem } from 'primeng/api';
@@ -35,7 +35,8 @@ import { MenuItem } from 'primeng/api';
     LibModule,
     FilterInputComponent,
     UpperCasePipe,
-    TieredMenuModule
+    TieredMenuModule,
+    DatePipe
   ],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.scss'
@@ -45,9 +46,9 @@ export default class SalesComponent {
   menu = viewChild<Menu>('menu');
   filter = viewChild<ElementRef>('filter');
 
-  stateValues = signal<StateVentasResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: null});
+  stateValues = signal<StateVentasResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
-  ventasdto = signal<VentasDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as VentasBaseFilter }});
+  ventasdto = signal<VentasDTO>({ config: { populate_data: true,  page: 1, rows: 15, sort_field : []}, filter: { ...{} as VentasBaseFilter }});
 
   tablecon: number[] = tableconfig  .cantidadRegistros;
   stateIni = false;
@@ -78,7 +79,7 @@ export default class SalesComponent {
 
   expandedRows = {};
 
-  private readonly allowedColumns: string[] = ['id', 'fechaventa', 'total', 'cliente'];
+  private readonly allowedColumns: string[] = ['id', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -94,21 +95,19 @@ export default class SalesComponent {
     private readonly ventasServ: VentasService,
     private readonly router: Router) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-    effect(() => {  console.log('hola ...... ')
-      this.ventasServ.getVentas(this.ventasdto())
-        .pipe(map(t => {
-          console.log("console.log('', t):   ", t);
-          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null};
-        }))
+    effect(() => {
+      this.ventasServ.postAllVentasSearch(this.ventasdto())
+        .pipe(
+          map(t => ({ data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null})))
         .subscribe({
           next: t => {
             console.log({...this.ventasdto()});
             console.log(t);
-            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null });
+            this.stateValues.set(t);
           },
           error: (err) => {
             console.log(err);
-            this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: err })
+            this.stateValues.set({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: err })
           }
         })
     });

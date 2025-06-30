@@ -1,3 +1,4 @@
+import Metadata from "../../common/metadata.interface";
 import { VentasItem } from "./ventas.model";
 
 export interface StateVentasResponseModel extends VentasResp {
@@ -6,8 +7,6 @@ export interface StateVentasResponseModel extends VentasResp {
   }
 
   export interface VentasResp {
-    data:          Array<VentasItem>;
-    page:          number;
-    rows:          number;
-    total_records: number;
+    data:     Array<VentasItem>;
+    metadata: Metadata;
   }
