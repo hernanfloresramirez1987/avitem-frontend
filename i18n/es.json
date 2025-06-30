@@ -24,6 +24,7 @@
         "detail_employee": "Detalle Empleado",
         "detail_client": "Detalle Cliente",
         "detail_product": "Detalle Producto",
+        "detail_purchase": "Detalle Compra",
         "id": "ID",
         "ci": "CI",
         "nit": "NIT",
@@ -108,6 +109,13 @@
         "manage_warehouse": "Gestionar Almacenes",
         "cantidadDespachada": "Cantidad Despachada",
         "forms_clients": "Formulario de Clientes",
-        "forms_employees": "Formulario de Empleados"
+        "forms_employees": "Formulario de Empleados",
+        "fechaVenta": "Fecha de Venta",
+        "id_cliente": "Cliente",
+        "id_empleado": "Empleado",
+        "id_producto": "Producto",
+        "totalVenta": "Monto Total",
+        "detail_compra": "Detalle de Compra",
+        "addres": "Direccion"
     }
 }
