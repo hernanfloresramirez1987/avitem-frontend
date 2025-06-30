@@ -3,11 +3,11 @@
     <p-table
         #dt1
         [value]="stateValues().data"
-        dataKey="id"
+        datakey="id"
         [paginator]="true"
         [loading]="stateValues().loading"
         [expandedRowKeys]="expandedRows"
-        [rows]="stateValues().data.length"
+        [rows]="stateValues().metadata.rows"
         [rowHover]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
         [rowsPerPageOptions]="tablecon"
@@ -16,7 +16,7 @@
         [columns]="columnsSelectSignal()"
         [reorderableColumns]="true"
         (onLazyLoad)="getDataPaged($event)"
-        [totalRecords]="stateValues().total_records"
+        [totalRecords]="stateValues().metadata.total_records"
         responsiveLayout="scroll"
         [sortMode]="'multiple'"
         [customSort]="true"
@@ -33,48 +33,46 @@
         <ng-template #header let-columns>
             <tr>
                 <th rowspan="2"></th>
-                @for (item of columns; track item) { @switch (item.field) { @case("id") {
-                <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}
-                        <p-sortIcon [field]="'id'"></p-sortIcon>
-                    </div>
-                </th>
-                } @case("fechaventa") {
-                <th style="min-width: 20rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.fechaVenta" | translate | uppercase}}
-                        <p-sortIcon [field]="item.field" />
-                    </div>
-                </th>
-                } @case("total") {
-                <th style="min-width: 25rem" [pSortableColumn]="item.field" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.total" | translate | uppercase}}
-                        <p-sortIcon [field]="item.field" />
-                    </div>
-                </th>
-                } @case("proveedor") {
-                <th style="min-width: 10rem" pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels.proveedor" | translate | uppercase}}
-                        <p-sortIcon [field]="item.field" />
-                    </div>
-                </th>
-                } @default {
-                <th pSortableColumn="{{item.field}}" pReorderableColumn>
-                    <div class="flex justify-content-between align-items-left">{{"labels." + item.field | translate | uppercase}}
-                        <p-sortIcon [field]="item.field" />
-                    </div>
-                </th>
-                } } }
+                @for (item of columns; track item) { 
+                    @switch (item.field) { 
+                        @case("id") {
+                            <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}<p-sortIcon [field]="'id'"></p-sortIcon></div>
+                            </th>
+                        }
+                        @case("fechaventa") {
+                        <th pSortableColumn="{{item.field}}" pReorderableColumn>
+                            <div class="flex justify-content-between align-items-left">{{"labels.fechaVenta" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                        </th>
+                        }
+                        @case("total") {
+                        <th [pSortableColumn]="item.field" pReorderableColumn>
+                            <div class="flex justify-content-between align-items-left">{{"labels.total" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                        </th>
+                        }
+                        @case("proveedor") {
+                        <th pSortableColumn="{{item.field}}" pReorderableColumn>
+                            <div class="flex justify-content-between align-items-left">{{"labels.proveedor" | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                        </th>
+                        }
+                        @default {
+                            <th pSortableColumn="{{item.field}}" pReorderableColumn>
+                                <div class="flex justify-content-between align-items-left">{{"labels." + item.field | translate | uppercase}}<p-sortIcon [field]="item.field" /></div>
+                            </th>
+                        }
+                    }
+                }
             </tr>
             <tr>
                 @for (item of columns; track item) {
-                <th style="min-width: 11rem">
-                    @switch (item.field) { 
+                <th>
+                    @switch (item.field) {
                         @default {
                             <appcommon-filter-input [field]="item.field" type="text" /> 
-                        } 
+                        }
                     }
                 </th>
-                } 
+                }
                 @empty {
                     <th style="min-width: 12rem">cargando</th> 
                 }
@@ -90,10 +88,13 @@
                 @for (item of columns; track item) {
                 <td>
                     @switch (item.field) {
-                        @case('fechaventa') { {{ rowData[item.field] }} } 
+                        @case('id') { {{ rowData[item.field] }} }
+                        @case('fechaVenta') { {{ rowData.fechaVenta | date: "dd/MM/yyyy" }} }
                         @case('total') { {{ rowData[item.field] }} }
-                        @case('proveedor') { {{ rowData[item.field] }} }
-                        @default { {{ rowData[item.field] }} } }
+                        @case('cliente') { {{ rowData.cliente.persona.nombre }} {{ rowData.cliente.persona.app }} {{ rowData.cliente.persona.apm }} }
+                        @case('ci') { {{ rowData.cliente.ci }} }
+                        @default { {{ rowData.cliente.nit }} }
+                    }
                 </td>
                 }
             </tr>

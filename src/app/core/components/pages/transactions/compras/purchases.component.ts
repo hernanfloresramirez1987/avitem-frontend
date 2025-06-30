@@ -1,5 +1,5 @@
-import { Component, computed, effect, ElementRef, Signal, signal, viewChild } from '@angular/core';
-import { UpperCasePipe } from '@angular/common';
+import { Component, computed, effect, ElementRef, LOCALE_ID, Signal, signal, viewChild } from '@angular/core';
+import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -26,6 +26,11 @@ import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { Menu } from 'primeng/menu';
+import { BolivianosPipe } from '@/core/pipes/bolivianos.pipe';
+import { DateTimeSeparatePipe } from '@/core/pipes/datetimeseparate.pipe';
+
+import { registerLocaleData } from '@angular/common';
+import localeEsBO from '@angular/common/locales/es-BO';
 
 @Component({
   selector: 'app-purchases',
@@ -43,7 +48,14 @@ import { Menu } from 'primeng/menu';
     ButtonModule,
     LibModule,
     FilterInputComponent,
-    TieredMenuModule],
+    TieredMenuModule,
+    // CurrencyPipe,
+    BolivianosPipe,
+    DateTimeSeparatePipe
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-BO' }
+  ],
   templateUrl: './purchases.component.html',
   styleUrl: './purchases.component.scss'
 })
@@ -52,7 +64,7 @@ export default class PurchasesComponent {
   menu = viewChild<Menu>('menu');
   filter = viewChild<ElementRef>('filter');
 
-  stateValues = signal<StateComprasResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: null});
+  stateValues = signal<StateComprasResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   comprasdto = signal<ComprasDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ComprasBaseFilter }});
 
@@ -80,7 +92,7 @@ export default class PurchasesComponent {
     },
   ];
 
-  private readonly allowedColumns: string[] = ['id', 'fechaCompra', 'total', 'proveedor'];
+  private readonly allowedColumns: string[] = ['id', 'fechaCompra', 'total', 'proveedor', 'nombre', 'nit'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -97,20 +109,15 @@ export default class PurchasesComponent {
     private readonly router: Router) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
-      this.comprasServ.getCompras(this.comprasdto())
-        .pipe(map(t => {
-          console.log("console.log('', t):   ", t);
-          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null};
-        }))
+      this.comprasServ.postAllComprasSearch(this.comprasdto())
+        .pipe(
+          map(t => ({ data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null})))
         .subscribe({
-          next: t => {
-            console.log({...this.comprasdto()});
-            console.log(t);
-            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null });
-          },
-          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: err })
+          next: t => this.stateValues.set(t),
+          error: (err) => this.stateValues.set({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: false, error: err })
         })
     });
+    registerLocaleData(localeEsBO);
   }
 
   clear = (table: Table) => {
@@ -160,26 +167,6 @@ export default class PurchasesComponent {
   }];
 
     expandedRows = {};
-
-    // constructor(private compraSerc: ProductService, private messageService: MessageService) {}
-
-    ngOnInit() {
-      // this.comprasServ.getCompras().then((data) => (this.products = data));
-      this.comprasServ.getCompras(this.comprasdto())
-        .pipe(map(t => {
-          console.log("console.log('', t):   ", t);
-          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null};
-        }))
-        .subscribe({
-          next: t => {
-            console.log({...this.comprasdto()});
-            console.log(t);
-            this.products = t.data
-            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loading: false, error: null });
-          },
-          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loading: true, error: err })
-        })
-    }
 
     expandAll() {
         this.expandedRows = this.products.reduce((acc, p) => (acc[p.id] = true) && acc, {});

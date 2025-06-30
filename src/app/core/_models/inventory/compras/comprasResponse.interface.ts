@@ -1,3 +1,4 @@
+import Metadata from "../../common/metadata.interface";
 import { ComprasItem } from "./compras.model";
 
 export interface StateComprasResponseModel extends ComprasResp {
@@ -6,8 +7,6 @@ export interface StateComprasResponseModel extends ComprasResp {
   }
 
   export interface ComprasResp {
-    data:          Array<ComprasItem>;
-    page:          number;
-    rows:          number;
-    total_records: number;
+    data:     Array<ComprasItem>;
+    metadata: Metadata;
   }
