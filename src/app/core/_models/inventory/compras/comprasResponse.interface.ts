@@ -1,7 +1,6 @@
 import { ComprasItem } from "./compras.model";
 
 export interface StateComprasResponseModel extends ComprasResp {
-    loaded: boolean;
     loading: boolean;
     error: string | null;
   }

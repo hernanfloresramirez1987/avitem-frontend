@@ -31,11 +31,11 @@
                 <!-- <p-button icon="pi pi-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" /> -->
             </div>
         </ng-template>
-        <ng-template pTemplate="header" let-columns>
+        <ng-template #header let-columns>
             <tr>
                 <th rowspan="2"></th>
-                @for (item of columns; track item.field) { 
-                    @switch (item.field) { 
+                @for (item of columns; track item.field) {
+                    @switch (item.field) {
                         @case("id") {
                             <th style="min-width: 1rem" [pSortableColumn]="'id'" pReorderableColumn>
                                 <div class="flex justify-content-between align-items-left">{{"labels.id" | translate | uppercase}}
@@ -114,11 +114,11 @@
                     </th>
                 } 
                 @empty {
-                    <th style="min-width: 8rem">cargando</th> 
+                    <th style="min-width: 8rem">cargando</th>
                 }
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-row>
+        <ng-template #body let-row>
             <tr>
                 <td></td>
                 <td>{{row.id}}</td>
@@ -128,6 +128,7 @@
                 <td>{{row.cantidadStock}}</td>
                 <td>{{row.cantidadDespachada}}</td>
                 <td>{{row.cantidadReservada}}</td>
+                <td>{{row.totalDisponible}}</td>
                 <td>{{row.cant_transferencias}}</td>
                 <td class="text-right">{{row.precio_compra}}</td>
                 <td class="text-right">{{row.precio_venta}}</td>
@@ -149,13 +150,14 @@
                     placeholder="Choose Columns"
                     class="p-input-icon-left"/>
             </div>
-        </ng-template>              <!-- <ng-template pTemplate="summary"> summary </ng-template> -->
+        </ng-template>
+        <!-- <ng-template pTemplate="summary"> summary </ng-template> -->
         <ng-template #emptymessage>
             <tr>
                 <td colspan="8">No order found.</td>
             </tr>
         </ng-template>
-        <ng-template pTemplate="loadingbody">
+        <ng-template #loadingbody>
             <tr>
                 <td colspan="8">Loading orders data. Please wait.</td>
             </tr>

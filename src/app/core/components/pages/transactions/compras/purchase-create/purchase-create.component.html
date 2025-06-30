@@ -3,13 +3,11 @@
 <form [formGroup]="purchaseForm">
     <p-card [header]="'pages.register_purchases' | translate | uppercase" [subheader]="'labels.form_purchases' | translate | capitalize">
         <div class="flex md:flex-row sm:flex-row">
-
             <div class="col-12 md:col-7 w-full">
-                <!-- <h6>{{'labels.form_purchases' | translate | capitalize}}</h6> -->
                 <div class="flex md:flex-row flex-row w-full">
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.fechaCompra' | translate }}</label>
-                        <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" /> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
+                        <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" placeholder="Seleccionar fecha"/> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
@@ -18,12 +16,14 @@
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.proveedor' | translate }}</label>
-                        <p-select [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
+                        <p-select [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" [checkmark]="true" [editable]="true" [showClear]="true" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
                         <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.producto' | translate }}</label>
-                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" /> @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
+                        <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="display" placeholder="Seleccionar Producto" class="w-full lg:w-full" styleClass="w-full" [checkmark]="true" [editable]="true" [showClear]="true" placeholder="Seleccionar un Producto"/> 
+                        @if (purchaseForm.get('id_producto')?.invalid && purchaseForm.get('id_producto')?.touched) {
+                                <!-- [editable]="true" -->
                         <small style="color: red;">Error en el Producto seleccionado.</small> }
                     </div>
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
@@ -58,10 +58,10 @@
                         <small style="color: red;">Error en el Precio de Venta.</small> }
                     </div>
 
-                    <div class="justify-content-center align-items-center">
+                    <div class="justify-content-center align-items-center p-2">
                         <label>{{'labels.options' | translate }}</label>
-                        <div class="flex justify-content-between">
-                            <p-buttonGroup class="p-2">
+                        <div class="flex justify-content-between pt-2">
+                            <p-buttonGroup>
                                 <p-button [title]="'label.add_detall' | translate" icon="pi pi-plus" severity="primary" (click)="addDetail()" />
                                 <!-- <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" /> -->
                                 <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="updateData()" />
@@ -78,7 +78,7 @@
             <ng-template pTemplate="caption">
                 <div class="from-stone-400">{{'labels.details' | translate | capitalize}}</div>
             </ng-template>
-            <ng-template pTemplate="header">
+            <ng-template #header>
                 <tr>
                     <th style="width: 6%; text-align: right;">No</th>
                     <th style="width: 40%;">Producto</th>
@@ -88,7 +88,7 @@
                     <th style="width: 6%;">Option</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-customer let-i="rowIndex">
+            <ng-template #body let-customer let-i="rowIndex">
                 <tr>
                     <td style="text-align: right;">{{i + 1}}</td>
                     <td [style.backgroundColor]=" getColorBackground(customer.color)" [style.color]="getColor(customer.color)">{{ customer.name_product }}</td>
@@ -98,25 +98,21 @@
                     <td style="text-align: right;">{{ customer.precioTotal }}</td>
                     <td style="text-align: right;">{{ customer.option }}</td>
                 </tr>
+                @if (i+1 === detailView.length) {
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <th style="text-align: right;">
+                            <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
+                        </th>
+                    </tr>
+                }
             </ng-template>
         </p-table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        <ng-template pTemplate="footer">
+        <ng-template #footer>
             <div class="flex gap-3 mt-1">
-                <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/inventory/products']" />
+                <p-button label="Cancel" severity="danger" class="w-full" styleClass="w-full" [routerLink]="['/transactions/compras']" />
                 <p-button label="Limpiar" severity="secondary" class="w-full" styleClass="w-full" (click)="cleanAll()" />
                 <p-button label="Save" class="w-full" styleClass="w-full" (click)="submitPurchase()" [disabled]="!purchaseForm.valid" />
             </div>

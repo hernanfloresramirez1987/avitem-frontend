@@ -41,7 +41,7 @@ export default class WarehouseComponent {
   stateIni = false;
   private readonly keylocalColumn = "inventory_cols";
 
-  private readonly allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
+  private readonly allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'totalDisponible', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
