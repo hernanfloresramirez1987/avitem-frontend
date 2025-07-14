@@ -77,7 +77,7 @@ export default class PurchasesComponent {
     {
       label: 'View',
       icon: 'pi pi-eye',
-      routerLink: '/transactions/compras/detail/214',
+      command: () => this.router.navigate([`/transactions/compras/detail/${this.selectedItemId}`])
     },
     { label: 'Download',
       icon: 'pi pi-download',
@@ -186,7 +186,7 @@ export default class PurchasesComponent {
 
     add = () => this.router.navigate(['/transactions/compras/create']);
 
-    openMenu(event: Event, rowData: any) {
+    openMenu(event: Event, rowData: any) { console.log(rowData)
       this.selectedItemId = rowData.id;
       this.menu()?.toggle(event); // Abre el menú contextual
     }

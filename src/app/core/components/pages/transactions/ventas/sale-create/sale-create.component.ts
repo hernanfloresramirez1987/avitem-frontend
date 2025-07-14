@@ -210,7 +210,7 @@ export default class SaleCreateComponent {
   }
 
   changeTotalVenta() {
-    const totalItem = this.salesForm.value.cantidad * this.producto().cantidadStock;
+    const totalItem = this.salesForm.value.cantidad * this.salesForm.value.precioUnitario;
     console.log("totalVenta ", totalItem);
     this.totalVenta = totalItem;
   }
