@@ -48,8 +48,7 @@ import { CapitalizePipe } from '@/core/pipes/capital-letter.pipe';
     ToastModule,
     ConfirmDialogModule,
     RouterLink,
-    CapitalizePipe,
-    JsonPipe
+    CapitalizePipe
   ],
   providers: [DatePipe],
   templateUrl: './sale-create.component.html',
@@ -101,7 +100,7 @@ export default class SaleCreateComponent {
       id_producto: [''],
     });
 
-    this.productosServ.postProductsGet().subscribe(t => {
+    this.productosServ.postProductsGet().subscribe(t => { console.log(t)
       this.productos = t.map(r => ({
         ...r,
         displayProduct: `${r.nombre} (${r.color}) - ${r.unidadMedida}`
@@ -142,8 +141,8 @@ export default class SaleCreateComponent {
     this.ventasRegister = {
       fechaVenta: formattedFechaVenta,
       total: this.total,
-      id_cliente: formValues.id_cliente.id,
-      id_empleado: formValues.id_empleado.id,
+      id_cliente: +formValues.id_cliente.id,
+      id_empleado: +formValues.id_empleado.id,
       confactura: 1,  // Nuevo campo requerido
       token_SIM: "tokenSIM",
       detalle: this.detailView.map((t: any) => {
@@ -211,7 +210,9 @@ export default class SaleCreateComponent {
   }
 
   changeTotalVenta() {
-
+    const totalItem = this.salesForm.value.cantidad * this.salesForm.value.precioUnitario;
+    console.log("totalVenta ", totalItem);
+    this.totalVenta = totalItem;
   }
 
   addDetail(): void {
@@ -221,9 +222,13 @@ export default class SaleCreateComponent {
     }
     const selectedProductId = Number(this.salesForm.value.id_producto.id);
     const productExists = this.detailView.some(detail => detail.id_producto === selectedProductId || this.salesForm.value.id_producto == '');
-    if (productExists) { // Si el producto ya existe, muestra un mensaje de advertencia o notificación
+    if (productExists) {
       alert('Este producto ya ha sido agregado. Por favor selecciona otro.');
-      return; // Sal del método para evitar agregar duplicados
+      return;
+    }
+    if(this.salesForm.value.cantidad > this.producto().cantidadStock) {
+      alert('Error, la cantidad solicitada de ' + this.salesForm.value.cantidad + " items excede al stock de " + this.producto().cantidadStock + " en Almacenes");
+      return;
     }
 
     this.detailView.push({
@@ -255,14 +260,16 @@ export default class SaleCreateComponent {
     this.totalVenta = 0;
   }
 
-  cleanAll() {}
+  cleanAll() {
+    console.log('cleanAll() { ... }')
+  }
 
   submitSales(): void {
     if (this.salesForm.valid) {
       const purchaseData = this.asignarValores();
       console.log(purchaseData);
       purchaseData.detalle = JSON.stringify(purchaseData.detalle);
-      this.confirmSave(purchaseData);
+      this.confirmSave(purchaseData)
     } else {
       console.error('Formulario inválido');
     }
@@ -294,9 +301,9 @@ export default class SaleCreateComponent {
 
   saveRegisterSale = (saleData: SalesRegister)  => {
     const secondConfir: any = this.confirmDialogFactura('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
-    console.log(secondConfir);
     this.ventasRegister.confactura = (secondConfir) ? 1 : 0;
-    console.log("this.ventasRegister\n ", this.ventasRegister)
+    console.log(this.ventasRegister)
+    console.log(saleData)
     this.ventasServ.postSaveVenta(saleData).subscribe({
       next: (t) => console.log(t),
       error: (e) => console.log(e),

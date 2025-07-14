@@ -15,7 +15,8 @@
         "warehouse": "Almacenes",
         "sucursal": "Sucursal",
         "inventories": "Inventarios",
-        "branches": "Sucursales"
+        "branches": "Sucursales",
+        "sales": "Ventas"
     },
     "labels": {
         "detail_people": "Detalle Persona",
@@ -93,6 +94,7 @@
         "precioVenta": "Precio de Venta",
         "totalCompra": "Total de Compra",
         "admin_purchases": "Administrar Compras",
+        "admin_sales": "Administrar Ventas",
         "precio_total": "Precio Total",
         "empresa": "Empresa",
         "cantidadStock": "Cantidad en Stock",

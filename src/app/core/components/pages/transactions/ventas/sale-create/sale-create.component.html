@@ -14,7 +14,7 @@
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.id_cliente' | translate }}</label>
                         <p-select [formControlName]="'id_cliente'" [options]="clientes" optionLabel="displayCliente" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar Cliente" [style]="{width: '100%'}" (onChange)="changeClient($event)"/> @if (salesForm.get('id_cliente')?.invalid && salesForm.get('id_cliente')?.touched) {
-                            <small style="color: red;">Error en el Proveedor Seleccionado.</small> }
+                            <small style="color: red;">Error en el Cliente Seleccionado.</small> }
                         </div>
                         <!-- razon social cliente -->
                         <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
@@ -36,13 +36,23 @@
                         <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar producto" [style]="{width: '100%'}" (onChange)="changeProduct($event)" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) {
                         <small style="color: red;">Error en el Producto Seleccionado.</small> }
                     </div>
-                    <!-- id_producto -->
+                    <!-- descrip -->
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                        <label class="w-25rem">{{'labels.description' | translate }}</label>
+                        <input pInputText type="text" value="{{producto().descripcion}}" class="w-full" [disabled]="true">
+                    </div>
+                    <!-- proveed -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.proveedor' | translate }}</label>
-                        <!-- <p-select [formControlName]="'id_producto'" [options]="productos" optionLabel="displayProduct" class="w-full lg:w-full" styleClass="w-full" placeholder="Seleccionar producto" [style]="{width: '100%'}" /> @if (salesForm.get('id_producto')?.invalid && salesForm.get('id_producto')?.touched) { -->
-                        <!-- {{producto().empresa | json}}<input pInputText type="number" [value]="producto().empresa !== undefined ? producto().empresa : ''" class="w-full" disabled/> @if (salesForm.get('totaCompra')?.invalid && salesForm.get('totaCompra')?.touched) {
-                        <small style="color: red;">Error en el Producto Seleccionado.</small> } -->
+                        <input pInputText type="text" value="{{producto().empresa}}" class="w-full" [disabled]="true">
                     </div>
+                    <!-- cantStcok -->
+                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                        <label class="w-25rem">{{'labels.cantidadStock' | translate }}</label>
+                        <input pInputText type="text" value="{{producto().cantidadStock}}" class="w-full" [disabled]="true">
+                    </div>
+                </div>
+                <div class="flex flex-column md:flex-row flex-row">
                     <!-- cantidad -->
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.cantidad' | translate }}</label>
@@ -72,10 +82,9 @@
                             </p-buttonGroup>
                         </div>
                     </div>
-
                 </div>
                 <!-- <div formArrayName="detalle"> -->
-                <h4>Detalles</h4>
+                <!-- <h4>Detalles</h4> -->
                 <!-- @for (item of detail; track $index) { -->
                 <p-table [value]="detailView" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm'">
                     <ng-template #header>
@@ -98,7 +107,8 @@
                             <!-- <td style="text-align: right;">{{ customer.precioVenta}}</td> -->
                             <td style="text-align: right;">{{ customer.cantidad * customer.precioUnitario}}</td>
                             <td class="flex flex-wrap justify-content-left">
-                                {{i}} - {{detailView.length | json}}<p-buttonGroup>
+                                <!-- {{i}} - {{detailView.length | json}} -->
+                                <p-buttonGroup>
                                     <!-- <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" (click)="updateDetail(customer)" /> -->
                                     <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="deleteDetail(customer)" />
                                 </p-buttonGroup>
@@ -110,7 +120,7 @@
                             <td></td>
                             <td></td>
                             <th style="text-align: right;">
-                                <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
+                                <label>{{'labels.precio_total' | translate }}</label>
                             </th>
                             <th style="text-align: right;" class="text-right">
                                 <!-- <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full"> -->

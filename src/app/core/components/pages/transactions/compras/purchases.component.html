@@ -98,7 +98,7 @@
         <ng-template #body let-rowData let-columns="columns" let-expanded="expanded">
             <tr>
                 <td class="flex py-4">
-                    <p-button type="button" [icon]="'pi pi-ellipsis-v'" class="p-button-text p-button-rounded" [text]="true" (click)="menu.toggle($event)"></p-button>
+                    <p-button type="button" [icon]="'pi pi-ellipsis-v'" class="p-button-text p-button-rounded" [text]="true" (click)="openMenu($event, rowData)"></p-button>
                     <!-- <p-button type="button" [icon]="expanded ? 'pi pi-ellipce' : 'pi pi-chevron-right'" [pRowToggler]="rowData" class="p-button-text p-button-rounded" [text]="true"></p-button> -->
                     <!-- <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> -->
                 </td>
