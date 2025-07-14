@@ -1,0 +1,1 @@
+import{Pa as n}from"./chunk-H3HIGMDG.js";var o=class e{transform(t,r=2){let i=Number(t);return isNaN(i)?"Bs 0.00":`Bs ${i.toFixed(r).replace(/\B(?=(\d{3})+(?!\d))/g,",")}`}static \u0275fac=function(r){return new(r||e)};static \u0275pipe=n({name:"bolivianos",type:e,pure:!0})};export{o as a};

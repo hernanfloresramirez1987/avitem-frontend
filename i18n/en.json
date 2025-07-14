@@ -15,7 +15,8 @@
         "warehouse": "Warehouse",
         "sucursal": "Branch",
         "inventories": "Inventories",
-        "branches": "Branchs"
+        "branches": "Branchs",
+        "sales": "Sales"
     },
     "labels": {
         "detail_people": "Detail People",
@@ -94,6 +95,7 @@
         "precioVenta": "Sale Price",
         "totalCompra": "Total Purchase",
         "admin_purchases": "Admin Purchases",
+        "admin_sales": "Admin Sales",
         "precio_total": "Total Price",
         "empresa": "Enterprise",
         "cantidadStock": "Stock Quantity",
