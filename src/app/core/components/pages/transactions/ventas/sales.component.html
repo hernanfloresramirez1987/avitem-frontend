@@ -91,16 +91,14 @@
                     <!-- <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> -->
                 </td>
                 @for (item of columns; track item) {
-                <td>
                     @switch (item.field) {
-                        @case('id') { {{ rowData[item.field] }} }
-                        @case('fechaVenta') { {{ rowData.fechaVenta | date: "dd/MM/yyyy" }} }
-                        @case('total') { {{ rowData[item.field] }} }
-                        @case('cliente') { {{ rowData.cliente.persona.nombre }} {{ rowData.cliente.persona.app }} {{ rowData.cliente.persona.apm }} }
-                        @case('ci') { {{ rowData.cliente.ci }} }
-                        @default { {{ rowData.cliente.nit }} }
+                        @case('id') { <td>{{ rowData[item.field] }}</td> }
+                        @case('fechaVenta') { <td>{{ rowData.fechaVenta | date: "dd/MM/yyyy" }}</td> }
+                        @case('total') { <td style="width: 12%; text-align: right;">{{ rowData[item.field] | bolivianos }}</td> }
+                        @case('cliente') { <td>{{ rowData.cliente.persona.nombre }} {{ rowData.cliente.persona.app }} {{ rowData.cliente.persona.apm }}</td> }
+                        @case('ci') { <td>{{ rowData.cliente.ci }}</td> }
+                        @default { <td>{{ rowData.cliente.nit }}</td> }
                     }
-                </td>
                 }
             </tr>
         </ng-template>

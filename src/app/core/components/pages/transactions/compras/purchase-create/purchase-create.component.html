@@ -10,10 +10,7 @@
                         <p-datepicker [formControlName]="'fechaCompra'" dateFormat="dd/mm/yy" type="text" styleClass="w-full" class="w-full" placeholder="Seleccionar fecha"/> @if (purchaseForm.get('fechaCompra')?.invalid && purchaseForm.get('fechaCompra')?.touched) {
                         <small style="color: red;">Error en el Fecha de Compra.</small> }
                     </div>
-                    <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
-                        <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
-                        <input pInputText type="text" class="w-full" [value]="total" [disabled]="true" />
-                    </div>
+                    
                     <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
                         <label class="w-25rem">{{'labels.proveedor' | translate }}</label>
                         <p-select [formControlName]="'id_proveedor'" [options]="proveedores" optionLabel="empresa" (onChange)="changeProvider()" class="w-full lg:w-full" styleClass="w-full" [checkmark]="true" [editable]="true" [showClear]="true" placeholder="Select un proveedor" [style]="{width: '100%'}" /> @if (purchaseForm.get('id_proveedor')?.invalid && purchaseForm.get('id_proveedor')?.touched) {
@@ -75,17 +72,15 @@
 
         <!-- <h4>Detalles</h4> -->
         <p-table [value]="detailView" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm w-full'">
-            <ng-template pTemplate="caption">
-                <div class="from-stone-400">{{'labels.details' | translate | capitalize}}</div>
-            </ng-template>
             <ng-template #header>
                 <tr>
                     <th style="width: 6%; text-align: right;">No</th>
-                    <th style="width: 40%;">Producto</th>
+                    <th style="width: 48%;">Producto</th>
                     <th style="width: 12%; text-align: right;">Cantidad</th>
                     <th style="width: 12%; text-align: right;">Precio Unitario</th>
                     <th style="width: 12%; text-align: right;">Precio Total</th>
                     <th style="width: 6%;">Option</th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template #body let-customer let-i="rowIndex">
@@ -96,7 +91,12 @@
                     <td style="text-align: right;">{{ customer.precioUnitario }}</td>
                     <td style="text-align: right;">{{ customer.precioVenta }}</td>
                     <td style="text-align: right;">{{ customer.precioTotal }}</td>
-                    <td style="text-align: right;">{{ customer.option }}</td>
+                    <td style="text-align: right;">
+                        <p-buttonGroup>
+                            <!-- <p-button [title]="'label.edit_detall' | translate" icon="pi pi-pencil" severity="warning" (click)="updateDetail(customer)" /> -->
+                            <p-button [title]="'label.delet_detall' | translate" icon="pi pi-trash" severity="danger" (click)="deleteDetail(customer)" />
+                        </p-buttonGroup>
+                    </td>
                 </tr>
                 @if (i+1 === detailView.length) {
                     <tr>
@@ -104,8 +104,14 @@
                         <td></td>
                         <td></td>
                         <th style="text-align: right;">
-                            <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
+                            <label>{{'labels.precio_total' | translate }}</label>
                         </th>
+                        <th>
+                            <div class="flex flex-wrap justify-content-left align-items-center gap-2 p-2 lg:w-full md:w-full w-full">
+                                <input pInputText type="text" class="w-full" [value]="total" [disabled]="true" />
+                            </div>
+                        </th>
+                        <th></th>
                     </tr>
                 }
             </ng-template>

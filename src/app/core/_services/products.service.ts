@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable, of } from 'rxjs';
-import { ProveedorRegister } from '../_models/dto/users/proveedors/proveedorRegister.interface';
-import { ProveedorSaveResponse } from '../_models/users/proveedores/proveedoresSaveResponse';
 import { ProductoDTO } from '../_models/dto/inventory/products/producto.interface.dto';
 import { ProductResp } from '../_models/inventory/products/productResponse.interface';
 import { ProductoRegister } from '../_models/dto/inventory/products/productoRegister.interface';
@@ -14,7 +12,7 @@ import { ProductItem } from '../_models/inventory/products/product.model';
   providedIn: 'root'
 })
 export class ProductosService {
-  readonly #url= environment.URL_API;
+  readonly #url= `${environment.URL_API}productos/`;
   private readonly http: HttpClient = inject(HttpClient);
 
   getUnidsMedida = (): Observable<any[]> => {
@@ -49,11 +47,11 @@ export class ProductosService {
     { medida: "Unidades combinadas"},
   ])};
 
-  postProducts = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.post<ProductResp>(`${this.#url}productos`, proveedorDto);
+  postProducts = (proveedorDto: ProductoDTO): Observable<ProductResp> => this.http.post<ProductResp>(`${this.#url}`, proveedorDto);
   
-  postProductsGet = (): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}productos`);
+  postProductsGet = (): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}`);
   
-  postProductscProveedor = (idProvider: number): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}productos/list/${idProvider}`);
+  postProductscProveedor = (idProvider: number): Observable<ProductItem[]> => this.http.get<ProductItem[]>(`${this.#url}list/${idProvider}`);
 
-  postSaveProduct = (employeeReg: ProductoRegister): Observable<ProductSaveResponse> => this.http.post<ProductSaveResponse>(`${this.#url}productos/register`, employeeReg);  
+  postSaveProduct = (employeeReg: ProductoRegister): Observable<ProductSaveResponse> => this.http.post<ProductSaveResponse>(`${this.#url}register/`, employeeReg);  
 }

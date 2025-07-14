@@ -23,6 +23,9 @@ import { DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { LibModule } from '@/core/components/lib/lib.module';
 import { MenuItem } from 'primeng/api';
+import { BolivianosPipe } from '@/core/pipes/bolivianos.pipe';
+import { PdfReportService } from '@/core/_services/common/pdfreport.service';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-sales',
@@ -36,7 +39,8 @@ import { MenuItem } from 'primeng/api';
     FilterInputComponent,
     UpperCasePipe,
     TieredMenuModule,
-    DatePipe
+    DatePipe,
+    BolivianosPipe
   ],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.scss'
@@ -69,6 +73,7 @@ export default class SalesComponent {
           style: { color: "crimson" },
           command: (e: any) => {
             console.log(e);
+            this.generatePdf();
           }
         }
       ]
@@ -93,7 +98,8 @@ export default class SalesComponent {
     private readonly translate : TranslateService, 
     private readonly filterservice: FilterApplyService,
     private readonly ventasServ: VentasService,
-    private readonly router: Router) {
+    private readonly router: Router,
+    private readonly pdfreport: PdfReportService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.ventasServ.postAllVentasSearch(this.ventasdto())
@@ -137,4 +143,15 @@ export default class SalesComponent {
   }
 
   add = () => this.router.navigate(['/transactions/ventas/create']);
+
+  generatePdf = () => {
+    const doc = new jsPDF();
+
+    const sampleData: any[] = [
+      { product: 'Producto A', quantity: 2, price: 10, total: 20 },
+      { product: 'Producto B', quantity: 1, price: 15, total: 15 },
+      { product: 'Producto C', quantity: 3, price: 7, total: 21 },
+    ];
+    this.pdfreport.generatePdf(); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
+  }
 }
