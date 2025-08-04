@@ -92,7 +92,7 @@ export default class PurchasesComponent {
     },
   ];
 
-  private readonly allowedColumns: string[] = ['id', 'fechaCompra', 'total', 'proveedor', 'nombre', 'nit'];
+  private readonly allowedColumns: string[] = ['id', 'idlote', 'fechaCompra', 'total', 'proveedor', 'nombre', 'nit'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({

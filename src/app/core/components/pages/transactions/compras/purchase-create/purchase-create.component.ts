@@ -100,6 +100,7 @@ export default class PurchaseCreateComponent {
 
     this.detailView.push({
       cantidad: Number(this.purchaseForm.value.cantidad),
+      cantidadRecibida: Number(this.purchaseForm.value.cantidad),
       precioUnitario: Number(this.purchaseForm.value.precioUnitario),
       precioVenta: Number(this.purchaseForm.value.precioVenta),
       id_producto: Number(this.purchaseForm.value.id_producto.id), // Use get to access the control
@@ -169,6 +170,7 @@ export default class PurchaseCreateComponent {
         console.log(t);
         return {
           cantidad: t.cantidad, // Asegúrate de que 't' sea un elemento de PurcharseDetail
+          cantidadRecibida: t.cant,
           precioUnitario: t.precioUnitario, // Accede a 'precioUnitario' de 't'
           precioVenta: t.precioVenta,
           id_producto: t.id_producto, // Asegúrate de que 'id_producto' esté definido
