@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [TableModule, CardModule],
+  imports: [TableModule, CardModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
