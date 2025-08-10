@@ -5,6 +5,7 @@ export interface ProductItem {
     cantidadStock:  number;
     fechaIngreso:   string;
     empresa:        string;
+    code:          string;
     color:          string;
     unidadMedida:   string;
     codigoProducto: string;
