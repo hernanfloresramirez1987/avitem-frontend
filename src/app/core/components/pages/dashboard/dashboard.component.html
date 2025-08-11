@@ -1,1 +1,54 @@
-<p>dashboard works!</p>
+<div class="grid-container">
+
+    <!-- Panel de Control -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="pie" [data]="pieData" style="width: 40%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="bar" [data]="barData" style="width: 60%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="doughnut" [data]="doughnutData" style="width: 40%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="bar" [data]="horizontalBarData" [options]="horizontalBarOptions" style="width: 60%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="line" [data]="lineData" style="width: 60%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="radar" [data]="radarData" style="width: 60%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="polarArea" [data]="polarAreaData" style="width: 40%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="bubble" [data]="bubbleData" style="width: 60%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <p-chart type="scatter" [data]="scatterData" style="width: 60%;"></p-chart>
+    </div>
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+
+    </div>
+</div>
