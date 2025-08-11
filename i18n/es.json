@@ -90,6 +90,7 @@
         "producto": "Producto",
         "almacen": "Almacén",
         "cantidad": "Cantidad",
+        "precioUnitario": "Precio Unitario",
         "precioCompra": "Precio de Compra",
         "precioVenta": "Precio de Venta",
         "totalCompra": "Total de Compra",
@@ -118,6 +119,7 @@
         "id_producto": "Producto",
         "totalVenta": "Monto Total",
         "detail_compra": "Detalle de Compra",
-        "addres": "Direccion"
+        "addres": "Direccion",
+        "details": "Detalles"
     }
 }

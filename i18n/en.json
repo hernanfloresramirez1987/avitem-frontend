@@ -84,13 +84,13 @@
         "register_product": "Register Product",
         "admin_products": "Admin Products",
         "purchases": "Purchases",
-        
         "fechaCompra": "Purchase Date",
         "total": "Total",
         "proveedor": "Supplier",
         "producto": "Product",
         "almacen": "Warehouse",
         "cantidad": "Quantity",
+        "precioUnitario": "Unit Price",
         "precioCompra": "Purchase Price",
         "precioVenta": "Sale Price",
         "totalCompra": "Total Purchase",
@@ -119,6 +119,7 @@
         "id_producto": "Product",
         "totalVenta": "Total Amount",
         "detail_compra": "Detaill Purchase",
-        "addres": "Addres"
+        "addres": "Addres",
+        "details": "Details"
     }
 }
