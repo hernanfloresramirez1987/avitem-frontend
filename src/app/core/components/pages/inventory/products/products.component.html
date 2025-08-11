@@ -22,13 +22,13 @@
         [scrollable]="true"
         scrollHeight="60vh"
         [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
-        <ng-template pTemplate="caption">
+        <ng-template #caption>
             <div class="flex flex-wrap justify-content-end">
                 <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
                 <p-button icon="pi pi-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />
             </div>
         </ng-template>
-        <ng-template pTemplate="header" let-columns>
+        <ng-template #header let-columns>
             <tr>
                 <th rowspan="2">
                     <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-2"> </button>
@@ -100,7 +100,7 @@
                 @for (item of columns; track item) {
                     @switch (item.field) { 
                         @case("id") { <td>{{ rowData[item.field] }}</td> } 
-                        @case('nombre') { <td [style.backgroundColor]=" getColorBackground(rowData['color'])">{{ rowData[item.field] }} </td> }
+                        @case('nombre') { <td [style.backgroundColor]="rowData['code']">{{ rowData[item.field] }}</td> }
                         @case("descripcion") { <td>{{ rowData[item.field] }}</td> } 
                         @case('codigoProducto') { <td>{{ rowData[item.field] }}</td> } 
                         @case('cantidadStock') { <td>{{ rowData[item.field] }}</td> } 

@@ -21,7 +21,7 @@ import { ButtonGroupModule } from 'primeng/buttongroup';
 @Component({
   selector: 'app-return-details',
   standalone: true,
-  imports: [CardModule, TableModule, ButtonModule, TranslateLanModule, TagModule, CapitalizePipe, TranslateModule, CommonModule, InputGroupModule, InputGroupAddonModule, ButtonGroupModule],
+  imports: [CardModule, TableModule, ButtonModule, TranslateLanModule, TagModule, TranslateModule, CommonModule, InputGroupModule, InputGroupAddonModule, ButtonGroupModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,0 +1,41 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas iguales */
+    gap: 1rem;
+}
+
+.card {
+    background-color:#2c1825;
+    color: #e0e7ff;
+    // padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    filter: grayscale(100%);
+
+    /* Combina todas las transiciones aquí */
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease 2s,
+        /* Empieza filtro después de 2 segundos */
+        background-color 0.3s ease 2s;
+    /* Empieza color después de 2 segundos */
+}
+
+.card:hover {
+    /* Combina todas las transiciones aquí */
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease 2s,
+        /* Empieza filtro después de 2 segundos */
+        background-color 0.2s ease 2s;
+    /* Empieza color después de 2 segundos */
+
+
+    transform: scale(1.025);
+    background-color: #121217;
+    filter: grayscale(0%);
+    transition: filter 0.3s ease;
+    border: 2px solid crimson;
+}

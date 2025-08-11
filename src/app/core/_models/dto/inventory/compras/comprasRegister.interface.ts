@@ -7,12 +7,13 @@ export interface PurcharseRegister {
 }
 
 export interface PurcharseDetail {
-  cantidad:       number;
-  precioUnitario: number;
-  precioVenta:    number;
-  id_producto:    number;
-  id_almacen:     number;
-  color?:         string;
+  cantidad:         number;
+  precioUnitario:   number;
+  cantidadRecibida: number;
+  precioVenta:      number;
+  id_producto:      number;
+  id_almacen:       number;
+  color?:           string;
 }
 
 export interface PurcharseDetailWithNameProduct extends PurcharseDetail {

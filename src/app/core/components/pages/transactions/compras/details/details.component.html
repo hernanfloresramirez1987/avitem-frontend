@@ -17,7 +17,7 @@
                     <div>{{ itemRegister().proveedor.empresa }}</div>
                 </div>
                 <div class="justify-content-left align-items-center gap-2 pb-2 lg:w-full md:w-full w-full">
-                    {{'labels.nit' | translate }}
+                    <b>{{'labels.nit' | translate }}</b>
                     <div>{{ itemRegister().proveedor.nit }}</div>
                 </div>
                 <div class="justify-content-left align-items-center gap-2 pb-2 lg:w-full md:w-full w-full">
@@ -38,15 +38,15 @@
     <!-- <h4>Detalles</h4> -->
     <p-table [value]="detailView()" [tableStyle]="{ 'width': '100%' }" [styleClass]="'p-datatable-sm w-full pt-2'">
         <ng-template #caption>
-            <div class="from-stone-400">{{'labels.details' | translate | capitalize}}</div>
+            <tr class="from-stone-400"><th>{{'labels.details' | translate | uppercase}}</th></tr>
         </ng-template>
         <ng-template #header>
             <tr>
                 <th style="text-align: right;">No</th>
-                <th>Producto</th>
-                <th style="text-align: right;">Cantidad</th>
-                <th style="text-align: right;">Precio Unitario</th>
-                <th style="text-align: right;">Total Producto</th>
+                <th>{{ 'labels.producto' | translate | uppercase }}</th>
+                <th style="text-align: right;">{{ 'labels.cantidad' | translate | uppercase }}</th>
+                <th style="text-align: right;">{{ 'labels.precioUnitario' | translate | uppercase }}</th>
+                <th style="text-align: right;">{{ 'labels.precio_total' | translate | uppercase }}</th>
             </tr>
         </ng-template>
         <ng-template #body let-customer let-i="rowIndex">
@@ -55,17 +55,14 @@
                 <td>{{ customer.producto.nombre }}</td>
                 <td style="text-align: right;">{{ customer.cantidad }}</td>
                 <td style="text-align: right;">{{ customer.precioUnitario }}</td>
-                <td style="text-align: right;">{{ customer.compra.total }}</td>
+                <td style="text-align: right;">{{ customer.cantidad * customer.precioUnitario }}</td>
             </tr>
             @if (i+1 === detailView().length) {
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th style="text-align: right; font-weight: 800;">
-                        <label class="w-25rem">{{'labels.precio_total' | translate }}</label>
-                    </th>
-                    <td style="text-align: right; font-weight: 700;">{{ itemRegister().total }}</td>
+                    <td colspan="4" style="text-align: right; font-weight: 800;">
+                        <label>{{'labels.precio_total' | translate | uppercase }}</label>
+                    </td>
+                    <td style="text-align: right; font-weight: 800;">{{ itemRegister().total }}</td>
                 </tr>
             }
         </ng-template>
