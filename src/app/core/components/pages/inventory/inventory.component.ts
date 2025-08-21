@@ -61,14 +61,13 @@ export default class WarehouseComponent {
     effect(() => {
       this.inventaryServ
         .getAllWarehouses(this.warehousesdto())
-        .pipe(map(t => {
-          console.log(t);
-          return { data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }}}))
+        .pipe(
+          map(t => ({ data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null})))
         .subscribe({
           next: t => {
             console.log(t);
             console.log({...this.warehousesdto()});
-            this.stateValues.set({ data: t.data, metadata: t.metadata, loading: false, error: null});
+            this.stateValues.set(t);
             console.log(this.stateValues());
           },
           error: (err) => {

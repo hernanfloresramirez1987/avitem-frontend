@@ -1,5 +1,6 @@
 export interface VentasItem {
     id:         string;
+    no:         number;
     fechaventa: Date;
     total:      string;
     cliente:    Cliente;
