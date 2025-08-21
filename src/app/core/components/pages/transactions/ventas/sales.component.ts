@@ -84,7 +84,7 @@ export default class SalesComponent {
 
   expandedRows = {};
 
-  private readonly allowedColumns: string[] = ['id', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
+  private readonly allowedColumns: string[] = ['id', 'no', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
@@ -106,11 +106,8 @@ export default class SalesComponent {
         .pipe(
           map(t => ({ data: Array.isArray(t.data) ? [...t.data] : [], metadata: { page: t.metadata.page, rows: t.metadata.rows, total_records: t.metadata.total_records }, loading: false, error: null})))
         .subscribe({
-          next: t => {
-            console.log({...this.ventasdto()});
-            console.log(t);
-            this.stateValues.set(t);
-          },
+          next: t => 
+            this.stateValues.set(t),
           error: (err) => {
             console.log(err);
             this.stateValues.set({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: err })
