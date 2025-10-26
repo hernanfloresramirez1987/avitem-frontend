@@ -30,8 +30,9 @@ export class AppMenu {
         {
             label: "home", icon: "pi pi-home",
             items: [
-                { label: "dashboard", icon: "pi pi-home", routerLink: ["/home"] },
-                { label: "main_panel", icon: "pi pi-desktop", routerLink: ["/dashboard"] }
+                { label: "home", icon: "pi pi-home", routerLink: ["/home"] },
+                { label: "dashboard", icon: "pi pi-desktop", routerLink: ["/dashboard"] },
+                { label: "graphics", icon: "pi pi-chart-line", routerLink: ["/graphics"] }
             ]
         },
         {

@@ -4,51 +4,180 @@
     <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
         onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
         onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="pie" [data]="pieData" style="width: 40%;"></p-chart>
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-chart-bar" style="font-size:2.5rem; color:#22c55e;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Panel de Control</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#a5b4fc;">
+            Vista general con KPIs, estadísticas y resumen de operaciones de Avitem Importaciones.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#22c55e; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;">
+                Ir al Panel
+            </button>
+        </div>
     </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="bar" [data]="barData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="doughnut" [data]="doughnutData" style="width: 40%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="bar" [data]="horizontalBarData" [options]="horizontalBarOptions" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="line" [data]="lineData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="radar" [data]="radarData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="polarArea" [data]="polarAreaData" style="width: 40%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="bubble" [data]="bubbleData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="scatter" [data]="scatterData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
 
+    <!-- Productos -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-truck" style="font-size:2.5rem; color:#3b82f6;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Productos</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#93c5fd;">
+            Gestión de inventario: insumos, materiales y productos importados y almacenados.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#3b82f6; color:#fff; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/inventory/products">
+                Ver Productos
+            </button>
+        </div>
     </div>
+
+    <!-- Compras -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-shopping-cart" style="font-size:2.5rem; color:#ef4444;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Compras</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#fca5a5;">
+            Control de órdenes de compra, proveedores y gestión de pagos.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#ef4444; color:#fff; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/transactions/compras">
+                Ver Compras
+            </button>
+        </div>
+    </div>
+
+    <!-- Ventas -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-credit-card" style="font-size:2.5rem; color:#facc15;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Ventas</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#fef08a;">
+            Análisis de transacciones, clientes y métricas comerciales.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#facc15; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/transactions/ventas">
+                Ver Ventas
+            </button>
+        </div>
+    </div>
+
+    <!-- Inventarios -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-server" style="font-size:2.5rem; color:#10b981;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Inventarios</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#6ee7b7;">
+            Gestión detallada de almacenes, niveles de stock y ubicaciones.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#10b981; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/inventory/inventory">
+                Ver Inventarios
+            </button>
+        </div>
+    </div>
+
+    <!-- Proveedores -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-users" style="font-size:2.5rem; color:#8b5cf6;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Proveedores</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#c4b5fd;">
+            Gestión de proveedores, contactos y evaluaciones de desempeño.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#8b5cf6; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/users/proveedores">
+                Ver Proveedores
+            </button>
+        </div>
+    </div>
+
+    <!-- Clientes -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-id-card" style="font-size:2.5rem; color:#14b8a6;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Clientes</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#81e6d9;">
+            Gestión de clientes, contactos, historial y ventas.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#14b8a6; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/users/clientes">
+                Ver Clientes
+            </button>
+        </div>
+    </div>
+
+    <!-- Empleados -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-users" style="font-size:2.5rem; color:#f97316;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Empleados</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#fb923c;">
+            Administración del personal, roles y accesos.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#f97316; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/users/empleados">
+                Ver Empleados
+            </button>
+        </div>
+    </div>
+
+    <!-- Reportes -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-file" style="font-size:2.5rem; color:#f97316;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Reportes</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#fdba74;">
+            Análisis detallados y reportes para facilitar la toma de decisiones.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#f97316; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;">
+                Ver Reportes
+            </button>
+        </div>
+    </div>
+
+    <!-- Configuración -->
+    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
+        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
+        <div style="text-align:center; margin-bottom:1rem;">
+            <i class="pi pi-cog" style="font-size:2.5rem; color:#a78bfa;"></i>
+        </div>
+        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Configuración</h3>
+        <p style="text-align:center; font-size:0.875rem; color:#d8b4fe;">
+            Ajusta parámetros del sistema, usuarios y preferencias de Avitem Importaciones.
+        </p>
+        <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" style="background:#a78bfa; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;">
+                Configurar
+            </button>
+        </div>
+    </div>
+
 </div>
