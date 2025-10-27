@@ -18,7 +18,7 @@
         [sortMode]="'multiple'"
         [customSort]="true"
         [scrollable]="true"
-        scrollHeight="60vh"
+        scrollHeight="53vh"
         [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
 
         <ng-template #caption>
@@ -26,7 +26,7 @@
                 <p-iconfield iconPosition="left">
                     <p-inputgroup>
                         <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
-                        <p-button icon="pi pi-user-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />&nbsp;
+                        <p-button icon="pi pi-user-plus" severity="primary" [outlined]="true" (click)="add()" />
                         <p-button pRipple icon="pi pi-ellipsis-v" severity="secondary" [outlined]="true"/>
                     </p-inputgroup>
                 </p-iconfield>
@@ -35,7 +35,7 @@
 
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th>
+                <th rowspan="2">
                     <!-- <p-tableHeaderCheckbox class="pb-0 px-2" /> -->
                     <p-button icon="pi pi-ellipsis-v" [rounded]="false" [text]="true" (click)="toggleMenu($event)" severity="secondary"> </p-button>
                     <!-- <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-text pt-5" (click)="toggleAllItemMenu($event)"> </button> -->
@@ -139,6 +139,33 @@
                     } @default { {{ rowData[item.field] }} } }
                     </td>
                 }
+            </tr>
+        </ng-template>
+
+        <ng-template #paginatorleft>
+            <div class="flex align-items-center justify-content-center"> <!-- {{'labels.selected_columns' | translate}} : -->
+                <p-multiSelect
+                    inputId="float-label"
+                    [options]="colsOptionsSelect"
+                    [ngModel]="columnsSelectSignal()"
+                    (onChange)="cargaColumnas($event)"
+                    (onSelectAllChange)="selectAll($event)"
+                    optionLabel="header"
+                    selectedItemsLabel="{0} columns selected"
+                    size="small"
+                    placeholder="Choose Columns"
+                    class="p-input-icon-left"/>
+            </div>
+        </ng-template>
+        <!-- <ng-template pTemplate="summary"> summary </ng-template> -->
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="8">No order found.</td>
+            </tr>
+        </ng-template>
+        <ng-template #loadingbody>
+            <tr>
+                <td colspan="8">Loading orders data. Please wait.</td>
             </tr>
         </ng-template>
     </p-table>

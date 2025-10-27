@@ -20,11 +20,14 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { Router, RouterLink } from '@angular/router';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { PersonasService } from '@/core/_services/personas.service';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { FormsModule } from '@angular/forms';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, IconFieldModule, InputGroupModule, NgStyle],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, IconFieldModule, InputGroupModule, NgStyle, MultiSelectModule, FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -46,8 +49,15 @@ export default class UsersComponent {
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
 
-  constructor(private readonly employeeServ: EmployeesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService) {
+  private readonly keylocalColumn = "clients_cols";
+
+  constructor(private readonly employeeServ: EmployeesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService, private readonly arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
@@ -91,4 +101,19 @@ export default class UsersComponent {
   add = () => this.router.navigate(['/users/empleados/create']);
 
   getSexo = (sex: string): string => this.personasService.getSexo(sex);
+
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
+  }
 }

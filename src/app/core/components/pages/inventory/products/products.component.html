@@ -20,7 +20,7 @@
         [sortMode]="'multiple'"
         [customSort]="true"
         [scrollable]="true"
-        scrollHeight="60vh"
+        scrollHeight="53vh"
         [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
         <ng-template #caption>
             <div class="flex flex-wrap justify-content-end">
@@ -109,6 +109,32 @@
                         @case('categoria') { <td>{{ rowData[item.field] }}</td> } 
                         @default { <td>{{ rowData[item.field] }}</td> } 
                     } }
+            </tr>
+        </ng-template>
+        <ng-template #paginatorleft>
+            <div class="flex align-items-center justify-content-center"> <!-- {{'labels.selected_columns' | translate}} : -->
+                <p-multiSelect
+                    inputId="float-label"
+                    [options]="colsOptionsSelect"
+                    [ngModel]="columnsSelectSignal()"
+                    (onChange)="cargaColumnas($event)"
+                    (onSelectAllChange)="selectAll($event)"
+                    optionLabel="header"
+                    selectedItemsLabel="{0} columns selected"
+                    size="small"
+                    placeholder="Choose Columns"
+                    class="p-input-icon-left"/>
+            </div>
+        </ng-template>
+        <!-- <ng-template pTemplate="summary"> summary </ng-template> -->
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="8">No order found.</td>
+            </tr>
+        </ng-template>
+        <ng-template #loadingbody>
+            <tr>
+                <td colspan="8">Loading orders data. Please wait.</td>
             </tr>
         </ng-template>
     </p-table>
