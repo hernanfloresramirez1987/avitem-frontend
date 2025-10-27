@@ -1,5 +1,5 @@
 <!-- {{stateValues().metadata | json}}/ -->
-<p-card [header]="'pages.inventories' | translate | uppercase">
+<p-card [header]="'pages.inventories' | translate | uppercase" [subheader]="'labels.view_historie' | translate">
     <p-table
         #dt1
         [value]="stateValues().data"
@@ -28,7 +28,6 @@
         <ng-template pTemplate="caption">
             <div class="flex flex-wrap justify-content-end gap-2">
                 <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
-                <!-- <p-button icon="pi pi-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" /> -->
             </div>
         </ng-template>
         <ng-template #header let-columns>

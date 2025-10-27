@@ -20,11 +20,14 @@ import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-
 import { PersonasService } from '@/core/_services/personas.service';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputGroupModule } from 'primeng/inputgroup';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-suppliers',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, IconFieldModule, FilterInputComponent, NgStyle, InputGroupModule],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, IconFieldModule, FilterInputComponent, NgStyle, InputGroupModule, MultiSelectModule, FormsModule],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss'
 })
@@ -46,8 +49,15 @@ export default class SuppliersComponent {
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
 
-    constructor(private readonly employeeServ: ProveedoresService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly personasService: PersonasService, private readonly router: Router) {
+  private readonly keylocalColumn = "proveedors_cols";
+
+    constructor(private readonly employeeServ: ProveedoresService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly personasService: PersonasService, private readonly router: Router, private readonly arrayurilservice: ArrayutilService) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         this.employeeServ.postProveedores(this.employeedto())
@@ -91,4 +101,19 @@ export default class SuppliersComponent {
   getSexo = (sex: string): string => this.personasService.getSexo(sex);
 
   add = () => this.router.navigate(['/users/proveedores/create']);
+
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
+  }
 }

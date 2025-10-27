@@ -20,11 +20,14 @@ import { PersonasService } from '@/core/_services/personas.service';
 import { LibModule } from '@/core/components/lib/lib.module';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { IconFieldModule } from 'primeng/iconfield';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { FormsModule, NgModel } from '@angular/forms';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 
 @Component({
   selector: 'app-clientes',
   standalone: true,
-  imports: [CardModule, TranslateModule, ButtonModule, UpperCasePipe, TableModule, NgStyle, LibModule, InputGroupModule, IconFieldModule],
+  imports: [CardModule, TranslateModule, ButtonModule, UpperCasePipe, TableModule, NgStyle, LibModule, InputGroupModule, IconFieldModule, MultiSelectModule, FormsModule],
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.scss'
 })
@@ -39,19 +42,26 @@ export default class ClientesComponent {
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
 
+  private readonly keylocalColumn = "clients_cols";
+
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo'];
   columns: string[] = this.allowedColumns;
+  
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
-
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
   clients: any[] = [];
   expedidoOptions!: { name: string; code: string }[];
 
   
-  constructor(private readonly usersServ: UsersService, private readonly clientServ: ClientsService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService) {
+  constructor(private readonly usersServ: UsersService, private readonly clientServ: ClientsService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService,  private readonly arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => { 
       this.clientServ.postClients(this.employeedto())
@@ -101,4 +111,19 @@ export default class ClientesComponent {
   add = () => this.router.navigate(['/users/clientes/create']);
 
   getSexo = (sex: string): string => this.personasService.getSexo(sex);
+
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
+  }
 }

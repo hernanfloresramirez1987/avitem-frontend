@@ -19,11 +19,14 @@ import { CardModule } from 'primeng/card';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { FilterInputComponent } from '@/core/components/lib/filter-input/filter-input.component';
 import { ProductItem } from '@/core/_models/inventory/products/product.model';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, CommonModule],
+  imports: [TranslateModule, CardModule, UpperCasePipe, TableModule, ButtonModule, LibModule, FilterInputComponent, CommonModule, MultiSelectModule, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -45,8 +48,15 @@ export default class ProductsComponent {
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
     })));
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
 
-    constructor(private readonly productsServ: ProductosService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly externapiServ: ExternapiService, private readonly router: Router) {
+  private readonly keylocalColumn = "products_cols";
+
+    constructor(private readonly productsServ: ProductosService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly externapiServ: ExternapiService, private readonly router: Router, private readonly arrayurilservice: ArrayutilService) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         // this.productsServ.postProductsGet(this.productsdto())
@@ -132,4 +142,18 @@ export default class ProductsComponent {
   //         return { fontWeight: 'bold', fontStyle: 'italic' };
   //     }
   // }
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
+  }
 }
