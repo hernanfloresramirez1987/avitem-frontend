@@ -93,9 +93,8 @@ export class PdfReportService {
         const img = new Image();
         img.src = 'layout/images/logo-dark.png'; // ruta relativa desde /src/assets
         img.onload = () => {
-        doc.addImage(img, 'PNG', 10, 10, 30, 30); // cuando cargue, la añade
-        doc.save('factura.pdf');
-        };
+            doc.addImage(img, 'PNG', 10, 10, 30, 30); // cuando cargue, la añade
+        
         // const logoBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...'; // reemplaza con tu logo real
         // doc.addImage(logoBase64, 'PNG', 10, 10, 30, 30); // (x, y, width, height)
 
@@ -160,5 +159,6 @@ export class PdfReportService {
 
         // Descargar o visualizar
         doc.save('factura.pdf');
+    }
     }
 }
