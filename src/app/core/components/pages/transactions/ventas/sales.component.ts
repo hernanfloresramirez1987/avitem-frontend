@@ -49,13 +49,24 @@ export default class SalesComponent {
   table = viewChild<Table>('dt1');
   menu = viewChild<Menu>('menu');
   filter = viewChild<ElementRef>('filter');
-
   stateValues = signal<StateVentasResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   ventasdto = signal<VentasDTO>({ config: { populate_data: true,  page: 1, rows: 15, sort_field : []}, filter: { ...{} as VentasBaseFilter }});
-
   tablecon: number[] = tableconfig  .cantidadRegistros;
   stateIni = false;
+  title: string = 'pages.sales';
+  private readonly allowedColumns: string[] = ['id', 'no', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
+  columns: string[] = this.allowedColumns;
+  columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+    })));
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
 
   selectedItemId: string | number | null = null;
   
@@ -80,18 +91,7 @@ export default class SalesComponent {
     },
   ];
 
-  title: string = 'pages.sales';
-
   expandedRows = {};
-
-  private readonly allowedColumns: string[] = ['id', 'no', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
-  columns: string[] = this.allowedColumns;
-  columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
-    .map(columnName => ({
-      field: columnName,
-      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
-    })));
-  
 
   constructor(
     private readonly translateLanService: TranslateLanService, 

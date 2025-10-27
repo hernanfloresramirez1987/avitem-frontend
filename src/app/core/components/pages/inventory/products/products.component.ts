@@ -1,7 +1,8 @@
-import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, Signal, signal, viewChild } from '@angular/core';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { tableconfig } from '../../../../config/table.config';
 import { Column } from '../../../../_models/common/columns.interface';
+import { Menu } from 'primeng/menu';
 import { StateProductResponseModel } from '../../../../_models/inventory/products/productResponse.interface';
 import { MatchModel } from '../../../../_models/common/matchmodel.interface';
 import { ProductoDTO } from '../../../../_models/dto/inventory/products/producto.interface.dto';
@@ -31,16 +32,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './products.component.scss'
 })
 export default class ProductsComponent {
-  @ViewChild('dt1') table!: Table;
-  @ViewChild('filter') filter!: ElementRef;
-
+  table = viewChild<Table>('dt1');
+  menu = viewChild<Menu>('menu');
+  filter = viewChild<ElementRef>('filter');
   stateValues = signal<StateProductResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   productsdto = signal<ProductoDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProductoBaseFilter }});
-
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-
+  title: string = 'pages.products';
   private readonly allowedColumns: string[] = ['id', 'nombre', 'codigoProducto', 'empresa', 'cantidadStock', 'fechaIngreso', 'unidadMedida',  'state', 'categoria'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -56,7 +56,14 @@ export default class ProductsComponent {
 
   private readonly keylocalColumn = "products_cols";
 
-    constructor(private readonly productsServ: ProductosService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly externapiServ: ExternapiService, private readonly router: Router, private readonly arrayurilservice: ArrayutilService) {
+    constructor(
+      private readonly productsServ: ProductosService, 
+      private readonly filterservice: FilterApplyService, 
+      private readonly translate : TranslateService, 
+      private readonly translateLanService : TranslateLanService, 
+      private readonly externapiServ: ExternapiService, 
+      private readonly router: Router, 
+      private readonly arrayurilservice: ArrayutilService) {
       this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
       effect(() => {
         // this.productsServ.postProductsGet(this.productsdto())

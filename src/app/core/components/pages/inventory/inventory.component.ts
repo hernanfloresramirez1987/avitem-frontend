@@ -32,14 +32,12 @@ import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
 export default class WarehouseComponent {
   table = viewChild<Table>('dt1');
   filter = viewChild<Table>('filter');
-
   stateValues = signal<StateWarehouseResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   warehousesdto = signal<InventaryDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as InventaryBaseFilter }});  
-  
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  private readonly keylocalColumn = "inventory_cols";
+  
 
   private readonly allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'totalDisponible', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
   columns: string[] = this.allowedColumns;
@@ -55,8 +53,15 @@ export default class WarehouseComponent {
   }));
 
   expandedRows = {};
-
-  constructor(private readonly inventaryServ: InventoriesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly messageService: MessageService, private readonly router: Router, private readonly arrayurilservice: ArrayutilService) {
+  private readonly keylocalColumn = "inventory_cols";
+  constructor(
+    private readonly inventaryServ: InventoriesService, 
+    private readonly filterservice: FilterApplyService, 
+    private readonly translate : TranslateService, 
+    private readonly translateLanService : TranslateLanService, 
+    private readonly messageService: MessageService, 
+    private readonly router: Router, 
+    private readonly arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.inventaryServ

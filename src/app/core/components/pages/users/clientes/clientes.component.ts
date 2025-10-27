@@ -1,8 +1,9 @@
-import { Component, computed, effect, ElementRef, OnInit, Signal, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, Signal, signal, viewChild } from '@angular/core';
 import { ClientsService } from '../../../../_services/clients.service';
 import { UsersService } from '@/core/_services/common/user.service';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { StateClienteResponseModel } from '@/core/_models/users/clients/clientesResponse.interface';
+import { Menu } from 'primeng/menu';
 import { MatchModel } from '@/core/_models/common/matchmodel.interface';
 import { ClientBaseFilter } from '@/core/_models/dto/users/clients/clientSearch.interface.dto';
 import { ClientDTO } from '@/core/_models/dto/users/clients/client.interface.dto';
@@ -32,21 +33,16 @@ import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
   styleUrl: './clientes.component.scss'
 })
 export default class ClientesComponent {
-  @ViewChild('dt1') table!: Table;
-  @ViewChild('filter') filter!: ElementRef;
-
+  table = viewChild<Table>('dt1');
+  menu = viewChild<Menu>('menu');
   stateValues = signal<StateClienteResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
-  employeedto = signal<ClientDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ClientBaseFilter }});
-
+  clientdto = signal<ClientDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ClientBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-
-  private readonly keylocalColumn = "clients_cols";
-
+  title: string = 'pages.clients';
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo'];
   columns: string[] = this.allowedColumns;
-  
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
     .map(columnName => ({
       field: columnName,
@@ -56,15 +52,24 @@ export default class ClientesComponent {
     .map(columnName => ({
       field: columnName,
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
-  }));
+    }));
+
   clients: any[] = [];
   expedidoOptions!: { name: string; code: string }[];
-
+  private readonly keylocalColumn = "clients_cols";
   
-  constructor(private readonly usersServ: UsersService, private readonly clientServ: ClientsService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService,  private readonly arrayurilservice: ArrayutilService) {
+  constructor(
+    private readonly usersServ: UsersService, 
+    private readonly clientServ: ClientsService, 
+    private readonly filterservice: FilterApplyService, 
+    private readonly translate : TranslateService, 
+    private readonly translateLanService : TranslateLanService, 
+    private readonly router: Router, 
+    private readonly personasService: PersonasService,  
+    private readonly arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => { 
-      this.clientServ.postClients(this.employeedto())
+      this.clientServ.postClients(this.clientdto())
       .pipe(map(t => {
           console.log(888)
           console.log("console.log('', t):   ", t);
@@ -72,7 +77,7 @@ export default class ClientesComponent {
         }))
         .subscribe({
           next: t => {
-            console.log({...this.employeedto()});
+            console.log({...this.clientdto()});
             console.log(t);
             this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null });
           },
@@ -83,7 +88,7 @@ export default class ClientesComponent {
   }
 
   clear = (table: Table) => {
-    this.employeedto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ClientBaseFilter }})
+    this.clientdto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ClientBaseFilter }})
     table.clear(); 
   }
 
@@ -93,7 +98,7 @@ export default class ClientesComponent {
 
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
-        this.employeedto.update(() => ({
+        this.clientdto.update(() => ({
           config: {
             populate_data: false,
             page: ((event.first || 0) / Number(event.rows)) + 1,
@@ -101,7 +106,7 @@ export default class ClientesComponent {
             rows: Number(event.rows),
           },
           filter: {
-            ...this.filterservice.applyFilterNew(event.filters, this.employeedto().filter),
+            ...this.filterservice.applyFilterNew(event.filters, this.clientdto().filter),
           }
         })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
     } // this.initData(this.namefilter());
