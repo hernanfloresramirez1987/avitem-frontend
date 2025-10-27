@@ -1,54 +1,19 @@
 <div class="grid-container">
-
-    <!-- Panel de Control -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="pie" [data]="pieData" style="width: 40%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="bar" [data]="barData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="doughnut" [data]="doughnutData" style="width: 40%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="bar" [data]="horizontalBarData" [options]="horizontalBarOptions" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="line" [data]="lineData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="radar" [data]="radarData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="polarArea" [data]="polarAreaData" style="width: 40%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="bubble" [data]="bubbleData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <p-chart type="scatter" [data]="scatterData" style="width: 60%;"></p-chart>
-    </div>
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-
-    </div>
+    @for (card of homeCards; track $index) {
+        <div class="card animate-fade-in" [style.border-color]="card.color" [style.border-color]="card.color"
+             [routerLink]="card.link" style="cursor:pointer;">
+          <div style="text-align:center; margin-bottom:1rem;">
+            <i [class]="card.icon" [style.color]="card.color" style="font-size:2.5rem;"></i>
+          </div>
+          <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">{{ card.titulo }}</h3>
+          <p style="text-align:center; font-size:0.875rem; color:#e0e7ff;">
+            {{ card.descripcion }}
+          </p>
+          <div style="margin-top:1rem; display:flex; justify-content:center;">
+            <button pButton type="button" [style.background]="card.color" style="color:#0f0c13; border: 3px; border-radius:9999px; padding:0.5rem 1rem;">
+              {{ card.titulo.includes('Configuración') ? 'Configurar' : 'Ver ' + card.titulo }}
+            </button>
+          </div>
+        </div>
+    }
 </div>
