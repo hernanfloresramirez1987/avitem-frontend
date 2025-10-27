@@ -299,12 +299,12 @@ export default class SaleCreateComponent {
     });
   }
 
-  saveRegisterSale = (saleData: SalesRegister, secondConfirm: boolean)  => {
+  saveRegisterSale = async (saleData: SalesRegister, secondConfirm: boolean)  => {
     this.ventasRegister.confactura = (secondConfirm) ? 1 : 0; console.log(this.ventasRegister, saleData);
     this.ventasRegister.token_SIN = (secondConfirm) ? "con token" : "";
     this.ventasRegister.total = this.ventasRegister.total * 0.13;
     console.log("Total: ", this.ventasRegister.total);
-    this.ventasServ.postSaveVenta(saleData).subscribe({
+    await this.ventasServ.postSaveVenta(saleData).subscribe({
       next: (t) => console.log(t),
       error: (e) => console.log(e),
     })
