@@ -141,10 +141,10 @@ export default class SaleCreateComponent {
     this.ventasRegister = {
       fechaVenta: formattedFechaVenta,
       total: this.total,
-      id_cliente: +formValues.id_cliente.id,
-      id_empleado: +formValues.id_empleado.id,
-      confactura: 1,  // Nuevo campo requerido
-      token_SIM: "tokenSIM",
+      id_cliente: formValues.id_cliente.id,
+      id_empleado: formValues.id_empleado.id,
+      confactura: 0,
+      token_SIN: "tokenSIN",
       detalle: this.detailView.map((t: any) => {
         console.log(t);
         return {
@@ -264,12 +264,12 @@ export default class SaleCreateComponent {
     console.log('cleanAll() { ... }')
   }
 
-  submitSales(): void {
+  async submitSales() {
     if (this.salesForm.valid) {
-      const purchaseData = this.asignarValores();
+      const purchaseData = await this.asignarValores();
       console.log(purchaseData);
       purchaseData.detalle = JSON.stringify(purchaseData.detalle);
-      this.confirmSave(purchaseData)
+      await this.confirmSave(purchaseData)
     } else {
       console.error('Formulario inválido');
     }
@@ -287,8 +287,8 @@ export default class SaleCreateComponent {
     });
   }
 
-  confirmDialogFactura(message: string, header: string): Promise<boolean> {
-    return new Promise((resolve) => {
+  async confirmDialogFactura(message: string, header: string): Promise<boolean> {
+    return await new Promise((resolve) => {
       this.confirmationServ.confirm({
         message,
         header,
@@ -299,11 +299,11 @@ export default class SaleCreateComponent {
     });
   }
 
-  saveRegisterSale = (saleData: SalesRegister)  => {
-    const secondConfir: any = this.confirmDialogFactura('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
-    this.ventasRegister.confactura = (secondConfir) ? 1 : 0;
-    console.log(this.ventasRegister)
-    console.log(saleData)
+  saveRegisterSale = (saleData: SalesRegister, secondConfirm: boolean)  => {
+    this.ventasRegister.confactura = (secondConfirm) ? 1 : 0; console.log(this.ventasRegister, saleData);
+    this.ventasRegister.token_SIN = (secondConfirm) ? "con token" : "";
+    this.ventasRegister.total = this.ventasRegister.total * 0.13;
+    console.log("Total: ", this.ventasRegister.total);
     this.ventasServ.postSaveVenta(saleData).subscribe({
       next: (t) => console.log(t),
       error: (e) => console.log(e),
@@ -317,8 +317,11 @@ export default class SaleCreateComponent {
     console.log(firstConfirm);
     let secondConfirm: any = null;
     if (firstConfirm) {
-      // secondConfirm = await this.confirmDialogFactura('¿Se está procesando la venta, desea factura?', 'Confirmación Factura');
-      this.saveRegisterSale(this.ventasRegister);
+      const total_IVA = this.ventasRegister.total * 0.13;
+      console.log(total_IVA);
+      secondConfirm = await this.confirmDialogFactura(`¿Se está procesando la venta, el precio sin factura es: ` + this.ventasRegister.total + `Bs con factura es ` + (this.ventasRegister.total + total_IVA) + `Bs,  desea factura?`, 'Confirmación Factura');
+      console.log(secondConfirm);
+      await this.saveRegisterSale(this.ventasRegister, secondConfirm);
     } else {
       console.log('Primera confirmación cancelada.');
     }

@@ -1,7 +1,7 @@
 export interface SalesRegister {
   fechaVenta:             string;
   total:                  number;
-  token_SIM:              string;
+  token_SIN:              string;
   id_cliente:             number;
   id_empleado:            number;
   confactura:             number;

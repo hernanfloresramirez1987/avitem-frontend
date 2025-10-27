@@ -1,5 +1,5 @@
 <!-- {{stateValues().metadata | json}}/ -->
-<p-card [header]="'pages.inventories' | translate | uppercase" [subheader]="'labels.view_historie' | translate">
+<p-card [header]="title | translate | uppercase" [subheader]="subtitle | translate">
     <p-table
         #dt1
         [value]="stateValues().data"
@@ -125,8 +125,8 @@
                 <td>{{row.nombreProducto}}</td>
                 <td>{{row.almacen?.nombre}}</td>
                 <td>{{row.cantidadStock}}</td>
-                <td>Despachada: {{row.cantidadDespachada}}</td>
-                <td>Reservada: {{row.cantidadReservada}}</td>
+                <td>{{row.cantidadDespachada}}</td>
+                <td>{{row.cantidadReservada}}</td>
                 <td>{{row.totalDisponible}}</td>
                 <td>{{row.cant_transferencias}}</td>
                 <td class="text-right">{{row.precio_compra}}</td>

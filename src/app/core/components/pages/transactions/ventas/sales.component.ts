@@ -54,7 +54,8 @@ export default class SalesComponent {
   ventasdto = signal<VentasDTO>({ config: { populate_data: true,  page: 1, rows: 15, sort_field : []}, filter: { ...{} as VentasBaseFilter }});
   tablecon: number[] = tableconfig  .cantidadRegistros;
   stateIni = false;
-  title: string = 'pages.sales';
+  readonly title: string = 'pages.sales';
+  readonly subtitle: string = 'labels.admin_sales';
   private readonly allowedColumns: string[] = ['id', 'no', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -93,6 +94,8 @@ export default class SalesComponent {
 
   expandedRows = {};
 
+  private readonly keylocalColumn = "sales_cols";
+
   constructor(
     private readonly translateLanService: TranslateLanService, 
     private readonly translate : TranslateService, 
@@ -116,6 +119,7 @@ export default class SalesComponent {
     });
   }
 
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
   
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {

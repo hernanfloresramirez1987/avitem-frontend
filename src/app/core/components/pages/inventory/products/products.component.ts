@@ -40,7 +40,8 @@ export default class ProductsComponent {
   productsdto = signal<ProductoDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProductoBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  title: string = 'pages.products';
+  readonly title: string = 'pages.products';
+  readonly subtitle: string = 'labels.admin_products';
   private readonly allowedColumns: string[] = ['id', 'nombre', 'codigoProducto', 'empresa', 'cantidadStock', 'fechaIngreso', 'unidadMedida',  'state', 'categoria'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -87,7 +88,9 @@ export default class ProductsComponent {
     this.productsdto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProductoBaseFilter }})
     table.clear(); 
   }
-    
+ 
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
+  
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.productsdto.update(() => ({

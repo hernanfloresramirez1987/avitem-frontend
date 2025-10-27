@@ -74,7 +74,8 @@ export default class PurchasesComponent {
   comprasdto = signal<ComprasDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ComprasBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  title = 'pages.purchases';
+  readonly title: string = 'pages.purchases';
+  readonly subtitle: string = 'labels.admin_purchases';
   private readonly allowedColumns: string[] = ['id', 'idlote', 'fechaCompra', 'total', 'proveedor', 'nombre', 'nit'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -136,6 +137,8 @@ export default class PurchasesComponent {
     this.comprasdto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ComprasBaseFilter }})
     table.clear(); 
   }
+
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
 
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {

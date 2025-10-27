@@ -39,7 +39,8 @@ export default class UsersComponent {
   employeedto = signal<EmployeeDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as EmployeeBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  title: string = 'pages.employees';
+  readonly title: string = 'pages.employees';
+  readonly subtitle: string = 'labels.admin_employees';
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -85,6 +86,8 @@ export default class UsersComponent {
     this.employeedto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as EmployeeBaseFilter }})
     table.clear(); 
   }
+  
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
   
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {

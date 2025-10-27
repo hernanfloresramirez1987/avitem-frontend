@@ -1,7 +1,23 @@
-<p-card [header]="'pages.suppliers' | translate | uppercase" [subheader]="'labels.admin_suppliers' | translate">
-    <p-table #dt1 [value]="stateValues().data" dataKey="id" [paginator]="true" [loading]="stateValues().loading" [rows]="stateValues().data.length" [rowHover]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees" [rowsPerPageOptions]="tablecon"
-        styleClass="p-datatable-sm" [lazy]="true" [columns]="columnsSelectSignal()" [reorderableColumns]="true" (onLazyLoad)="getDataPaged($event)" [totalRecords]="stateValues().total_records" responsiveLayout="scroll" [sortMode]="'multiple'" [customSort]="true"
-        [scrollable]="true" scrollHeight="53vh" [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
+<p-card [header]="title | translate | uppercase" [subheader]="subtitle | translate">
+    <p-table #dt1
+    [value]="stateValues().data"
+    dataKey="id"
+    [paginator]="true"
+    [loading]="stateValues().loading"
+    [rows]="stateValues().data.length"
+    [rowHover]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+    [rowsPerPageOptions]="tablecon"
+    styleClass="p-datatable-sm"
+    [lazy]="true"
+    [columns]="columnsSelectSignal()"
+    [reorderableColumns]="true"
+    (onLazyLoad)="getDataPaged($event)"
+    [totalRecords]="stateValues().total_records"
+    responsiveLayout="scroll" [sortMode]="'multiple'" [customSort]="true"
+    [scrollable]="true"
+    scrollHeight="53vh"
+    [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
         <!-- [rows]="stateValues().rows" -->
         <!-- (onColReorder)="onColumnReorder($event)" -->
         <ng-template #caption>

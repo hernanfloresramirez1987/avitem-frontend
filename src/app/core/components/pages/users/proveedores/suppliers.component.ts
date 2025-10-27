@@ -39,6 +39,8 @@ export default class SuppliersComponent {
   proveedordto = signal<ProveedorDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
+  readonly title: string = 'pages.suppliers';
+  readonly subtitle: string = 'labels.admin_suppliers';
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'nit', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -79,11 +81,13 @@ export default class SuppliersComponent {
     })
   }
 
-    clear = (table: Table) => {
-      this.proveedordto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }})
-      table.clear(); 
-    }
-    
+  clear = (table: Table) => {
+    this.proveedordto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }})
+    table.clear(); 
+  }
+  
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
+  
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.proveedordto.update(() => ({

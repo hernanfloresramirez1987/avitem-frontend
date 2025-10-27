@@ -40,7 +40,8 @@ export default class ClientesComponent {
   clientdto = signal<ClientDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ClientBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  title: string = 'pages.clients';
+  readonly title: string = 'pages.clients';
+  readonly subtitle: string = 'labels.admin_clients'; 
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -96,6 +97,8 @@ export default class ClientesComponent {
     console.log(event);
   }
 
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
+  
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
         this.clientdto.update(() => ({

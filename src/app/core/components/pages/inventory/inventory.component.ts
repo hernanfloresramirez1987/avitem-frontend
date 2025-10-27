@@ -37,8 +37,8 @@ export default class WarehouseComponent {
   warehousesdto = signal<InventaryDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as InventaryBaseFilter }});  
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-  
-
+  readonly title = 'pages.inventories';
+  readonly subtitle = 'labels.view_historie';
   private readonly allowedColumns: string[] = ['id', 'idLote', 'producto', 'almacen', 'cantidadStock', 'totalDisponible', 'cantidadDespachada', 'cant_salidas', 'cant_transferencias', 'precio_compra', 'precio_venta', 'sucursal'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
