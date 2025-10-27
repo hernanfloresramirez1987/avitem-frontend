@@ -29,6 +29,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { jsPDF } from "jspdf";
 import { PdfReportService } from '@/core/_services/common/pdfreport.service';
 import { CapitalizePipe } from '@/core/pipes/capital-letter.pipe';
+import { VentaSaveResponse } from '@/core/_models/inventory/ventas/ventaSaveResponse';
 
 @Component({
   selector: 'app-sale-create',
@@ -305,7 +306,11 @@ export default class SaleCreateComponent {
     this.ventasRegister.total = this.ventasRegister.total * 0.13;
     console.log("Total: ", this.ventasRegister.total);
     await this.ventasServ.postSaveVenta(saleData).subscribe({
-      next: (t) => console.log(t),
+      next: (t: VentaSaveResponse) => { console.log(t)
+        if(t.CodigoEstado == "200") {
+          this.pdfreport.generatePdf();
+        }
+      },
       error: (e) => console.log(e),
     })
   }
@@ -325,29 +330,6 @@ export default class SaleCreateComponent {
     } else {
       console.log('Primera confirmación cancelada.');
     }
-    // console.log(secondConfirm);
-    // if (firstConfirm && secondConfirm) {
-    //   console.log('Generando factura:', this.ventasRegister.confactura);
-    //   this.ventasRegister.confactura = 1;
-    // } else {
-    //   console.log('El usuario no quiere factura.');
-    //   this.ventasRegister.confactura = 0;
-    // }
-    
-    if (firstConfirm && secondConfirm) {
-      this.generatePdf();
-    }
-  }
-
-  generatePdf = () => {
-    const doc = new jsPDF();
-
-    const sampleData: any[] = [
-      { product: 'Producto A', quantity: 2, price: 10, total: 20 },
-      { product: 'Producto B', quantity: 1, price: 15, total: 15 },
-      { product: 'Producto C', quantity: 3, price: 7, total: 21 },
-    ];
-    this.pdfreport.generatePdf(); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
   }
 
   changeClient({ value }: any) {
