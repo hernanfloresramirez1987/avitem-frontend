@@ -86,7 +86,7 @@ export class PdfReportService {
     }
 
 
-    generatePdf = () => {
+    generatePdf = (data: any) => {
         const doc = new jsPDF();
 
         // Agregar logo (debes usar una imagen base64 o una URL absoluta válida si es en línea)
@@ -104,7 +104,8 @@ export class PdfReportService {
 
         // Datos de la Factura
         doc.setFontSize(11);
-        doc.text(`Número Factura: 000123`, 150, 20);
+        console.log("data: ", data);
+        doc.text(`Número Factura: ${data.no}`, 150, 20);
         doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 150, 26);
 
         // Datos del Cliente

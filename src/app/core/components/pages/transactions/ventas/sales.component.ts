@@ -153,6 +153,6 @@ export default class SalesComponent {
       { product: 'Producto B', quantity: 1, price: 15, total: 15 },
       { product: 'Producto C', quantity: 3, price: 7, total: 21 },
     ];
-    this.pdfreport.generatePdf(); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
+    this.pdfreport.generatePdf({sampleData}); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
   }
 }

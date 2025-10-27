@@ -308,7 +308,7 @@ export default class SaleCreateComponent {
     await this.ventasServ.postSaveVenta(saleData).subscribe({
       next: (t: VentaSaveResponse) => { console.log(t)
         if(t.CodigoEstado == "200") {
-          this.pdfreport.generatePdf();
+          this.pdfreport.generatePdf(saleData);
         }
       },
       error: (e) => console.log(e),
