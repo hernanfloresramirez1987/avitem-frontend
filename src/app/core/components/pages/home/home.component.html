@@ -1,243 +1,84 @@
-<div class="grid-container">
+<div class="grid grid-cols-12 gap-8 mb-4">
 
-    <div class="col-span-12 lg:col-span-6 xl:col-span-4">
-        <div class="card h-full"><div class="font-semibold text-xl">Trials Leads By Role</div>
-        <div class="flex items-center justify-between pb-2 mb-1 pt-6 border-b border-surface">
-            <span class="font-bold">Role</span>
-            <span class="font-bold">Leads</span>
+  <!-- Stats Widgets -->
+  <div class="flex">
+    @for (stat of stats; track $index) {
+    <div class="w-full md:col-6 xl:col-3 p-2">
+      <div class="card p-0 overflow-hidden flex-col-2">
+        <div class="flex">
+          <i [class]="'pi ' + stat.icon + ' ' + stat.color + ' p-4 t-0'" [style.fontSize.px]="64"></i>
+          <div>
+            <b><span [class]="'block whitespace-nowrap ' + stat.color" >{{ stat.label }}</span></b>
+            <span  [style.fontSize.px]="28" [class]="'block text-4xl font-bold ' + stat.color">{{ stat.value }}</span>
+            <p [style.fontSize.px]="16" [class]="'block text-4xl font-bold ' + stat.color">{{stat.porcent}}</p>
+          </div>
         </div>
-        <ul class="list-none p-0 m-0">
-            <li class="flex flex-wrap items-center justify-between py-1">
-            <span>Finance</span>
-            <p-avatar-group class="w-32 justify-evenly p-avatar-group p-component" pc43="">
-            <p-avatar image="/demo/images/avatar/amyelsner.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc44="">
-            <img src="/demo/images/avatar/amyelsner.png">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        </p-avatar>
-            <p-avatar image="/demo/images/avatar/asiyajavayant.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc45="">
-            <img src="/demo/images/avatar/asiyajavayant.png">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        </p-avatar>
-            <p-avatar image="/demo/images/avatar/onyamalimba.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc46="">
-            <img src="/demo/images/avatar/onyamalimba.png">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        </p-avatar>
-            <p-avatar image="/demo/images/avatar/ionibowcher.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc47="">
-            <img src="/demo/images/avatar/ionibowcher.png">
-        <!---->
-        <!---->
-        <!---->
-        <!---->
-        <!----></p-avatar>
-    </p-avatar-group>
-    </li>
-        <li class="flex flex-wrap items-center justify-between py-1">
-            <span>Management</span>
-            <p-avatar-group class="w-24 justify-evenly p-avatar-group p-component" pc48="">
-            <p-avatar image="/demo/images/avatar/annafali.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc49="">
-            <img src="/demo/images/avatar/annafali.png">
-            <!----><!----><!----><!----><!----></p-avatar>
-            <p-avatar image="/demo/images/avatar/bernardodominic.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc50="">
-                <img src="/demo/images/avatar/bernardodominic.png"><!----><!----><!----><!----><!---->
-            </p-avatar>
-            <p-avatar image="/demo/images/avatar/elwinsharvill.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc51="">
-                <img src="/demo/images/avatar/elwinsharvill.png"><!----><!----><!----><!----><!---->
-            </p-avatar>
-            </p-avatar-group>
-        </li>
-        <li class="flex flex-wrap items-center justify-between py-1"><span>Human Resources</span    >
-            <p-avatar-group class="w-16 justify-evenly p-avatar-group p-component" pc52=""><p-avatar image="/demo/images/avatar/ivanmagalhaes.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc53=""><img src="/demo/images/avatar/ivanmagalhaes.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/onyamalimba.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc54=""><img src="/demo/images/avatar/onyamalimba.png"><!----><!----><!----><!----><!----></p-avatar></p-avatar-group></li><li class="flex flex-wrap items-center justify-between py-2"><span>Development</span><p-avatar-group class="w-32 justify-evenly p-avatar-group p-component" pc55=""><p-avatar image="/demo/images/avatar/amyelsner.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc56=""><img src="/demo/images/avatar/amyelsner.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/asiyajavayant.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc57=""><img src="/demo/images/avatar/asiyajavayant.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/onyamalimba.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc58=""><img src="/demo/images/avatar/onyamalimba.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/ionibowcher.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc59=""><img src="/demo/images/avatar/ionibowcher.png"><!----><!----><!----><!----><!----></p-avatar></p-avatar-group></li><li class="flex flex-wrap items-center justify-between py-2"><span>Design</span><p-avatar-group class="w-16 justify-evenly p-avatar-group p-component" pc60=""><p-avatar image="/demo/images/avatar/amyelsner.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc61=""><img src="/demo/images/avatar/amyelsner.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/asiyajavayant.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc62=""><img src="/demo/images/avatar/asiyajavayant.png"><!----><!----><!----><!----><!----></p-avatar></p-avatar-group></li><li class="flex flex-wrap items-center justify-between py-2"><span>R&amp;D</span><p-avatar-group class="w-24 justify-evenly p-avatar-group p-component" pc63=""><p-avatar image="/demo/images/avatar/amyelsner.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc64=""><img src="/demo/images/avatar/amyelsner.png"><!----><!----><!----><!----><!----></p-avatar>
-                <p-avatar image="/demo/images/avatar/asiyajavayant.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc65=""><img src="/demo/images/avatar/asiyajavayant.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/onyamalimba.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc66=""><img src="/demo/images/avatar/onyamalimba.png"><!----><!----><!----><!----><!----></p-avatar></p-avatar-group></li><li class="flex flex-wrap items-center justify-between py-2"><span>Reliability</span><p-avatar-group class="w-16 justify-evenly p-avatar-group p-component" pc67=""><p-avatar image="/demo/images/avatar/amyelsner.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc68=""><img src="/demo/images/avatar/amyelsner.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/asiyajavayant.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc69=""><img src="/demo/images/avatar/asiyajavayant.png"><!----><!----><!----><!----><!----></p-avatar></p-avatar-group></li><li class="flex flex-wrap items-center justify-between py-2"><span>Social Media</span><p-avatar-group class="w-32 justify-evenly p-avatar-group p-component" pc70=""><p-avatar image="/demo/images/avatar/amyelsner.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc71=""><img src="/demo/images/avatar/amyelsner.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/asiyajavayant.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc72=""><img src="/demo/images/avatar/asiyajavayant.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/onyamalimba.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc73=""><img src="/demo/images/avatar/onyamalimba.png"><!----><!----><!----><!----><!----></p-avatar><p-avatar image="/demo/images/avatar/ionibowcher.png" shape="circle" data-pc-name="avatar" class="p-avatar p-avatar-circle p-avatar-image p-component" pc74=""><img src="/demo/images/avatar/ionibowcher.png"><!----><!----><!----><!----><!----></p-avatar></p-avatar-group></li></ul></div></div>
-    <!-- Panel de Control -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-chart-bar" style="font-size:2.5rem; color:#22c55e;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Panel de Control</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#a5b4fc;">
-            Vista general con KPIs, estadísticas y resumen de operaciones de Avitem Importaciones.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#22c55e; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;">
-                Ir al Panel
-            </button>
-        </div>
+        <img [src]="stat.image" class="w-full" alt="{{ stat.label }}">
+      </div>
     </div>
+    }  
+  </div>
 
-    <!-- Productos -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-truck" style="font-size:2.5rem; color:#3b82f6;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Productos</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#93c5fd;">
-            Gestión de inventario: insumos, materiales y productos importados y almacenados.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#3b82f6; color:#fff; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/inventory/products">
-                Ver Productos
-            </button>
-        </div>
+  <div class="flex">
+    <div class="w-full p-2">
+      <div class="card">      
+        <p-chart type="bar" [data]="acquisitionData" [options]="chartOptions" style="height: 370px;"></p-chart>
+      </div>
     </div>
-
-    <!-- Compras -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-shopping-cart" style="font-size:2.5rem; color:#ef4444;"></i>
+    <!-- Gráficos de Ventas -->
+    
+      <div class="p-4 w-full">
+        <div class="card h-full">
+          <p-chart type="line" [data]="salesChartData" [options]="chartOptions" style="width: 100%; height: 300px;"></p-chart>
         </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Compras</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#fca5a5;">
-            Control de órdenes de compra, proveedores y gestión de pagos.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#ef4444; color:#fff; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/transactions/compras">
-                Ver Compras
-            </button>
-        </div>
+      </div>
     </div>
-
-    <!-- Ventas -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-credit-card" style="font-size:2.5rem; color:#facc15;"></i>
+    <!-- Métricas principales -->
+    <div class="flex">
+      <div class="p-4 w-full">
+        <div class="card">
+          <p-chart type="pie" [data]="categoryChartData" [options]="chartOptions" style="width: 100%; height: 300px;"></p-chart>
         </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Ventas</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#fef08a;">
-            Análisis de transacciones, clientes y métricas comerciales.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#facc15; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/transactions/ventas">
-                Ver Ventas
-            </button>
+      </div>
+      <div class="w-full p-2">
+        <div class="card w-full p-4 bg-white rounded-xl shadow-md border-l-4 border-blue-500">
+          <p class="text-gray-500 font-semibold">Ventas Hoy</p>
+          <h2 class="text-2xl font-bold">{{ salesToday | currency:'USD' }}</h2>
         </div>
+        <div class="card w-full p-4 bg-white rounded-xl shadow-md border-l-4 border-green-500">
+          <p class="text-gray-500 font-semibold">Productos en Stock Crítico</p>
+          <h2 class="text-2xl font-bold">{{ lowStockCount }}</h2>
+        </div>
+        <div class="card w-full p-4 bg-white rounded-xl shadow-md border-l-4 border-yellow-500">
+          <p class="text-gray-500 font-semibold">Órdenes Pendientes</p>
+          <h2 class="text-2xl font-bold">{{ pendingOrders }}</h2>
+        </div>
+        <div class="card w-full p-4 bg-white rounded-xl shadow-md border-l-4 border-red-500">
+          <p class="text-gray-500 font-semibold">Productos Más Vendidos</p>
+          <h2 class="text-2xl font-bold">{{ topProduct }}</h2>
+        </div>
+      </div>
+      <div class="flex w-full p-2">
+        <p-table [value]="recentOrders" [paginator]="true" [rows]="5" [responsiveLayout]="'scroll'" [ngClass]="'w-full'">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Cliente</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+              <th>Estado</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-order>
+            <tr>
+              <td>{{ order.client }}</td>
+              <td>{{ order.product }}</td>
+              <td>{{ order.quantity }}</td>
+              <td>{{ order.total | currency:'USD' }}</td>
+              <td>{{ order.status }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
-
-    <!-- Inventarios -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-server" style="font-size:2.5rem; color:#10b981;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Inventarios</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#6ee7b7;">
-            Gestión detallada de almacenes, niveles de stock y ubicaciones.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#10b981; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/inventory/inventory">
-                Ver Inventarios
-            </button>
-        </div>
-    </div>
-
-    <!-- Proveedores -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-users" style="font-size:2.5rem; color:#8b5cf6;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Proveedores</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#c4b5fd;">
-            Gestión de proveedores, contactos y evaluaciones de desempeño.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#8b5cf6; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/users/proveedores">
-                Ver Proveedores
-            </button>
-        </div>
-    </div>
-
-    <!-- Clientes -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-id-card" style="font-size:2.5rem; color:#14b8a6;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Clientes</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#81e6d9;">
-            Gestión de clientes, contactos, historial y ventas.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#14b8a6; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/users/clientes">
-                Ver Clientes
-            </button>
-        </div>
-    </div>
-
-    <!-- Empleados -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-users" style="font-size:2.5rem; color:#f97316;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Empleados</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#fb923c;">
-            Administración del personal, roles y accesos.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#f97316; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;" routerLink="/users/empleados">
-                Ver Empleados
-            </button>
-        </div>
-    </div>
-
-    <!-- Reportes -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-file" style="font-size:2.5rem; color:#f97316;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Reportes</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#fdba74;">
-            Análisis detallados y reportes para facilitar la toma de decisiones.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#f97316; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;">
-                Ver Reportes
-            </button>
-        </div>
-    </div>
-
-    <!-- Configuración -->
-    <div class="card" style="background:#1e293b; border-radius:1rem; padding:1.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;"
-        onmouseenter="this.style.transform='scale(1.02)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.3)';"
-        onmouseleave="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)';">
-        <div style="text-align:center; margin-bottom:1rem;">
-            <i class="pi pi-cog" style="font-size:2.5rem; color:#a78bfa;"></i>
-        </div>
-        <h3 style="text-align:center; font-weight:bold; margin-bottom:0.5rem;">Configuración</h3>
-        <p style="text-align:center; font-size:0.875rem; color:#d8b4fe;">
-            Ajusta parámetros del sistema, usuarios y preferencias de Avitem Importaciones.
-        </p>
-        <div style="margin-top:1rem; display:flex; justify-content:center;">
-            <button pButton type="button" style="background:#a78bfa; color:#0f0c13; border:none; border-radius:9999px; padding:0.5rem 1rem;">
-                Configurar
-            </button>
-        </div>
-    </div>
-
 </div>
