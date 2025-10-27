@@ -105,8 +105,8 @@ export class PdfReportService {
         // Datos de la Factura
         doc.setFontSize(11);
         console.log("data: ", data);
-        doc.text(`Número Factura: ${data.no}`, 150, 20);
-        doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 150, 26);
+        doc.text(`Id Factura: ${data.id}`, 150, 20);
+        doc.text(`Fecha: ${new Date(data.fechaVenta).toLocaleDateString()}`, 150, 26);
 
         // Datos del Cliente
         doc.text('Cliente:', 10, 50);
