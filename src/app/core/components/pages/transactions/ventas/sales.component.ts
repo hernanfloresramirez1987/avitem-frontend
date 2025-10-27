@@ -49,13 +49,25 @@ export default class SalesComponent {
   table = viewChild<Table>('dt1');
   menu = viewChild<Menu>('menu');
   filter = viewChild<ElementRef>('filter');
-
   stateValues = signal<StateVentasResponseModel>({ data: [], metadata: { page: 0, rows: 0, total_records: 0 }, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   ventasdto = signal<VentasDTO>({ config: { populate_data: true,  page: 1, rows: 15, sort_field : []}, filter: { ...{} as VentasBaseFilter }});
-
   tablecon: number[] = tableconfig  .cantidadRegistros;
   stateIni = false;
+  readonly title: string = 'pages.sales';
+  readonly subtitle: string = 'labels.admin_sales';
+  private readonly allowedColumns: string[] = ['id', 'no', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
+  columns: string[] = this.allowedColumns;
+  columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+    })));
+  colsOptionsSelect: Column[] = this.allowedColumns
+    .map(columnName => ({
+      field: columnName,
+      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
+  }));
 
   selectedItemId: string | number | null = null;
   
@@ -80,18 +92,9 @@ export default class SalesComponent {
     },
   ];
 
-  title: string = 'pages.sales';
-
   expandedRows = {};
 
-  private readonly allowedColumns: string[] = ['id', 'no', 'fechaVenta', 'total', 'cliente', 'ci', 'nit'];
-  columns: string[] = this.allowedColumns;
-  columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
-    .map(columnName => ({
-      field: columnName,
-      header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
-    })));
-  
+  private readonly keylocalColumn = "sales_cols";
 
   constructor(
     private readonly translateLanService: TranslateLanService, 
@@ -116,6 +119,7 @@ export default class SalesComponent {
     });
   }
 
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
   
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {

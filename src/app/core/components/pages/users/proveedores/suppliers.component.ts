@@ -1,5 +1,5 @@
+import { Component, computed, effect, ElementRef, Signal, signal, viewChild } from '@angular/core';
 import { NgStyle, UpperCasePipe } from '@angular/common';
-import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
@@ -32,16 +32,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './suppliers.component.scss'
 })
 export default class SuppliersComponent {
-  @ViewChild('dt1') table!: Table;
-  @ViewChild('filter') filter!: ElementRef;
-
+  table = viewChild<Table>('dt1');
+  filter = viewChild<ElementRef>('filter');
   stateValues = signal<StateProveedorResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
-  employeedto = signal<ProveedorDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }});
-
+  proveedordto = signal<ProveedorDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }});
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-
+  readonly title: string = 'pages.suppliers';
+  readonly subtitle: string = 'labels.admin_suppliers';
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'empresa', 'nit', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -56,34 +55,42 @@ export default class SuppliersComponent {
   }));
 
   private readonly keylocalColumn = "proveedors_cols";
+  constructor(
+    private readonly employeeServ: ProveedoresService, 
+    private readonly filterservice: FilterApplyService, 
+    private readonly translate : TranslateService, 
+    private readonly translateLanService : TranslateLanService, 
+    private readonly personasService: PersonasService, 
+    private readonly router: Router, 
+    private readonly arrayurilservice: ArrayutilService) {
+    this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
+    effect(() => {
+      this.employeeServ.postProveedores(this.proveedordto())
+        .pipe(map(t => {
+          console.log("console.log('', t):   ", t);
+          return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
+        }))
+        .subscribe({
+          next: t => {
+            console.log({...this.proveedordto()});
+            console.log(t);
+            this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null });
+          },
+          error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: err })
+        })
+    })
+  }
 
-    constructor(private readonly employeeServ: ProveedoresService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly personasService: PersonasService, private readonly router: Router, private readonly arrayurilservice: ArrayutilService) {
-      this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
-      effect(() => {
-        this.employeeServ.postProveedores(this.employeedto())
-          .pipe(map(t => {
-            console.log("console.log('', t):   ", t);
-            return { data: Array.isArray(t) ? [...t] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null};
-          }))
-          .subscribe({
-            next: t => {
-              console.log({...this.employeedto()});
-              console.log(t);
-              this.stateValues.set({ data: (t.data && t.data.length > 0) ? [...t.data] : [], page: 0, rows: 0, total_records: 0, loaded: true, loading: false, error: null });
-            },
-            error: (err) => this.stateValues.set({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: err })
-          })
-      })
-    }
-
-    clear = (table: Table) => {
-      this.employeedto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }})
-      table.clear(); 
-    }
-    
+  clear = (table: Table) => {
+    this.proveedordto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as ProveedorBaseFilter }})
+    table.clear(); 
+  }
+  
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
+  
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {
-        this.employeedto.update(() => ({
+        this.proveedordto.update(() => ({
           config: {
             populate_data: false,
             page: ((event.first || 0) / Number(event.rows)) + 1,
@@ -91,7 +98,7 @@ export default class SuppliersComponent {
             rows: Number(event.rows),
           },
           filter: {
-            ...this.filterservice.applyFilterNew(event.filters, this.employeedto().filter),
+            ...this.filterservice.applyFilterNew(event.filters, this.proveedordto().filter),
           }
         })); // this.enformato = this.filterservice.preparaFiltersChip(event.filters, this.reemplazo); // }
     } // this.initData(this.namefilter());

@@ -1,4 +1,4 @@
-<p-card [header]="'pages.products' | translate | uppercase" [subheader]="'labels.admin_products' | translate">
+<p-card [header]="title | translate | uppercase" [subheader]="subtitle | translate">
     <p-table
         #dt1
         [value]="stateValues().data"
@@ -7,13 +7,14 @@
         [loading]="stateValues().loading"
         [rows]="stateValues().data.length"
         [rowHover]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
         [rowsPerPageOptions]="tablecon"
         styleClass="p-datatable-sm"
         [lazy]="true"
         stripedRows
         [columns]="columnsSelectSignal()"
         [reorderableColumns]="true"
+        (onColReorder)="onColumnReorder($event)"
         (onLazyLoad)="getDataPaged($event)"
         [totalRecords]="stateValues().total_records"
         responsiveLayout="scroll"

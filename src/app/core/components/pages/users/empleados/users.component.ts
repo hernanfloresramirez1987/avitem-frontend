@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, Signal, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, Signal, signal, viewChild } from '@angular/core';
 import { Table, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { EmployeesService } from '../../../../_services/employees.service';
 import { StateEmployeeResponseModel } from '../../../../_models/users/employees/employeeResponse.interface';
@@ -32,16 +32,15 @@ import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
   styleUrl: './users.component.scss'
 })
 export default class UsersComponent {
-  @ViewChild('dt1') table!: Table;
-  @ViewChild('filter') filter!: ElementRef;
-
+  table = viewChild<Table>('dt1');
+  filter = viewChild<ElementRef>('filter');
   stateValues = signal<StateEmployeeResponseModel>({ data: [], page: 0, rows: 0, total_records: 0, loaded: false, loading: true, error: null});
   searchTxt = signal<Array<MatchModel>>([]);
   employeedto = signal<EmployeeDTO>({ config: { populate_data: true, page: 1, rows: 15, sort_field : []}, filter: { ...{} as EmployeeBaseFilter }});
-
   tablecon: number[] = tableconfig.cantidadRegistros;
   stateIni = false;
-
+  readonly title: string = 'pages.employees';
+  readonly subtitle: string = 'labels.admin_employees';
   private readonly allowedColumns: string[] = ['id', 'ci', 'nombre', 'app', 'apm', 'sexo', 'fnaci', 'idtipo', 'idcargo', 'salario', 'direccion', 'telefono', 'email'];
   columns: string[] = this.allowedColumns;
   columnsSelectSignal: Signal<Column[]> = computed(() => this.columns
@@ -57,7 +56,14 @@ export default class UsersComponent {
 
   private readonly keylocalColumn = "clients_cols";
 
-  constructor(private readonly employeeServ: EmployeesService, private readonly filterservice: FilterApplyService, private readonly translate : TranslateService, private readonly translateLanService : TranslateLanService, private readonly router: Router, private readonly personasService: PersonasService, private readonly arrayurilservice: ArrayutilService) {
+  constructor(
+    private readonly employeeServ: EmployeesService, 
+    private readonly filterservice: FilterApplyService, 
+    private readonly translate : TranslateService, 
+    private readonly translateLanService : TranslateLanService, 
+    private readonly router: Router, 
+    private readonly personasService: PersonasService, 
+    private readonly arrayurilservice: ArrayutilService) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.employeeServ.postEmployees(this.employeedto())
@@ -80,6 +86,8 @@ export default class UsersComponent {
     this.employeedto.set({ config: { populate_data: false, page: 1, rows: 15, sort_field : []}, filter: { ...{} as EmployeeBaseFilter }})
     table.clear(); 
   }
+  
+  onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
   
   getDataPaged(event: TableLazyLoadEvent) {
     if (event.filters && this.stateIni !== false) { // if (this.stateValues().accounts !== null && this.stateValues().categories !== null) {

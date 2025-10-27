@@ -1,5 +1,5 @@
 <p-tieredmenu #menu [model]="items" [popup]="true" />
-<p-card [header]="title | translate | uppercase" [subheader]="'labels.admin_sales' | translate">
+<p-card [header]="title | translate | uppercase" [subheader]="subtitle | translate">
     <p-table
         #dt1
         [value]="stateValues().data"
@@ -9,7 +9,7 @@
         [expandedRowKeys]="expandedRows"
         [rows]="stateValues().metadata.rows"
         [rowHover]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
         [rowsPerPageOptions]="tablecon"
         styleClass="p-datatable-sm"
         [lazy]="true"
@@ -24,9 +24,9 @@
         scrollHeight="53vh"
         [paginatorPosition]="stateValues().data ? stateValues().data.length > 50 ? 'both' :'bottom' :'bottom'">
         <ng-template pTemplate="caption">
-            <div class="flex flex-wrap justify-content-end gap-2">
+            <div class="flex flex-wrap justify-content-end">
                 <p-button [label]="'labels.clear' | translate" [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt1)"/>
-                <p-button icon="pi pi-plus" severity="primary" [outlined]="true" class="pr-1" (click)="add()" />
+                <p-button icon="pi pi-plus" severity="primary" [outlined]="true" (click)="add()" />
             </div>
         </ng-template>
         <ng-template #header let-columns>
