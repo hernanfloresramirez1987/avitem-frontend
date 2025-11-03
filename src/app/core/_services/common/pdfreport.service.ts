@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import jsPDF from 'jspdf';
 // import autoTable from 'jspdf-autotable';
 import { formatDate, calculateTotal } from './pdf-helpers';
+import { VentasItem } from '@/core/_models/inventory/ventas/ventas.model';
 
 
 export interface SaleItem {
@@ -17,7 +18,7 @@ export interface SaleItem {
 export class PdfReportService {
 
 
-    generateSalesReport_(data: any[], reportTitle: string = 'Reporte de Ventas'): void {
+    generateSalesReport_(detaildata: any[], reportTitle: string = 'Reporte de Ventas'): void {
         const doc = new jsPDF();
 
         // 1. Título
@@ -86,80 +87,81 @@ export class PdfReportService {
     }
 
 
-    generatePdf = (data: any) => {
+    generatePdf = (venta: VentasItem, detalle: any[]) => {
         const doc = new jsPDF();
-
-        // Agregar logo (debes usar una imagen base64 o una URL absoluta válida si es en línea)
-        const img = new Image();
-        img.src = 'layout/images/logo-dark.png'; // ruta relativa desde /src/assets
-        img.onload = () => {
-            doc.addImage(img, 'PNG', 10, 10, 30, 30); // cuando cargue, la añade
+      
+        // Agregar logo
+        const logo = new Image();
+        logo.src = 'layout/images/logo-dark.png';  // asegúrate que esté en /src/assets/images/
+        logo.onload = () => {
+            doc.addImage(logo, 'PNG', 10, 10, 30, 30);
         
-        // const logoBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...'; // reemplaza con tu logo real
-        // doc.addImage(logoBase64, 'PNG', 10, 10, 30, 30); // (x, y, width, height)
-
-        // Título
-        doc.setFontSize(18);
-        doc.text('FACTURA', 105, 20, { align: 'center' });
-
-        // Datos de la Factura
-        doc.setFontSize(11);
-        console.log("data: ", data);
-        doc.text(`Id Factura: ${data.id}`, 150, 20);
-        doc.text(`Fecha: ${new Date(data.fechaVenta).toLocaleDateString()}`, 150, 26);
-
-        // Datos del Cliente
-        doc.text('Cliente:', 10, 50);
-        doc.text('Nombre: Juan Pérez', 10, 56);
-        doc.text('CI: 12345678', 10, 62);
-        doc.text('Email: juan.perez@email.com', 10, 68);
-
-        // Sucursal
-        doc.text('Sucursal:', 150, 50);
-        doc.text('Av. Siempre Viva #742', 150, 56);
-
-        // Detalle de productos (tabla manual sin autotable)
-        const startY = 80;
-        doc.text('Detalle:', 10, startY);
-
-        // Encabezado
-        doc.setFillColor(200, 200, 200); // Gris claro
-        doc.rect(10, startY + 5, 190, 8, 'F'); // Rectángulo fondo
-        doc.setTextColor(0, 0, 0);
-        doc.text('Producto', 12, startY + 10);
-        doc.text('Cant.', 80, startY + 10);
-        doc.text('Precio', 120, startY + 10);
-        doc.text('Total', 170, startY + 10);
-
-        // Datos de ejemplo
-        const items = [
-            { product: 'Producto A', quantity: 2, price: 10 },
-            { product: 'Producto B', quantity: 1, price: 15 },
-            { product: 'Producto C', quantity: 3, price: 7 },
-        ];
-
-        let currentY = startY + 15;
-        let totalGeneral = 0;
-
-        items.forEach(item => {
-            const total = item.quantity * item.price;
-            totalGeneral += total;
-
-            doc.text(item.product, 12, currentY);
-            doc.text(String(item.quantity), 85, currentY);
-            doc.text(`$${item.price.toFixed(2)}`, 120, currentY);
-            doc.text(`$${total.toFixed(2)}`, 170, currentY);
-            currentY += 8;
-        });
-
-        // Línea de Total
-        doc.setDrawColor(0);
-        doc.line(120, currentY + 2, 200, currentY + 2); // línea horizontal
-        doc.text('TOTAL GENERAL:', 120, currentY + 10);
-        doc.text(`$${totalGeneral.toFixed(2)}`, 170, currentY + 10);
-
-        // Descargar o visualizar
-        doc.save('factura.pdf');
-    }
-    }
+            // --- 🔹 ENCABEZADO FACTURA ---
+            doc.setFontSize(18);
+            doc.text('FACTURA', 105, 20, { align: 'center' });
+        
+            // --- 🔹 DATOS GENERALES ---
+            doc.setFontSize(11);
+            doc.text(`N° Factura: ${venta.no}`, 150, 20);
+            doc.text(`Fecha: ${new Date(venta.fechaventa).toLocaleDateString()}`, 150, 26);
+        
+            // --- 🔹 DATOS DEL CLIENTE ---
+            const cliente = venta.cliente;
+            doc.text('Cliente:', 10, 50);
+            //doc.text(`Nombre: ${cliente?.nombre || 'N/A'}`, 10, 56);
+            doc.text(`CI/NIT: ${cliente?.ci || 'N/A'}`, 10, 62);
+            //doc.text(`Email: ${cliente?.email || 'N/A'}`, 10, 68);
+        
+            // --- 🔹 SUCURSAL / EMPRESA ---
+            doc.text('Sucursal:', 150, 50);
+            doc.text('Av. Siempre Viva #742', 150, 56);
+            doc.text('Teléfono: 686-12345', 150, 62);
+        
+            // --- 🔹 DETALLE DE PRODUCTOS ---
+            const startY = 80;
+            doc.text('Detalle de la Venta:', 10, startY);
+        
+            // Encabezado de tabla
+            doc.setFillColor(230, 230, 230);
+            doc.rect(10, startY + 5, 190, 8, 'F');
+            doc.setTextColor(0, 0, 0);
+            doc.text('Producto', 12, startY + 10);
+            doc.text('Cantidad', 80, startY + 10);
+            doc.text('P. Unitario', 120, startY + 10);
+            doc.text('Subtotal', 170, startY + 10);
+        
+            // --- 🔹 Llenar productos ---
+            let y = startY + 15;
+            let totalGeneral = 0;
+        
+            detalle.forEach((item, index) => {
+              const nombreProd = item.producto || `Producto ${index + 1}`;
+              const cantidad = Number(item.cantidad) || 0;
+              const precioUnitario = parseFloat(item.precioUnitario || 0);
+              const subtotal = cantidad * precioUnitario;
+              totalGeneral += subtotal;
+        
+              doc.text(nombreProd, 12, y);
+              doc.text(String(cantidad), 85, y);
+              doc.text(`Bs ${precioUnitario.toFixed(2)}`, 120, y);
+              doc.text(`Bs ${subtotal.toFixed(2)}`, 170, y);
+              y += 8;
+            });
+        
+            // --- 🔹 TOTAL GENERAL ---
+            doc.setDrawColor(0);
+            doc.line(120, y + 2, 200, y + 2);
+            doc.setFontSize(12);
+            doc.text('TOTAL GENERAL:', 120, y + 10);
+            doc.text(`Bs ${totalGeneral.toFixed(2)}`, 170, y + 10);
+        
+            // --- 🔹 PIE DE PÁGINA ---
+            doc.setFontSize(10);
+            doc.text('Gracias por su compra.', 105, 280, { align: 'center' });
+            doc.text('Documento generado por Avitem Importaciones', 105, 285, { align: 'center' });
+        
+            // --- 🔹 DESCARGAR ---
+            doc.save(`Factura_${venta.id}.pdf`);
+          };
+    };
 }

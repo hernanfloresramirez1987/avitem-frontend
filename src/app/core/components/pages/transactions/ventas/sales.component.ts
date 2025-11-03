@@ -26,6 +26,11 @@ import { MenuItem } from 'primeng/api';
 import { BolivianosPipe } from '@/core/pipes/bolivianos.pipe';
 import { PdfReportService } from '@/core/_services/common/pdfreport.service';
 import jsPDF from 'jspdf';
+import { MultiSelectChangeEvent, MultiSelectModule, MultiSelectSelectAllChangeEvent } from 'primeng/multiselect';
+import { ArrayutilService } from '@/core/_services/common/arrayutil.service';
+import { FormsModule } from '@angular/forms';
+import { DetalleVentasService } from '@/core/_services/detalle-ventas.service';
+import { VentasItem } from '@/core/_models/inventory/ventas/ventas.model';
 
 @Component({
   selector: 'app-sales',
@@ -40,7 +45,9 @@ import jsPDF from 'jspdf';
     UpperCasePipe,
     TieredMenuModule,
     DatePipe,
-    BolivianosPipe
+    FormsModule,
+    BolivianosPipe,
+    MultiSelectModule
   ],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.scss'
@@ -69,7 +76,7 @@ export default class SalesComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
   }));
 
-  selectedItemId: string | number | null = null;
+  selectedItemId: VentasItem | null = null;
   
   items: MenuItem[] = [
     {
@@ -85,7 +92,11 @@ export default class SalesComponent {
           style: { color: "crimson" },
           command: (e: any) => {
             console.log(e);
-            this.generatePdf();
+            if (this.selectedItemId) {
+              this.getDetVentas(this.selectedItemId);
+            } else {
+              console.warn('No hay un ítem seleccionado para descargar el PDF.');
+            }
           }
         }
       ]
@@ -102,7 +113,10 @@ export default class SalesComponent {
     private readonly filterservice: FilterApplyService,
     private readonly ventasServ: VentasService,
     private readonly router: Router,
-    private readonly pdfreport: PdfReportService) {
+    private readonly pdfreport: PdfReportService,
+    private readonly arrayurilservice: ArrayutilService,
+    private readonly detalleVentasServ: DetalleVentasService
+  ) {
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {
       this.ventasServ.postAllVentasSearch(this.ventasdto())
@@ -145,14 +159,37 @@ export default class SalesComponent {
 
   add = () => this.router.navigate(['/transactions/ventas/create']);
 
-  generatePdf = () => {
-    const doc = new jsPDF();
+  openMenu(event: Event, rowData: VentasItem) { console.log(rowData)
+    this.selectedItemId = rowData;
+    this.menu()?.toggle(event); // Abre el menú contextual
+  }
 
-    const sampleData: any[] = [
-      { product: 'Producto A', quantity: 2, price: 10, total: 20 },
-      { product: 'Producto B', quantity: 1, price: 15, total: 15 },
-      { product: 'Producto C', quantity: 3, price: 7, total: 21 },
-    ];
-    this.pdfreport.generatePdf({sampleData}); // .generateSalesReport('Reporte de Ventas', sampleData, new Date());
+  getDetVentas(item: VentasItem) {
+    return this.detalleVentasServ.getDetVentas(+item.id)
+      .subscribe(t => {
+        console.log(t);
+        this.generatePdf(item, t);
+      return t});
+  }
+
+  generatePdf = (data: VentasItem, detaildata: any[]) => {
+    const doc = new jsPDF();
+    console.log(detaildata);
+    this.pdfreport.generatePdf(data, detaildata); //this.getDetVentas(this.selectedItemId as number);
+  }
+
+  cargaColumnas($event: MultiSelectChangeEvent) {
+    const ordered = this.arrayurilservice.selectOrderedArray(this.colsOptionsSelect, $event.value);
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(this.columnsSelectSignal()));
+  }
+
+  selectAll($event: MultiSelectSelectAllChangeEvent) {
+    let ordered: any[] = [];
+    if ($event.checked) {
+      ordered = this.allowedColumns;
+    }
+    this.columnsSelectSignal = computed(() => ordered);
+    localStorage.setItem(this.keylocalColumn, JSON.stringify(ordered));
   }
 }
