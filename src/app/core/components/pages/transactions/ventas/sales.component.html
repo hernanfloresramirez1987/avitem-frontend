@@ -91,20 +91,48 @@
         <ng-template #body let-rowData let-columns="columns" let-expanded="expanded">
             <tr>
                 <td class="flex py-4">
-                    <p-button type="button" [icon]="'pi pi-ellipsis-v'" class="p-button-text p-button-rounded" [text]="true" (click)="menu.toggle($event)"></p-button>
+                    <p-button type="button" [icon]="'pi pi-ellipsis-v'" class="p-button-text p-button-rounded" [text]="true" (click)="openMenu($event, rowData)"></p-button>
                     <!-- <p-button type="button" [icon]="expanded ? 'pi pi-ellipce' : 'pi pi-chevron-right'" [pRowToggler]="rowData" class="p-button-text p-button-rounded" [text]="true"></p-button> -->
                     <!-- <p-tableCheckbox class="p-2" [value]="rowData"></p-tableCheckbox> -->
                 </td>
                 @for (item of columns; track item) {
                     @switch (item.field) {
                         @case('id') { <td>{{ rowData[item.field] }}</td> }
+                        @case('no') { <td>{{ rowData[item.field] }}</td> }
                         @case('fechaVenta') { <td>{{ rowData.fechaVenta | date: "dd/MM/yyyy" }}</td> }
                         @case('total') { <td style="width: 12%; text-align: right;">{{ rowData[item.field] | bolivianos }}</td> }
                         @case('cliente') { <td>{{ rowData.cliente.persona.nombre }} {{ rowData.cliente.persona.app }} {{ rowData.cliente.persona.apm }}</td> }
                         @case('ci') { <td>{{ rowData.cliente.ci }}</td> }
+                        @case('nit') { <td>{{ rowData.cliente.nit }}</td> }
                         @default { <td>{{ rowData.cliente.nit }}</td> }
                     }
                 }
+            </tr>
+        </ng-template>
+        <ng-template #paginatorleft>
+            <div class="flex align-items-center justify-content-center"> <!-- {{'labels.selected_columns' | translate}} : -->
+                <p-multiSelect
+                    inputId="float-label"
+                    [options]="colsOptionsSelect"
+                    [ngModel]="columnsSelectSignal()"
+                    (onChange)="cargaColumnas($event)"
+                    (onSelectAllChange)="selectAll($event)"
+                    optionLabel="header"
+                    selectedItemsLabel="{0} columns selected"
+                    size="small"
+                    placeholder="Choose Columns"
+                    class="p-input-icon-left"/>
+            </div>
+        </ng-template>
+        <!-- <ng-template pTemplate="summary"> summary </ng-template> -->
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="8">No order found.</td>
+            </tr>
+        </ng-template>
+        <ng-template #loadingbody>
+            <tr>
+                <td colspan="8">Loading orders data. Please wait.</td>
             </tr>
         </ng-template>
     </p-table>
