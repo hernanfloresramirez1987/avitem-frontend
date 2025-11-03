@@ -19,6 +19,8 @@
         "sales": "Ventas"
     },
     "labels": {
+        "no": "No",
+        "cliente": "Cliente",
         "detail_people": "Detalle Persona",
         "detail_user": "Detalle Usuario",
         "detail_supplier": "Detalle Proveedor",
