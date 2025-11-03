@@ -1,0 +1,75 @@
+<div class="card">
+    <!-- ENCABEZADO DE FACTURA -->
+    
+
+    <img src="/layout/images/logo-dark.png" alt="Logo" width="250" height="250" class="mb-3" />
+    <p-card class="p-4">
+        <div class="flex">
+          
+          <!-- 👈 Lado Izquierdo: Datos del Cliente -->
+          <div class="flex w-full">
+            <div class="text-lg font-bold text-900 w-full mb-2">Datos del Cliente</div>
+            <div class="line-height-3 text-700 w-full">
+              <div><strong>Nombre:</strong> {{ venta()?.cliente?.persona?.nombre }} {{ venta()?.cliente?.persona?.app }} {{ venta()?.cliente?.persona?.apm }}</div>
+              <div><strong>CI/NIT:</strong> {{ venta()?.cliente?.persona?.ci }}</div>
+              <div><strong>Email:</strong> {{ venta()?.cliente?.persona?.email }}</div>
+            </div>
+          </div>
+      
+          <!-- 👉 Lado Derecho: Información de la Factura -->
+          <div class="flex w-full">
+            <div class="text-lg font-bold text-900 w-full mb-2">Datos de la Factura</div>
+            <div class="line-height-3 text-700 w-full">
+              <div><strong>No:</strong> {{ venta()?.cliente?.persona?.nombre }} {{ venta()?.cliente?.persona?.app }} {{ venta()?.cliente?.persona?.apm }}</div>
+              <div><strong>Fecha:</strong> {{ venta()?.cliente?.persona?.ci }}</div>
+              <div><strong>Codigo de Autorizacion:</strong> {{ venta()?.cliente?.persona?.email }}</div>
+            </div>
+          </div>
+        </div>
+      </p-card>
+
+      
+    <!-- TABLA DETALLE -->
+    <div class="overflow-x-auto">
+      <table class="w-full" style="border-collapse: collapse; table-layout: auto;">
+        <thead>
+          <tr>
+            <th class="text-left font-semibold py-3 border-b border-surface-200 dark:border-surface-700 whitespace-nowrap">Producto</th>
+            <th class="text-right font-semibold py-3 border-b border-surface-200 dark:border-surface-700 whitespace-nowrap px-4">Cantidad</th>
+            <th class="text-right font-semibold py-3 border-b border-surface-200 dark:border-surface-700 whitespace-nowrap px-4">P. Unitario (Bs)</th>
+            <th class="text-right font-semibold py-3 border-b border-surface-200 dark:border-surface-700 whitespace-nowrap">Subtotal (Bs)</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of detalle(); track $index) {
+          <tr>
+            <td class="text-left py-3 border-b border-surface-200 dark:border-surface-700 whitespace-nowrap">{{ item.producto }}</td>
+            <td class="text-right py-3 border-b border-surface-200 dark:border-surface-700 px-4">{{ item.cantidad }}</td>
+            <td class="text-right py-3 border-b border-surface-200 dark:border-surface-700 px-4">{{ item.precioUnitario | number:'1.2-2' }}</td>
+            <td class="text-right py-3 border-b border-surface-200 dark:border-surface-700">{{ (item.cantidad * item.precioUnitario) | number:'1.2-2' }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- PIE DE FACTURA -->
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between mt-6">
+      <div class="font-semibold mb-3 md:mb-0 text-700">Observaciones:</div>
+      <div class="flex flex-col w-full md:w-3">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold mr-4">SUBTOTAL</span>
+          <span>{{ totalGeneral | number:'1.2-2' }} Bs</span>
+        </div>
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold mr-4">IVA (13%)</span>
+          <span>{{ (totalGeneral * 0.13) | number:'1.2-2' }} Bs</span>
+        </div>
+        <div class="flex justify-between items-center text-xl font-bold border-t border-surface-300 pt-3">
+          <span class="mr-4">TOTAL</span>
+          <span>{{ (totalGeneral * 1.13) | number:'1.2-2' }} Bs</span>
+        </div>
+      </div>
+    </div>
+  
+</div> 

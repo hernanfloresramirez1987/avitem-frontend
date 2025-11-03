@@ -53,6 +53,7 @@ import { VentasItem } from '@/core/_models/inventory/ventas/ventas.model';
   styleUrl: './sales.component.scss'
 })
 export default class SalesComponent {
+  id: string | null = null;
   table = viewChild<Table>('dt1');
   menu = viewChild<Menu>('menu');
   filter = viewChild<ElementRef>('filter');
@@ -82,7 +83,7 @@ export default class SalesComponent {
     {
       label: 'View',
       icon: 'pi pi-eye',
-      routerLink: '/transactions/ventas/detail/214',
+      command: (() => this.viewVenta()),
     },
     { label: 'Download',
       icon: 'pi pi-download',
@@ -90,8 +91,7 @@ export default class SalesComponent {
         { label: 'Pdf',
           icon: 'pi pi-file-pdf',
           style: { color: "crimson" },
-          command: (e: any) => {
-            console.log(e);
+          command: () => {
             if (this.selectedItemId) {
               this.getDetVentas(this.selectedItemId);
             } else {
@@ -133,6 +133,15 @@ export default class SalesComponent {
     });
   }
 
+  
+viewVenta() { console.log(this.selectedItemId)
+  if (this.selectedItemId) {
+    this.router.navigate([`/transactions/ventas/detail/${this.selectedItemId.id}`]);
+  } else {
+    console.warn('No hay una venta seleccionada para ver el detalle.');
+  }
+}
+
   onColumnReorder = ($event: any) => localStorage.setItem(this.keylocalColumn, JSON.stringify($event.columns));
   
   getDataPaged(event: TableLazyLoadEvent) {
@@ -159,7 +168,7 @@ export default class SalesComponent {
 
   add = () => this.router.navigate(['/transactions/ventas/create']);
 
-  openMenu(event: Event, rowData: VentasItem) { console.log(rowData)
+  openMenu(event: Event, rowData: any) { console.log(rowData)
     this.selectedItemId = rowData;
     this.menu()?.toggle(event); // Abre el menú contextual
   }
@@ -174,7 +183,7 @@ export default class SalesComponent {
 
   generatePdf = (data: VentasItem, detaildata: any[]) => {
     const doc = new jsPDF();
-    console.log(detaildata);
+    console.log(detaildata); console.log(data);
     this.pdfreport.generatePdf(data, detaildata); //this.getDetVentas(this.selectedItemId as number);
   }
 

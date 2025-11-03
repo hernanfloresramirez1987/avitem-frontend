@@ -22,8 +22,8 @@ import { ButtonGroupModule } from 'primeng/buttongroup';
   selector: 'app-return-details',
   standalone: true,
   imports: [CardModule, TableModule, ButtonModule, TranslateLanModule, TagModule, TranslateModule, CommonModule, InputGroupModule, InputGroupAddonModule, ButtonGroupModule],
-  templateUrl: './details.component.html',
-  styleUrl: './details.component.scss',
+  templateUrl: './detailcompra.component.html',
+  styleUrl: './detailcompra.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class DetailsReturnComponent {
@@ -32,7 +32,13 @@ export default class DetailsReturnComponent {
   itemRegister = signal<ComprasResponse>({} as ComprasResponse);
   detailView = signal<any>(null);
 
-  constructor(private readonly comprasServ: ComprasService, private readonly detalleComprasServ: DetalleComprasService, private readonly router: Router, private readonly route: ActivatedRoute, private readonly translateLanService: TranslateLanService, private readonly translate : TranslateService) {
+  constructor(
+    private readonly comprasServ: ComprasService, 
+    private readonly detalleComprasServ: DetalleComprasService, 
+    private readonly router: Router, 
+    private readonly route: ActivatedRoute, 
+    private readonly translateLanService: TranslateLanService, 
+    private readonly translate : TranslateService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.translateLanService.changeLanguage$.subscribe((lan: string) => this.translate.use(lan));
     effect(() => {

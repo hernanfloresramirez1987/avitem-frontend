@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', data: { breadcrumb: 'list' }, loadComponent: () => import('./sales.component') },
+  { path: 'detail/:id', data: { breadcrumb: 'item' }, loadComponent: () => import('./detailventa/detailventa.component') },
   { path: 'create', data: { breadcrumb: 'create' }, loadComponent: () => import('./sale-create/sale-create.component') },
 ];
 
