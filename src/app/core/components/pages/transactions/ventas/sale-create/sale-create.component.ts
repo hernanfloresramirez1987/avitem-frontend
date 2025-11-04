@@ -309,7 +309,7 @@ export default class SaleCreateComponent {
       next: (t: VentaSaveResponse) => { console.log(t)
         if(t.CodigoEstado == "200") {
           //////////this.pdfreport.generatePdf(saleData);
-          console.log("Registro exitoso!!!");
+          console.log("Registro exitoso!!! ", t);
         }
       },
       error: (e) => console.log(e),

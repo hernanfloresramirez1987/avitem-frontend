@@ -12,6 +12,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { VentasService } from '@/core/_services/ventas.service';
 import { TranslateLanService } from '@/layout/service/translate-lan.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VentasResponse } from '@/core/_models/dto/inventory/ventas/ventasResponse.interface';
 
 @Component({
   selector: 'app-detailventa',
@@ -21,7 +22,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export default class DetailventaComponent {
   id: string | null = null;
-  venta = input<any>();
 
   columnsSelectSignal2: Signal<any> = computed(() => this.columns
     .map(columnName => ({
@@ -46,6 +46,8 @@ export default class DetailventaComponent {
       header: columnName.charAt(0).toUpperCase() + columnName.slice(1)
   }));
 
+  selectedItemId: VentasResponse | null = null;
+
   private readonly keylocalColumn = "sales_cols";
 
   constructor(
@@ -66,6 +68,7 @@ export default class DetailventaComponent {
           this.ventasServ.getOneVenta(+this.id)
             .subscribe(t => {
               console.log(t);
+              this.selectedItemId = t;
             })
         }
       })

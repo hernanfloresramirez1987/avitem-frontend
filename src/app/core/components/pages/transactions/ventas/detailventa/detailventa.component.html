@@ -8,21 +8,21 @@
           
           <!-- 👈 Lado Izquierdo: Datos del Cliente -->
           <div class="flex w-full">
-            <div class="text-lg font-bold text-900 w-full mb-2">Datos del Cliente</div>
             <div class="line-height-3 text-700 w-full">
-              <div><strong>Nombre:</strong> {{ venta()?.cliente?.persona?.nombre }} {{ venta()?.cliente?.persona?.app }} {{ venta()?.cliente?.persona?.apm }}</div>
-              <div><strong>CI/NIT:</strong> {{ venta()?.cliente?.persona?.ci }}</div>
-              <div><strong>Email:</strong> {{ venta()?.cliente?.persona?.email }}</div>
+              <div class="text-lg font-bold text-900 w-full mb-2"><b>Datos del Cliente</b></div>
+              <div><strong>Nombre:</strong> {{ selectedItemId?.cliente?.persona?.nombre }} {{ selectedItemId?.cliente?.persona?.app }} {{ selectedItemId?.cliente?.persona?.apm }}</div>
+              <div><strong>CI/NIT:</strong> {{ selectedItemId?.cliente?.persona?.ci }}</div>
+              <div><strong>Email:</strong> {{ selectedItemId?.cliente?.persona?.email }}</div>
             </div>
           </div>
       
           <!-- 👉 Lado Derecho: Información de la Factura -->
           <div class="flex w-full">
-            <div class="text-lg font-bold text-900 w-full mb-2">Datos de la Factura</div>
             <div class="line-height-3 text-700 w-full">
-              <div><strong>No:</strong> {{ venta()?.cliente?.persona?.nombre }} {{ venta()?.cliente?.persona?.app }} {{ venta()?.cliente?.persona?.apm }}</div>
-              <div><strong>Fecha:</strong> {{ venta()?.cliente?.persona?.ci }}</div>
-              <div><strong>Codigo de Autorizacion:</strong> {{ venta()?.cliente?.persona?.email }}</div>
+              <div class="text-lg font-bold text-900 w-full mb-2"><b>Datos de la Factura</b></div>
+              <div><strong>No:</strong> {{ selectedItemId?.cliente?.persona?.nombre }} {{ selectedItemId?.cliente?.persona?.app }} {{ selectedItemId?.cliente?.persona?.apm }}</div>
+              <div><strong>Fecha:</strong> {{ selectedItemId?.cliente?.persona?.ci }}</div>
+              <div><strong>Codigo de Autorizacion:</strong> {{ selectedItemId?.cliente?.persona?.email }}</div>
             </div>
           </div>
         </div>
